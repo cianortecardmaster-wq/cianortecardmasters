@@ -1,0 +1,254 @@
+title: "Cianorte Card Masters"
+description: "Conteúdo para jogadores de card games, RPG e jogos de tabuleiro em Cianorte."
+baseurl: "/cianortecardmaster"
+url: ""
+timezone: America/Sao_Paulo
+lang: pt-BR
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+collections:
+  guias:
+    output: true
+    permalink: /guias/:name/
+  decks:
+    output: true
+    permalink: /guias/decks/:name/
+  blog:
+    output: true
+    permalink: /blog/:path/
+  jogos:
+    output: true
+    permalink: /jogos/:name/
+  comunidade:
+    output: true
+    permalink: /comunidade/:path/
+  autores:
+    output: true
+    permalink: /autores/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: "guias"
+    values:
+      layout: post
+      author: "Cianorte Card Masters"
+      category_label: "Guia"
+  - scope:
+      path: ""
+      type: "decks"
+    values:
+      layout: post
+      author: "Cianorte Card Masters"
+      category_label: "Deck"
+
+  # Decks: subpastas por formato
+  - scope:
+      path: "_decks/Silver-Age"
+      type: "decks"
+    values:
+      category_label: "Silver Age"
+      deck_format: "Silver Age"
+      content_style: "silver-age"
+  - scope:
+      path: "_decks/Classic-Constructed"
+      type: "decks"
+    values:
+      category_label: "Classic Constructed"
+      deck_format: "Classic Constructed"
+      content_style: "classic-constructed"
+  - scope:
+      path: "_decks/Sealed"
+      type: "decks"
+    values:
+      category_label: "Sealed"
+      deck_format: "Sealed"
+      content_style: "sealed"
+  - scope:
+      path: "_decks/Living-Legend"
+      type: "decks"
+    values:
+      category_label: "Living Legend"
+      deck_format: "Living Legend"
+      content_style: "living-legend"
+  - scope:
+      path: "_decks/Blitz"
+      type: "decks"
+    values:
+      category_label: "Blitz"
+      deck_format: "Blitz"
+      content_style: "blitz"
+  - scope:
+      path: "_decks/UPF"
+      type: "decks"
+    values:
+      category_label: "UPF"
+      deck_format: "UPF"
+      content_style: "upf"
+  - scope:
+      path: "_decks/pokemon"
+      type: "decks"
+    values:
+      category_label: "Pokémon TCG"
+      deck_game: "Pokémon TCG"
+      deck_format: "Standard"
+      content_style: "pokemon"
+  - scope:
+      path: ""
+      type: "blog"
+    values:
+      layout: post
+      author: "Cianorte Card Masters"
+      category_label: "Blog"
+  - scope:
+      path: ""
+      type: "jogos"
+    values:
+      layout: post
+      author: "Cianorte Card Masters"
+      category_label: "Jogos"
+      content_style: "cianorte-card-master"
+  - scope:
+      path: ""
+      type: "comunidade"
+    values:
+      layout: post
+      author: "Cianorte Card Masters"
+      category_label: "Comunidade"
+  - scope:
+      path: ""
+      type: "autores"
+    values:
+      layout: autor
+      category_label: "Herói da Comunidade"
+
+  # Blog: subpastas com rótulo automático
+  - scope:
+      path: "_blog/Flesh-and-Blood"
+      type: "blog"
+    values:
+      category_label: "Flesh and Blood"
+      content_style: "flesh-and-blood"
+  - scope:
+      path: "_blog/Pokemon"
+      type: "blog"
+    values:
+      category_label: "Pokémon"
+      content_style: "pokemon"
+  - scope:
+      path: "_blog/Magic"
+      type: "blog"
+    values:
+      category_label: "Magic"
+      content_style: "magic"
+  - scope:
+      path: "_blog/TCG"
+      type: "blog"
+    values:
+      category_label: "TCG"
+      content_style: "tcg"
+  - scope:
+      path: "_blog/RPG"
+      type: "blog"
+    values:
+      category_label: "RPG"
+      content_style: "rpg"
+  - scope:
+      path: "_blog/cianorte-card-master"
+      type: "blog"
+    values:
+      category_label: "Cianorte Card Masters"
+      content_style: "cianorte-card-master"
+
+  # Comunidade: subpastas com rótulo automático
+  - scope:
+      path: "_comunidade/Instagram"
+      type: "comunidade"
+    values:
+      category_label: "Instagram"
+      content_style: "instagram"
+      social_platform: "instagram"
+  - scope:
+      path: "_comunidade/YouTube"
+      type: "comunidade"
+    values:
+      category_label: "YouTube"
+      content_style: "youtube"
+      social_platform: "youtube"
+  - scope:
+      path: "_comunidade/TikTok"
+      type: "comunidade"
+    values:
+      category_label: "TikTok"
+      content_style: "tiktok"
+      social_platform: "tiktok"
+  - scope:
+      path: "_comunidade/X"
+      type: "comunidade"
+    values:
+      category_label: "X"
+      content_style: "x"
+      social_platform: "x"
+  - scope:
+      path: "_comunidade/Fanservice"
+      type: "comunidade"
+    values:
+      category_label: "Fanservice"
+      content_style: "fanservice"
+  - scope:
+      path: "_comunidade/Fotos"
+      type: "comunidade"
+    values:
+      category_label: "Fotos"
+      content_style: "fotos"
+  - scope:
+      path: "_comunidade/Videos"
+      type: "comunidade"
+    values:
+      category_label: "Vídeos"
+      content_style: "videos"
+  - scope:
+      path: "_comunidade/videos"
+      type: "comunidade"
+    values:
+      category_label: "Vídeos"
+      content_style: "videos"
+  - scope:
+      path: "_comunidade/Musica"
+      type: "comunidade"
+    values:
+      category_label: "Música"
+      content_style: "musica"
+  - scope:
+      path: "_comunidade/Meme"
+      type: "comunidade"
+    values:
+      category_label: "Meme"
+      content_style: "meme"
+  - scope:
+      path: "_comunidade/Torneio"
+      type: "comunidade"
+    values:
+      category_label: "Torneio"
+      content_style: "torneio"
+  - scope:
+      path: "_comunidade/Liga"
+      type: "comunidade"
+    values:
+      category_label: "Liga"
+      content_style: "liga"
+  - scope:
+      path: "_comunidade/Armory"
+      type: "comunidade"
+    values:
+      category_label: "Armory"
+      content_style: "armory"
+# Arquivos internos que não precisam ir para o site publicado.
+exclude:
+  - docs/
+  - scripts/
+  - README-INSTRUCOES.md
+

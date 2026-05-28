@@ -1,0 +1,91 @@
+# Arquivos removidos ou movidos na organização
+
+## Arquivos removidos do projeto
+
+- `GUIA-HEROIS-DA-COMUNIDADE.md`
+- `GUIA-IMAGENS-API-POSTS.md`
+- `LEIA-ANTES-DE-SUBIR.txt`
+- `RELATORIO-AGENDA-HOME-20-05-2026.md`
+- `RELATORIO-AJUSTES-IMAGENS-AGENDA-SPIKES-20-05-2026.md`
+- `RELATORIO-ALTERACOES-20-05-2026.md`
+- `RELATORIO-BLOCO-ARMORY-COMUNIDADE-21-05-2026.md`
+- `RELATORIO-BLOCO-LIGA-COMUNIDADE-23-05-2026.md`
+- `RELATORIO-CORRECAO-IMAGENS-HOME-BLOG-20-05-2026.md`
+- `RELATORIO-CORRECAO-LOG-SPIKES.txt`
+- `RELATORIO-CORRECAO-SPIKES-9-CARTAS-20-05-2026.md`
+- `RELATORIO-CORRECAO-SPIKES.txt`
+- `RELATORIO-CORRECAO.txt`
+- `RELATORIO-DECKLIST-LINKS-INTERNOS-22-05-2026.md`
+- `RELATORIO-GUIA-PARA-LERDOS-20-05-2026.txt`
+- `RELATORIO-GUIA-PARA-LERDOS-SEO-22-05-2026.md`
+- `RELATORIO-HOME-SPIKES-20-05-2026.md`
+- `RELATORIO-SPIKES-TCGCSV-20-05-2026.md`
+- `assets/img/banner-home.webp`
+- `assets/img/banners/banner-liga-prefeitura-flesh-and-blood.png`
+- `assets/img/banners/banner-resultados-mobile.webp`
+- `assets/img/banners/banner-resultados.webp`
+- `assets/img/fab-heroes/Aurora, Shooting Star.webp`
+- `assets/img/fab-heroes/Azalea, Ace in the Hole.webp`
+- `assets/img/fab-heroes/Benji, Piercing Wind.webp`
+- `assets/img/fab-heroes/Betsy, Skin in the Game.webp`
+- `assets/img/fab-heroes/Blaze, Firemind.webp`
+- `assets/img/fab-heroes/Bravo, Flattering Showman.webp`
+- `assets/img/fab-heroes/Bravo, Showstopper.webp`
+- `assets/img/fab-heroes/Bravo, Star of the Show.webp`
+- `assets/img/fab-heroes/Brevant, Civic Protector.webp`
+- `assets/img/fab-heroes/Chane, Bound by Shadow.webp`
+- `assets/img/fab-heroes/Cindra, Dracai of Retribution.webp`
+- `assets/img/fab-heroes/Dash I-O.webp`
+- `assets/img/fab-heroes/Dash, Inventor Extraordinaire.webp`
+- `assets/img/fab-heroes/Data Doll MKII.webp`
+- `assets/img/fab-heroes/Dorinthea Ironsong.webp`
+- `assets/img/fab-heroes/Dromai, Ash Artist.webp`
+- `assets/img/fab-heroes/Emperor, Dracai of Aesir.webp`
+- `assets/img/fab-heroes/Enigma, Ledger of Ancestry.webp`
+- `assets/img/fab-heroes/Fai, Rising Rebellion.webp`
+- `assets/img/fab-heroes/Fang, Dracai of Blades.webp`
+- `assets/img/fab-heroes/Florian, Rotwood Harbinger.webp`
+- `assets/img/fab-heroes/Frankie, Make Ends Meat.webp`
+- `assets/img/fab-heroes/Genis Wotchuneed.webp`
+- `assets/img/fab-heroes/Gravy Bones, Shipwrecked Looter.webp`
+- `assets/img/fab-heroes/Hala, Bladesaint of the Vow.webp`
+- `assets/img/fab-heroes/Ira, Scarlet Revenger.webp`
+- `assets/img/fab-heroes/Iyslander, Stormbind.webp`
+- `assets/img/fab-heroes/Jarl Vetreidi.webp`
+- `assets/img/fab-heroes/Kano, Dracai of Aether.webp`
+- `assets/img/fab-heroes/Kassai of the Golden Sand.webp`
+- `assets/img/fab-heroes/Kassai, Cintari Sellsword.webp`
+- `assets/img/fab-heroes/Katsu, the Wanderer.webp`
+- `assets/img/fab-heroes/Kavdaen, Trader of Skins.webp`
+- `assets/img/fab-heroes/Kayo, Armed and Dangerous.webp`
+- `assets/img/fab-heroes/Kayo, Berserker Runt.png`
+- `assets/img/fab-heroes/Kayo, Underhanded Cheat.webp`
+- `assets/img/fab-heroes/Levia, Shadowborn Abomination.webp`
+- `assets/img/fab-heroes/Lexi, Livewire.webp`
+- `assets/img/fab-heroes/Lyath Goldmane.webp`
+- `assets/img/fab-heroes/Marlynn, Treasure Hunter.webp`
+- `assets/img/fab-heroes/Maxx 'The Hype' Nitro.webp`
+- `assets/img/fab-heroes/Melody, Sing-along.webp`
+- `assets/img/fab-heroes/Nuu, Alluring Desire.webp`
+- `assets/img/fab-heroes/Oldhim, Grandfather of Eternity.webp`
+- `assets/img/fab-heroes/Olympia, Prized Fighter.webp`
+- `assets/img/fab-heroes/Oscilio, Constella Intelligence.webp`
+- `assets/img/fab-heroes/Oscilio, Forked Continuum.webp`
+- `assets/img/fab-heroes/Pleiades, Superstar.webp`
+- `assets/img/fab-heroes/Prism, Awakener of Sol.webp`
+- `assets/img/fab-heroes/Prism, Sculptor of Arc Light.webp`
+- `assets/img/fab-heroes/Rhinar, Reckless Rampage.webp`
+- `assets/img/fab-heroes/Riptide, Lurker of the Deep.webp`
+- `assets/img/fab-heroes/Scurv, Stowaway.webp`
+- `assets/img/fab-heroes/Ser Boltyn, Breaker of Dawn.webp`
+- `assets/img/fab-heroes/Shiyana, Diamond Gemini.webp`
+- `assets/img/fab-heroes/Teklovossen, Esteemed Magnate.webp`
+- `assets/img/fab-heroes/Tuffnut, Bumbling Hulkster.webp`
+- `assets/img/fab-heroes/Uzuri, Switchblade.webp`
+- `assets/img/fab-heroes/Valda, Seismic Impact.webp`
+- `assets/img/fab-heroes/Verdance, Thorn of the Rose.webp`
+- `assets/img/fab-heroes/Victor Goldmane, High and Mighty.webp`
+- `assets/img/fab-heroes/Viserai, Rune Blood.webp`
+- `assets/img/fab-heroes/Vynnset, Iron Maiden.webp`
+- `assets/img/fab-heroes/Yoji, Royal Protector.webp`
+- `assets/img/fab-heroes/Zen, Tamer of Purpose.webp`

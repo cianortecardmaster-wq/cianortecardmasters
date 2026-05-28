@@ -1,0 +1,172 @@
+---
+layout: default
+title: "Agenda da Comunidade"
+description: "Agenda da Cianorte Card Masters com encontros presenciais, loja parceira de cartinhas, Flesh and Blood, Pokémon TCG, Magic Commander, RPG, jogos de tabuleiro e card games em Cianorte. Veja horários, locais e rotas."
+permalink: /agenda/
+---
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": {{ page.title | jsonify }},
+  "description": {{ page.description | jsonify }},
+  "url": {{ page.url | absolute_url | jsonify }},
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Cianorte Card Masters",
+    "url": {{ '/' | absolute_url | jsonify }}
+  },
+  "about": [
+    "card games em Cianorte",
+    "Flesh and Blood em Cianorte",
+    "Pokémon TCG em Cianorte",
+    "Magic Commander em Cianorte",
+    "RPG em Cianorte",
+    "comunidade de card games em Cianorte",
+    "Projeto Card Game em Cianorte",
+    "projeto cultural de card games em Cianorte",
+    "loja de cartinhas em Cianorte",
+    "Bazar do Weezing Cianorte",
+    "sleeves e playmats em Cianorte"
+  ]
+}
+</script>
+
+<section class="page-hero agenda-page-hero" style="--page-hero-image: url('{{ '/assets/img/banners/banner-agenda.webp' | relative_url }}'); --page-hero-image-mobile: url('{{ '/assets/img/banners/banner-agenda-mobile.webp' | relative_url }}'); --page-hero-position: center; --page-hero-position-mobile: center;">
+  <div class="container">
+    <p class="eyebrow">Encontros, calendário e rotas</p>
+    <h1>Agenda da Comunidade</h1>
+    <p>
+      Horários, locais e rotas para quem quer jogar, aprender ou participar dos encontros
+      do Cianorte Card Masters. Aqui você encontra Flesh and Blood, Pokémon TCG,
+      Magic: The Gathering Commander, RPG, jogos de tabuleiro e card games em Cianorte.
+    </p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="#encontros-da-semana">Ver encontros</a>
+      <a class="btn" href="{{ '/comunidade/' | relative_url }}">Ver comunidade</a>
+      <a class="btn" href="{{ '/guias/' | relative_url }}">Guias para iniciantes</a>
+    </div>
+  </div>
+</section>
+
+<section class="section agenda-section">
+  <div class="container">
+    <div class="cta-box">
+      <p class="eyebrow">Card games em Cianorte</p>
+      <h2>Onde jogar com a comunidade</h2>
+      <p>
+        A agenda abaixo reúne os principais pontos de encontro da Cianorte Card Masters para quem procura
+        <strong>card games em Cianorte</strong>, loja de cartinhas, torneios, encontros de Pokémon TCG,
+        Magic: The Gathering, Flesh and Blood, RPG e outros jogos presenciais. Confira o dia, o horário,
+        o endereço e abra a rota direto no Google Maps antes de sair de casa. Porque perder partida por flood
+        é aceitável; perder o caminho já é crueldade.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="{{ '/projeto-card-game-em-cianorte/' | relative_url }}">Projeto Card Game</a>
+        <a class="btn" href="{{ '/loja-de-cartinhas-em-cianorte/' | relative_url }}">Loja Parceira</a>
+        <a class="btn" href="{{ '/jogos/' | relative_url }}">Conhecer os jogos</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section agenda-section" id="encontros-da-semana">
+  <div class="container">
+    <div class="events-grid agenda-events-grid">
+      {% for event in site.data.events %}
+        {% assign directions_url = event.directions_url | default: event.maps_directions_url | default: event.maps_url %}
+
+        <article class="event-card agenda-card" id="{{ event.title | slugify }}">
+          {% if event.image %}
+            <img
+              class="agenda-card-image"
+              src="{{ event.image | relative_url }}"
+              alt="{{ event.location | default: event.title | escape }} em Cianorte"
+              loading="lazy"
+            >
+          {% endif %}
+
+          <div class="agenda-card-body">
+            <p class="eyebrow">{{ event.day }} • {{ event.time }}</p>
+            <h3>{{ event.title }}</h3>
+
+            <p><strong>Jogos:</strong> {{ event.game }}</p>
+            <p><strong>Local:</strong> {{ event.location }}</p>
+            <p><strong>Endereço:</strong> {{ event.address }}</p>
+
+            {% if event.note %}
+              <p>{{ event.note }}</p>
+            {% endif %}
+
+            {% if event.schedule %}
+              <div class="agenda-schedule-list" aria-label="Programação de {{ event.location | escape }}">
+                {% for item in event.schedule %}
+                  <div class="agenda-schedule-item">
+                    <strong>{{ item.day }}</strong>
+                    <span>{{ item.event }}{% if item.game %} — {{ item.game }}{% endif %}</span>
+                    <em>{{ item.time }}</em>
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            {% if event.maps_embed_url %}
+              <div class="agenda-schedule-list" aria-label="Mapa de {{ event.location | escape }}">
+                <iframe
+                  src="{{ event.maps_embed_url }}"
+                  title="Mapa de {{ event.location | escape }}"
+                  width="100%"
+                  height="240"
+                  style="border:0;"
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            {% endif %}
+
+            <div class="btn-row">
+              {% if directions_url %}
+                <a class="btn btn-primary" href="{{ directions_url }}" target="_blank" rel="noopener">Como chegar</a>
+              {% endif %}
+
+              {% if event.maps_url %}
+                <a class="btn" href="{{ event.maps_url }}" target="_blank" rel="noopener">Abrir no Google Maps</a>
+              {% endif %}
+
+              {% if event.calendar_note %}
+                <span class="agenda-note-pill">{{ event.calendar_note }}</span>
+              {% endif %}
+            </div>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="cta-box agenda-welcome-banner">
+      <div class="agenda-welcome-content">
+        <p class="eyebrow">Novos jogadores são bem-vindos</p>
+
+        <h2>Não tem deck? Pode aparecer mesmo assim.</h2>
+
+        <p>
+          A comunidade ajuda a ensinar, emprestar decks quando possível e apresentar os jogos.
+          O mais importante é chegar com vontade de conhecer a galera. Temos encontros de
+          Flesh and Blood, Pokémon TCG, Magic Commander, RPG e outros card games em Cianorte.
+        </p>
+
+        <div class="agenda-welcome-actions">
+          <a class="btn btn-primary" href="{{ '/guias/' | relative_url }}">Ver guias</a>
+          <a class="btn" href="{{ '/guias/decks/' | relative_url }}">Ver decks</a>
+          <a class="btn" href="{{ '/blog/' | relative_url }}">Ver blog</a>
+          <a class="btn" href="{{ '/comunidade/' | relative_url }}">Ver comunidade</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

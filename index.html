@@ -1,0 +1,663 @@
+---
+layout: default
+permalink: /
+title: "Card games, RPG e comunidade em Cianorte"
+description: "Conheça o Cianorte Card Masters, grupo de jogadores de card games e RPG em Cianorte. Veja agenda, resultados de Armory, fotos, vídeos, guias, deck techs e redes sociais da comunidade."
+keywords:
+  - card games em Cianorte
+  - Flesh and Blood Cianorte
+  - Pokémon TCG Cianorte
+  - Magic Commander Cianorte
+  - RPG em Cianorte
+  - comunidade geek Cianorte
+  - torneios de card game Cianorte
+image: "/assets/img/banners/banner-home.webp"
+image_alt: "Dragão em arte fantástica representando a comunidade Cianorte Card Masters e os encontros presenciais de card games em Cianorte"
+---
+
+{% assign all_content = site.guias | concat: site.decks | concat: site.blog | concat: site.comunidade | sort: "date" | reverse %}
+{% assign guias = site.guias %}
+{% assign blog_posts = site.blog %}
+{% assign comunidade_posts = site.comunidade %}
+{% assign armory_posts = comunidade_posts | where_exp: "post", "post.content_style == 'armory'" | sort: "date" | reverse %}
+{% assign latest_armory = armory_posts | first %}
+
+<section class="hero home-hero" aria-labelledby="home-title">
+  <div class="hero-bg" style="--hero-image: url('{{ site.data.images.hero_background | relative_url }}'); --hero-image-mobile: url('{{ site.data.images.hero_background_mobile | default: site.data.images.hero_background | relative_url }}');"></div>
+
+  <div class="container hero-inner">
+    <div>
+      <p class="eyebrow">Comunidade de jogadores / Card games / RPG</p>
+      <h1 id="home-title">Cianorte Card Masters</h1>
+      <p class="lead">
+        Somos um grupo de jogadores de Cianorte e região, não uma loja nem um endereço comercial.
+        A gente se reúne para jogar, ensinar, trocar ideias, registrar resultados e fortalecer a cena local de
+        Flesh and Blood, Pokémon TCG, Magic Commander, RPG e outros jogos presenciais.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="{{ '/agenda/' | relative_url }}">Ver quando jogar</a>
+        <a class="btn btn-secondary" href="#siga-a-comunidade">Nos siga nas redes</a>
+      </div>
+    </div>
+
+    <aside class="hero-card hero-spike-panel" aria-label="Carta em destaque nas últimas 24 horas">
+      <p class="eyebrow">Spike das 24h</p>
+      <div id="hero-spike-card" class="spike-card spike-card-hero" data-game-filter="fab">
+        <span class="spike-loading">Carregando spike 24h de Flesh and Blood...</span>
+      </div>
+      <a class="section-link hero-spike-link" href="{{ '/spikes/' | relative_url }}">Ver todos os spikes</a>
+    </aside>
+  </div>
+</section>
+
+<section class="section home-google-section" aria-labelledby="home-google-title">
+  <div class="container">
+    <div class="home-google-grid">
+      <article class="home-google-hero">
+        <div class="home-google-hero-inner">
+          <p class="home-google-kicker">
+            <span>Achou a gente no Google?</span>
+          </p>
+
+          <h2 id="home-google-title">Pode chegar: aqui é comunidade, mesa e aprendizado</h2>
+
+          <p>
+            O Cianorte Card Masters existe para conectar jogadores de todos os níveis. Publicamos agenda,
+            guias, deck techs, fotos, vídeos, memes e resultados dos eventos para você saber onde jogar
+            card games em Cianorte.
+          </p>
+
+          <div class="home-google-highlight">
+            <span class="home-google-highlight-icon" aria-hidden="true">
+              <img src="{{ '/assets/img/armory-icons/depth/badge-armory.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+            </span>
+            <p>
+              Não somos uma loja: somos uma comunidade que se reúne para jogar, aprender e fortalecer a cena local.
+              Chegue, participe e faça parte da mesa.
+            </p>
+          </div>
+
+          <div class="home-google-actions">
+            <a class="home-google-btn home-google-btn--agenda" href="{{ '/agenda/' | relative_url }}">
+              <img src="{{ '/assets/img/armory-icons/flat/icon-calendario.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+              <span>Ver agenda</span>
+            </a>
+            <a class="home-google-btn home-google-btn--whatsapp" href="https://chat.whatsapp.com/HjmzPtLTCIALlwS2mIg55R" target="_blank" rel="noopener noreferrer">
+              <img src="{{ '/assets/img/social/icon-whatsapp.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+              <span>Entrar no WhatsApp</span>
+            </a>
+          </div>
+
+          <a class="home-google-bottom-link" href="https://chat.whatsapp.com/HjmzPtLTCIALlwS2mIg55R" target="_blank" rel="noopener noreferrer">
+            <img src="{{ '/assets/img/home/google/icone-aureula.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+            <span>Iniciante? Pode chegar sem deck pronto.</span>
+          </a>
+        </div>
+      </article>
+
+      <div class="home-google-cards" aria-label="Informações rápidas para novos jogadores">
+        <article class="home-google-card home-google-card--gold">
+          <img class="home-google-card-bg" src="{{ '/assets/img/home/google/img-recem-chegado.webp' | relative_url }}" alt="" loading="lazy" decoding="async" width="1122" height="1402">
+          <span class="home-google-card-icon" aria-hidden="true">
+            <img class="home-google-card-icon-aureola" src="{{ '/assets/img/home/google/icone-aureula.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+            <img class="home-google-card-icon-symbol" src="{{ '/assets/img/armory-icons/flat/icon-pessoas.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+          </span>
+          <h3>Não somos uma loja</h3>
+          <span class="home-google-card-divider" aria-hidden="true"></span>
+          <p>Somos uma comunidade de jogadores. Indicamos locais, eventos e parceiros, mas quem faz o grupo é a galera da mesa.</p>
+        </article>
+
+        <article class="home-google-card home-google-card--green">
+          <img class="home-google-card-bg" src="{{ '/assets/img/home/google/img-cidadela.webp' | relative_url }}" alt="" loading="lazy" decoding="async" width="1122" height="1402">
+          <span class="home-google-card-icon" aria-hidden="true">
+            <img class="home-google-card-icon-aureola" src="{{ '/assets/img/home/google/icone-aureula.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+            <img class="home-google-card-icon-symbol" src="{{ '/assets/img/home/google/icone-cidade.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+          </span>
+          <h3>Tem projeto na cidade</h3>
+          <span class="home-google-card-divider" aria-hidden="true"></span>
+          <p>Os encontros ajudam novos jogadores a aprender card games, participar de torneios e conhecer pessoas em Cianorte.</p>
+        </article>
+
+        <article class="home-google-card home-google-card--gold">
+          <img class="home-google-card-bg" src="{{ '/assets/img/home/google/img-loja-parceira.webp' | relative_url }}" alt="" loading="lazy" decoding="async" width="1122" height="1402">
+          <span class="home-google-card-icon" aria-hidden="true">
+            <img class="home-google-card-icon-aureola" src="{{ '/assets/img/home/google/icone-aureula.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+            <img class="home-google-card-icon-symbol" src="{{ '/assets/img/home/google/icone-parceiros.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+          </span>
+          <h3>Tem loja parceira</h3>
+          <span class="home-google-card-divider" aria-hidden="true"></span>
+          <p>O Bazar do Weezing apoia eventos semanais, torneios e venda de produtos para quem quer montar ou melhorar decks.</p>
+        </article>
+
+        <article class="home-google-card home-google-card--green">
+          <img class="home-google-card-bg" src="{{ '/assets/img/home/google/img-cartas-cidadela.webp' | relative_url }}" alt="" loading="lazy" decoding="async" width="1122" height="1402">
+          <span class="home-google-card-icon" aria-hidden="true">
+            <img class="home-google-card-icon-aureola" src="{{ '/assets/img/home/google/icone-aureula.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+            <img class="home-google-card-icon-symbol" src="{{ '/assets/img/home/google/icone-estudos.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+          </span>
+          <h3>Iniciante é bem-vindo</h3>
+          <span class="home-google-card-divider" aria-hidden="true"></span>
+          <p>Você não precisa de deck pronto. Apareça, pergunte, jogue partidas de teste e conheça os formatos aos poucos.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    {% include section-title.html kicker="Novidades" title="Últimas postagens" text="Guias, deck techs, notícias, resultados e registros da comunidade em um só lugar." link="/posts/" link_text="Ver mais" %}
+
+    <div class="card-grid grid-3 home-latest-posts">
+      {% for post in all_content limit:3 %}
+        {% assign latest_post_path = post.path | downcase %}
+        {% assign latest_style_slug = post.content_style | default: post.social_platform | default: post.video_platform | default: post.category_label | default: '' | slugify %}
+        {% assign use_social_card = false %}
+        {% assign social_platform = latest_style_slug %}
+
+        {% if post.collection == "comunidade" %}
+          {% if latest_post_path contains '/instagram/' or latest_post_path contains '/youtube/' or latest_post_path contains '/tiktok/' or latest_post_path contains '/x/' or latest_post_path contains '/fanservice/' or latest_post_path contains '/fotos/' or latest_post_path contains '/videos/' or latest_post_path contains '/musica/' or latest_post_path contains '/meme/' or latest_style_slug == 'instagram' or latest_style_slug == 'youtube' or latest_style_slug == 'tiktok' or latest_style_slug == 'x' or latest_style_slug == 'twitter' or latest_style_slug == 'fanservice' or latest_style_slug == 'fotos' or latest_style_slug == 'videos' or latest_style_slug == 'musica' or latest_style_slug == 'meme' or post.social_embed_url or post.embed_url or post.youtube_id or post.social_embed_html %}
+            {% assign use_social_card = true %}
+            {% if latest_post_path contains '/instagram/' %}{% assign social_platform = 'instagram' %}
+            {% elsif latest_post_path contains '/youtube/' %}{% assign social_platform = 'youtube' %}
+            {% elsif latest_post_path contains '/tiktok/' %}{% assign social_platform = 'tiktok' %}
+            {% elsif latest_post_path contains '/x/' %}{% assign social_platform = 'x' %}
+            {% elsif social_platform == 'twitter' %}{% assign social_platform = 'x' %}
+            {% elsif social_platform != 'instagram' and social_platform != 'youtube' and social_platform != 'tiktok' and social_platform != 'x' %}{% assign social_platform = 'outros' %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+
+        {% if use_social_card %}
+          {% include social-post-card.html post=post platform=social_platform %}
+        {% else %}
+          {% include post-card.html post=post %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section home-social-section" id="siga-a-comunidade" aria-labelledby="home-social-title">
+  <div class="container">
+    <div class="home-social-heading" aria-hidden="true">
+      <span>Nos siga nas redes sociais</span>
+    </div>
+
+    <div class="home-social-grid">
+      <article class="home-social-hero">
+        <div class="home-social-copy">
+          <h2 id="home-social-title">A aventura continua depois do evento</h2>
+          <p>
+            Aqui a comunidade segue viva! Compartilhamos fotos, reels, gameplays, resultados de eventos,
+            memes e chamados de torneios. Novos jogadores são sempre bem-vindos — comece entrando no grupo do WhatsApp
+            ou seguindo nosso Instagram.
+          </p>
+
+          <div class="home-social-actions">
+            <a class="home-social-cta home-social-cta--whatsapp" href="https://chat.whatsapp.com/HjmzPtLTCIALlwS2mIg55R" target="_blank" rel="noopener noreferrer" aria-label="Entrar no grupo de WhatsApp Encontro de cardgames">
+              <img src="{{ '/assets/img/social/icon-whatsapp.png' | relative_url }}" alt="Logo do WhatsApp" loading="lazy" decoding="async" width="1254" height="1254">
+              <span>Entrar no WhatsApp</span>
+            </a>
+            <a class="home-social-cta home-social-cta--instagram" href="https://www.instagram.com/cianortecardmasters/" target="_blank" rel="me noopener" aria-label="Seguir Instagram do Cianorte Card Masters">
+              <img src="{{ '/assets/img/social/icon-instagram.png' | relative_url }}" alt="Logo do Instagram" loading="lazy" decoding="async" width="1254" height="1254">
+              <span>Seguir no Instagram</span>
+            </a>
+          </div>
+
+          <a class="home-social-newbie" href="https://chat.whatsapp.com/HjmzPtLTCIALlwS2mIg55R" target="_blank" rel="noopener noreferrer">
+            Primeira vez por aqui? Comece pelo WhatsApp.
+          </a>
+
+          <a class="home-social-policy" href="{{ '/uso-de-imagem/' | relative_url }}">Ver política de uso de imagem e repostagem</a>
+        </div>
+      </article>
+
+      <div class="home-social-cards" aria-label="Canais sociais do Cianorte Card Masters">
+        <a class="home-social-card home-social-card--instagram is-featured" href="https://www.instagram.com/cianortecardmasters/" target="_blank" rel="me noopener" aria-label="Abrir Instagram do Cianorte Card Masters">
+          <span class="home-social-icon-wrap">
+            <img class="home-social-icon-image" src="{{ '/assets/img/social/icon-instagram.png' | relative_url }}" alt="Ícone do Instagram" loading="lazy" decoding="async" width="1254" height="1254">
+          </span>
+          <strong>Instagram</strong>
+          <small>@cianortecardmasters</small>
+          <em>Fotos, reels e bastidores da comunidade.</em>
+          <span class="home-social-card-button">Seguir</span>
+        </a>
+
+        <a class="home-social-card home-social-card--whatsapp is-featured" href="https://chat.whatsapp.com/HjmzPtLTCIALlwS2mIg55R" target="_blank" rel="noopener noreferrer" aria-label="Entrar no grupo de WhatsApp Encontro de cardgames">
+          <span class="home-social-icon-wrap">
+            <img class="home-social-icon-image" src="{{ '/assets/img/social/icon-whatsapp.png' | relative_url }}" alt="Ícone do WhatsApp" loading="lazy" decoding="async" width="1254" height="1254">
+          </span>
+          <strong>WhatsApp</strong>
+          <small>Encontro de cardgames</small>
+          <em>Combine mesas, tire dúvidas e conheça a galera.</em>
+          <span class="home-social-card-button">Entrar</span>
+        </a>
+
+        <a class="home-social-card home-social-card--youtube" href="https://youtube.com/@cianortecardmaster?si=L8SyIU_bcRjwXiiU" target="_blank" rel="me noopener noreferrer" aria-label="Abrir YouTube do Cianorte Card Masters">
+          <span class="home-social-icon-wrap">
+            <img class="home-social-icon-image" src="{{ '/assets/img/social/icon-youtube.png' | relative_url }}" alt="Ícone do YouTube" loading="lazy" decoding="async" width="500" height="500">
+          </span>
+          <strong>YouTube</strong>
+          <small>@cianortecardmaster</small>
+          <em>Gameplays, cobertura de eventos e vídeos da comunidade.</em>
+          <span class="home-social-card-button">Assistir</span>
+        </a>
+
+        <a class="home-social-card home-social-card--tiktok" href="https://www.tiktok.com/@ccmasters7?_r=1&_t=ZS-96cT8XFjVyf" target="_blank" rel="me noopener noreferrer" aria-label="Abrir TikTok do Cianorte Card Masters">
+          <span class="home-social-icon-wrap">
+            <img class="home-social-icon-image" src="{{ '/assets/img/social/icon-tiktok.png' | relative_url }}" alt="Ícone do TikTok" loading="lazy" decoding="async" width="500" height="500">
+          </span>
+          <strong>TikTok</strong>
+          <small>@ccmasters7</small>
+          <em>Cortes, humor e momentos da mesa.</em>
+          <span class="home-social-card-button">Ver vídeos</span>
+        </a>
+
+        <a class="home-social-card home-social-card--facebook" href="https://www.facebook.com/p/Cianorte-Card-Masters-61573789171734/" target="_blank" rel="me noopener" aria-label="Abrir Facebook do Cianorte Card Masters">
+          <span class="home-social-icon-wrap">
+            <img class="home-social-icon-image" src="{{ '/assets/img/social/icon-facebook.png' | relative_url }}" alt="Ícone do Facebook" loading="lazy" decoding="async" width="1254" height="1254">
+          </span>
+          <strong>Facebook</strong>
+          <small>Cianorte Card Masters</small>
+          <em>Postagens e registros públicos do grupo.</em>
+          <span class="home-social-card-button">Acompanhar</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section home-armory-section" aria-labelledby="home-armory-title">
+  <div class="container home-armory-grid">
+    <div class="home-armory-copy">
+      <div class="home-armory-copy-content">
+        <p class="eyebrow">Resultado da comunidade</p>
+        <h2 id="home-armory-title">Último Armory de Flesh and Blood</h2>
+        <p>
+          O Armory é nosso torneio semanal de Flesh and Blood. A Home mostra o resultado mais recente para quem quer acompanhar o cenário local,
+          ver heróis em destaque e descobrir quando aparece a próxima chance de testar o deck.
+        </p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="{{ '/comunidade/#ultimo-armory' | relative_url }}">Ver resultado completo</a>
+          <a class="btn btn-secondary" href="{{ '/agenda/' | relative_url }}">Próximos eventos</a>
+        </div>
+      </div>
+    </div>
+
+    <article class="home-armory-card home-armory-card-epic" aria-label="Resumo do último resultado de Armory">
+      {% if latest_armory %}
+        <p class="eyebrow home-armory-meta">{{ latest_armory.date | date: "%d/%m/%Y" }} • {{ latest_armory.rounds | default: "3" }} rodadas</p>
+        <h3>{{ latest_armory.title }}</h3>
+        {% if latest_armory.results %}
+          <ol class="home-armory-podium home-armory-podium-epic">
+            {% for result in latest_armory.results limit:3 %}
+              {% assign hero_slug = result.hero | slugify %}
+              {% assign hero_image = '/assets/img/fab-heroes/' | append: hero_slug | append: '.webp' %}
+              <li class="home-armory-row home-armory-row-{{ forloop.index }}">
+                <span class="home-armory-rank-badge" aria-hidden="true">
+                  <img class="home-armory-rank-icon" src="{{ '/assets/img/armory-icons/depth/badge-colocacao.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="72" height="72">
+                  <strong>{{ forloop.index }}º</strong>
+                </span>
+
+                <span class="home-armory-hero-badge">
+                  <img src="{{ hero_image | relative_url }}" alt="Badge do herói {{ result.hero }}" loading="lazy" decoding="async" width="96" height="96">
+                </span>
+
+                <span class="home-armory-player-cell">
+                  <strong>{{ result.player }}</strong>
+                  <em>{{ result.hero }}</em>
+                </span>
+
+                <span class="home-armory-record">{{ result.record }}</span>
+              </li>
+            {% endfor %}
+          </ol>
+        {% else %}
+          <p>Resultado cadastrado, mas sem lista de jogadores no front matter.</p>
+        {% endif %}
+      {% else %}
+        <p class="eyebrow">Armory</p>
+        <h3>Nenhum resultado publicado ainda</h3>
+        <p>Publique resultados em <code>_comunidade/Armory</code> para alimentar este destaque automaticamente.</p>
+      {% endif %}
+    </article>
+  </div>
+</section>
+
+<section class="section home-pokemon-welcome-section post-style-pokemon" aria-labelledby="home-pokemon-welcome-title">
+  <div class="container home-pokemon-welcome-grid">
+    <article class="home-pokemon-welcome-copy">
+      <span class="home-pokemon-shape home-pokemon-shape-left" aria-hidden="true"></span>
+      <span class="home-pokemon-shape home-pokemon-shape-right" aria-hidden="true"></span>
+
+      <p class="eyebrow home-pokemon-kicker">
+        <span class="home-pokemon-ui-icon home-pokemon-ui-icon--pokeball" aria-hidden="true"></span>
+        Pokémon TCG em Cianorte
+      </p>
+      <h2 id="home-pokemon-welcome-title"><span>Treinadores, colecionadores e curiosos</span> <em>também têm lugar na mesa</em></h2>
+      <p>
+        A comunidade não é só pancadaria de guerreiro e mago mal-humorado: também temos jogadores de Pokémon TCG,
+        treinadores começando agora, colecionadores procurando aquela carta bonita e gente da cidade querendo aprender
+        sem ser atropelada por termos em inglês logo na primeira partida.
+      </p>
+      <p>
+        Se você curte Pokémon, quer montar seu primeiro deck, trocar ideia sobre coleção, entender sleeves, boosters,
+        cartas avulsas ou só descobrir onde encontrar outros treinadores em Cianorte, esse espaço também é seu.
+      </p>
+      <div class="btn-row home-pokemon-welcome-actions">
+        <a class="btn btn-primary" href="{{ '/jogos/pokemon-tcg-em-cianorte/' | relative_url }}">
+          <span class="home-pokemon-ui-icon home-pokemon-ui-icon--pokeball" aria-hidden="true"></span>
+          Ver Pokémon TCG
+        </a>
+        <a class="btn btn-secondary" href="{{ '/jogos/#pokemon' | relative_url }}">
+          <span class="home-pokemon-ui-icon home-pokemon-ui-icon--swords" aria-hidden="true"></span>
+          Ir para Jogos
+        </a>
+      </div>
+    </article>
+
+    <aside class="home-pokemon-welcome-card" aria-label="Convite para jogadores e colecionadores de Pokémon TCG em Cianorte">
+      <div class="home-pokemon-welcome-image">
+        <img src="{{ '/assets/img/banners/default-pokemon.webp' | relative_url }}" alt="Arte temática de Pokémon TCG para jogadores e colecionadores em Cianorte" loading="lazy" decoding="async" width="1880" height="720">
+      </div>
+      <div class="home-pokemon-welcome-list">
+        <article class="home-pokemon-welcome-item">
+          <span class="home-pokemon-card-icon" aria-hidden="true">
+            <img src="{{ '/assets/img/home/icon-pokebola-card-home.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="96" height="96">
+          </span>
+          <span>
+            <strong>Para quem joga</strong>
+            <small>Decks, partidas casuais, testes e aprendizado sem cobrança de veterano rabugento.</small>
+          </span>
+        </article>
+        <article class="home-pokemon-welcome-item">
+          <span class="home-pokemon-card-icon" aria-hidden="true">
+            <img src="{{ '/assets/img/home/icon-coleciona-card-home.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="96" height="96">
+          </span>
+          <span>
+            <strong>Para quem coleciona</strong>
+            <small>Cartas bonitas, sleeves, playmat, singles e conversa sobre coleção sem julgamento.</small>
+          </span>
+        </article>
+        <article class="home-pokemon-welcome-item">
+          <span class="home-pokemon-card-icon" aria-hidden="true">
+            <img src="{{ '/assets/img/home/icon-bag-card-home.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="96" height="96">
+          </span>
+          <span>
+            <strong>Para quem está começando</strong>
+            <small>Pode chegar com dúvida, sem deck pronto e sem saber a diferença entre booster e triple pack.</small>
+          </span>
+        </article>
+      </div>
+      <a class="home-pokemon-welcome-link" href="{{ '/agenda/' | relative_url }}">
+        <span class="home-pokemon-ui-icon home-pokemon-ui-icon--calendar" aria-hidden="true"></span>
+        Ver agenda dos encontros
+        <span class="home-pokemon-link-arrow" aria-hidden="true"></span>
+      </a>
+    </aside>
+  </div>
+</section>
+
+<section class="section cta home-join-cta">
+  <div class="container">
+    <div class="cta-box">
+      <p class="eyebrow">Vem conhecer a galera</p>
+      <h2>Quer jogar, aprender ou só trocar ideia sobre jogos?</h2>
+      <p>
+        Jogamos Flesh and Blood, Pokémon TCG, Magic: The Gathering, jogos de tabuleiro e RPG.
+        Não precisa ter deck pronto para aparecer: a comunidade ajuda quem está começando e indica a melhor mesa para cada perfil.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="{{ '/agenda/' | relative_url }}">Ver agenda</a>
+        <a class="btn btn-secondary" href="{{ '/comunidade/' | relative_url }}">Conhecer a comunidade</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    {% include section-title.html kicker="Aprenda" title="Guias para começar e tirar dúvidas" text="Conteúdos simples para aprender regras, entender cartas, keywords, interações e fundamentos dos jogos." link="/guias/" link_text="Ver todos os guias" %}
+
+    <div class="card-grid grid-3">
+      {% assign guias_sorted = guias | sort: "date" | reverse %}
+      {% for post in guias_sorted limit:3 %}
+        {% include post-card.html post=post %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section home-project-section">
+  <div class="container project-grid home-project-grid">
+    <article class="project-highlight home-project-highlight home-project-visual" aria-labelledby="home-project-visual-title">
+      <div class="home-project-visual-inner">
+      
+        <div class="home-project-title-panel">
+          <img src="{{ '/assets/img/home/project/projeto-parceiros-comunidade.png' | relative_url }}" alt="Projeto, Parceiros e Comunidade." loading="lazy" decoding="async" width="100" height="100">
+        </div>
+
+        <div class="home-project-pillars" aria-label="Pilares da comunidade">
+          <div class="home-project-pillar">
+            <span class="home-project-pillar-icon">
+              <img src="{{ '/assets/img/home/project/icon-projeto.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="36" height="36">
+            </span>
+            <small>Projeto</small>
+          </div>
+          <div class="home-project-pillar">
+            <span class="home-project-pillar-icon">
+              <img src="{{ '/assets/img/home/google/icone-parceiros.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="36" height="36">
+            </span>
+            <small>Parceiros</small>
+          </div>
+          <div class="home-project-pillar">
+            <span class="home-project-pillar-icon">
+              <img src="{{ '/assets/img/armory-icons/flat/icon-pessoas.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="36" height="36">
+            </span>
+            <small>Comunidade</small>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <div class="info-panel home-project-info">
+      <p class="eyebrow">Onde a comunidade acontece</p>
+      <h2>Encontros, torneios e mesas presenciais em Cianorte</h2>
+      <p>
+        Aos domingos, os encontros da comunidade ajudam novos jogadores a aprender, jogar casualmente, testar decks e participar de torneios.
+        Durante a semana, a loja parceira recebe eventos e produtos para quem quer acompanhar a cena de card games físicos.
+      </p>
+      <p>
+        O site organiza tudo isso: agenda, resultados de Armory e ligas, fotos, vídeos, guias, deck techs e notícias para quem quer participar sem depender de boato de grupo fechado.
+      </p>
+      <div class="btn-row home-project-actions">
+        <a class="btn btn-primary home-project-btn home-project-btn-primary" href="{{ '/agenda/' | relative_url }}">
+          <img src="{{ '/assets/img/home/project/icon-onde-jogar.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="22" height="22">
+          <span>Onde jogar</span>
+        </a>
+        <a class="btn btn-secondary home-project-btn home-project-btn-secondary" href="{{ '/sobre/' | relative_url }}">
+          <img src="{{ '/assets/img/armory-icons/flat/icon-pessoas.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="22" height="22">
+          <span>Entender o grupo</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    {% include section-title.html kicker="Blog" title="Notícias, opinião e novidades" text="Lançamentos, atualizações de regras, banimentos, coleções, empresas do setor e notícias locais de card games." link="/blog/" link_text="Ver blog" %}
+
+    <div class="card-grid grid-4">
+      {% assign blog_sorted = blog_posts | sort: "date" | reverse %}
+      {% for post in blog_sorted limit:4 %}
+        {% include post-card.html post=post %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section home-magic-welcome-section post-style-magic" aria-labelledby="home-magic-welcome-title">
+  <div class="container">
+    <div class="home-magic-welcome-grid">
+      <aside class="home-magic-welcome-card" aria-label="Convite para jogadores de Magic: The Gathering em Cianorte">
+        <div class="home-magic-welcome-image">
+          <img src="{{ '/assets/img/banners/default-magic.jpg' | relative_url }}" alt="Arte temática de Magic: The Gathering para jogadores de Commander em Cianorte" loading="lazy" decoding="async" width="1350" height="450">
+        </div>
+
+        <div class="home-magic-welcome-list">
+          <article class="home-magic-feature-item">
+            <img class="home-magic-feature-icon" src="{{ '/assets/img/home/magic/icone-magic-home.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="54" height="54">
+            <div>
+              <strong>Commander presencial</strong>
+              <small>Mesas casuais, política duvidosa, alianças temporárias e aquele pacto que nunca acaba bem.</small>
+            </div>
+          </article>
+
+          <article class="home-magic-feature-item">
+            <img class="home-magic-feature-icon" src="{{ '/assets/img/home/magic/icone-castle-home.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="54" height="54">
+            <div>
+              <strong>Deckbuilding e orçamento</strong>
+              <small>Ajuda para montar lista, melhorar mana base, escolher upgrades e jogar sem vender o rim.</small>
+            </div>
+          </article>
+
+          <article class="home-magic-feature-item">
+            <img class="home-magic-feature-icon" src="{{ '/assets/img/home/magic/icone-card-purple-home.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="54" height="54">
+            <div>
+              <strong>Jogadores novos</strong>
+              <small>Pode chegar com deck pronto, precon, cartas antigas ou só curiosidade para aprender Magic.</small>
+            </div>
+          </article>
+        </div>
+
+        <a class="home-magic-cta home-magic-cta-guide" href="{{ '/guias/como-montar-deck-commander-ate-500/' | relative_url }}">
+          <span>Ver guia de Commander</span>
+        </a>
+      </aside>
+
+      <article class="home-magic-welcome-copy">
+        <p class="eyebrow home-magic-eyebrow">Magic: The Gathering em Cianorte</p>
+        <h2 id="home-magic-welcome-title">
+          <span class="home-magic-title-line home-magic-title-line-light">Planeswalkers,</span>
+          <span class="home-magic-title-line home-magic-title-line-gold">comandantes&nbsp;e</span>
+          <span class="home-magic-title-line home-magic-title-line-gold">colecionadores</span>
+          <span class="home-magic-title-line home-magic-title-line-light">também têm cadeira na mesa</span>
+        </h2>
+        <p>
+          Também temos jogadores de Magic: The Gathering em Cianorte, com foco em jogo físico, Commander casual,
+          troca de ideias sobre decks, cartas avulsas, coleção e aquela conversa inevitável sobre qual remoção deveria ter entrado na lista.
+        </p>
+        <p>
+          Se você joga Commander, está voltando para o Magic depois de anos, comprou um precon ou só quer entender por que quatro pessoas
+          brigam por duas horas e ainda chamam isso de diversão, a comunidade é um bom ponto de partida.
+        </p>
+        <div class="btn-row home-magic-welcome-actions">
+          <a class="home-magic-cta home-magic-cta-blue" href="{{ '/jogos/magic-the-gathering-em-cianorte/' | relative_url }}">Ver Magic</a>
+          <a class="home-magic-cta home-magic-cta-gold" href="{{ '/jogos/#magic' | relative_url }}">Ir para Jogos</a>
+          <a class="home-magic-cta home-magic-cta-purple" href="{{ '/agenda/' | relative_url }}">Ver agenda</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    {% include section-title.html kicker="Comunidade" title="Últimas fotos da comunidade" text="Fotos, marcações e momentos publicados nos posts da comunidade." link="/comunidade/" link_text="Ver comunidade" %}
+
+    <div class="gallery-grid">
+      {% assign comunidade_sorted = comunidade_posts | sort: "date" | reverse %}
+      {% for post in comunidade_sorted limit:6 %}
+        {% if post.image %}
+          {% assign gallery_alt = post.image_alt | default: post.title | prepend: 'Foto da comunidade Cianorte Card Masters: ' %}
+          <a class="gallery-item" href="{{ post.url | relative_url }}" aria-label="Abrir registro da comunidade: {{ post.title | escape }}">
+            <img src="{{ post.image | relative_url }}" alt="{{ gallery_alt | escape }}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='{{ site.data.images.post_default | relative_url }}';">
+          </a>
+        {% endif %}
+        {% if post.gallery %}
+          {% for foto in post.gallery limit:2 %}
+            {% assign foto_src = foto.src | default: foto.url | default: foto.path | default: foto %}
+            {% assign foto_alt = foto.alt | default: foto.title | default: post.image_alt | default: post.title | append: ' — foto ' | append: forloop.index %}
+            <a class="gallery-item" href="{{ post.url | relative_url }}" aria-label="Abrir galeria da comunidade: {{ post.title | escape }}">
+              <img src="{{ foto_src | relative_url }}" alt="{{ foto_alt | escape }}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='{{ site.data.images.post_default | relative_url }}';">
+            </a>
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt home-agenda-section" aria-labelledby="home-agenda-title">
+  <div class="container">
+    <div class="home-agenda-header">
+      <div>
+        <p class="eyebrow">Agenda</p>
+        <h2 id="home-agenda-title">Agenda da Semana</h2>
+        <p>Clique em qualquer encontro para ver endereço e detalhes na página de agenda.</p>
+      </div>
+      <a class="section-link home-agenda-link" href="{{ '/agenda/' | relative_url }}">Ver agenda completa</a>
+    </div>
+
+    <div class="home-agenda-board" aria-label="Agenda semanal da Cianorte Card Masters">
+      {% for item in site.data.home_agenda %}
+        <a class="home-agenda-row home-agenda-row-{{ forloop.index }}" href="{{ item.url | relative_url }}">
+          <strong class="home-agenda-day">{{ item.day }}</strong>
+          {% if item.image %}
+            {% assign image_kind = item.image_kind | default: "photo" %}
+            <span class="home-agenda-media home-agenda-media-{{ image_kind }}">
+              <img src="{{ item.image | relative_url }}" alt="{{ item.image_alt | default: item.title | escape }}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='{{ site.data.images.post_default | relative_url }}';">
+            </span>
+          {% endif %}
+          <span class="home-agenda-main">
+            <span class="home-agenda-title">{{ item.title }}</span>
+            {% if item.game %}<span class="home-agenda-game">{{ item.game }}</span>{% endif %}
+          </span>
+          <small class="home-agenda-time">{{ item.time }}</small>
+        </a>
+      {% endfor %}
+    </div>
+
+    <p class="home-agenda-seo">
+      A Cianorte Card Masters reúne jogadores de Flesh and Blood, Pokémon TCG, Magic: The Gathering, RPG e outros card games em Cianorte. Confira nossa agenda semanal, participe dos encontros da comunidade e descubra onde jogar card games presenciais na cidade.
+    </p>
+  </div>
+</section>
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": {{ site.title | jsonify }},
+  "alternateName": "CC Master",
+  "description": {{ page.description | jsonify }},
+  "url": "{{ '/' | absolute_url }}",
+  "inLanguage": "{{ site.lang | default: 'pt-BR' }}",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Cianorte Card Masters",
+    "url": "{{ '/' | absolute_url }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ site.data.images.logo_menu | default: '/assets/img/logo/ccm-logo.png' | absolute_url }}"
+    },
+    "sameAs": [
+      "https://www.instagram.com/cianortecardmasters/",
+      "https://www.facebook.com/p/Cianorte-Card-Masters-61573789171734/",
+      "https://youtube.com/@cianortecardmaster",
+      "https://www.tiktok.com/@ccmasters7"
+    ]
+  },
+  "about": [
+    { "@type": "Thing", "name": "Card games em Cianorte" },
+    { "@type": "Thing", "name": "Flesh and Blood" },
+    { "@type": "Thing", "name": "Pokémon TCG" },
+    { "@type": "Thing", "name": "Magic: The Gathering Commander" },
+    { "@type": "Thing", "name": "RPG de mesa" }
+  ]
+}
+</script>

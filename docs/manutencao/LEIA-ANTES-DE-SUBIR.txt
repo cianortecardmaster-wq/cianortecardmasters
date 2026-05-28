@@ -1,0 +1,36 @@
+ALTERAÇÕES DESTA VERSÃO
+
+1. Blog / Deck / Home
+- Se o post não tiver imagem, o site usa uma capa automática da categoria.
+- Foram incluídas capas padrão para Flesh and Blood, Magic, Pokémon, TCG, RPG e Cianorte Card Master.
+- Os cards e páginas internas agora aceitam imagem de carta por API usando:
+  image: "goagain:Dash I/O"
+  image: "scryfall:Krenko, Mob Boss"
+  image: "pokemon:Pikachu"
+  image: "yugioh:Blue-Eyes White Dragon"
+
+2. Spikes
+- Página configurada para mostrar apenas os spikes das últimas 24 horas.
+- O limite visual está preparado para até 9 cartas por jogo.
+- Continua usando assets/data/spikes.json.
+- Para atualizar dados reais, configure JUSTTCG_API_KEY nos Secrets do GitHub e rode o workflow manualmente.
+- O workflow automático está agendado para 05:00 no horário de Brasília.
+
+3. Comunidade / Home
+- A Home mantém o bloco "Últimas imagens da comunidade" como estava.
+- O bloco "Últimas postagens" agora tem altura mínima nos cards.
+- Posts de Instagram no bloco "Últimas postagens" ficam compactos para não quebrar o layout.
+
+4. Agenda
+- Centro Cultural com foto real no card da agenda:
+  assets/img/agenda/fachada-centro-cultural.webp
+- Bazar do Weezing com foto da fachada no card da agenda:
+  assets/img/agenda/bazar-do-weezing-fachada.webp
+
+IMPORTANTE
+
+O arquivo assets/data/spikes.json só muda quando o workflow rodar com a chave da JustTCG configurada.
+Se ele ainda mostrar 4 cartas, rode:
+Actions > Atualizar spikes JustTCG > Run workflow
+
+Leia README-INSTRUCOES.md para ver modelos de postagem, imagens por API e resultado de Armory.
