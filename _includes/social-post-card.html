@@ -1,0 +1,180 @@
+{% assign social_post_path = include.post.path | downcase %}
+{% assign social_platform = include.platform | default: include.post.social_platform | default: include.post.video_platform | default: include.post.content_style | default: include.post.category_label | default: 'outros' | slugify %}
+{% if social_platform == 'twitter' %}{% assign social_platform = 'x' %}{% endif %}
+{% if social_post_path contains '_comunidade/instagram/' %}{% assign social_platform = 'instagram' %}{% endif %}
+{% if social_post_path contains '_comunidade/youtube/' %}{% assign social_platform = 'youtube' %}{% endif %}
+{% if social_post_path contains '_comunidade/tiktok/' %}{% assign social_platform = 'tiktok' %}{% endif %}
+{% if social_post_path contains '_comunidade/x/' %}{% assign social_platform = 'x' %}{% endif %}
+{% if social_platform == '' %}{% assign social_platform = 'outros' %}{% endif %}
+
+{% assign platform_label = include.post.category_label | default: social_platform | replace: 'youtube', 'YouTube' | replace: 'instagram', 'Instagram' | replace: 'tiktok', 'TikTok' | replace: 'x', 'X' %}
+{% assign media_alt = include.post.image_alt | default: include.post.alt %}
+{% unless media_alt %}{% assign media_alt = include.post.title | prepend: 'Registro da comunidade Cianorte Card Masters: ' %}{% endunless %}
+
+{% assign fallback_image = site.data.images.post_defaults.comunidade | default: site.data.images.post_default %}
+{% if social_platform == 'instagram' or social_platform == 'fotos' %}
+  {% assign fallback_image = site.data.images.post_defaults.comunidade | default: site.data.images.post_default %}
+{% elsif social_platform == 'youtube' %}
+  {% assign fallback_image = site.data.images.post_defaults.tcg | default: site.data.images.post_default %}
+{% endif %}
+
+{% assign social_image = include.post.image | default: '' | strip %}
+{% if social_image contains '://' %}
+  {% assign social_image_src = social_image %}
+{% else %}
+  {% assign social_image_src = social_image | relative_url %}
+{% endif %}
+
+{% assign local_video = include.post.video_file | default: include.post.video_src | default: include.post.local_video | default: '' | strip %}
+{% if local_video != '' %}
+  {% if local_video contains '://' %}
+    {% assign local_video_src = local_video %}
+  {% else %}
+    {% assign local_video_src = local_video | relative_url %}
+  {% endif %}
+{% endif %}
+
+{% assign video_poster = include.post.video_poster | default: include.post.poster | default: include.post.thumbnail | default: '' | strip %}
+{% if video_poster != '' %}
+  {% if video_poster contains '://' %}
+    {% assign video_poster_src = video_poster %}
+  {% else %}
+    {% assign video_poster_src = video_poster | relative_url %}
+  {% endif %}
+{% endif %}
+
+{% assign instagram_permalink = include.post.instagram_permalink | default: include.post.social_url | default: include.post.social_embed_url | default: include.post.embed_url | default: '' | strip %}
+{% if social_platform == 'instagram' and instagram_permalink != '' %}
+  {% assign instagram_permalink = instagram_permalink | replace: '/embed/captioned', '/' | replace: '/embed', '/' %}
+{% endif %}
+
+{% assign tiktok_video_id = include.post.tiktok_video_id | default: '' | strip %}
+{% if social_platform == 'tiktok' and tiktok_video_id == '' %}
+  {% assign tiktok_source_url = include.post.social_url | default: include.post.social_embed_url | default: include.post.embed_url | default: '' | strip %}
+  {% if tiktok_source_url contains '/video/' %}
+    {% assign tiktok_video_id = tiktok_source_url | split: '/video/' | last | split: '/' | first | split: '?' | first %}
+  {% endif %}
+{% endif %}
+
+{% assign api_image_game = nil %}
+{% assign api_image_name = nil %}
+{% if include.post.image_game and include.post.image_card %}
+  {% assign api_image_game = include.post.image_game | downcase | strip %}
+  {% assign api_image_name = include.post.image_card | strip %}
+  {% if api_image_game == 'goagain' %}{% assign api_image_game = 'fab' %}{% endif %}
+  {% if api_image_game == 'scryfall' or api_image_game == 'magic' %}{% assign api_image_game = 'mtg' %}{% endif %}
+  {% if api_image_game == 'pkm' %}{% assign api_image_game = 'pokemon' %}{% endif %}
+  {% if api_image_game == 'ygo' %}{% assign api_image_game = 'yugioh' %}{% endif %}
+{% elsif social_image != '' %}
+  {% assign social_image_parts = social_image | split: ':' %}
+  {% assign social_image_prefix = social_image_parts[0] | downcase | strip %}
+  {% assign social_image_name = social_image_parts[1] | strip %}
+  {% case social_image_prefix %}
+    {% when 'goagain' %}{% assign api_image_game = 'fab' %}{% assign api_image_name = social_image_name %}
+    {% when 'fab' %}{% assign api_image_game = 'fab' %}{% assign api_image_name = social_image_name %}
+    {% when 'scryfall' %}{% assign api_image_game = 'mtg' %}{% assign api_image_name = social_image_name %}
+    {% when 'mtg' %}{% assign api_image_game = 'mtg' %}{% assign api_image_name = social_image_name %}
+    {% when 'magic' %}{% assign api_image_game = 'mtg' %}{% assign api_image_name = social_image_name %}
+    {% when 'pokemon' %}{% assign api_image_game = 'pokemon' %}{% assign api_image_name = social_image_name %}
+    {% when 'pkm' %}{% assign api_image_game = 'pokemon' %}{% assign api_image_name = social_image_name %}
+    {% when 'yugioh' %}{% assign api_image_game = 'yugioh' %}{% assign api_image_name = social_image_name %}
+    {% when 'ygo' %}{% assign api_image_game = 'yugioh' %}{% assign api_image_name = social_image_name %}
+  {% endcase %}
+{% endif %}
+
+<article class="social-post-card post-style-{{ social_platform }}" data-social-platform="{{ social_platform }}">
+  <div class="social-post-topline">
+    <p class="eyebrow">{{ platform_label }}</p>
+    {% if include.post.date %}<span>{{ include.post.date | date: "%d/%m/%Y" }}</span>{% endif %}
+  </div>
+
+  <div class="social-post-embed social-post-embed-{{ social_platform }}{% if local_video != '' %} social-post-embed-native-video{% endif %}">
+    {% if local_video != '' %}
+      <video
+        class="social-post-video"
+        controls
+        playsinline
+        preload="metadata"
+        {% if video_poster != '' %}poster="{{ video_poster_src }}"{% endif %}>
+        <source src="{{ local_video_src }}" type="{{ include.post.video_type | default: 'video/mp4' }}">
+        Seu navegador não conseguiu reproduzir este vídeo. {% if include.post.social_url %}<a href="{{ include.post.social_url }}">Abrir na origem</a>.{% endif %}
+      </video>
+    {% elsif include.post.youtube_id %}
+      <iframe
+        src="https://www.youtube.com/embed/{{ include.post.youtube_id }}"
+        title="{{ include.post.title | escape }}"
+        loading="lazy"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+    {% elsif social_platform == 'tiktok' and tiktok_video_id != '' %}
+      <iframe
+        src="https://www.tiktok.com/player/v1/{{ tiktok_video_id }}?music_info=1&description=1"
+        title="{{ include.post.title | escape }}"
+        loading="lazy"
+        frameborder="0"
+        scrolling="no"
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+    {% elsif social_platform == 'instagram' and instagram_permalink != '' %}
+      <blockquote
+        class="instagram-media"
+        data-instgrm-permalink="{{ instagram_permalink }}"
+        data-instgrm-version="14">
+        <a href="{{ instagram_permalink }}">Ver publicação no Instagram</a>
+      </blockquote>
+      <script async src="https://www.instagram.com/embed.js"></script>
+    {% elsif include.post.social_embed_url %}
+      <iframe
+        src="{{ include.post.social_embed_url }}"
+        title="{{ include.post.title | escape }}"
+        loading="lazy"
+        frameborder="0"
+        scrolling="no"
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+    {% elsif include.post.embed_url %}
+      <iframe
+        src="{{ include.post.embed_url }}"
+        title="{{ include.post.title | escape }}"
+        loading="lazy"
+        frameborder="0"
+        scrolling="no"
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+    {% elsif include.post.social_embed_html %}
+      {{ include.post.social_embed_html }}
+    {% elsif include.post.gallery %}
+      <div class="social-gallery-preview">
+        {% for foto in include.post.gallery limit:4 %}
+          {% assign foto_src = foto.src | default: foto.url | default: foto.path | default: foto %}
+          {% assign foto_src = foto_src | strip %}
+          {% if foto_src contains '://' %}
+            {% assign foto_src_final = foto_src %}
+          {% else %}
+            {% assign foto_src_final = foto_src | relative_url %}
+          {% endif %}
+          {% assign foto_alt = foto.alt | default: foto.title | default: include.post.image_alt | default: include.post.title | append: ' — foto ' | append: forloop.index %}
+          <img src="{{ foto_src_final }}" alt="{{ foto_alt | escape }}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='{{ fallback_image | relative_url }}';">
+        {% endfor %}
+      </div>
+    {% elsif api_image_game and api_image_name %}
+      {% include tcg-card.html game=api_image_game name=api_image_name cover=true fallback=fallback_image fallback_alt=media_alt alt=media_alt %}
+    {% elsif social_image != '' %}
+      <img src="{{ social_image_src }}" alt="{{ media_alt | escape }}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='{{ fallback_image | relative_url }}';">
+    {% else %}
+      <div class="social-content-fallback">
+        {{ include.post.content }}
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="social-post-content">
+    <h3>{{ include.post.title }}</h3>
+    {% if include.post.summary %}<p>{{ include.post.summary }}</p>{% endif %}
+    <div class="social-post-actions">
+      <a class="btn btn-secondary" href="{{ include.post.url | relative_url }}">Detalhes no site</a>
+      {% if include.post.social_url %}<a class="section-link" href="{{ include.post.social_url }}">Origem</a>{% endif %}
+    </div>
+  </div>
+</article>

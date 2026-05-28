@@ -1,0 +1,30 @@
+<header class="site-header" id="topo">
+  <div class="container header-inner">
+    <a class="brand" href="{{ '/' | relative_url }}" aria-label="Cianorte Card Masters">
+      <img class="brand-logo" src="{{ site.data.images.logo_menu | relative_url }}" alt="Cianorte Card Masters">
+    </a>
+
+    <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    {% assign menu_whatsapp = site.data.social_links | where: "name", "WhatsApp" | first %}
+    <nav class="main-nav" aria-label="Menu principal">
+      <a href="{{ '/' | relative_url }}">Home</a>
+      <a href="{{ '/comunidade/' | relative_url }}">Comunidade</a>
+      <a href="{{ '/jogos/' | relative_url }}">Jogos</a>
+      <a href="{{ '/resultados/' | relative_url }}">Resultados</a>
+      <a href="{{ '/agenda/' | relative_url }}">Agenda</a>
+      <a href="{{ '/guias/' | relative_url }}">Guias</a>
+      <a href="{{ '/blog/' | relative_url }}">Blog</a>
+      <a href="{{ '/ferramentas/' | relative_url }}">Ferramentas</a>
+      <a href="{{ '/sobre/' | relative_url }}">Sobre</a>
+      <a class="nav-whatsapp-badge" href="{{ menu_whatsapp.url | default: 'https://chat.whatsapp.com/HjmzPtLTCIALlwS2mIg55R' }}" target="_blank" rel="noopener noreferrer" aria-label="Entrar no grupo de WhatsApp do Cianorte Card Masters" title="Entrar no WhatsApp">
+        <img src="{{ '/assets/img/social/icon-whatsapp.png' | relative_url }}" alt="" aria-hidden="true" loading="lazy" decoding="async" width="32" height="32">
+        <span>WhatsApp</span>
+      </a>
+    </nav>
+  </div>
+</header>

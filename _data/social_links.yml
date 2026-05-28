@@ -1,0 +1,32 @@
+# Links sociais oficiais/úteis do Cianorte Card Masters.
+# A Home também mantém o bloco fixo no index.html para evitar que a seção suma se este arquivo não for publicado.
+
+- name: "Instagram"
+  label: "@cianortecardmasters"
+  url: "https://www.instagram.com/cianortecardmasters/"
+  icon: "IG"
+  description: "Fotos, reels, bastidores e marcações da comunidade."
+
+- name: "Facebook"
+  label: "Cianorte Card Masters"
+  url: "https://www.facebook.com/p/Cianorte-Card-Masters-61573789171734/"
+  icon: "FB"
+  description: "Postagens, vídeos e registros públicos do grupo."
+
+- name: "YouTube"
+  label: "@cianortecardmaster"
+  url: "https://youtube.com/@cianortecardmaster?si=L8SyIU_bcRjwXiiU"
+  icon: "YT"
+  description: "Gameplays, cobertura de eventos e vídeos da comunidade."
+
+- name: "TikTok"
+  label: "@ccmasters7"
+  url: "https://www.tiktok.com/@ccmasters7?_r=1&_t=ZS-96cT8XFjVyf"
+  icon: "TK"
+  description: "Cortes, momentos de mesa, humor e bastidores dos encontros."
+
+- name: "WhatsApp"
+  label: "Encontro de cardgames"
+  url: "https://chat.whatsapp.com/HjmzPtLTCIALlwS2mIg55R"
+  icon: "WA"
+  description: "Grupo para combinar mesas, tirar dúvidas e chegar na comunidade."

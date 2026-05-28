@@ -1,0 +1,48 @@
+# Agenda resumida exibida na Home.
+# Cada item aparece em uma linha clicável e pode ser editado individualmente.
+# A página completa da agenda continua em /agenda/.
+
+- day: "Domingo"
+  title: "Encontro semanal da comunidade"
+  game: "Card games, RPG e comunidade"
+  time: "13:30"
+  url: "/agenda/"
+  image: "/assets/img/agenda/fachada-centro-cultural.webp"
+  image_alt: "Fachada do Centro Cultural de Cianorte"
+  image_kind: "photo"
+
+- day: "Quarta"
+  title: "Armory — Flesh and Blood"
+  game: "Flesh and Blood"
+  time: "19:00 - 22:30"
+  url: "/agenda/"
+  image: "/assets/img/agenda/bazar-do-weezing-transparente.png"
+  image_alt: "Logo do Bazar do Weezing"
+  image_kind: "logo"
+
+- day: "Quinta"
+  title: "Pokémon — Pokémon TCG"
+  game: "Pokémon TCG"
+  time: "19:00 - 22:30"
+  url: "/agenda/"
+  image: "/assets/img/agenda/bazar-do-weezing-transparente.png"
+  image_alt: "Logo do Bazar do Weezing"
+  image_kind: "logo"
+
+- day: "Sexta"
+  title: "Friday Night Magic"
+  game: "Magic: The Gathering"
+  time: "19:00 - 22:30"
+  url: "/agenda/"
+  image: "/assets/img/agenda/bazar-do-weezing-transparente.png"
+  image_alt: "Logo do Bazar do Weezing"
+  image_kind: "logo"
+
+- day: "Sábado"
+  title: "Eventos — Card games variados"
+  game: "Card games variados"
+  time: "14:00 - 18:00"
+  url: "/agenda/"
+  image: "/assets/img/agenda/bazar-do-weezing-transparente.png"
+  image_alt: "Logo do Bazar do Weezing"
+  image_kind: "logo"
