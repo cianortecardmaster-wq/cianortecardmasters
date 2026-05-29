@@ -192,7 +192,7 @@
     "dash i-o": "Dash I-O",
     "fai": "Fai, Rising Rebellion",
     "ira": "Ira, Crimson Haze",
-    "ira, scarlet revenger": "Ira, Crimson Haze",
+    "ira, scarlet revenger": "Ira, Scarlet Revenger",
     "pleiades": "Pleiades, Superstar",
     "prism": "Prism, Awakener of Sol",
     "teklovossen": "Teklovossen, Esteemed Magnate"
