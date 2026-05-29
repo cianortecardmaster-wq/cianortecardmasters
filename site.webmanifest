@@ -1,0 +1,19 @@
+{
+  "name": "Cianorte Card Masters",
+  "short_name": "CC Masters",
+  "description": "Comunidade de card games, RPG e jogos presenciais em Cianorte.",
+  "lang": "pt-BR",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0d1117",
+  "theme_color": "#0d1117",
+  "icons": [
+    {
+      "src": "/ccm-favicon.png",
+      "sizes": "1254x1254",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+---
+layout: null
+permalink: /robots.txt
+---
+User-agent: *
+Allow: /
+
+# Área usada só para gerar arquivos internos da comunidade.
+Disallow: /admin/
+
+Sitemap: {{ '/sitemap.xml' | absolute_url }}

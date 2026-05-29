@@ -1,0 +1,38 @@
+---
+layout: null
+permalink: /sitemap.xml
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- assign sitemap_pages = site.pages | where_exp: "item", "item.sitemap != false" -%}
+{%- for item in sitemap_pages -%}
+  {%- assign item_path = item.path | default: "" -%}
+  {%- assign item_ext = item_path | split: "." | last | downcase -%}
+  {%- assign include_item = true -%}
+  {%- if item.url == nil or item.url == "" -%}{%- assign include_item = false -%}{%- endif -%}
+  {%- if item_ext != "html" and item_ext != "md" -%}{%- assign include_item = false -%}{%- endif -%}
+  {%- if item_path contains "/admin/" or item_path contains "/docs/" -%}{%- assign include_item = false -%}{%- endif -%}
+  {%- if item_path == "404.html" or item_path == "post.html" -%}{%- assign include_item = false -%}{%- endif -%}
+  {%- if item.url == "/robots.txt" or item.url == "/sitemap.xml" -%}{%- assign include_item = false -%}{%- endif -%}
+  {%- if include_item -%}
+  <url>
+    <loc>{{ item.url | absolute_url | xml_escape }}</loc>
+    <lastmod>{{ item.last_modified_at | default: item.date | default: site.time | date_to_xmlschema }}</lastmod>
+  </url>
+  {%- endif -%}
+{%- endfor -%}
+{%- assign sitemap_collections = site.collections | where_exp: "collection", "collection.output == true" -%}
+{%- for collection in sitemap_collections -%}
+  {%- for item in collection.docs -%}
+    {%- assign include_item = true -%}
+    {%- if item.url == nil or item.url == "" -%}{%- assign include_item = false -%}{%- endif -%}
+    {%- if item.sitemap == false or item.published == false -%}{%- assign include_item = false -%}{%- endif -%}
+    {%- if include_item -%}
+  <url>
+    <loc>{{ item.url | absolute_url | xml_escape }}</loc>
+    <lastmod>{{ item.last_modified_at | default: item.date | default: site.time | date_to_xmlschema }}</lastmod>
+  </url>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endfor -%}
+</urlset>

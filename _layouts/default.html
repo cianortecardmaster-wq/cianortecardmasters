@@ -7,7 +7,12 @@
   {% assign meta_description = page.description | default: page.summary | default: page.excerpt | strip_html | strip_newlines | default: site.description %}
   <meta name="description" content="{{ meta_description | truncate: 165 | escape }}">
   {% if page.keywords %}<meta name="keywords" content="{{ page.keywords | join: ', ' | escape }}">{% endif %}
+  {% if page.noindex %}<meta name="robots" content="noindex, nofollow">{% endif %}
   {% if page.image_alt %}<meta property="og:image:alt" content="{{ page.image_alt | escape }}">{% endif %}
+  <link rel="icon" type="image/png" href="{{ '/ccm-favicon.png' | relative_url }}">
+  <link rel="apple-touch-icon" href="{{ '/ccm-favicon.png' | relative_url }}">
+  <link rel="manifest" href="{{ '/site.webmanifest' | relative_url }}">
+  <meta name="theme-color" content="#0d1117">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Barlow:wght@400;500;600;700;800&family=Fugaz+One&display=swap" rel="stylesheet">
