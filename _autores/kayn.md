@@ -5,7 +5,7 @@ slug: "kayn"
 nome_aventureiro: "Kayn"
 classe: "Jogador, Colecionador, Deckbuilder, Criador de conteúdo, Outro"
 cidade: "Cianorte"
-avatar: ""
+avatar: "/assets/img/autores/kayn.webp"
 avatar_alt: "Avatar de Kayn"
 bio_curta: |-
   Sou um jogar de Pokémon e flash and Blood, gosto muito de criar decks q vão surpreender e incomodar meus adversários
