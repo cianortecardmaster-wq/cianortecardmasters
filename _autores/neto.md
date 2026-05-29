@@ -5,7 +5,7 @@ slug: "neto"
 nome_aventureiro: "Neto"
 classe: "Jogador, Colecionador, Autor de artigos, Criador de conteúdo, Outro"
 cidade: "Cianorte"
-avatar: ""
+avatar: "/assets/img/autores/neto.webp"
 avatar_alt: "Avatar de Neto"
 bio_curta: |-
   Pai de dois ser humaninhos, fã de senhor dos aneis e SCI-FI,e um dia ao encostar em uma carta fui amaldiçoado e fiquei preso ao universo de card games, gosto de teorias mirabolantes e depois dos jogos imaginar como foi a luta parecendo uma cena de cinema.
