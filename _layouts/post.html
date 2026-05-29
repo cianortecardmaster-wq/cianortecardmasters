@@ -290,6 +290,35 @@ layout: default
     {% if page_autor %}
       {% include autor-post-footer.html autor=page_author_key %}
     {% endif %}
+
+    {% comment %}
+      Comentários com Giscus.
+      Mostra em Blog, Decks, Guias e Comunidade, mas não em resultados/arquivos
+      de Armory, Liga e Torneio. Use comments: false no front matter para desligar
+      em uma página específica.
+    {% endcomment %}
+    {% assign comments_collection_allowed = false %}
+    {% if page.collection == "blog" or page.collection == "decks" or page.collection == "guias" or page.collection == "comunidade" %}
+      {% assign comments_collection_allowed = true %}
+    {% endif %}
+
+    {% assign comments_excluded_section = false %}
+    {% if page.collection == "comunidade" %}
+      {% assign comments_path_down = page.path | downcase %}
+      {% assign comments_style_down = post_style | downcase %}
+      {% if comments_style_down == "armory" or comments_style_down == "liga" or comments_style_down == "torneio" %}
+        {% assign comments_excluded_section = true %}
+      {% endif %}
+      {% if comments_path_down contains "_comunidade/armory/" or comments_path_down contains "_comunidade/liga/" or comments_path_down contains "_comunidade/torneio/" or comments_path_down contains "_comunidade/torneios/" %}
+        {% assign comments_excluded_section = true %}
+      {% endif %}
+    {% endif %}
+
+    {% if comments_collection_allowed and comments_excluded_section == false %}
+      {% unless page.comments == false %}
+        {% include giscus.html %}
+      {% endunless %}
+    {% endif %}
   </div>
 </article>
 {% endif %}

@@ -37,6 +37,7 @@ defaults:
       layout: post
       author: "Cianorte Card Masters"
       category_label: "Guia"
+      comments: true
   - scope:
       path: ""
       type: "decks"
@@ -44,6 +45,7 @@ defaults:
       layout: post
       author: "Cianorte Card Masters"
       category_label: "Deck"
+      comments: true
 
   # Decks: subpastas por formato
   - scope:
@@ -103,6 +105,7 @@ defaults:
       layout: post
       author: "Cianorte Card Masters"
       category_label: "Blog"
+      comments: true
   - scope:
       path: ""
       type: "jogos"
@@ -118,6 +121,7 @@ defaults:
       layout: post
       author: "Cianorte Card Masters"
       category_label: "Comunidade"
+      comments: true
   - scope:
       path: ""
       type: "autores"
@@ -234,18 +238,21 @@ defaults:
     values:
       category_label: "Torneio"
       content_style: "torneio"
+      comments: false
   - scope:
       path: "_comunidade/Liga"
       type: "comunidade"
     values:
       category_label: "Liga"
       content_style: "liga"
+      comments: false
   - scope:
       path: "_comunidade/Armory"
       type: "comunidade"
     values:
       category_label: "Armory"
       content_style: "armory"
+      comments: false
 # Arquivos internos que não precisam ir para o site publicado.
 exclude:
   - docs/
