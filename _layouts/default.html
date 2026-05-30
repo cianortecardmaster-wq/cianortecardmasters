@@ -6,13 +6,15 @@
   <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
   {% assign meta_description = page.description | default: page.summary | default: page.excerpt | strip_html | strip_newlines | default: site.description %}
   <meta name="description" content="{{ meta_description | truncate: 165 | escape }}">
-  {% if page.keywords %}<meta name="keywords" content="{{ page.keywords | join: ', ' | escape }}">{% endif %}
-  {% if page.noindex %}<meta name="robots" content="noindex, nofollow">{% endif %}
-  {% if page.image_alt %}<meta property="og:image:alt" content="{{ page.image_alt | escape }}">{% endif %}
-  <link rel="icon" type="image/png" href="{{ '/ccm-favicon.png' | relative_url }}">
-  <link rel="apple-touch-icon" href="{{ '/ccm-favicon.png' | relative_url }}">
+  <!-- Favicons / ícones do Cianorte Card Masters -->
+  <link rel="icon" type="image/png" sizes="96x96" href="{{ '/assets/img/favicon-96x96.png' | relative_url }}">
+  <link rel="icon" type="image/png" sizes="48x48" href="{{ '/assets/img/favicon-48x48.png' | relative_url }}">
+  <link rel="icon" href="{{ '/favicon.ico' | relative_url }}" sizes="any">
+  <link rel="apple-touch-icon" href="{{ '/assets/img/apple-touch-icon.png' | relative_url }}">
   <link rel="manifest" href="{{ '/site.webmanifest' | relative_url }}">
-  <meta name="theme-color" content="#0d1117">
+  <meta name="theme-color" content="#0b1020">
+  {% if page.keywords %}<meta name="keywords" content="{{ page.keywords | join: ', ' | escape }}">{% endif %}
+  {% if page.image_alt %}<meta property="og:image:alt" content="{{ page.image_alt | escape }}">{% endif %}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Barlow:wght@400;500;600;700;800&family=Fugaz+One&display=swap" rel="stylesheet">
