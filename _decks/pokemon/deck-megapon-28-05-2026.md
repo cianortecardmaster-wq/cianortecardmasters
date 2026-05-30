@@ -3,7 +3,7 @@ published: true
 title: "Deck Megapon: Mega Venusaur ex, Ogerpon e Meganium no Pokémon TCG"
 summary: "Deck Tech Megapon de Pokémon TCG: uma lista Grass baseada em Teal Mask Ogerpon ex, Meganium e Mega Venusaur ex para acelerar energias, comprar cartas e transformar o campo em pressão constante."
 description: "Deck Megapon Pokémon TCG com Mega Venusaur ex, Teal Mask Ogerpon ex e Meganium: plano de jogo, cartas principais, sequência ideal, pontos fortes e lista completa com 60 cartas."
-category_label: "Deck Tech"
+category_label: "Pokémon TCG"
 deck_game: "Pokémon TCG"
 deck_format: "Standard"
 deck_archetype: "Megapon Grass Toolbox"
