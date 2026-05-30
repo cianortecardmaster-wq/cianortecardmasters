@@ -1,6 +1,6 @@
 ---
 title: "Deck Tech Dash I/O: La Bombita, BIOS Update e Granadas no Talo"
-category_label: "Deck Tech"
+category_label: "Classic Constructed"
 deck_game: "Flesh and Blood"
 deck_format: "Classic Constructed"
 deck_archetype: "Mechanologist Aggro Midrange"
