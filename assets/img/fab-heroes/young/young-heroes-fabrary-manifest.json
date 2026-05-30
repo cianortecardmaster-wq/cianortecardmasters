@@ -1,0 +1,1296 @@
+[
+  {
+    "name": "Arakni",
+    "slug": "arakni",
+    "url": "https://content.fabrary.net/heroes/arakni.webp",
+    "file": "assets/img/fab/heroes/young/arakni.webp",
+    "unique_id": "9F7RHWjLgCDRqwMww99GN",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Assassin",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 20942,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Arakni, Solitary Confinement",
+    "slug": "arakni-solitary-confinement",
+    "url": "https://content.fabrary.net/heroes/arakni-solitary-confinement.webp",
+    "file": "assets/img/fab/heroes/young/arakni-solitary-confinement.webp",
+    "unique_id": "jkwfjdcDbhRnDrPWDnwT9",
+    "health": "19",
+    "intelligence": "4",
+    "types": [
+      "Assassin",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 12872,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Arakni, Web of Deceit",
+    "slug": "arakni-web-of-deceit",
+    "url": "https://content.fabrary.net/heroes/arakni-web-of-deceit.webp",
+    "file": "assets/img/fab/heroes/young/arakni-web-of-deceit.webp",
+    "unique_id": "qMNzBQBKDMgnGpTfGgKkP",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Chaos",
+      "Assassin",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 17236,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Aurora",
+    "slug": "aurora",
+    "url": "https://content.fabrary.net/heroes/aurora.webp",
+    "file": "assets/img/fab/heroes/young/aurora.webp",
+    "unique_id": "TDrmKkRWGKWnqfQkT9QML",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Elemental",
+      "Runeblade",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 75632,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Azalea",
+    "slug": "azalea",
+    "url": "https://content.fabrary.net/heroes/azalea.webp",
+    "file": "assets/img/fab/heroes/young/azalea.webp",
+    "unique_id": "Fc8mPQBjrNq6Fg9LW9RLc",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Ranger",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 22500,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Benji, the Piercing Wind",
+    "slug": "benji-the-piercing-wind",
+    "url": "https://content.fabrary.net/heroes/benji-the-piercing-wind.webp",
+    "file": "assets/img/fab/heroes/young/benji-the-piercing-wind.webp",
+    "unique_id": "HT8r8mg8rHmbWJthCFHfH",
+    "health": "17",
+    "intelligence": "4",
+    "types": [
+      "Ninja",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 25472,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Betsy",
+    "slug": "betsy",
+    "url": "https://content.fabrary.net/heroes/betsy.webp",
+    "file": "assets/img/fab/heroes/young/betsy.webp",
+    "unique_id": "zdWrPkDgdbWdGBWjCLnhj",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Guardian",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 17076,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Blaze, Firemind",
+    "slug": "blaze-firemind",
+    "url": "https://content.fabrary.net/heroes/blaze-firemind.webp",
+    "file": "assets/img/fab/heroes/young/blaze-firemind.webp",
+    "unique_id": "hJdWJJWrBzNBBFz9BCJDw",
+    "health": "17",
+    "intelligence": "4",
+    "types": [
+      "Wizard",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 105494,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Boltyn",
+    "slug": "boltyn",
+    "url": "https://content.fabrary.net/heroes/boltyn.webp",
+    "file": "assets/img/fab/heroes/young/boltyn.webp",
+    "unique_id": "Fmf8trg9w8B8BBbWrf8w9",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Light",
+      "Warrior",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 16374,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Bravo",
+    "slug": "bravo",
+    "url": "https://content.fabrary.net/heroes/bravo.webp",
+    "file": "assets/img/fab/heroes/young/bravo.webp",
+    "unique_id": "tzTbzLkLhDzmW9QMJr9KF",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Guardian",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 17752,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Bravo, Flattering Showman",
+    "slug": "bravo-flattering-showman",
+    "url": "https://content.fabrary.net/heroes/bravo-flattering-showman.webp",
+    "file": "assets/img/fab/heroes/young/bravo-flattering-showman.webp",
+    "unique_id": "DbqGjQMfWLNCfd7qGqGht",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Guardian",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 24148,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Brevant, Civic Protector",
+    "slug": "brevant-civic-protector",
+    "url": "https://content.fabrary.net/heroes/brevant-civic-protector.webp",
+    "file": "assets/img/fab/heroes/young/brevant-civic-protector.webp",
+    "unique_id": "jBtHRMcRntDhhGzKtzKFB",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Guardian",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 104126,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Briar",
+    "slug": "briar",
+    "url": "https://content.fabrary.net/heroes/briar.webp",
+    "file": "assets/img/fab/heroes/young/briar.webp",
+    "unique_id": "7TjkgnbJ8tghfrkMRnTfW",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Elemental",
+      "Runeblade",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 19706,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Chane",
+    "slug": "chane",
+    "url": "https://content.fabrary.net/heroes/chane.webp",
+    "file": "assets/img/fab/heroes/young/chane.webp",
+    "unique_id": "mCCnJrJQkqJ7KfqKNHGnc",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Shadow",
+      "Runeblade",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 18064,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Cindra",
+    "slug": "cindra",
+    "url": "https://content.fabrary.net/heroes/cindra.webp",
+    "file": "assets/img/fab/heroes/young/cindra.webp",
+    "unique_id": "m7hWTmtRzJnrtqtfLLR6M",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Royal",
+      "Draconic",
+      "Ninja",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 282880,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Dash",
+    "slug": "dash",
+    "url": "https://content.fabrary.net/heroes/dash.webp",
+    "file": "assets/img/fab/heroes/young/dash.webp",
+    "unique_id": "kftPnNkrBLJ7rPmFGgQCm",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Mechanologist",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 26748,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Dash, Database",
+    "slug": "dash-database",
+    "url": "https://content.fabrary.net/heroes/dash-database.webp",
+    "file": "assets/img/fab/heroes/young/dash-database.webp",
+    "unique_id": "N6TDqDNWfKfrz6G6jNrQQ",
+    "health": "18",
+    "intelligence": "4",
+    "types": [
+      "Mechanologist",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 19944,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Data Doll MKII",
+    "slug": "data-doll-mkii",
+    "url": "https://content.fabrary.net/heroes/data-doll-mkii.webp",
+    "file": "assets/img/fab/heroes/young/data-doll-mkii.webp",
+    "unique_id": "kbdzm8R7MHCpWC79RdTGH",
+    "health": "20",
+    "intelligence": "3",
+    "types": [
+      "Mechanologist",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 22532,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Dorinthea",
+    "slug": "dorinthea",
+    "url": "https://content.fabrary.net/heroes/dorinthea.webp",
+    "file": "assets/img/fab/heroes/young/dorinthea.webp",
+    "unique_id": "KGqRPDfRrnPqdj7Cm76fr",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Warrior",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 27898,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Dorinthea, Quicksilver Prodigy",
+    "slug": "dorinthea-quicksilver-prodigy",
+    "url": "https://content.fabrary.net/heroes/dorinthea-quicksilver-prodigy.webp",
+    "file": "assets/img/fab/heroes/young/dorinthea-quicksilver-prodigy.webp",
+    "unique_id": "NJJCGNjdCFzrjLqGfL6mR",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Warrior",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 16536,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Dromai",
+    "slug": "dromai",
+    "url": "https://content.fabrary.net/heroes/dromai.webp",
+    "file": "assets/img/fab/heroes/young/dromai.webp",
+    "unique_id": "Dz6FcRBNMFdBt9fJPMB7d",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Draconic",
+      "Illusionist",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 20206,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Emperor, Dracai of Aesir",
+    "slug": "emperor-dracai-of-aesir",
+    "url": "https://content.fabrary.net/heroes/emperor-dracai-of-aesir.webp",
+    "file": "assets/img/fab/heroes/young/emperor-dracai-of-aesir.webp",
+    "unique_id": "QgqNQGbtcF6NNBMDbDMhh",
+    "health": "15",
+    "intelligence": "4",
+    "types": [
+      "Royal",
+      "Draconic",
+      "Warrior",
+      "Wizard",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 102128,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Enigma",
+    "slug": "enigma",
+    "url": "https://content.fabrary.net/heroes/enigma.webp",
+    "file": "assets/img/fab/heroes/young/enigma.webp",
+    "unique_id": "JKPFKKFqnLtmctLkwNCmc",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Mystic",
+      "Illusionist",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 104598,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Enigma, New Moon",
+    "slug": "enigma-new-moon",
+    "url": "https://content.fabrary.net/heroes/enigma-new-moon.webp",
+    "file": "assets/img/fab/heroes/young/enigma-new-moon.webp",
+    "unique_id": "9HfDfRR8m8cLKDdg88gjm",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Mystic",
+      "Illusionist",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 11780,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Fai",
+    "slug": "fai",
+    "url": "https://content.fabrary.net/heroes/fai.webp",
+    "file": "assets/img/fab/heroes/young/fai.webp",
+    "unique_id": "QHNfbDkffrKWgwDw7MjwQ",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Draconic",
+      "Ninja",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 21852,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Fang",
+    "slug": "fang",
+    "url": "https://content.fabrary.net/heroes/fang.webp",
+    "file": "assets/img/fab/heroes/young/fang.webp",
+    "unique_id": "RBcRMcBrm89m6pcTDQnP9",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Royal",
+      "Draconic",
+      "Warrior",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 119466,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Florian",
+    "slug": "florian",
+    "url": "https://content.fabrary.net/heroes/florian.webp",
+    "file": "assets/img/fab/heroes/young/florian.webp",
+    "unique_id": "Ht8qhJWDMHjjMjzqgf6KG",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Elemental",
+      "Runeblade",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 76270,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Frankie, Make Ends Meat",
+    "slug": "frankie-make-ends-meat",
+    "url": "https://content.fabrary.net/heroes/frankie-make-ends-meat.webp",
+    "file": "assets/img/fab/heroes/young/frankie-make-ends-meat.webp",
+    "unique_id": "qJdwq7GGjFb96CzLDqCdk",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Necromancer",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 18250,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Genis Wotchuneed",
+    "slug": "genis-wotchuneed",
+    "url": "https://content.fabrary.net/heroes/genis-wotchuneed.webp",
+    "file": "assets/img/fab/heroes/young/genis-wotchuneed.webp",
+    "unique_id": "Mqj9K8NgJ7LFBwMKWk6L7",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Merchant",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 25812,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Gravy Bones",
+    "slug": "gravy-bones",
+    "url": "https://content.fabrary.net/heroes/gravy-bones.webp",
+    "file": "assets/img/fab/heroes/young/gravy-bones.webp",
+    "unique_id": "Fq9Cg9pKGFKrTbfHq9mBb",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Pirate",
+      "Necromancer",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 421604,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Hala",
+    "slug": "hala",
+    "url": "https://content.fabrary.net/heroes/hala.webp",
+    "file": "assets/img/fab/heroes/young/hala.webp",
+    "unique_id": "PCcMjhHfKKrmH8hR9LQBc",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Warrior",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 7948,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Ira, Crimson Haze",
+    "slug": "ira-crimson-haze",
+    "url": "https://content.fabrary.net/heroes/ira-crimson-haze.webp",
+    "file": "assets/img/fab/heroes/young/ira-crimson-haze.webp",
+    "unique_id": "GCRQMpBtqBHWrk68GqnGP",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Ninja",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 21606,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Iyslander",
+    "slug": "iyslander",
+    "url": "https://content.fabrary.net/heroes/iyslander.webp",
+    "file": "assets/img/fab/heroes/young/iyslander.webp",
+    "unique_id": "TmKrpP8tDg8bmpnqMPtgj",
+    "health": "18",
+    "intelligence": "4",
+    "types": [
+      "Elemental",
+      "Wizard",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 16714,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Kano",
+    "slug": "kano",
+    "url": "https://content.fabrary.net/heroes/kano.webp",
+    "file": "assets/img/fab/heroes/young/kano.webp",
+    "unique_id": "Q9B8TDhTdfDLN8ccnBThK",
+    "health": "15",
+    "intelligence": "4",
+    "types": [
+      "Wizard",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 20788,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Kassai",
+    "slug": "kassai",
+    "url": "https://content.fabrary.net/heroes/kassai.webp",
+    "file": "assets/img/fab/heroes/young/kassai.webp",
+    "unique_id": "GwMRRqcL8rDHFRDTfqWzt",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Warrior",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 391386,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Kassai, Cintari Sellsword",
+    "slug": "kassai-cintari-sellsword",
+    "url": "https://content.fabrary.net/heroes/kassai-cintari-sellsword.webp",
+    "file": "assets/img/fab/heroes/young/kassai-cintari-sellsword.webp",
+    "unique_id": "wWmP8RJRq7MWk7kBh9q7w",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Warrior",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 19230,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Katsu",
+    "slug": "katsu",
+    "url": "https://content.fabrary.net/heroes/katsu.webp",
+    "file": "assets/img/fab/heroes/young/katsu.webp",
+    "unique_id": "QnGJNBGBFw98q9n9NCdRW",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Ninja",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 41568,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Kavdaen, Trader of Skins",
+    "slug": "kavdaen-trader-of-skins",
+    "url": "https://content.fabrary.net/heroes/kavdaen-trader-of-skins.webp",
+    "file": "assets/img/fab/heroes/young/kavdaen-trader-of-skins.webp",
+    "unique_id": "rgq8FqBMdhn9khbwjDK6Q",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Merchant",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 18988,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Kayo",
+    "slug": "kayo",
+    "url": "https://content.fabrary.net/heroes/kayo.webp",
+    "file": "assets/img/fab/heroes/young/kayo.webp",
+    "unique_id": "HhFFJJRzq78LdNWPJP88t",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Brute",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 25018,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Kayo, Berserker Runt",
+    "slug": "kayo-berserker-runt",
+    "url": "https://content.fabrary.net/heroes/kayo-berserker-runt.webp",
+    "file": "assets/img/fab/heroes/young/kayo-berserker-runt.webp",
+    "unique_id": "NcQMQ79gb9P7CTMfWfBz8",
+    "health": "19",
+    "intelligence": "4",
+    "types": [
+      "Brute",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 27680,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Kayo, Strong-arm",
+    "slug": "kayo-strong-arm",
+    "url": "https://content.fabrary.net/heroes/kayo-strong-arm.webp",
+    "file": "assets/img/fab/heroes/young/kayo-strong-arm.webp",
+    "unique_id": "rwntmhkHtPGcKCbzJWjNn",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Reviled",
+      "Brute",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 625504,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Levia",
+    "slug": "levia",
+    "url": "https://content.fabrary.net/heroes/levia.webp",
+    "file": "assets/img/fab/heroes/young/levia.webp",
+    "unique_id": "WwzJLfPwhRTkFLDNjJPrk",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Shadow",
+      "Brute",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 19940,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Lexi",
+    "slug": "lexi",
+    "url": "https://content.fabrary.net/heroes/lexi.webp",
+    "file": "assets/img/fab/heroes/young/lexi.webp",
+    "unique_id": "GFc7t8wNTwC8rCFwrqTfh",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Elemental",
+      "Ranger",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 25430,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Lyath Goldmane",
+    "slug": "lyath-goldmane",
+    "url": "https://content.fabrary.net/heroes/lyath-goldmane.webp",
+    "file": "assets/img/fab/heroes/young/lyath-goldmane.webp",
+    "unique_id": "QrHJnzKzpMwgfJMcKQ8Dp",
+    "health": "20",
+    "intelligence": "5",
+    "types": [
+      "Reviled",
+      "Guardian",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 270372,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Marlynn",
+    "slug": "marlynn",
+    "url": "https://content.fabrary.net/heroes/marlynn.webp",
+    "file": "assets/img/fab/heroes/young/marlynn.webp",
+    "unique_id": "N7PFFQLkdzRMDhzDWJWwW",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Pirate",
+      "Ranger",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 492058,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Maxx Nitro",
+    "slug": "maxx-nitro",
+    "url": "https://content.fabrary.net/heroes/maxx-nitro.webp",
+    "file": "assets/img/fab/heroes/young/maxx-nitro.webp",
+    "unique_id": "z7bLz9hhPDcwmTdQGf6TK",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Mechanologist",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 20686,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Melody, Sing-along",
+    "slug": "melody-sing-along",
+    "url": "https://content.fabrary.net/heroes/melody-sing-along.webp",
+    "file": "assets/img/fab/heroes/young/melody-sing-along.webp",
+    "unique_id": "npDPz98H6BnJGDzHBmdGk",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Bard",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 117836,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Nuu",
+    "slug": "nuu",
+    "url": "https://content.fabrary.net/heroes/nuu.webp",
+    "file": "assets/img/fab/heroes/young/nuu.webp",
+    "unique_id": "prMJkPd8w9KQHQ9BjgMmG",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Mystic",
+      "Assassin",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 107396,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Oldhim",
+    "slug": "oldhim",
+    "url": "https://content.fabrary.net/heroes/oldhim.webp",
+    "file": "assets/img/fab/heroes/young/oldhim.webp",
+    "unique_id": "hw6qHfWdqQGfRPfKJMgR7",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Elemental",
+      "Guardian",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 22204,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Olympia",
+    "slug": "olympia",
+    "url": "https://content.fabrary.net/heroes/olympia.webp",
+    "file": "assets/img/fab/heroes/young/olympia.webp",
+    "unique_id": "t7H7JCQcTb9TTjjCbNwDH",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Warrior",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 12490,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Oscilio",
+    "slug": "oscilio",
+    "url": "https://content.fabrary.net/heroes/oscilio.webp",
+    "file": "assets/img/fab/heroes/young/oscilio.webp",
+    "unique_id": "jC7KWzhP9jMrPDNCHJWtk",
+    "health": "18",
+    "intelligence": "4",
+    "types": [
+      "Elemental",
+      "Wizard",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 97970,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Pleiades",
+    "slug": "pleiades",
+    "url": "https://content.fabrary.net/heroes/pleiades.webp",
+    "file": "assets/img/fab/heroes/young/pleiades.webp",
+    "unique_id": "DcwnhL66BkhqjFcfzwwfQ",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Revered",
+      "Guardian",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 120760,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Prism",
+    "slug": "prism",
+    "url": "https://content.fabrary.net/heroes/prism.webp",
+    "file": "assets/img/fab/heroes/young/prism.webp",
+    "unique_id": "NGkHQHjzkFqfmGLKmRCpj",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Light",
+      "Illusionist",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 17106,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Prism, Advent of Thrones",
+    "slug": "prism-advent-of-thrones",
+    "url": "https://content.fabrary.net/heroes/prism-advent-of-thrones.webp",
+    "file": "assets/img/fab/heroes/young/prism-advent-of-thrones.webp",
+    "unique_id": "dhbhdcr8CB6ngRrf9GTgm",
+    "health": "16",
+    "intelligence": "4",
+    "types": [
+      "Light",
+      "Illusionist",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 31682,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Professor Teklovossen",
+    "slug": "professor-teklovossen",
+    "url": "https://content.fabrary.net/heroes/professor-teklovossen.webp",
+    "file": "assets/img/fab/heroes/young/professor-teklovossen.webp",
+    "unique_id": "BLCMLHnwnbRKbdhPJ9DQp",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Mechanologist",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 120102,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Puffin",
+    "slug": "puffin",
+    "url": "https://content.fabrary.net/heroes/puffin.webp",
+    "file": "assets/img/fab/heroes/young/puffin.webp",
+    "unique_id": "m8MzjMMWBw88jJj9gt9Qj",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Pirate",
+      "Mechanologist",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 14774,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Rhinar",
+    "slug": "rhinar",
+    "url": "https://content.fabrary.net/heroes/rhinar.webp",
+    "file": "assets/img/fab/heroes/young/rhinar.webp",
+    "unique_id": "wNRqrHCn6rrKLhrDkqPwp",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Brute",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 20006,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Riptide",
+    "slug": "riptide",
+    "url": "https://content.fabrary.net/heroes/riptide.webp",
+    "file": "assets/img/fab/heroes/young/riptide.webp",
+    "unique_id": "DhffBQC7PHwzdJpjTjNBm",
+    "health": "19",
+    "intelligence": "4",
+    "types": [
+      "Ranger",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 9442,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Scurv, Stowaway",
+    "slug": "scurv-stowaway",
+    "url": "https://content.fabrary.net/heroes/scurv-stowaway.webp",
+    "file": "assets/img/fab/heroes/young/scurv-stowaway.webp",
+    "unique_id": "gKgfQDwNnGH8GtfL9RkPG",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Pirate",
+      "Thief",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 87616,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Shiyana, Diamond Gemini",
+    "slug": "shiyana-diamond-gemini",
+    "url": "https://content.fabrary.net/heroes/shiyana-diamond-gemini.webp",
+    "file": "assets/img/fab/heroes/young/shiyana-diamond-gemini.webp",
+    "unique_id": "n9r77QwMzdWJmnfhPLN9J",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Shapeshifter",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 24340,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Squizzy & Floof",
+    "slug": "squizzy-and-floof",
+    "url": "https://content.fabrary.net/heroes/squizzy-and-floof.webp",
+    "file": "assets/img/fab/heroes/young/squizzy-and-floof.webp",
+    "unique_id": "czfMfgfthg6qKLtKBMQjD",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Merchant",
+      "Hero",
+      "Young"
+    ],
+    "status": "missing",
+    "http_status": 404
+  },
+  {
+    "name": "Taylor",
+    "slug": "taylor",
+    "url": "https://content.fabrary.net/heroes/taylor.webp",
+    "file": "assets/img/fab/heroes/young/taylor.webp",
+    "unique_id": "PkD89rQPqTmdPjzH6GMhf",
+    "health": "18",
+    "intelligence": "4",
+    "types": [
+      "Shapeshifter",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 14730,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Teklovossen",
+    "slug": "teklovossen",
+    "url": "https://content.fabrary.net/heroes/teklovossen.webp",
+    "file": "assets/img/fab/heroes/young/teklovossen.webp",
+    "unique_id": "6PPFnJ8tNtPKN6Km7NWpp",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Mechanologist",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 18286,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Terra",
+    "slug": "terra",
+    "url": "https://content.fabrary.net/heroes/terra.webp",
+    "file": "assets/img/fab/heroes/young/terra.webp",
+    "unique_id": "JbQPwq8DkLpDdjHCP9www",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Elemental",
+      "Guardian",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 15130,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Tuffnut",
+    "slug": "tuffnut",
+    "url": "https://content.fabrary.net/heroes/tuffnut.webp",
+    "file": "assets/img/fab/heroes/young/tuffnut.webp",
+    "unique_id": "wKnhnNTHKHqFfjgdn9LLP",
+    "health": "20",
+    "intelligence": "3",
+    "types": [
+      "Revered",
+      "Brute",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 107150,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Uzuri",
+    "slug": "uzuri",
+    "url": "https://content.fabrary.net/heroes/uzuri.webp",
+    "file": "assets/img/fab/heroes/young/uzuri.webp",
+    "unique_id": "QmqN6fJJMnLDjLHKF7g97",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Assassin",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 10802,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Valda Brightaxe",
+    "slug": "valda-brightaxe",
+    "url": "https://content.fabrary.net/heroes/valda-brightaxe.webp",
+    "file": "assets/img/fab/heroes/young/valda-brightaxe.webp",
+    "unique_id": "zWhGF8kMMdmKdhMNdj6NH",
+    "health": "21",
+    "intelligence": "4",
+    "types": [
+      "Guardian",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 23078,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Verdance",
+    "slug": "verdance",
+    "url": "https://content.fabrary.net/heroes/verdance.webp",
+    "file": "assets/img/fab/heroes/young/verdance.webp",
+    "unique_id": "d77Rnf7QF6pfMd6MNgGtm",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Elemental",
+      "Wizard",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 76920,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Victor Goldmane",
+    "slug": "victor-goldmane",
+    "url": "https://content.fabrary.net/heroes/victor-goldmane.webp",
+    "file": "assets/img/fab/heroes/young/victor-goldmane.webp",
+    "unique_id": "kHmRR6Q7mJPjQgdQJcjpQ",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Guardian",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 41460,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Viserai",
+    "slug": "viserai",
+    "url": "https://content.fabrary.net/heroes/viserai.webp",
+    "file": "assets/img/fab/heroes/young/viserai.webp",
+    "unique_id": "RHnFkKb8FKdFzp9rdzGjF",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Runeblade",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 29840,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Vynnset",
+    "slug": "vynnset",
+    "url": "https://content.fabrary.net/heroes/vynnset.webp",
+    "file": "assets/img/fab/heroes/young/vynnset.webp",
+    "unique_id": "WhKb7MKbcDLhGThWGP8hT",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Shadow",
+      "Runeblade",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 91272,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Yoji, Royal Protector",
+    "slug": "yoji-royal-protector",
+    "url": "https://content.fabrary.net/heroes/yoji-royal-protector.webp",
+    "file": "assets/img/fab/heroes/young/yoji-royal-protector.webp",
+    "unique_id": "ncc6tmdrfHgnz9DhPqnwC",
+    "health": "22",
+    "intelligence": "4",
+    "types": [
+      "Guardian",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 34946,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Yorick, Weaver of Tales",
+    "slug": "yorick-weaver-of-tales",
+    "url": "https://content.fabrary.net/heroes/yorick-weaver-of-tales.webp",
+    "file": "assets/img/fab/heroes/young/yorick-weaver-of-tales.webp",
+    "unique_id": "nrMg9kDMg9KwBPPtJLJph",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Bard",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 15682,
+    "content_type": "image/webp"
+  },
+  {
+    "name": "Zen",
+    "slug": "zen",
+    "url": "https://content.fabrary.net/heroes/zen.webp",
+    "file": "assets/img/fab/heroes/young/zen.webp",
+    "unique_id": "7FHM67fkfjCjzwWzKfFKH",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Mystic",
+      "Ninja",
+      "Hero",
+      "Young"
+    ],
+    "status": "downloaded",
+    "bytes": 50222,
+    "content_type": "image/webp"
+  }
+]

@@ -98,6 +98,7 @@ permalink: /resultados/
       "event_date": {{ post.event_date | default: post.date | date_to_xmlschema | jsonify }},
       "summary": {{ post.summary | default: post.excerpt | strip_html | strip | jsonify }},
       "game": {{ post.game | default: "Flesh and Blood" | jsonify }},
+      "format": {{ post.format | default: "" | jsonify }},
       "rounds": {{ post.rounds | default: "" | jsonify }},
       "next_armory": {{ post.next_armory | default: "Quarta • 19:00" | jsonify }},
       "results": {% if post.results %}{{ post.results | jsonify }}{% else %}[]{% endif %}
@@ -123,6 +124,7 @@ permalink: /resultados/
       "event_date": {{ post.event_date | default: post.date | date_to_xmlschema | jsonify }},
       "summary": {{ post.summary | default: post.excerpt | strip_html | strip | jsonify }},
       "game": {{ post.game | default: "Flesh and Blood" | jsonify }},
+      "format": {{ post.format | default: "" | jsonify }},
       "rounds": {{ post.rounds | default: "" | jsonify }},
       "next_league": {{ post.next_liga | default: post.next_league | default: "Domingo • 13:30" | jsonify }},
       "results": {% if post.results %}{{ post.results | jsonify }}{% else %}[]{% endif %}

@@ -16,10 +16,10 @@ results:
     hero: "Nome do herói"
     # Opcional: informe uma foto do jogador para aparecer no hexágono do pódio da página completa.
     # player_image: "/assets/img/jogadores/nome-do-jogador.webp"
-    # Opcional: use uma imagem local do herói. Se não informar, o site tenta buscar pela API GoAgain.
+    # Opcional: use uma imagem local do herói. Se não informar, o site tenta resolver automaticamente.
     # hero_icon: "/assets/img/fab-heroes/nome-do-heroi.webp"
-    # Se existir um arquivo local com o nome do herói em assets/img/fab-heroes/, o site carrega o badge automaticamente.
-    # Se existir um arquivo local com o nome exato do herói em assets/img/fab-heroes/, o site tenta carregar automaticamente.
+    # Em formatos Silver Age, Blitz ou Young, o site usa automaticamente os badges de assets/img/fab-heroes/young/.
+    # Se precisar forçar um badge específico, use por exemplo: /assets/img/fab-heroes/young/ira-crimson-haze.webp
     record: "3-0"
     wins: 3
   - player: "Nome do jogador 2"

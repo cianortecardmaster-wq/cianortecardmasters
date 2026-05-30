@@ -287,13 +287,23 @@ image_alt: "Dragão em arte fantástica representando a comunidade Cianorte Card
 
     <article class="home-armory-card home-armory-card-epic" aria-label="Resumo do último resultado de Armory">
       {% if latest_armory %}
-        <p class="eyebrow home-armory-meta">{{ latest_armory.date | date: "%d/%m/%Y" }} • {{ latest_armory.rounds | default: "3" }} rodadas</p>
+        {% assign latest_armory_format_slug = latest_armory.format | default: "" | slugify %}
+        {% assign latest_armory_uses_young_badges = false %}
+        {% if latest_armory_format_slug contains "silver-age" or latest_armory_format_slug contains "blitz" or latest_armory_format_slug contains "young" %}
+          {% assign latest_armory_uses_young_badges = true %}
+        {% endif %}
+        <p class="eyebrow home-armory-meta">{{ latest_armory.date | date: "%d/%m/%Y" }} • {{ latest_armory.rounds | default: "3" }} rodadas{% if latest_armory.format %} • {{ latest_armory.format }}{% endif %}</p>
         <h3>{{ latest_armory.title }}</h3>
         {% if latest_armory.results %}
           <ol class="home-armory-podium home-armory-podium-epic">
             {% for result in latest_armory.results limit:3 %}
               {% assign hero_slug = result.hero | slugify %}
-              {% assign hero_image = '/assets/img/fab-heroes/' | append: hero_slug | append: '.webp' %}
+              {% if latest_armory_uses_young_badges %}
+                {% assign hero_young_slug = site.data.fab_young_hero_badges.aliases[hero_slug] | default: hero_slug %}
+                {% assign hero_image = '/assets/img/fab-heroes/young/' | append: hero_young_slug | append: '.webp' %}
+              {% else %}
+                {% assign hero_image = '/assets/img/fab-heroes/' | append: hero_slug | append: '.webp' %}
+              {% endif %}
               <li class="home-armory-row home-armory-row-{{ forloop.index }}">
                 <span class="home-armory-rank-badge" aria-hidden="true">
                   <img class="home-armory-rank-icon" src="{{ '/assets/img/armory-icons/depth/badge-colocacao.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="72" height="72">

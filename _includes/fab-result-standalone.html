@@ -7,6 +7,11 @@
   {% assign event_title = "Resultado do Armory" %}
   {% assign event_format = page.format | default: "Blitz" %}
 {% endif %}
+{% assign event_format_slug = event_format | slugify %}
+{% assign use_young_hero_badges = false %}
+{% if event_format_slug contains "silver-age" or event_format_slug contains "blitz" or event_format_slug contains "young" %}
+  {% assign use_young_hero_badges = true %}
+{% endif %}
 
 {% assign total_players = page.results | size %}
 {% assign champion = nil %}
@@ -91,7 +96,12 @@
           {% assign podium_wins = podium_result.wins | default: podium_result.vitorias | default: "-" %}
           {% assign podium_photo = podium_result.player_image | default: placeholder_photo %}
           {% assign podium_hero_slug = podium_hero | slugify %}
-          {% assign podium_hero_fallback = "/assets/img/fab-heroes/" | append: podium_hero_slug | append: ".webp" %}
+          {% if use_young_hero_badges %}
+            {% assign podium_hero_young_slug = site.data.fab_young_hero_badges.aliases[podium_hero_slug] | default: podium_hero_slug %}
+            {% assign podium_hero_fallback = "/assets/img/fab-heroes/young/" | append: podium_hero_young_slug | append: ".webp" %}
+          {% else %}
+            {% assign podium_hero_fallback = "/assets/img/fab-heroes/" | append: podium_hero_slug | append: ".webp" %}
+          {% endif %}
           <article class="fab-result-podium-card fab-result-podium-card-side is-rank-2 is-{{ podium_tone }}">
             <div class="fab-result-winner-hex">
               <img class="fab-result-player-photo" src="{{ podium_photo | relative_url }}" alt="Foto de {{ podium_player | escape }}" loading="lazy" decoding="async">
@@ -124,7 +134,12 @@
           {% assign podium_wins = podium_result.wins | default: podium_result.vitorias | default: "-" %}
           {% assign podium_photo = podium_result.player_image | default: placeholder_photo %}
           {% assign podium_hero_slug = podium_hero | slugify %}
-          {% assign podium_hero_fallback = "/assets/img/fab-heroes/" | append: podium_hero_slug | append: ".webp" %}
+          {% if use_young_hero_badges %}
+            {% assign podium_hero_young_slug = site.data.fab_young_hero_badges.aliases[podium_hero_slug] | default: podium_hero_slug %}
+            {% assign podium_hero_fallback = "/assets/img/fab-heroes/young/" | append: podium_hero_young_slug | append: ".webp" %}
+          {% else %}
+            {% assign podium_hero_fallback = "/assets/img/fab-heroes/" | append: podium_hero_slug | append: ".webp" %}
+          {% endif %}
           <article class="fab-result-podium-card fab-result-podium-card-champion is-rank-1 is-{{ podium_tone }}">
             <div class="fab-result-winner-hex">
               <img class="fab-result-player-photo" src="{{ podium_photo | relative_url }}" alt="Foto de {{ podium_player | escape }}" loading="lazy" decoding="async">
@@ -157,7 +172,12 @@
           {% assign podium_wins = podium_result.wins | default: podium_result.vitorias | default: "-" %}
           {% assign podium_photo = podium_result.player_image | default: placeholder_photo %}
           {% assign podium_hero_slug = podium_hero | slugify %}
-          {% assign podium_hero_fallback = "/assets/img/fab-heroes/" | append: podium_hero_slug | append: ".webp" %}
+          {% if use_young_hero_badges %}
+            {% assign podium_hero_young_slug = site.data.fab_young_hero_badges.aliases[podium_hero_slug] | default: podium_hero_slug %}
+            {% assign podium_hero_fallback = "/assets/img/fab-heroes/young/" | append: podium_hero_young_slug | append: ".webp" %}
+          {% else %}
+            {% assign podium_hero_fallback = "/assets/img/fab-heroes/" | append: podium_hero_slug | append: ".webp" %}
+          {% endif %}
           <article class="fab-result-podium-card fab-result-podium-card-side is-rank-3 is-{{ podium_tone }}">
             <div class="fab-result-winner-hex">
               <img class="fab-result-player-photo" src="{{ podium_photo | relative_url }}" alt="Foto de {{ podium_player | escape }}" loading="lazy" decoding="async">
@@ -223,9 +243,14 @@
             {% assign result_record = result.record | default: result.campanha | default: result.score | default: "-" %}
             {% assign result_wins = result.wins | default: result.vitorias | default: "-" %}
             {% assign result_hero_slug = result_hero | slugify %}
-            {% assign result_hero_local = "/assets/img/fab-heroes/" | append: result_hero_slug | append: ".webp" %}
+            {% if use_young_hero_badges %}
+              {% assign result_hero_young_slug = site.data.fab_young_hero_badges.aliases[result_hero_slug] | default: result_hero_slug %}
+              {% assign result_hero_local = "/assets/img/fab-heroes/young/" | append: result_hero_young_slug | append: ".webp" %}
+            {% else %}
+              {% assign result_hero_local = "/assets/img/fab-heroes/" | append: result_hero_slug | append: ".webp" %}
+            {% endif %}
             <article class="fab-result-hero-chip">
-              <span class="fab-result-hero-avatar">
+              <span class="fab-result-hero-avatar{% if use_young_hero_badges %} is-young-hero-badge{% endif %}">
                 <img src="{{ result_hero_local | relative_url }}" alt="{{ result_hero | escape }}" loading="lazy" decoding="async" onerror="this.closest('.fab-result-hero-avatar').classList.add('is-missing');this.remove();">
                 <span>{{ result_hero | slice: 0, 1 }}</span>
               </span>
@@ -261,7 +286,12 @@
                 {% assign result_record = result.record | default: result.campanha | default: result.score | default: "-" %}
                 {% assign result_wins = result.wins | default: result.vitorias | default: "-" %}
                 {% assign result_hero_slug = result_hero | slugify %}
-                {% assign result_hero_local = "/assets/img/fab-heroes/" | append: result_hero_slug | append: ".webp" %}
+                {% if use_young_hero_badges %}
+                  {% assign result_hero_young_slug = site.data.fab_young_hero_badges.aliases[result_hero_slug] | default: result_hero_slug %}
+                  {% assign result_hero_local = "/assets/img/fab-heroes/young/" | append: result_hero_young_slug | append: ".webp" %}
+                {% else %}
+                  {% assign result_hero_local = "/assets/img/fab-heroes/" | append: result_hero_slug | append: ".webp" %}
+                {% endif %}
                 {% assign row_rank_icon = rank_icon_placement %}
                 {% if forloop.index == 1 %}{% assign row_rank_icon = rank_icon_champion %}{% endif %}
                 <tr class="{% if forloop.index == 1 %}is-champion{% elsif forloop.index == 2 %}is-runner-up{% elsif forloop.index == 3 %}is-third-place{% endif %}">
@@ -274,7 +304,7 @@
                   <td><strong>{{ result_player }}</strong></td>
                   <td>
                     <div class="fab-result-table-hero armory-player-cell">
-                      <span class="armory-hero-badge armory-hero-badge-normal has-image" title="{{ result_hero | escape }}">
+                      <span class="armory-hero-badge armory-hero-badge-normal has-image{% if use_young_hero_badges %} armory-hero-badge-young{% endif %}" title="{{ result_hero | escape }}">
                         <img src="{{ result_hero_local | relative_url }}" alt="{{ result_hero | escape }}" loading="lazy" decoding="async" onerror="this.closest('.armory-hero-badge').classList.remove('has-image');this.remove();">
                         <span class="armory-hero-initials">{{ result_hero | slice: 0, 1 }}</span>
                       </span>

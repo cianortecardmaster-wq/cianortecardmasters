@@ -60,6 +60,11 @@
     return game.includes("flesh and blood") || game === "fab";
   }
 
+  function isYoungHeroFormat(value) {
+    const format = normalizeGame(value).replace(/[–—]/g, "-");
+    return format.includes("silver age") || format.includes("silver-age") || format.includes("blitz") || format.includes("young");
+  }
+
   function dateLabel(value) {
     if (!value) return "Sem data";
     return new Date(value).toLocaleDateString("pt-BR", {
@@ -190,11 +195,157 @@
     "ser boltyn": "Ser Boltyn, Breaker of Dawn",
     "dash i/o": "Dash I-O",
     "dash i-o": "Dash I-O",
-    "fai": "Fai, Rising Rebellion",   
+    "fai": "Fai, Rising Rebellion",
+    "ira": "Ira, Scarlet Revenger",
+    "ira, crimson haze": "Ira, Crimson Haze",
     "ira, scarlet revenger": "Ira, Scarlet Revenger",
     "pleiades": "Pleiades, Superstar",
     "prism": "Prism, Awakener of Sol",
     "teklovossen": "Teklovossen, Esteemed Magnate"
+  };
+
+  const youngHeroBadgeAliases = {
+      "arakni": "arakni",
+      "arakni-5l-p3d-7hru-7h3-cr4x": "arakni",
+      "arakni-huntsman": "arakni",
+      "arakni-marionette": "arakni",
+      "arakni-solitary-confinement": "arakni-solitary-confinement",
+      "arakni-web-of-deceit": "arakni-web-of-deceit",
+      "aurora": "aurora",
+      "aurora-legacy-of-tempest": "aurora",
+      "aurora-shooting-star": "aurora",
+      "azalea": "azalea",
+      "azalea-ace-in-the-hole": "azalea",
+      "benji": "benji-the-piercing-wind",
+      "benji-piercing-wind": "benji-the-piercing-wind",
+      "benji-the-piercing-wind": "benji-the-piercing-wind",
+      "betsy": "betsy",
+      "betsy-skin-in-the-game": "betsy",
+      "blaze": "blaze-firemind",
+      "blaze-firemind": "blaze-firemind",
+      "boltyn": "boltyn",
+      "boltyn-breaker-of-dawn": "boltyn",
+      "bravo": "bravo",
+      "bravo-flattering-showman": "bravo-flattering-showman",
+      "bravo-showstopper": "bravo",
+      "bravo-star-of-the-show": "bravo",
+      "brevant": "brevant-civic-protector",
+      "brevant-civic-protector": "brevant-civic-protector",
+      "briar": "briar",
+      "chane": "chane",
+      "chane-bound-by-shadow": "chane",
+      "cindra": "cindra",
+      "cindra-dracai-of-retribution": "cindra",
+      "dash": "dash",
+      "dash-database": "dash-database",
+      "dash-i-o": "dash",
+      "dash-inventor-extraordinaire": "dash",
+      "dash-io": "dash",
+      "data-doll-mk2": "data-doll-mkii",
+      "data-doll-mkii": "data-doll-mkii",
+      "dorinthea": "dorinthea",
+      "dorinthea-ironsong": "dorinthea",
+      "dorinthea-quicksilver-prodigy": "dorinthea-quicksilver-prodigy",
+      "dromai": "dromai",
+      "dromai-ash-artist": "dromai",
+      "emperor": "emperor-dracai-of-aesir",
+      "emperor-dracai-of-aesir": "emperor-dracai-of-aesir",
+      "enigma": "enigma",
+      "enigma-ledger-of-ancestry": "enigma",
+      "enigma-new-moon": "enigma-new-moon",
+      "fai": "fai",
+      "fai-rising-rebellion": "fai",
+      "fang": "fang",
+      "fang-dracai-of-blades": "fang",
+      "florian": "florian",
+      "florian-rotwood-harbinger": "florian",
+      "frankie": "frankie-make-ends-meat",
+      "frankie-make-ends-meat": "frankie-make-ends-meat",
+      "genis-wotchuneed": "genis-wotchuneed",
+      "gravy-bones": "gravy-bones",
+      "gravy-bones-shipwrecked-looter": "gravy-bones",
+      "hala": "hala",
+      "hala-bladesaint-of-the-vow": "hala",
+      "ira": "ira-crimson-haze",
+      "ira-crimson-haze": "ira-crimson-haze",
+      "ira-scarlet-revenger": "ira-crimson-haze",
+      "iyslander": "iyslander",
+      "iyslander-stormbind": "iyslander",
+      "kano": "kano",
+      "kano-dracai-of-aether": "kano",
+      "kassai": "kassai",
+      "kassai-cintari-sellsword": "kassai-cintari-sellsword",
+      "kassai-of-the-golden-sand": "kassai",
+      "katsu": "katsu",
+      "katsu-the-wanderer": "katsu",
+      "kavdaen": "kavdaen-trader-of-skins",
+      "kavdaen-trader-of-skins": "kavdaen-trader-of-skins",
+      "kayo": "kayo",
+      "kayo-armed-and-dangerous": "kayo",
+      "kayo-berserker-runt": "kayo-berserker-runt",
+      "kayo-strong-arm": "kayo-strong-arm",
+      "kayo-underhanded-cheat": "kayo",
+      "levia": "levia",
+      "levia-shadowborn-abomination": "levia",
+      "lexi": "lexi",
+      "lexi-livewire": "lexi",
+      "lyath-goldmane": "lyath-goldmane",
+      "marlynn": "marlynn",
+      "marlynn-treasure-hunter": "marlynn",
+      "maxx-nitro": "maxx-nitro",
+      "maxx-the-hype-nitro": "maxx-nitro",
+      "melody": "melody-sing-along",
+      "melody-sing-along": "melody-sing-along",
+      "nuu": "nuu",
+      "nuu-alluring-desire": "nuu",
+      "oldhim": "oldhim",
+      "oldhim-grandfather-of-eternity": "oldhim",
+      "olympia": "olympia",
+      "oscilio": "oscilio",
+      "oscilio-constella-intelligence": "oscilio",
+      "oscilio-forked-continuum": "oscilio",
+      "pleiades": "pleiades",
+      "pleiades-superstar": "pleiades",
+      "prism": "prism",
+      "prism-advent-of-thrones": "prism-advent-of-thrones",
+      "prism-awakener-of-sol": "prism",
+      "prism-sculptor-of-arc-light": "prism",
+      "professor-teklovossen": "professor-teklovossen",
+      "puffin": "puffin",
+      "rhinar": "rhinar",
+      "rhinar-reckless-rampage": "rhinar",
+      "riptide": "riptide",
+      "riptide-lurker-of-the-deep": "riptide",
+      "scurv": "scurv-stowaway",
+      "scurv-stowaway": "scurv-stowaway",
+      "ser-boltyn": "boltyn",
+      "ser-boltyn-breaker-of-dawn": "boltyn",
+      "shiyana": "shiyana-diamond-gemini",
+      "shiyana-diamond-gemini": "shiyana-diamond-gemini",
+      "taylor": "taylor",
+      "teklovossen": "teklovossen",
+      "teklovossen-esteemed-magnate": "teklovossen",
+      "terra": "terra",
+      "tuffnut": "tuffnut",
+      "tuffnut-bumbling-hulkster": "tuffnut",
+      "uzuri": "uzuri",
+      "uzuri-switchblade": "uzuri",
+      "valda-brightaxe": "valda-brightaxe",
+      "valda-seismic-impact": "valda-brightaxe",
+      "verdance": "verdance",
+      "verdance-thorn-of-the-rose": "verdance",
+      "victor-goldmane": "victor-goldmane",
+      "victor-goldmane-high-and-mighty": "victor-goldmane",
+      "viserai": "viserai",
+      "viserai-rune-blood": "viserai",
+      "vynnset": "vynnset",
+      "vynnset-iron-maiden": "vynnset",
+      "yoji": "yoji-royal-protector",
+      "yoji-royal-protector": "yoji-royal-protector",
+      "yorick": "yorick-weaver-of-tales",
+      "yorick-weaver-of-tales": "yorick-weaver-of-tales",
+      "zen": "zen",
+      "zen-tamer-of-purpose": "zen"
   };
 
   function canonicalHeroName(value) {
@@ -214,23 +365,34 @@
       .toLowerCase();
   }
 
-  function heroAssetCandidates(heroName, explicitIcon = "") {
+  function heroAssetCandidates(heroName, explicitIcon = "", options = {}) {
     const canonical = canonicalHeroName(heroName);
     if (!canonical) return [];
 
     const slug = slugHeroFileName(canonical);
+    const firstNameSlug = slugHeroFileName(String(canonical).split(",")[0] || canonical).replace(/^ser-/, "");
     const encoded = encodeURIComponent(canonical);
     const explicit = String(explicitIcon || "").trim();
     const localExplicit = explicit && !/^[a-z]+:/i.test(explicit) ? assetUrl(explicit) : "";
-    const candidates = [
-      localExplicit,
+    const useYoung = Boolean(options.young);
+    const youngAliasSlug = youngHeroBadgeAliases[slug] || youngHeroBadgeAliases[firstNameSlug] || "";
+
+    const candidates = [localExplicit];
+
+    if (useYoung) {
+      [youngAliasSlug, slug, firstNameSlug].filter(Boolean).forEach(candidateSlug => {
+        candidates.push(assetUrl(`/assets/img/fab-heroes/young/${candidateSlug}.webp`));
+      });
+    }
+
+    candidates.push(
       // Padrão escolhido para o bloco Armory: arquivos em slug minúsculo, sem vírgula e sem espaços.
       assetUrl(`/assets/img/fab-heroes/${slug}.webp`),
       assetUrl(`/assets/img/fab-heroes/${slug}.png`),
       // Fallback para os arquivos duplicados antigos com nome completo.
       assetUrl(`/assets/img/fab-heroes/${encoded}.webp`),
       assetUrl(`/assets/img/fab-heroes/${encoded}.png`)
-    ];
+    );
 
     return Array.from(new Set(candidates.filter(Boolean)));
   }
@@ -606,10 +768,10 @@
     return Array.from(map.values());
   }
 
-  function heroBadge(hero, icon = "", size = "normal") {
+  function heroBadge(hero, icon = "", size = "normal", options = {}) {
     const clean = canonicalHeroName(hero);
     const label = clean || "Herói não informado";
-    const candidates = heroAssetCandidates(clean, icon);
+    const candidates = heroAssetCandidates(clean, icon, options);
     const firstImage = candidates[0] || "";
     const fallbacks = candidates.slice(1);
     const initials = `<span class="armory-hero-initials">${escapeHtml(heroInitials(label))}</span>`;
@@ -618,7 +780,7 @@
       : "";
 
     return `
-      <span class="armory-hero-badge armory-hero-badge-${size}${image ? " has-image" : ""}" data-hero-name="${escapeHtml(clean)}" title="${escapeHtml(label)}">
+      <span class="armory-hero-badge armory-hero-badge-${size}${image ? " has-image" : ""}${options.young ? " armory-hero-badge-young" : ""}" data-hero-name="${escapeHtml(clean)}" title="${escapeHtml(label)}">
         ${image}
         ${initials}
       </span>
@@ -664,6 +826,7 @@
     const rounds = roundsFromResults(results, latest.rounds);
     const game = latest.game || "Flesh and Blood";
     const nextArmory = latest.next_armory || latest.nextArmory || "Quarta • 19:00";
+    const useYoungHeroBadges = isYoungHeroFormat(latest.format || latest.formato || latest.event_format || "");
     const heroes = uniqueHeroes(results);
 
     const rows = results.slice(0, 12).map((result, index) => {
@@ -681,7 +844,7 @@
             <strong>${placement}º</strong>
           </span>
           <div class="armory-player-cell">
-            ${heroBadge(hero, heroIcon, index === 0 ? "featured" : "normal")}
+            ${heroBadge(hero, heroIcon, index === 0 ? "featured" : "normal", { young: useYoungHeroBadges })}
             <div>
               <strong>${escapeHtml(player)}</strong>
               <small>${escapeHtml(heroName)}</small>
@@ -708,7 +871,7 @@
 
     const heroList = heroes.map(hero => `
       <li>
-        ${heroBadge(hero.name, hero.icon, "mini")}
+        ${heroBadge(hero.name, hero.icon, "mini", { young: useYoungHeroBadges })}
         <span title="${escapeHtml(hero.name)}">${escapeHtml(hero.shortName)}</span>
       </li>
     `).join("");
@@ -758,6 +921,7 @@
     const game = latest.game || (options.variant === "pokemon" ? "Pokemon" : "Flesh and Blood");
     const nextLeague = latest.next_league || latest.next_liga || latest.nextLeague || "Domingo • 13:30";
     const isPokemon = options.variant === "pokemon" || isPokemonGame(game);
+    const useYoungHeroBadges = !isPokemon && isYoungHeroFormat(latest.format || latest.formato || latest.event_format || "");
     const heroes = isPokemon ? uniquePokemonDecks(results) : uniqueHeroes(results);
     const eyebrow = isPokemon ? "Última Liga de Pokémon" : "Última Liga de Flesh and Blood";
     const sideTitle = isPokemon ? "Pokémon da liga" : "Heróis da liga";
@@ -771,7 +935,7 @@
       const heroIcon = result.hero_icon || result.heroIcon || result.icon || "";
       const placement = index + 1;
       const placementIcon = index === 0 ? armoryIcons.depth.champion : armoryIcons.depth.placement;
-      const badgeMarkup = isPokemon ? pokemonSpriteStack(result) : heroBadge(hero, heroIcon, index === 0 ? "featured" : "normal");
+      const badgeMarkup = isPokemon ? pokemonSpriteStack(result) : heroBadge(hero, heroIcon, index === 0 ? "featured" : "normal", { young: useYoungHeroBadges });
       return `
         <li class="armory-result-row${index === 0 ? " is-champion" : ""}${isPokemon ? " is-pokemon-row" : ""}">
           <span class="armory-rank-badge armory-rank-${placement}" aria-label="${placement}º colocado">
@@ -808,7 +972,7 @@
 
     const heroList = heroes.map(hero => `
       <li>
-        ${isPokemon ? pokemonBadge(hero.source || hero.name, "mini") : heroBadge(hero.name, hero.icon, "mini")}
+        ${isPokemon ? pokemonBadge(hero.source || hero.name, "mini") : heroBadge(hero.name, hero.icon, "mini", { young: useYoungHeroBadges })}
         <span title="${escapeHtml(hero.name)}">${escapeHtml(hero.shortName)}</span>
       </li>
     `).join("");
@@ -1319,6 +1483,7 @@
       initDeckFilter();
       initCommunityPagination();
       renderArmoryStats();
+      initArmoryHeroBadges(document);
     });
   } else {
     initBlogFilter();
@@ -1326,5 +1491,6 @@
     initDeckFilter();
     initCommunityPagination();
     renderArmoryStats();
+    initArmoryHeroBadges(document);
   }
 })();

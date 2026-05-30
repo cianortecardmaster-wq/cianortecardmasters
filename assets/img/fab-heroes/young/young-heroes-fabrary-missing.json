@@ -1,0 +1,18 @@
+[
+  {
+    "name": "Squizzy & Floof",
+    "slug": "squizzy-and-floof",
+    "url": "https://content.fabrary.net/heroes/squizzy-and-floof.webp",
+    "file": "assets/img/fab/heroes/young/squizzy-and-floof.webp",
+    "unique_id": "czfMfgfthg6qKLtKBMQjD",
+    "health": "20",
+    "intelligence": "4",
+    "types": [
+      "Merchant",
+      "Hero",
+      "Young"
+    ],
+    "status": "missing",
+    "http_status": 404
+  }
+]
