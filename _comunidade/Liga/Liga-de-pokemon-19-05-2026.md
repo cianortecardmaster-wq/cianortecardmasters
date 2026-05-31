@@ -11,7 +11,7 @@ local: "Centro Cultural"
 image: "/assets/img/banners/banner-liga-pokemon-resultado.png"
 image_alt: "Card de resultado da Liga de Pokémon da comunidade Cianorte Card Masters"
 results:
-  - player: "Hermes Lerdo"
+  - player: "Hermes"
     hero: "Ogerpon EX / Meganium"
     record: "17 pts"
     wins: 17
@@ -21,7 +21,7 @@ results:
     record: "13 pts"
     wins: 13
 
-  - player: "Gustavo Scopel"
+  - player: "Scopel"
     hero: "Mega Absol EX / Mega Kangaskhan EX"
     record: "13 pts"
     wins: 13
