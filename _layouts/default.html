@@ -10,9 +10,13 @@
   <link rel="icon" type="image/png" sizes="96x96" href="{{ '/assets/img/favicon-96x96.png' | relative_url }}">
   <link rel="icon" type="image/png" sizes="48x48" href="{{ '/assets/img/favicon-48x48.png' | relative_url }}">
   <link rel="icon" href="{{ '/favicon.ico' | relative_url }}" sizes="any">
-  <link rel="apple-touch-icon" href="{{ '/assets/img/apple-touch-icon.png' | relative_url }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/img/pwa/site/icon-180.png' | relative_url }}">
   <link rel="manifest" href="{{ '/site.webmanifest' | relative_url }}">
-  <meta name="theme-color" content="#0b1020">
+  <meta name="theme-color" content="#06110b">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="CC Masters">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   {% if page.keywords %}<meta name="keywords" content="{{ page.keywords | join: ', ' | escape }}">{% endif %}
   {% if page.image_alt %}<meta property="og:image:alt" content="{{ page.image_alt | escape }}">{% endif %}
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,5 +36,12 @@
   {% include footer.html %}
   <script>window.CCM_BASEURL = "{{ site.baseurl }}";</script>
   <script src="{{ '/assets/js/site.min.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register("{{ '/service-worker.js' | relative_url }}").catch(function () {});
+      });
+    }
+  </script>
 </body>
 </html>

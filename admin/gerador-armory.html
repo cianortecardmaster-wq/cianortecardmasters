@@ -3,6 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="manifest" href="/manifest-armory.webmanifest" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/pwa/armory/icon-180.png" />
+  <meta name="theme-color" content="#07130a" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="CCM Armory" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title>Gerador de Markdown - Resultados Cianorte Card Masters</title>
   <style>
     :root {
@@ -1312,6 +1319,13 @@
 
     if (!loadDraft()) resetForm();
     generateMarkdown();
+  </script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('/service-worker.js').catch(function () {});
+      });
+    }
   </script>
 </body>
 </html>

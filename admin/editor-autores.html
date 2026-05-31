@@ -3,6 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="manifest" href="/manifest-editor-autores.webmanifest" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/pwa/editor/icon-180.png" />
+  <meta name="theme-color" content="#07130a" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="CCM Editor" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title>Editor de Artigos - Cianorte Card Masters</title>
   <style>
     :root {
@@ -1213,6 +1220,13 @@
     newAuthorWrap.classList.toggle("active", authorSelect.value === "__new");
     setDefaultImageIfBlank();
     updatePreview();
+  </script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('/service-worker.js').catch(function () {});
+      });
+    }
   </script>
 </body>
 </html>
