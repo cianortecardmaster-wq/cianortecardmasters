@@ -12,7 +12,7 @@ local: "Bazar do Weezing"
 category_label: "Torneio"
 content_style: "torneio"
 comments: false
-image: "/assets/img/banners/banner-liga-fab-resultado.png"
+image: "/assets/img/banners/banner-silver-age-bazar-do-weezing.webp"
 image_alt: "Card de resultado do torneio Silver Age de Flesh and Blood da comunidade Cianorte Card Masters em 30 de maio de 2026"
 tags:
   - "Flesh and Blood"
