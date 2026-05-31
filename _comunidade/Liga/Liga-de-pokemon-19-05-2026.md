@@ -8,7 +8,7 @@ date: 2026-05-19
 event_date: 2026-05-03
 next_liga: "Esperando Edital"
 local: "Centro Cultural"
-image: "/assets/img/banners/banner-liga-pokemon-resultado.png"
+image: "/assets/img/banners/banner-card-liga-pokemon-centro-cultural.webp"
 image_alt: "Card de resultado da Liga de Pokémon da comunidade Cianorte Card Masters"
 results:
   - player: "Hermes"
