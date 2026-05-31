@@ -201,6 +201,10 @@ layout: default
     {% unless post_game_down contains "pokemon" %}
       {% assign is_fab_result_detail = true %}
     {% endunless %}
+  {% elsif post_style == "torneio" %}
+    {% if post_game_down contains "flesh" or post_game_down == "fab" %}
+      {% assign is_fab_result_detail = true %}
+    {% endif %}
   {% endif %}
 {% endif %}
 

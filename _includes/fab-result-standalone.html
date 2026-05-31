@@ -6,6 +6,10 @@
   {% assign event_kind = "Armory" %}
   {% assign event_title = "Resultado do Armory" %}
   {% assign event_format = page.format | default: "Blitz" %}
+{% elsif post_style == "torneio" %}
+  {% assign event_kind = "Torneio" %}
+  {% assign event_title = "Resultado do Torneio" %}
+  {% assign event_format = page.format | default: "Silver Age" %}
 {% endif %}
 {% assign event_format_slug = event_format | slugify %}
 {% assign use_young_hero_badges = false %}
