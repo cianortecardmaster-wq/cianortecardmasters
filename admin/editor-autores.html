@@ -1,0 +1,1218 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Editor de Artigos - Cianorte Card Masters</title>
+  <style>
+    :root {
+      --bg: #080b12;
+      --panel: #121926;
+      --panel-2: #182235;
+      --panel-3: #0d1320;
+      --text: #f7f0df;
+      --muted: #b9ad96;
+      --line: rgba(255,255,255,.13);
+      --gold: #d6a84f;
+      --gold-2: #f7d77d;
+      --green: #58d68d;
+      --red: #ff6b6b;
+      --blue: #65b7ff;
+      --input: #0b101b;
+      --shadow: 0 18px 60px rgba(0,0,0,.38);
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(214,168,79,.20), transparent 32rem),
+        radial-gradient(circle at 95% 20%, rgba(88,214,141,.12), transparent 28rem),
+        linear-gradient(180deg, #0a0e18, #05070c 52%, #090b10);
+      padding: 24px;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    a { color: var(--gold-2); }
+
+    .app {
+      width: min(1440px, 100%);
+      margin: 0 auto;
+    }
+
+    .hero {
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: linear-gradient(135deg, rgba(18,25,38,.95), rgba(24,34,53,.82));
+      box-shadow: var(--shadow);
+      padding: clamp(20px, 4vw, 34px);
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -10% -50% 42%;
+      height: 220px;
+      background: radial-gradient(circle, rgba(214,168,79,.18), transparent 70%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      color: var(--gold-2);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-weight: 900;
+      font-size: .75rem;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: .92;
+      margin-bottom: 12px;
+      letter-spacing: .01em;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 920px;
+      margin-bottom: 0;
+      line-height: 1.62;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(360px, .45fr) minmax(0, .55fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      background: rgba(18,25,38,.92);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .card + .card { margin-top: 18px; }
+
+    .card h2 {
+      color: var(--gold-2);
+      font-size: 1.05rem;
+      margin-bottom: 14px;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: .9rem;
+      line-height: 1.55;
+      margin-bottom: 14px;
+    }
+
+    .fields {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 13px;
+    }
+
+    .field.full { grid-column: 1 / -1; }
+
+    label {
+      display: block;
+      color: var(--muted);
+      font-size: .8rem;
+      font-weight: 800;
+      margin-bottom: 7px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 13px;
+      background: var(--input);
+      color: var(--text);
+      padding: 11px 12px;
+      font: inherit;
+      outline: none;
+      transition: border-color .18s, box-shadow .18s, background .18s;
+    }
+
+    textarea { min-height: 92px; resize: vertical; }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: rgba(214,168,79,.78);
+      box-shadow: 0 0 0 4px rgba(214,168,79,.12);
+      background: #0e1523;
+    }
+
+    .new-author-wrap { display: none; }
+    .new-author-wrap.active { display: grid; }
+
+    .toolbar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255,255,255,.035);
+      margin-bottom: 10px;
+      position: sticky;
+      top: 10px;
+      z-index: 4;
+      backdrop-filter: blur(16px);
+    }
+
+    button, .fake-button {
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 13px;
+      font: inherit;
+      font-weight: 900;
+      cursor: pointer;
+      color: #111;
+      background: linear-gradient(135deg, var(--gold), var(--gold-2));
+      transition: transform .15s, filter .15s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    button:hover, .fake-button:hover { transform: translateY(-1px); filter: brightness(1.05); }
+    button:active, .fake-button:active { transform: translateY(0); }
+
+    button.secondary {
+      color: var(--text);
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+    }
+
+    button.danger {
+      color: #fff;
+      background: rgba(255,107,107,.15);
+      border: 1px solid rgba(255,107,107,.45);
+    }
+
+    button.small {
+      padding: 8px 10px;
+      font-size: .85rem;
+    }
+
+    .editor {
+      min-height: 540px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 18px;
+      background: #101827;
+      color: var(--text);
+      padding: clamp(16px, 2.5vw, 24px);
+      line-height: 1.72;
+      outline: none;
+      overflow: auto;
+    }
+
+    .editor:focus {
+      border-color: rgba(214,168,79,.72);
+      box-shadow: 0 0 0 4px rgba(214,168,79,.11);
+    }
+
+    .editor:empty::before {
+      content: "Escreva o texto aqui. Use os botões acima para negrito, sublinhado, título, citação, imagem e botão.";
+      color: rgba(247,240,223,.45);
+    }
+
+    .editor h2, .editor h3 { color: #fff5c8; line-height: 1.18; }
+    .editor blockquote {
+      border-left: 4px solid var(--gold);
+      margin: 1.25rem 0;
+      padding: .8rem 1rem;
+      background: rgba(214,168,79,.08);
+      border-radius: 0 14px 14px 0;
+      color: #f3e8cf;
+    }
+
+    .editor figure, .preview-content figure { clear: both; }
+    .editor img, .preview-content img { max-width: 100%; height: auto; }
+
+    .path-box {
+      border: 1px dashed rgba(214,168,79,.45);
+      background: rgba(214,168,79,.07);
+      border-radius: 15px;
+      padding: 12px;
+      color: var(--muted);
+      overflow-wrap: anywhere;
+      font-size: .9rem;
+      margin-top: 12px;
+    }
+
+    .path-box strong { color: var(--gold-2); }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .status {
+      min-height: 22px;
+      color: var(--green);
+      font-size: .9rem;
+      margin-top: 10px;
+    }
+
+    .preview-shell {
+      overflow: hidden;
+      padding: 0;
+    }
+
+    .preview-hero {
+      padding: 28px;
+      background:
+        linear-gradient(135deg, rgba(214,168,79,.13), rgba(88,214,141,.06)),
+        var(--panel-2);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .preview-hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(180px, .85fr);
+      gap: 20px;
+      align-items: center;
+    }
+
+    .preview-hero h2 {
+      font-size: clamp(1.8rem, 4vw, 3.1rem);
+      line-height: .95;
+      margin: 0 0 12px;
+      color: #fff8dc;
+    }
+
+    .preview-summary {
+      color: #ded2b9;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .preview-meta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      color: rgba(247,240,223,.76);
+      font-size: .9rem;
+    }
+
+    .preview-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .preview-tags span {
+      border: 1px solid rgba(214,168,79,.32);
+      color: #ffe9a3;
+      border-radius: 999px;
+      padding: .16rem .55rem;
+      font-size: .75rem;
+      background: rgba(214,168,79,.08);
+    }
+
+    .preview-image {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      border-radius: 22px;
+      object-fit: cover;
+      border: 1px solid rgba(214,168,79,.2);
+      box-shadow: 0 16px 34px rgba(0,0,0,.32);
+      background: #0a0f1b;
+    }
+
+    .preview-image.placeholder {
+      display: grid;
+      place-items: center;
+      color: rgba(247,240,223,.44);
+      text-align: center;
+      padding: 18px;
+    }
+
+    .preview-content {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 28px;
+      line-height: 1.72;
+      color: #eee5cd;
+    }
+
+    .preview-content h1 { font-size: 2rem; line-height: 1.05; }
+    .preview-content h2 { margin-top: 2rem; color: #fff5c8; }
+    .preview-content blockquote {
+      border-left: 4px solid var(--gold);
+      margin: 1.5rem 0;
+      padding: .8rem 1rem;
+      background: rgba(214,168,79,.08);
+      border-radius: 0 14px 14px 0;
+    }
+
+    .preview-empty {
+      color: rgba(247,240,223,.48);
+      border: 1px dashed rgba(255,255,255,.18);
+      border-radius: 16px;
+      padding: 18px;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(0,0,0,.72);
+      z-index: 20;
+    }
+
+    .modal-backdrop.active { display: flex; }
+
+    .modal {
+      width: min(620px, 100%);
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 22px;
+      background: #111927;
+      box-shadow: 0 24px 80px rgba(0,0,0,.55);
+      padding: 20px;
+    }
+
+    .modal h2 { color: var(--gold-2); }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .notice {
+      border: 1px solid rgba(101,183,255,.35);
+      background: rgba(101,183,255,.08);
+      color: #d9ecff;
+      border-radius: 16px;
+      padding: 12px;
+      font-size: .9rem;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 1050px) {
+      .layout { grid-template-columns: 1fr; }
+      .toolbar { position: static; }
+    }
+
+    @media (max-width: 720px) {
+      body { padding: 14px; }
+      .fields { grid-template-columns: 1fr; }
+      .preview-hero-grid { grid-template-columns: 1fr; }
+      .editor { min-height: 420px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <section class="hero">
+      <p class="eyebrow">Ferramenta interna</p>
+      <h1>Editor de Artigos dos Autores</h1>
+      <p>Preencha autor, título, data e imagem. Depois escreva como em um editor comum, veja a prévia visual da página e baixe o arquivo <strong>.md</strong> pronto para subir no GitHub.</p>
+    </section>
+
+    <div class="layout">
+      <aside>
+        <section class="card">
+          <h2>1. Dados do artigo</h2>
+          <div class="fields">
+            <div class="field">
+              <label for="contentType">Tipo de conteúdo</label>
+              <select id="contentType">
+                <option value="blog">Blog</option>
+                <option value="guia">Guia</option>
+                <option value="deck">Deck Tech</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="category">Categoria / jogo</label>
+              <select id="category"></select>
+            </div>
+
+            <div class="field">
+              <label for="authorSelect">Autor</label>
+              <select id="authorSelect"></select>
+            </div>
+
+            <div class="field new-author-wrap" id="newAuthorWrap">
+              <label for="newAuthor">Nome do novo autor</label>
+              <input id="newAuthor" type="text" placeholder="Ex.: João" />
+            </div>
+
+            <div class="field full">
+              <label for="titleInput">Título</label>
+              <input id="titleInput" type="text" placeholder="Ex.: Como montei meu primeiro deck de Flesh and Blood" />
+            </div>
+
+            <div class="field">
+              <label for="dateInput">Data</label>
+              <input id="dateInput" type="date" />
+            </div>
+
+            <div class="field">
+              <label for="formatInput">Formato, se for Deck Tech</label>
+              <select id="formatInput">
+                <option value="">Não se aplica</option>
+                <option>Classic Constructed</option>
+                <option>Blitz</option>
+                <option>Silver Age</option>
+                <option>Commoner</option>
+                <option>Standard</option>
+                <option>Commander</option>
+                <option>Sealed</option>
+                <option>UPF</option>
+                <option>Living Legend</option>
+              </select>
+            </div>
+
+            <div class="field full">
+              <label for="summaryInput">Resumo para aparecer nos cards do site</label>
+              <textarea id="summaryInput" placeholder="Escreva um resumo curto. Se deixar vazio, o gerador tenta usar o começo do texto."></textarea>
+            </div>
+
+            <div class="field full">
+              <label for="imageInput">Imagem principal da página</label>
+              <input id="imageInput" type="text" placeholder="/assets/img/banners/default-flesh-and-blood.webp ou https://... ou goagain:Dash I/O" />
+            </div>
+
+            <div class="field full">
+              <label for="imageAltInput">Descrição da imagem principal</label>
+              <input id="imageAltInput" type="text" placeholder="Ex.: Carta Dash I/O representando deck tech de Mechanologist" />
+            </div>
+
+            <div class="field full">
+              <label for="tagsInput">Tags separadas por vírgula</label>
+              <input id="tagsInput" type="text" placeholder="Flesh and Blood, Deck Tech, Cianorte Card Masters" />
+            </div>
+          </div>
+
+          <div class="path-box" id="pathBox"><strong>Destino sugerido:</strong> preencha o título para gerar o caminho.</div>
+        </section>
+
+        <section class="card">
+          <h2>2. Baixar o Markdown</h2>
+          <p class="hint">O Markdown não fica aberto ao lado para não confundir quem está escrevendo. Ao clicar em baixar, o arquivo é gerado automaticamente com as marcações certas.</p>
+          <div class="actions">
+            <button id="downloadBtn" type="button">Baixar .MD</button>
+            <button id="copyBtn" type="button" class="secondary">Copiar .MD</button>
+            <button id="clearBtn" type="button" class="danger">Limpar rascunho</button>
+          </div>
+          <div class="status" id="status"></div>
+          <div class="notice">
+            Para publicar: baixe o arquivo, envie para a pasta sugerida no GitHub e suba também a imagem caso ela esteja em <code>/assets/img/...</code>.
+          </div>
+        </section>
+      </aside>
+
+      <section>
+        <section class="card">
+          <h2>3. Escreva o texto</h2>
+          <div class="toolbar" aria-label="Barra de edição">
+            <button type="button" class="small secondary" data-command="bold"><strong>B</strong></button>
+            <button type="button" class="small secondary" data-command="underline"><u>U</u></button>
+            <button type="button" class="small secondary" data-block="h2">Título</button>
+            <button type="button" class="small secondary" data-block="h3">Subtítulo</button>
+            <button type="button" class="small secondary" data-block="blockquote">Citação</button>
+            <button type="button" class="small secondary" data-command="insertUnorderedList">Lista</button>
+            <button type="button" class="small secondary" data-link="true">Link</button>
+            <button type="button" class="small secondary" data-image="true">Imagem</button>
+            <button type="button" class="small secondary" data-button="true">Botão</button>
+            <button type="button" class="small secondary" data-hr="true">Linha</button>
+          </div>
+          <div id="editor" class="editor" contenteditable="true" spellcheck="true"></div>
+        </section>
+
+        <section class="card preview-shell">
+          <div class="preview-hero">
+            <p class="eyebrow" id="previewCategory">Blog</p>
+            <div class="preview-hero-grid">
+              <div>
+                <h2 id="previewTitle">Título do artigo</h2>
+                <p class="preview-summary" id="previewSummary">O resumo do artigo aparece aqui.</p>
+                <div class="preview-meta">
+                  <span id="previewAuthor">Por Cianorte Card Masters</span>
+                  <span id="previewDate">Data</span>
+                </div>
+                <div class="preview-tags" id="previewTags"></div>
+              </div>
+              <div id="previewImageWrap" class="preview-image placeholder">Imagem principal</div>
+            </div>
+          </div>
+          <article class="preview-content" id="previewContent">
+            <div class="preview-empty">A prévia do texto aparece aqui conforme você escreve.</div>
+          </article>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <div class="modal-backdrop" id="imageModal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="imageModalTitle">
+      <h2 id="imageModalTitle">Inserir imagem no texto</h2>
+      <div class="fields">
+        <div class="field full">
+          <label for="inlineImageUrl">URL ou caminho da imagem</label>
+          <input id="inlineImageUrl" type="text" placeholder="https://... ou /assets/img/..." />
+        </div>
+        <div class="field full">
+          <label for="inlineImageAlt">Texto alternativo</label>
+          <input id="inlineImageAlt" type="text" placeholder="Descreva a imagem para acessibilidade" />
+        </div>
+        <div class="field full">
+          <label for="inlineImageCaption">Legenda, opcional</label>
+          <input id="inlineImageCaption" type="text" placeholder="Legenda abaixo da imagem" />
+        </div>
+        <div class="field full">
+          <label for="inlineImageLayout">Como a imagem deve aparecer?</label>
+          <select id="inlineImageLayout">
+            <option value="center">Centralizada, até metade da área do texto</option>
+            <option value="full">Largura total da área do texto</option>
+            <option value="left">Na esquerda, com texto ao lado</option>
+            <option value="right">Na direita, com texto ao lado</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="secondary" data-close-modal="imageModal">Cancelar</button>
+        <button type="button" id="insertImageBtn">Inserir imagem</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="buttonModal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="buttonModalTitle">
+      <h2 id="buttonModalTitle">Inserir botão com link</h2>
+      <div class="fields">
+        <div class="field full">
+          <label for="buttonText">Texto do botão</label>
+          <input id="buttonText" type="text" placeholder="Ex.: Ver deck no Fabrary" />
+        </div>
+        <div class="field full">
+          <label for="buttonUrl">Link</label>
+          <input id="buttonUrl" type="url" placeholder="https://..." />
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="secondary" data-close-modal="buttonModal">Cancelar</button>
+        <button type="button" id="insertButtonBtn">Inserir botão</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const AUTHORS = [
+      { name: "21", slug: "21", avatar: "/assets/img/autores/21.webp" },
+      { name: "Ejar", slug: "ejar", avatar: "/assets/img/autores/ejar.webp" },
+      { name: "Hermes", slug: "hermes", avatar: "/assets/img/autores/hermes.webp" },
+      { name: "Kayn", slug: "kayn", avatar: "/assets/img/autores/kayn.webp" },
+      { name: "Medina", slug: "medina", avatar: "/assets/img/autores/medina.webp" },
+      { name: "Neto", slug: "neto", avatar: "/assets/img/autores/neto.webp" },
+      { name: "Scopel", slug: "scopel", avatar: "/assets/img/autores/scopel.webp" },
+      { name: "The librarian", slug: "the-librarian", avatar: "/assets/img/autores/the-librarian.webp" }
+    ];
+
+    const CATEGORY_BY_TYPE = {
+      blog: [
+        { label: "Flesh and Blood", slug: "flesh-and-blood", folder: "_blog/Flesh-and-Blood", style: "flesh-and-blood", image: "/assets/img/banners/default-flesh-and-blood.webp" },
+        { label: "Pokémon", slug: "pokemon", folder: "_blog/Pokemon", style: "pokemon", image: "/assets/img/banners/default-pokemon.webp" },
+        { label: "Magic", slug: "magic", folder: "_blog/Magic", style: "magic", image: "/assets/img/banners/default-magic.jpg" },
+        { label: "TCG", slug: "tcg", folder: "_blog/TCG", style: "tcg", image: "/assets/img/banners/default-tcg.webp" },
+        { label: "RPG", slug: "rpg", folder: "_blog/RPG", style: "rpg", image: "/assets/img/banners/default-rpg.webp" },
+        { label: "Cianorte Card Masters", slug: "cianorte-card-master", folder: "_blog/cianorte-card-master", style: "cianorte-card-master", image: "/assets/img/banners/default-cianorte-card-master.webp" }
+      ],
+      guia: [
+        { label: "Guia", slug: "guia", folder: "_guias", style: "guia", image: "/assets/img/banners/banner-guias.webp" },
+        { label: "Flesh and Blood", slug: "flesh-and-blood", folder: "_guias", style: "flesh-and-blood", image: "/assets/img/banners/default-flesh-and-blood.webp" },
+        { label: "Pokémon", slug: "pokemon", folder: "_guias", style: "pokemon", image: "/assets/img/banners/default-pokemon.webp" },
+        { label: "Magic", slug: "magic", folder: "_guias", style: "magic", image: "/assets/img/banners/default-magic.jpg" },
+        { label: "TCG", slug: "tcg", folder: "_guias", style: "tcg", image: "/assets/img/banners/default-tcg.webp" },
+        { label: "RPG", slug: "rpg", folder: "_guias", style: "rpg", image: "/assets/img/banners/default-rpg.webp" }
+      ],
+      deck: [
+        { label: "Flesh and Blood", slug: "flesh-and-blood", folder: "_decks/Classic-Constructed", style: "classic-constructed", image: "/assets/img/banners/banner-decktech.webp" },
+        { label: "Pokémon", slug: "pokemon", folder: "_decks/pokemon", style: "pokemon", image: "/assets/img/banners/default-pokemon.webp" },
+        { label: "Magic", slug: "magic", folder: "_decks/Magic", style: "magic", image: "/assets/img/banners/default-magic.jpg" }
+      ]
+    };
+
+    const STORAGE_KEY = "ccm-editor-autores-v1";
+
+    const $ = (id) => document.getElementById(id);
+    const contentType = $("contentType");
+    const category = $("category");
+    const authorSelect = $("authorSelect");
+    const newAuthorWrap = $("newAuthorWrap");
+    const newAuthor = $("newAuthor");
+    const titleInput = $("titleInput");
+    const dateInput = $("dateInput");
+    const formatInput = $("formatInput");
+    const summaryInput = $("summaryInput");
+    const imageInput = $("imageInput");
+    const imageAltInput = $("imageAltInput");
+    const tagsInput = $("tagsInput");
+    const editor = $("editor");
+    const status = $("status");
+
+    function todayISO() {
+      const now = new Date();
+      const off = now.getTimezoneOffset();
+      const local = new Date(now.getTime() - off * 60000);
+      return local.toISOString().slice(0, 10);
+    }
+
+    function slugify(value) {
+      return String(value || "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/&/g, " e ")
+        .replace(/[^a-zA-Z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "")
+        .toLowerCase();
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function escapeYaml(value) {
+      return String(value || "").replace(/\\/g, "\\\\").replace(/"/g, "\\\"");
+    }
+
+    function getAuthor() {
+      if (authorSelect.value === "__new") {
+        const name = newAuthor.value.trim() || "Novo Autor";
+        return { name, slug: slugify(name), avatar: "" };
+      }
+      return AUTHORS.find((a) => a.slug === authorSelect.value) || AUTHORS[0];
+    }
+
+    function getCategory() {
+      const list = CATEGORY_BY_TYPE[contentType.value] || CATEGORY_BY_TYPE.blog;
+      return list.find((item) => item.slug === category.value) || list[0];
+    }
+
+    function populateAuthors() {
+      authorSelect.innerHTML = AUTHORS.map((author) => `<option value="${author.slug}">${author.name}</option>`).join("") + `<option value="__new">+ Novo autor</option>`;
+      authorSelect.value = AUTHORS.find((a) => a.slug === "neto") ? "neto" : AUTHORS[0].slug;
+    }
+
+    function populateCategories() {
+      const oldValue = category.value;
+      const options = CATEGORY_BY_TYPE[contentType.value] || CATEGORY_BY_TYPE.blog;
+      category.innerHTML = options.map((item) => `<option value="${item.slug}">${item.label}</option>`).join("");
+      category.value = options.some((item) => item.slug === oldValue) ? oldValue : options[0].slug;
+      updateDeckFolderByFormat();
+      setDefaultImageIfBlank();
+    }
+
+    function updateDeckFolderByFormat() {
+      if (contentType.value !== "deck") return;
+      const selected = getCategory();
+      if (selected.slug !== "flesh-and-blood") return;
+      const formatFolder = {
+        "Classic Constructed": "_decks/Classic-Constructed",
+        "Blitz": "_decks/Blitz",
+        "Silver Age": "_decks/Silver-Age",
+        "Sealed": "_decks/Sealed",
+        "UPF": "_decks/UPF",
+        "Living Legend": "_decks/Living-Legend"
+      };
+      selected.folder = formatFolder[formatInput.value] || "_decks/Classic-Constructed";
+      selected.style = slugify(formatInput.value || "classic-constructed");
+    }
+
+    function setDefaultImageIfBlank() {
+      if (imageInput.value.trim()) return;
+      imageInput.value = getCategory().image || "/assets/img/banners/post-default.jpg";
+    }
+
+    function getSuggestedFileName() {
+      const titleSlug = slugify(titleInput.value) || "novo-artigo";
+      const date = dateInput.value || todayISO();
+      if (contentType.value === "deck") return `deck-tech-${titleSlug}-${date}.md`;
+      if (contentType.value === "guia") return `${titleSlug}.md`;
+      return `${titleSlug}.md`;
+    }
+
+    function getSuggestedPath() {
+      updateDeckFolderByFormat();
+      const cat = getCategory();
+      return `${cat.folder}/${getSuggestedFileName()}`;
+    }
+
+    function getSummary() {
+      const typed = summaryInput.value.trim();
+      if (typed) return typed;
+      const text = editor.innerText.replace(/\s+/g, " ").trim();
+      if (text) return text.slice(0, 180) + (text.length > 180 ? "..." : "");
+      return titleInput.value ? `Artigo da comunidade Cianorte Card Masters sobre ${titleInput.value}.` : "Artigo da comunidade Cianorte Card Masters.";
+    }
+
+    function getTags() {
+      const manual = tagsInput.value.split(",").map((tag) => tag.trim()).filter(Boolean);
+      if (manual.length) return manual;
+      const cat = getCategory();
+      const base = [cat.label, "Cianorte Card Masters"];
+      if (contentType.value === "deck") base.splice(1, 0, "Deck Tech");
+      if (contentType.value === "guia") base.splice(1, 0, "Guia");
+      return [...new Set(base)];
+    }
+
+    function getCategoryLabel() {
+      if (contentType.value === "deck") {
+        return formatInput.value || getCategory().label;
+      }
+      if (contentType.value === "guia" && category.value === "guia") return "Guia";
+      return getCategory().label;
+    }
+
+    function getBodyWithTitle() {
+      const title = titleInput.value.trim() || "Título do artigo";
+      const body = htmlToMarkdown(editor);
+      return `# ${title}\n\n${body}`.trim() + "\n";
+    }
+
+    function buildFrontMatter() {
+      updateDeckFolderByFormat();
+      const title = titleInput.value.trim() || "Título do artigo";
+      const date = dateInput.value || todayISO();
+      const author = getAuthor();
+      const cat = getCategory();
+      const summary = getSummary();
+      const image = imageInput.value.trim() || cat.image || "/assets/img/banners/post-default.jpg";
+      const imageAlt = imageAltInput.value.trim() || `${title} - Cianorte Card Masters`;
+      const tags = getTags();
+      const lines = ["---"];
+
+      lines.push(`title: "${escapeYaml(title)}"`);
+      lines.push(`category_label: "${escapeYaml(getCategoryLabel())}"`);
+
+      if (contentType.value === "deck") {
+        lines.push(`deck_game: "${escapeYaml(cat.label)}"`);
+        lines.push(`deck_format: "${escapeYaml(formatInput.value || getCategoryLabel())}"`);
+        lines.push(`schema_type: "BlogPosting"`);
+      } else {
+        lines.push(`category: "${escapeYaml(cat.slug)}"`);
+      }
+
+      lines.push(`summary: "${escapeYaml(summary)}"`);
+      lines.push(`description: "${escapeYaml(summary)}"`);
+      lines.push(`image: "${escapeYaml(image)}"`);
+      lines.push(`image_alt: "${escapeYaml(imageAlt)}"`);
+      lines.push(`author: "${escapeYaml(author.name)}"`);
+      lines.push(`autor: "${escapeYaml(author.slug)}"`);
+      lines.push(`date: ${date}`);
+      lines.push(`last_modified_at: ${date}`);
+      lines.push(`schema_type: "BlogPosting"`);
+      lines.push(`content_style: "${escapeYaml(cat.style || cat.slug)}"`);
+      lines.push(`comments: true`);
+      lines.push("tags:");
+      tags.forEach((tag) => lines.push(`  - ${escapeYaml(tag)}`));
+      lines.push("---");
+      return lines.join("\n");
+    }
+
+    function buildMarkdown() {
+      return `${buildFrontMatter()}\n\n${getBodyWithTitle()}`;
+    }
+
+    function textOf(node) {
+      return node.textContent || "";
+    }
+
+    function inlineToMarkdown(node) {
+      if (node.nodeType === Node.TEXT_NODE) return node.textContent.replace(/\u00a0/g, " ");
+      if (node.nodeType !== Node.ELEMENT_NODE) return "";
+      const tag = node.tagName.toLowerCase();
+      const inner = Array.from(node.childNodes).map(inlineToMarkdown).join("");
+      if (tag === "strong" || tag === "b") return `**${inner}**`;
+      if (tag === "em" || tag === "i") return `*${inner}*`;
+      if (tag === "u") return `<u>${inner}</u>`;
+      if (tag === "a") {
+        const href = node.getAttribute("href") || "#";
+        return `[${inner || href}](${href})`;
+      }
+      if (tag === "br") return "\n";
+      if (tag === "code") return "`" + inner + "`";
+      if (tag === "img") {
+        const src = node.getAttribute("src") || "";
+        const alt = node.getAttribute("alt") || "";
+        return `![${alt}](${src})`;
+      }
+      return inner;
+    }
+
+    function listToMarkdown(listNode, ordered) {
+      return Array.from(listNode.children)
+        .filter((child) => child.tagName && child.tagName.toLowerCase() === "li")
+        .map((li, index) => `${ordered ? `${index + 1}.` : "-"} ${inlineToMarkdown(li).trim()}`)
+        .join("\n");
+    }
+
+    function figureToHtml(figure) {
+      const img = figure.querySelector("img");
+      if (!img) return "";
+      const src = img.getAttribute("src") || "";
+      const alt = img.getAttribute("alt") || "";
+      const caption = figure.querySelector("figcaption")?.textContent?.trim() || "";
+      const layout = figure.dataset.layout || "center";
+      const styles = {
+        full: "margin: 1.6rem 0; width: 100%; clear: both;",
+        center: "margin: 1.6rem auto; width: min(50%, 420px); clear: both; text-align: center;",
+        left: "float: left; width: min(46%, 340px); margin: .35rem 1.25rem 1rem 0;",
+        right: "float: right; width: min(46%, 340px); margin: .35rem 0 1rem 1.25rem;"
+      };
+      const figureStyle = styles[layout] || styles.center;
+      const captionHtml = caption ? `\n  <figcaption style="font-size: .88rem; color: rgba(238,229,205,.72); margin-top: .45rem; text-align: center;">${escapeHtml(caption)}</figcaption>` : "";
+      return `<figure class="ccm-md-image ccm-md-image-${layout}" style="${figureStyle}">\n  <img loading="lazy" decoding="async" src="${escapeHtml(src)}" alt="${escapeHtml(alt)}" style="width: 100%; height: auto; border-radius: 18px; border: 1px solid rgba(212,175,55,.20); box-shadow: 0 14px 30px rgba(0,0,0,.28);">${captionHtml}\n</figure>`;
+    }
+
+    function buttonToHtml(node) {
+      const link = node.querySelector("a");
+      if (!link) return "";
+      const href = link.getAttribute("href") || "#";
+      const text = link.textContent.trim() || "Abrir link";
+      return `<p style="text-align:center; margin: 1.8rem 0; clear: both;">\n  <a href="${escapeHtml(href)}" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; justify-content:center; padding:.82rem 1.15rem; border-radius:999px; background:linear-gradient(135deg,#d6a84f,#f7d77d); color:#101010; font-weight:900; text-decoration:none; box-shadow:0 12px 26px rgba(0,0,0,.28);">${escapeHtml(text)}</a>\n</p>`;
+    }
+
+    function blockToMarkdown(node) {
+      if (node.nodeType === Node.TEXT_NODE) return node.textContent.trim();
+      if (node.nodeType !== Node.ELEMENT_NODE) return "";
+      const tag = node.tagName.toLowerCase();
+      if (node.classList.contains("ccm-inserted-button")) return buttonToHtml(node);
+      if (tag === "h1") return `# ${inlineToMarkdown(node).trim()}`;
+      if (tag === "h2") return `## ${inlineToMarkdown(node).trim()}`;
+      if (tag === "h3") return `### ${inlineToMarkdown(node).trim()}`;
+      if (tag === "h4") return `#### ${inlineToMarkdown(node).trim()}`;
+      if (tag === "blockquote") {
+        const content = inlineToMarkdown(node).trim().split("\n").map((line) => `> ${line}`).join("\n");
+        return content;
+      }
+      if (tag === "ul") return listToMarkdown(node, false);
+      if (tag === "ol") return listToMarkdown(node, true);
+      if (tag === "figure") return figureToHtml(node);
+      if (tag === "hr") return "---";
+      if (tag === "p") return inlineToMarkdown(node).trim();
+      if (tag === "div") {
+        if (!node.textContent.trim() && !node.querySelector("img,a,hr")) return "";
+        return Array.from(node.childNodes).map(blockToMarkdown).filter(Boolean).join("\n\n") || inlineToMarkdown(node).trim();
+      }
+      return inlineToMarkdown(node).trim();
+    }
+
+    function htmlToMarkdown(root) {
+      const blocks = Array.from(root.childNodes).map(blockToMarkdown).map((block) => block.trim()).filter(Boolean);
+      return blocks.join("\n\n").replace(/\n{3,}/g, "\n\n");
+    }
+
+    function insertHtmlAtCursor(html) {
+      editor.focus();
+      document.execCommand("insertHTML", false, html);
+      saveDraft();
+      updatePreview();
+    }
+
+    function applyCommand(command) {
+      editor.focus();
+      document.execCommand(command, false, null);
+      saveDraft();
+      updatePreview();
+    }
+
+    function applyBlock(block) {
+      editor.focus();
+      document.execCommand("formatBlock", false, block);
+      saveDraft();
+      updatePreview();
+    }
+
+    function openModal(id) {
+      $(id).classList.add("active");
+      const firstInput = $(id).querySelector("input,select,textarea");
+      if (firstInput) setTimeout(() => firstInput.focus(), 50);
+    }
+
+    function closeModal(id) {
+      $(id).classList.remove("active");
+    }
+
+    function imageHtml(src, alt, caption, layout) {
+      const figureStyle = {
+        full: "margin: 1.6rem 0; width: 100%; clear: both;",
+        center: "margin: 1.6rem auto; width: min(50%, 420px); clear: both; text-align: center;",
+        left: "float: left; width: min(46%, 340px); margin: .35rem 1.25rem 1rem 0;",
+        right: "float: right; width: min(46%, 340px); margin: .35rem 0 1rem 1.25rem;"
+      }[layout] || "margin: 1.6rem auto; width: min(50%, 420px); clear: both; text-align: center;";
+      const captionPart = caption ? `<figcaption style="font-size:.88rem;color:rgba(238,229,205,.72);margin-top:.45rem;text-align:center;">${escapeHtml(caption)}</figcaption>` : "";
+      return `<figure data-layout="${layout}" style="${figureStyle}"><img loading="lazy" decoding="async" src="${escapeHtml(src)}" alt="${escapeHtml(alt)}" style="width:100%;height:auto;border-radius:18px;border:1px solid rgba(212,175,55,.20);box-shadow:0 14px 30px rgba(0,0,0,.28);">${captionPart}</figure><p><br></p>`;
+    }
+
+    function buttonHtml(text, href) {
+      return `<p class="ccm-inserted-button" style="text-align:center;margin:1.8rem 0;clear:both;"><a href="${escapeHtml(href)}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;padding:.82rem 1.15rem;border-radius:999px;background:linear-gradient(135deg,#d6a84f,#f7d77d);color:#101010;font-weight:900;text-decoration:none;box-shadow:0 12px 26px rgba(0,0,0,.28);">${escapeHtml(text)}</a></p><p><br></p>`;
+    }
+
+    function updatePathBox() {
+      $("pathBox").innerHTML = `<strong>Destino sugerido:</strong> ${escapeHtml(getSuggestedPath())}`;
+    }
+
+    function updatePreview() {
+      const cat = getCategory();
+      const author = getAuthor();
+      const title = titleInput.value.trim() || "Título do artigo";
+      const date = dateInput.value || todayISO();
+      const summary = getSummary();
+      const image = imageInput.value.trim();
+      const tags = getTags();
+
+      $("previewCategory").textContent = getCategoryLabel();
+      $("previewTitle").textContent = title;
+      $("previewSummary").textContent = summary;
+      $("previewAuthor").textContent = `Por ${author.name}`;
+      $("previewDate").textContent = date.split("-").reverse().join("/");
+      $("previewTags").innerHTML = tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("");
+
+      if (image && !image.includes(":")) {
+        $("previewImageWrap").outerHTML = `<img id="previewImageWrap" class="preview-image" src="${escapeHtml(image)}" alt="${escapeHtml(imageAltInput.value || title)}" onerror="this.outerHTML='<div id=&quot;previewImageWrap&quot; class=&quot;preview-image placeholder&quot;>Imagem principal<br>não carregou na prévia</div>'">`;
+      } else if (image && image.includes(":")) {
+        $("previewImageWrap").outerHTML = `<div id="previewImageWrap" class="preview-image placeholder">Imagem por API<br><strong>${escapeHtml(image)}</strong></div>`;
+      } else {
+        $("previewImageWrap").outerHTML = `<div id="previewImageWrap" class="preview-image placeholder">Imagem principal</div>`;
+      }
+
+      const content = editor.innerHTML.trim();
+      $("previewContent").innerHTML = content ? `<h1>${escapeHtml(title)}</h1>${content}` : `<div class="preview-empty">A prévia do texto aparece aqui conforme você escreve.</div>`;
+      updatePathBox();
+      saveDraftSoon();
+    }
+
+    let saveTimer;
+    function saveDraftSoon() {
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(saveDraft, 250);
+    }
+
+    function saveDraft() {
+      const data = {
+        contentType: contentType.value,
+        category: category.value,
+        authorSelect: authorSelect.value,
+        newAuthor: newAuthor.value,
+        title: titleInput.value,
+        date: dateInput.value,
+        format: formatInput.value,
+        summary: summaryInput.value,
+        image: imageInput.value,
+        imageAlt: imageAltInput.value,
+        tags: tagsInput.value,
+        html: editor.innerHTML
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+
+    function loadDraft() {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      try {
+        const data = JSON.parse(raw);
+        contentType.value = data.contentType || "blog";
+        populateCategories();
+        category.value = data.category || category.value;
+        authorSelect.value = data.authorSelect || authorSelect.value;
+        newAuthor.value = data.newAuthor || "";
+        titleInput.value = data.title || "";
+        dateInput.value = data.date || todayISO();
+        formatInput.value = data.format || "";
+        summaryInput.value = data.summary || "";
+        imageInput.value = data.image || "";
+        imageAltInput.value = data.imageAlt || "";
+        tagsInput.value = data.tags || "";
+        editor.innerHTML = data.html || "";
+      } catch (error) {
+        console.warn("Não foi possível carregar o rascunho.", error);
+      }
+    }
+
+    function validateBeforeExport() {
+      const missing = [];
+      if (!titleInput.value.trim()) missing.push("título");
+      if (!dateInput.value) missing.push("data");
+      if (authorSelect.value === "__new" && !newAuthor.value.trim()) missing.push("nome do novo autor");
+      if (!editor.innerText.trim()) missing.push("texto do artigo");
+      if (missing.length) {
+        status.style.color = "var(--red)";
+        status.textContent = `Preencha antes de baixar: ${missing.join(", ")}.`;
+        return false;
+      }
+      return true;
+    }
+
+    function downloadMarkdown() {
+      if (!validateBeforeExport()) return;
+      const md = buildMarkdown();
+      const blob = new Blob([md], { type: "text/markdown;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = getSuggestedFileName();
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      status.style.color = "var(--green)";
+      status.textContent = `Arquivo gerado: ${getSuggestedFileName()}`;
+    }
+
+    async function copyMarkdown() {
+      if (!validateBeforeExport()) return;
+      try {
+        await navigator.clipboard.writeText(buildMarkdown());
+        status.style.color = "var(--green)";
+        status.textContent = "Markdown copiado para a área de transferência.";
+      } catch (error) {
+        status.style.color = "var(--red)";
+        status.textContent = "Não consegui copiar automaticamente. Use o botão baixar.";
+      }
+    }
+
+    document.querySelectorAll("[data-command]").forEach((btn) => {
+      btn.addEventListener("click", () => applyCommand(btn.dataset.command));
+    });
+
+    document.querySelectorAll("[data-block]").forEach((btn) => {
+      btn.addEventListener("click", () => applyBlock(btn.dataset.block));
+    });
+
+    document.querySelector("[data-link]").addEventListener("click", () => {
+      const url = prompt("Cole o link:");
+      if (!url) return;
+      editor.focus();
+      document.execCommand("createLink", false, url);
+      saveDraft();
+      updatePreview();
+    });
+
+    document.querySelector("[data-image]").addEventListener("click", () => openModal("imageModal"));
+    document.querySelector("[data-button]").addEventListener("click", () => openModal("buttonModal"));
+    document.querySelector("[data-hr]").addEventListener("click", () => insertHtmlAtCursor("<hr><p><br></p>"));
+
+    document.querySelectorAll("[data-close-modal]").forEach((btn) => {
+      btn.addEventListener("click", () => closeModal(btn.dataset.closeModal));
+    });
+
+    document.querySelectorAll(".modal-backdrop").forEach((backdrop) => {
+      backdrop.addEventListener("click", (event) => {
+        if (event.target === backdrop) closeModal(backdrop.id);
+      });
+    });
+
+    $("insertImageBtn").addEventListener("click", () => {
+      const src = $("inlineImageUrl").value.trim();
+      if (!src) return;
+      const alt = $("inlineImageAlt").value.trim();
+      const caption = $("inlineImageCaption").value.trim();
+      const layout = $("inlineImageLayout").value;
+      insertHtmlAtCursor(imageHtml(src, alt, caption, layout));
+      ["inlineImageUrl", "inlineImageAlt", "inlineImageCaption"].forEach((id) => $(id).value = "");
+      closeModal("imageModal");
+    });
+
+    $("insertButtonBtn").addEventListener("click", () => {
+      const text = $("buttonText").value.trim() || "Abrir link";
+      const href = $("buttonUrl").value.trim();
+      if (!href) return;
+      insertHtmlAtCursor(buttonHtml(text, href));
+      $("buttonText").value = "";
+      $("buttonUrl").value = "";
+      closeModal("buttonModal");
+    });
+
+    authorSelect.addEventListener("change", () => {
+      newAuthorWrap.classList.toggle("active", authorSelect.value === "__new");
+      updatePreview();
+    });
+
+    contentType.addEventListener("change", () => {
+      populateCategories();
+      updatePreview();
+    });
+
+    category.addEventListener("change", () => {
+      setDefaultImageIfBlank();
+      updatePreview();
+    });
+
+    formatInput.addEventListener("change", () => {
+      updateDeckFolderByFormat();
+      updatePreview();
+    });
+
+    [newAuthor, titleInput, dateInput, summaryInput, imageInput, imageAltInput, tagsInput].forEach((el) => {
+      el.addEventListener("input", updatePreview);
+      el.addEventListener("change", updatePreview);
+    });
+
+    editor.addEventListener("input", updatePreview);
+    editor.addEventListener("paste", (event) => {
+      event.preventDefault();
+      const text = event.clipboardData.getData("text/plain");
+      document.execCommand("insertText", false, text);
+    });
+
+    $("downloadBtn").addEventListener("click", downloadMarkdown);
+    $("copyBtn").addEventListener("click", copyMarkdown);
+    $("clearBtn").addEventListener("click", () => {
+      if (!confirm("Limpar este rascunho do navegador?")) return;
+      localStorage.removeItem(STORAGE_KEY);
+      titleInput.value = "";
+      summaryInput.value = "";
+      imageInput.value = "";
+      imageAltInput.value = "";
+      tagsInput.value = "";
+      newAuthor.value = "";
+      editor.innerHTML = "";
+      dateInput.value = todayISO();
+      setDefaultImageIfBlank();
+      updatePreview();
+      status.style.color = "var(--green)";
+      status.textContent = "Rascunho limpo.";
+    });
+
+    populateAuthors();
+    populateCategories();
+    dateInput.value = todayISO();
+    loadDraft();
+    newAuthorWrap.classList.toggle("active", authorSelect.value === "__new");
+    setDefaultImageIfBlank();
+    updatePreview();
+  </script>
+</body>
+</html>
