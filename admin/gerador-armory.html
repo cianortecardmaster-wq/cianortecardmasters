@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Gerador de Markdown - Armory Cianorte Card Masters</title>
+  <title>Gerador de Markdown - Resultados Cianorte Card Masters</title>
   <style>
     :root {
       --bg: #0d1117;
@@ -16,6 +16,7 @@
       --gold-2: #f5d27a;
       --green: #67d391;
       --danger: #ff6b6b;
+      --blue: #69a7ff;
       --input: #0f1520;
       --shadow: 0 20px 60px rgba(0, 0, 0, .35);
       --radius: 18px;
@@ -50,10 +51,7 @@
       margin-bottom: 14px;
     }
 
-    .app {
-      max-width: 1320px;
-      margin: 0 auto;
-    }
+    .app { max-width: 1480px; margin: 0 auto; }
 
     .hero {
       border: 1px solid var(--line);
@@ -66,14 +64,14 @@
 
     .hero p {
       color: var(--muted);
-      max-width: 860px;
+      max-width: 980px;
       margin-bottom: 0;
       font-size: 1rem;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.05fr) minmax(360px, .95fr);
+      grid-template-columns: minmax(0, 1.05fr) minmax(420px, .95fr);
       gap: 22px;
       align-items: start;
     }
@@ -86,9 +84,9 @@
       box-shadow: var(--shadow);
     }
 
-    .section + .section { margin-top: 18px; }
+    .section + .section { margin-top: 20px; }
 
-    .fixed-box {
+    .fixed-box, .preview-box {
       display: grid;
       gap: 8px;
       padding: 14px;
@@ -100,9 +98,7 @@
       margin-bottom: 16px;
     }
 
-    .fixed-box strong {
-      color: var(--gold-2);
-    }
+    .fixed-box strong, .preview-box strong { color: var(--gold-2); }
 
     .fields {
       display: grid;
@@ -111,6 +107,8 @@
     }
 
     .field.full { grid-column: 1 / -1; }
+    .field.two { grid-column: span 2; }
+    .is-hidden { display: none !important; }
 
     label {
       display: block;
@@ -132,6 +130,11 @@
       transition: border-color .2s, box-shadow .2s;
     }
 
+    input[readonly] {
+      color: #f8efd7;
+      background: rgba(9, 13, 19, .72);
+    }
+
     input:focus, textarea:focus, select:focus {
       border-color: rgba(214, 168, 79, .7);
       box-shadow: 0 0 0 4px rgba(214, 168, 79, .13);
@@ -147,14 +150,11 @@
 
     .players-header h2 { margin: 0; }
 
-    .player-list {
-      display: grid;
-      gap: 12px;
-    }
+    .player-list { display: grid; gap: 12px; }
 
     .player-row {
       display: grid;
-      grid-template-columns: 1.2fr 1.25fr .55fr auto;
+      grid-template-columns: 1.1fr 1.25fr .42fr .44fr auto;
       gap: 10px;
       align-items: end;
       padding: 14px;
@@ -189,14 +189,9 @@
       border: 1px solid rgba(255, 107, 107, .36);
     }
 
-    button.success {
-      background: linear-gradient(135deg, #55c77d, var(--green));
-    }
+    button.success { background: linear-gradient(135deg, #55c77d, var(--green)); }
 
-    .output-card {
-      position: sticky;
-      top: 22px;
-    }
+    .output-card { position: sticky; top: 22px; }
 
     .toolbar {
       display: flex;
@@ -205,9 +200,21 @@
       margin-bottom: 12px;
     }
 
+    .path-hint {
+      border: 1px solid rgba(105, 167, 255, .25);
+      background: rgba(105, 167, 255, .08);
+      border-radius: 14px;
+      padding: 10px 12px;
+      color: #d6e6ff;
+      font-size: .9rem;
+      margin-bottom: 12px;
+    }
+
+    .path-hint code { color: var(--gold-2); }
+
     pre {
       margin: 0;
-      min-height: 680px;
+      min-height: 720px;
       max-height: 78vh;
       overflow: auto;
       white-space: pre-wrap;
@@ -244,21 +251,19 @@
       z-index: 20;
     }
 
-    .toast.show {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-    }
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
-    @media (max-width: 980px) {
+    @media (max-width: 1100px) {
       body { padding: 16px; }
       .grid { grid-template-columns: 1fr; }
       .output-card { position: static; }
       pre { min-height: 420px; max-height: none; }
     }
 
-    @media (max-width: 760px) {
+    @media (max-width: 820px) {
       .hero, .card { padding: 18px; }
       .fields { grid-template-columns: 1fr; }
+      .field.two { grid-column: auto; }
       .player-row { grid-template-columns: 1fr; }
       .players-header { align-items: stretch; flex-direction: column; }
       button { width: 100%; }
@@ -269,8 +274,8 @@
 <body>
   <main class="app">
     <header class="hero">
-      <h1>Gerador de Markdown do Armory</h1>
-      <p>Preencha somente o que muda em cada Armory: data, publicação, rodadas, jogador, herói e vitórias. Os campos fixos saem sempre padronizados no modelo do site.</p>
+      <h1>Gerador de Markdown de Resultados</h1>
+      <p>Crie arquivos .md para Armory, Liga e Torneio com os campos usados pelo site. O título, resumo, record, imagem alternativa e caminho sugerido são preenchidos automaticamente.</p>
     </header>
 
     <div class="grid">
@@ -279,28 +284,82 @@
           <h2>Dados do evento</h2>
 
           <div class="fixed-box">
-            <div><strong>Campos fixos:</strong> summary, game, format, next_armory, local, image e image_alt.</div>
-            <div>O <strong>title</strong> é gerado como “Armory - DD/MM/AAAA”.</div>
-            <div>O <strong>image_alt</strong> usa a data em texto, exemplo: “20 de maio de 2026”.</div>
+            <div><strong>Destino automático:</strong> Armory vai para <code>_comunidade/Armory</code>, Liga para <code>_comunidade/Liga</code> e Torneio para <code>_comunidade/Torneio</code>.</div>
+            <div><strong>Record automático:</strong> vitórias - (rodadas menos vitórias). Exemplo: 4 rodadas e 3 vitórias gera <code>3-1</code>.</div>
+            <div><strong>Campos reaproveitados:</strong> jogadores, locais e heróis/decks vêm dos resultados já cadastrados no site.</div>
           </div>
 
           <div class="fields">
             <div>
               <label for="published">Publicado?</label>
               <select id="published">
-                <option value="True">True</option>
-                <option value="False">False</option>
+                <option value="true">true</option>
+                <option value="false">false</option>
               </select>
             </div>
 
             <div>
-              <label for="date">Data do Armory</label>
-              <input id="date" type="date" />
+              <label for="eventType">Tipo de evento</label>
+              <select id="eventType">
+                <option value="Armory">Armory</option>
+                <option value="Liga">Liga</option>
+                <option value="Torneio">Torneio</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="game">Jogo</label>
+              <select id="game">
+                <option value="Flesh and Blood">Flesh and Blood</option>
+                <option value="Pokemon">Pokémon</option>
+                <option value="Magic: The Gathering">Magic: The Gathering</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="format">Formato</label>
+              <select id="format" required></select>
+            </div>
+
+            <div>
+              <label for="date">Data do evento</label>
+              <input id="date" type="date" required />
             </div>
 
             <div>
               <label for="rounds">Rodadas</label>
-              <input id="rounds" type="number" min="1" max="12" value="3" />
+              <input id="rounds" type="number" min="1" max="99" value="3" required />
+            </div>
+
+            <div class="field two">
+              <label for="local">Local</label>
+              <input id="local" list="localOptions" placeholder="Ex: Bazar do Weezing" required />
+              <datalist id="localOptions"></datalist>
+            </div>
+
+            <div id="nextEventField">
+              <label for="nextEvent">Próximo encontro</label>
+              <input id="nextEvent" placeholder="Ex: Quarta • 19:00" />
+            </div>
+
+            <div class="field two">
+              <label for="imageChoice">Imagem padrão do evento</label>
+              <select id="imageChoice"></select>
+            </div>
+
+            <div id="customImageField" class="is-hidden">
+              <label for="customImage">Imagem personalizada</label>
+              <input id="customImage" placeholder="/assets/img/banners/nome.webp" />
+            </div>
+
+            <div class="field full">
+              <label for="generatedTitle">Título automático</label>
+              <input id="generatedTitle" readonly />
+            </div>
+
+            <div class="field full">
+              <label for="generatedSummary">Summary automático</label>
+              <input id="generatedSummary" readonly />
             </div>
           </div>
         </div>
@@ -310,7 +369,9 @@
             <h2>Resultados dos jogadores</h2>
             <button type="button" id="addPlayer">+ Adicionar jogador</button>
           </div>
-          <p class="hint">O record é calculado automaticamente. Exemplo: 3 rodadas e 2 vitórias vira 2-1. Em caso de empate nas vitórias, a ordem fica pelo nome do jogador.</p>
+          <p class="hint">Use o campo de jogador para selecionar alguém que já participou. Se for jogador novo, é só digitar o nome. O campo de herói/deck muda conforme jogo e formato.</p>
+          <datalist id="playerOptions"></datalist>
+          <datalist id="heroOptions"></datalist>
           <div id="playerList" class="player-list"></div>
         </div>
       </section>
@@ -322,6 +383,7 @@
           <button type="button" class="secondary" id="downloadMarkdown">Baixar .md</button>
           <button type="button" class="secondary" id="resetForm">Limpar</button>
         </div>
+        <div class="path-hint" id="pathHint">Destino sugerido: <code>_comunidade/Armory/arquivo.md</code></div>
         <pre id="output" aria-live="polite"></pre>
       </aside>
     </div>
@@ -330,23 +392,417 @@
   <div id="toast" class="toast">Markdown copiado!</div>
 
   <script>
-    const FIXED = {
-      summary: 'Resultado do Armory de Flesh and Blood.',
-      game: 'Flesh and Blood',
-      format: 'Classic Constructed',
-      nextArmory: 'Quarta • 19:00',
-      local: 'Bazar do Weezing',
-      image: '/assets/img/banners/banner-armory-resultado-card.png'
+    const DATA = {
+      "players": [
+            "21",
+            "Adrian",
+            "Akira",
+            "Arilson",
+            "Artur",
+            "Brayan",
+            "Caetano",
+            "Ejar",
+            "Eric Fox",
+            "Erick Jadiel",
+            "Gorla",
+            "Henry",
+            "Hermes",
+            "Iuri",
+            "Kayn",
+            "Lucas Barros",
+            "Marcelo Goulart",
+            "Marcelo Goularte",
+            "Matheus Ardenghi",
+            "Medina",
+            "Mizuno",
+            "Neto",
+            "Rayan",
+            "Scopel"
+      ],
+      "locations": [
+            "Bazar do Weezing",
+            "Centro Cultural",
+            "Centro Cultural de Cianorte",
+            "Ecomuseu de Cianorte",
+            "Prefeitura de Cianorte"
+      ],
+      "heroOptions": {
+            "Flesh and Blood": {
+                  "adult": [
+                        "Arakni, 5L!P3D 7hRu 7h3 cR4X",
+                        "Arakni, Huntsman",
+                        "Arakni, Marionette",
+                        "Aurora, Legacy of Tempest",
+                        "Aurora, Shooting Star",
+                        "Azalea, Ace in the Hole",
+                        "Benji, the Piercing Wind",
+                        "Betsy, Skin in the Game",
+                        "Blaze, Firemind",
+                        "Bravo, Flattering Showman",
+                        "Bravo, Showstopper",
+                        "Bravo, Star of the Show",
+                        "Brevant, Civic Protector",
+                        "Briar",
+                        "Briar, Warden of Thorns",
+                        "Chane, Bound by Shadow",
+                        "Cindra, Dracai of Retribution",
+                        "Dash I/O",
+                        "Dash, Inventor Extraordinaire",
+                        "Data Doll MKII",
+                        "Dorinthea Ironsong",
+                        "Dromai, Ash Artist",
+                        "Emperor, Dracai of Aesir",
+                        "Enigma, Ledger of Ancestry",
+                        "Fai, Rising Rebellion",
+                        "Fang, Dracai of Blades",
+                        "Florian",
+                        "Florian, Rotwood Harbinger",
+                        "Frankie, Make Ends Meat",
+                        "Genis Wotchuneed",
+                        "Gravy Bones, Shipwrecked Looter",
+                        "Hala, Bladesaint of the Vow",
+                        "Ira, Scarlet Revenger",
+                        "Iyslander",
+                        "Iyslander, Stormbind",
+                        "Jarl Vetreidi",
+                        "Kano, Dracai of Aether",
+                        "Kassai of the Golden Sand",
+                        "Kassai, Cintari Sellsword",
+                        "Katsu, the Wanderer",
+                        "Kavdaen, Trader of Skins",
+                        "Kayo, Armed and Dangerous",
+                        "Kayo, Berserker Runt",
+                        "Kayo, Underhanded Cheat",
+                        "Levia",
+                        "Levia, Shadowborn Abomination",
+                        "Lexi",
+                        "Lexi, Livewire",
+                        "Lyath Goldmane",
+                        "Marlynn, Treasure Hunter",
+                        "Maxx The Hype Nitro",
+                        "Melody, Sing-along",
+                        "Nuu, Alluring Desire",
+                        "Oldhim, Grandfather of Eternity",
+                        "Olympia, Prized Fighter",
+                        "Oscilio, Constella Intelligence",
+                        "Oscilio, Forked Continuum",
+                        "Pleiades, Superstar",
+                        "Prism, Awakener of Sol",
+                        "Prism, Sculptor of Arc Light",
+                        "Puffin",
+                        "Rhinar, Reckless Rampage",
+                        "Riptide, Lurker of the Deep",
+                        "Scurv, Stowaway",
+                        "Ser Boltyn, Breaker of Dawn",
+                        "Shiyana, Diamond Gemini",
+                        "Teklovossen, Esteemed Magnate",
+                        "Terra",
+                        "Tuffnut, Bumbling Hulkster",
+                        "Uzuri, Switchblade",
+                        "Valda, Seismic Impact",
+                        "Verdance, Thorn of the Rose",
+                        "Victor Goldmane, High and Mighty",
+                        "Viserai, Rune Blood",
+                        "Vynnset, Iron Maiden",
+                        "Yoji, Royal Protector",
+                        "Zen, Tamer of Purpose",
+                        "Ziggy Starlight"
+                  ],
+                  "young": [
+                        "Arakni",
+                        "Arakni, Solitary Confinement",
+                        "Arakni, Web of Deceit",
+                        "Aurora",
+                        "Azalea",
+                        "Benji, the Piercing Wind",
+                        "Betsy",
+                        "Blaze, Firemind",
+                        "Boltyn",
+                        "Bravo",
+                        "Bravo, Flattering Showman",
+                        "Brevant, Civic Protector",
+                        "Briar",
+                        "Chane",
+                        "Cindra",
+                        "Dash",
+                        "Dash, Database",
+                        "Data Doll MKII",
+                        "Dorinthea",
+                        "Dorinthea, Quicksilver Prodigy",
+                        "Dromai",
+                        "Emperor, Dracai of Aesir",
+                        "Enigma",
+                        "Enigma, New Moon",
+                        "Fai",
+                        "Fang",
+                        "Florian",
+                        "Frankie, Make Ends Meat",
+                        "Genis Wotchuneed",
+                        "Gravy Bones",
+                        "Hala",
+                        "Ira, Crimson Haze",
+                        "Iyslander",
+                        "Kano",
+                        "Kassai",
+                        "Kassai, Cintari Sellsword",
+                        "Katsu",
+                        "Kavdaen, Trader of Skins",
+                        "Kayo",
+                        "Kayo, Berserker Runt",
+                        "Kayo, Strong-arm",
+                        "Levia",
+                        "Lexi",
+                        "Lyath Goldmane",
+                        "Marlynn",
+                        "Maxx Nitro",
+                        "Melody, Sing-along",
+                        "Nuu",
+                        "Oldhim",
+                        "Olympia",
+                        "Oscilio",
+                        "Pleiades",
+                        "Prism",
+                        "Prism, Advent of Thrones",
+                        "Professor Teklovossen",
+                        "Puffin",
+                        "Rhinar",
+                        "Riptide",
+                        "Scurv, Stowaway",
+                        "Shiyana, Diamond Gemini",
+                        "Squizzy & Floof",
+                        "Taylor",
+                        "Teklovossen",
+                        "Terra",
+                        "Tuffnut",
+                        "Uzuri",
+                        "Valda Brightaxe",
+                        "Verdance",
+                        "Victor Goldmane",
+                        "Viserai",
+                        "Vynnset",
+                        "Yoji, Royal Protector",
+                        "Yorick, Weaver of Tales",
+                        "Zen"
+                  ],
+                  "all": [
+                        "Arakni",
+                        "Arakni, 5L!P3D 7hRu 7h3 cR4X",
+                        "Arakni, Huntsman",
+                        "Arakni, Marionette",
+                        "Arakni, Solitary Confinement",
+                        "Arakni, Web of Deceit",
+                        "Aurora",
+                        "Aurora, Legacy of Tempest",
+                        "Aurora, Shooting Star",
+                        "Azalea",
+                        "Azalea, Ace in the Hole",
+                        "Benji, the Piercing Wind",
+                        "Betsy",
+                        "Betsy, Skin in the Game",
+                        "Blaze, Firemind",
+                        "Boltyn",
+                        "Bravo",
+                        "Bravo, Flattering Showman",
+                        "Bravo, Showstopper",
+                        "Bravo, Star of the Show",
+                        "Brevant, Civic Protector",
+                        "Briar",
+                        "Briar, Warden of Thorns",
+                        "Chane",
+                        "Chane, Bound by Shadow",
+                        "Cindra",
+                        "Cindra, Dracai of Retribution",
+                        "Dash",
+                        "Dash I/O",
+                        "Dash, Database",
+                        "Dash, Inventor Extraordinaire",
+                        "Data Doll MKII",
+                        "Dorinthea",
+                        "Dorinthea Ironsong",
+                        "Dorinthea, Quicksilver Prodigy",
+                        "Dromai",
+                        "Dromai, Ash Artist",
+                        "Emperor, Dracai of Aesir",
+                        "Enigma",
+                        "Enigma, Ledger of Ancestry",
+                        "Enigma, New Moon",
+                        "Fai",
+                        "Fai, Rising Rebellion",
+                        "Fang",
+                        "Fang, Dracai of Blades",
+                        "Florian",
+                        "Florian, Rotwood Harbinger",
+                        "Frankie, Make Ends Meat",
+                        "Genis Wotchuneed",
+                        "Gravy Bones",
+                        "Gravy Bones, Shipwrecked Looter",
+                        "Hala",
+                        "Hala, Bladesaint of the Vow",
+                        "Ira, Crimson Haze",
+                        "Ira, Scarlet Revenger",
+                        "Iyslander",
+                        "Iyslander, Stormbind",
+                        "Jarl Vetreidi",
+                        "Kano",
+                        "Kano, Dracai of Aether",
+                        "Kassai",
+                        "Kassai of the Golden Sand",
+                        "Kassai, Cintari Sellsword",
+                        "Katsu",
+                        "Katsu, the Wanderer",
+                        "Kavdaen, Trader of Skins",
+                        "Kayo",
+                        "Kayo, Armed and Dangerous",
+                        "Kayo, Berserker Runt",
+                        "Kayo, Strong-arm",
+                        "Kayo, Underhanded Cheat",
+                        "Levia",
+                        "Levia, Shadowborn Abomination",
+                        "Lexi",
+                        "Lexi, Livewire",
+                        "Lyath Goldmane",
+                        "Marlynn",
+                        "Marlynn, Treasure Hunter",
+                        "Maxx Nitro",
+                        "Maxx The Hype Nitro",
+                        "Melody, Sing-along",
+                        "Nuu",
+                        "Nuu, Alluring Desire",
+                        "Oldhim",
+                        "Oldhim, Grandfather of Eternity",
+                        "Olympia",
+                        "Olympia, Prized Fighter",
+                        "Oscilio",
+                        "Oscilio, Constella Intelligence",
+                        "Oscilio, Forked Continuum",
+                        "Pleiades",
+                        "Pleiades, Superstar",
+                        "Prism",
+                        "Prism, Advent of Thrones",
+                        "Prism, Awakener of Sol",
+                        "Prism, Sculptor of Arc Light",
+                        "Professor Teklovossen",
+                        "Puffin",
+                        "Rhinar",
+                        "Rhinar, Reckless Rampage",
+                        "Riptide",
+                        "Riptide, Lurker of the Deep",
+                        "Scurv, Stowaway",
+                        "Ser Boltyn, Breaker of Dawn",
+                        "Shiyana, Diamond Gemini",
+                        "Squizzy & Floof",
+                        "Taylor",
+                        "Teklovossen",
+                        "Teklovossen, Esteemed Magnate",
+                        "Terra",
+                        "Tuffnut",
+                        "Tuffnut, Bumbling Hulkster",
+                        "Uzuri",
+                        "Uzuri, Switchblade",
+                        "Valda Brightaxe",
+                        "Valda, Seismic Impact",
+                        "Verdance",
+                        "Verdance, Thorn of the Rose",
+                        "Victor Goldmane",
+                        "Victor Goldmane, High and Mighty",
+                        "Viserai",
+                        "Viserai, Rune Blood",
+                        "Vynnset",
+                        "Vynnset, Iron Maiden",
+                        "Yoji, Royal Protector",
+                        "Yorick, Weaver of Tales",
+                        "Zen",
+                        "Zen, Tamer of Purpose",
+                        "Ziggy Starlight"
+                  ]
+            },
+            "Pokemon": {
+                  "all": [
+                        "Charizard / Mega Charizard X EX",
+                        "Dragapult ex",
+                        "Gardevoir ex",
+                        "Gholdengo ex",
+                        "Grimmsnarl / Mega Gengar EX",
+                        "Mega Absol EX / Grimmsnarl",
+                        "Mega Absol EX / Mega Kangaskhan EX",
+                        "Mega Gengar EX / Grimmsnarl",
+                        "Mega Gengar EX / Mega Gengar EX",
+                        "Mega Heracross EX / Mega Kangaskhan EX",
+                        "Mega Sharpedo EX / Mega Absol EX",
+                        "Mega Venusaur ex / Ogerpon ex",
+                        "Mewtwo EX / Gardevoir",
+                        "Ogerpon EX / Meganium"
+                  ]
+            },
+            "Magic: The Gathering": {
+                  "all": [
+                        "Atraxa, Praetors' Voice",
+                        "Commander / Deck",
+                        "Edgar Markov",
+                        "Krenko, Mob Boss",
+                        "Muldrotha, the Gravetide",
+                        "Ur-Dragon",
+                        "Winota, Joiner of Forces"
+                  ]
+            }
+      }
+};
+
+    const FORMAT_OPTIONS = {
+      "Flesh and Blood": ["Classic Constructed", "Blitz", "Silver Age", "Commoner", "Living Legend", "Draft", "Sealed", "UPF", "Young"],
+      "Pokemon": ["Standard", "Expanded", "GLC", "Pré-release", "Selado", "Liga"],
+      "Magic: The Gathering": ["Commander", "Standard", "Modern", "Pioneer", "Pauper", "Legacy", "Draft", "Sealed"]
     };
 
-    const monthNames = [
-      'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
-      'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
+    const DEFAULTS = {
+      Armory: {
+        game: "Flesh and Blood",
+        format: "Classic Constructed",
+        rounds: 3,
+        local: "Bazar do Weezing",
+        next: "Quarta • 19:00"
+      },
+      Liga: {
+        game: "Pokemon",
+        format: "Standard",
+        rounds: 20,
+        local: "Centro Cultural",
+        next: "Esperando Edital"
+      },
+      Torneio: {
+        game: "Flesh and Blood",
+        format: "Silver Age",
+        rounds: 4,
+        local: "Bazar do Weezing",
+        next: ""
+      }
+    };
+
+    const ARMORY_IMAGES = [
+      { label: "Armory Verde - Bazar do Weezing", value: "/assets/img/banners/banner-armory-bazar-do-weezing-green.webp" },
+      { label: "Armory Amarelo - Bazar do Weezing", value: "/assets/img/banners/banner-armory-bazar-do-weezing-yellow.webp" },
+      { label: "Armory Azul - Bazar do Weezing", value: "/assets/img/banners/banner-armory-bazar-do-weezing-blue.webp" },
+      { label: "Armory Vermelho - Bazar do Weezing", value: "/assets/img/banners/banner-armory-bazar-do-weezing-red.webp" }
     ];
 
-    const playerList = document.querySelector('#playerList');
-    const output = document.querySelector('#output');
-    const toast = document.querySelector('#toast');
+    const BASE_IMAGES = [
+      { label: "Liga Flesh and Blood", value: "/assets/img/banners/banner-liga-fab-resultado.png", event: "Liga", game: "Flesh and Blood" },
+      { label: "Liga Pokémon", value: "/assets/img/banners/banner-liga-pokemon-resultado.png", event: "Liga", game: "Pokemon" },
+      { label: "Torneio Silver Age - Bazar do Weezing", value: "/assets/img/banners/banner-silver-age-bazar-do-weezing.webp", event: "Torneio", game: "Flesh and Blood", format: "Silver Age" },
+      { label: "Flesh and Blood padrão", value: "/assets/img/banners/default-flesh-and-blood.webp", game: "Flesh and Blood" },
+      { label: "Pokémon padrão", value: "/assets/img/banners/default-pokemon.webp", game: "Pokemon" },
+      { label: "Magic padrão", value: "/assets/img/banners/default-magic.jpg", game: "Magic: The Gathering" },
+      { label: "Cianorte Card Masters padrão", value: "/assets/img/banners/default-cianorte-card-master.webp" }
+    ];
+
+    const monthNames = [
+      "janeiro", "fevereiro", "março", "abril", "maio", "junho",
+      "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"
+    ];
+
+    const playerList = document.querySelector("#playerList");
+    const output = document.querySelector("#output");
+    const toast = document.querySelector("#toast");
 
     function todayISO() {
       const now = new Date();
@@ -356,65 +812,224 @@
     }
 
     function formatDateBR(isoDate) {
-      if (!isoDate) return 'DD/MM/AAAA';
-      const [year, month, day] = isoDate.split('-');
+      if (!isoDate) return "DD/MM/AAAA";
+      const [year, month, day] = isoDate.split("-");
       return `${day}/${month}/${year}`;
     }
 
     function formatDateLongBR(isoDate) {
-      if (!isoDate) return 'DD de mês de AAAA';
-      const [year, month, day] = isoDate.split('-').map(Number);
-      return `${day} de ${monthNames[month - 1]} de ${year}`;
+      if (!isoDate) return "DD de mês de AAAA";
+      const [year, month, day] = isoDate.split("-").map(Number);
+      return `${day} de ${monthNames[month - 1] || "mês"} de ${year}`;
     }
 
     function slugify(text) {
-      return String(text || '')
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
+      return String(text || "")
+        .normalize("NFD")
+        .replace(/[̀-ͯ]/g, "")
         .toLowerCase()
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/^-+|-+$/g, '') || 'armory';
+        .replace(/&/g, " e ")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "") || "resultado";
     }
 
     function yamlQuote(value) {
-      return String(value ?? '')
-        .replace(/\\/g, '\\\\')
+      return String(value ?? "")
+        .replace(/\\/g, "\\\\")
         .replace(/"/g, '\\"');
+    }
+
+    function escapeHtmlAttr(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/"/g, "&quot;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
     }
 
     function getValue(id) {
       return document.querySelector(`#${id}`).value.trim();
     }
 
+    function getGameLabel(game) {
+      if (game === "Pokemon") return "Pokémon";
+      return game;
+    }
+
+    function getEventArticle(eventType) {
+      return eventType === "Liga" ? "da" : "do";
+    }
+
     function showToast(message) {
       toast.textContent = message;
-      toast.classList.add('show');
+      toast.classList.add("show");
       window.clearTimeout(showToast.timer);
-      showToast.timer = window.setTimeout(() => toast.classList.remove('show'), 1800);
+      showToast.timer = window.setTimeout(() => toast.classList.remove("show"), 1800);
+    }
+
+    function fillDatalist(id, values) {
+      const list = document.querySelector(`#${id}`);
+      list.innerHTML = "";
+      [...new Set(values.filter(Boolean))]
+        .sort((a, b) => a.localeCompare(b, "pt-BR"))
+        .forEach(value => {
+          const option = document.createElement("option");
+          option.value = value;
+          list.appendChild(option);
+        });
+    }
+
+    function setSelectOptions(select, values, selected) {
+      select.innerHTML = "";
+      values.forEach(value => {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = value;
+        select.appendChild(option);
+      });
+      if (values.includes(selected)) select.value = selected;
+    }
+
+    function isYoungFormat(format) {
+      return ["Silver Age", "Blitz", "Young", "Commoner"].includes(format);
+    }
+
+    function getHeroOptions(game, format) {
+      const options = DATA.heroOptions[game];
+      if (!options) return [];
+      if (game === "Flesh and Blood") {
+        return isYoungFormat(format) ? options.young : options.adult;
+      }
+      return options.all || [];
+    }
+
+    function renderHeroOptions() {
+      fillDatalist("heroOptions", getHeroOptions(getValue("game"), getValue("format")));
+    }
+
+    function renderFormatOptions(preferred = "") {
+      const game = getValue("game");
+      const formats = FORMAT_OPTIONS[game] || [];
+      const current = preferred || getValue("format") || formats[0] || "";
+      setSelectOptions(document.querySelector("#format"), formats, current);
+    }
+
+    function imageOptionsForCurrentState() {
+      const eventType = getValue("eventType");
+      const game = getValue("game");
+      const format = getValue("format");
+      if (eventType === "Armory") return ARMORY_IMAGES;
+
+      const filtered = BASE_IMAGES.filter(item => {
+        if (item.event && item.event !== eventType) return false;
+        if (item.game && item.game !== game) return false;
+        if (item.format && item.format !== format) return false;
+        return true;
+      });
+
+      const fallback = BASE_IMAGES.filter(item => !item.event && (!item.game || item.game === game));
+      const merged = [...filtered, ...fallback];
+      const seen = new Set();
+      return merged.filter(item => {
+        if (seen.has(item.value)) return false;
+        seen.add(item.value);
+        return true;
+      });
+    }
+
+    function renderImageOptions(preferred = "") {
+      const select = document.querySelector("#imageChoice");
+      const options = imageOptionsForCurrentState();
+      select.innerHTML = "";
+      options.forEach(item => {
+        const option = document.createElement("option");
+        option.value = item.value;
+        option.textContent = item.label;
+        select.appendChild(option);
+      });
+      const custom = document.createElement("option");
+      custom.value = "__custom__";
+      custom.textContent = "Personalizada";
+      select.appendChild(custom);
+
+      if (preferred && [...select.options].some(option => option.value === preferred)) {
+        select.value = preferred;
+      } else if (options[0]) {
+        select.value = options[0].value;
+      }
+      updateCustomImageVisibility();
+    }
+
+    function updateCustomImageVisibility() {
+      const custom = getValue("imageChoice") === "__custom__";
+      document.querySelector("#customImageField").classList.toggle("is-hidden", !custom);
+    }
+
+    function getImagePath() {
+      return getValue("imageChoice") === "__custom__" ? getValue("customImage") : getValue("imageChoice");
+    }
+
+    function getTitle(eventType, game, format, date) {
+      const dateBR = formatDateBR(date);
+      if (eventType === "Armory") return `Armory - ${dateBR}`;
+      if (eventType === "Liga") return `Liga de ${getGameLabel(game)} - ${dateBR}`;
+      return `Torneio ${format} - ${dateBR}`;
+    }
+
+    function getSummary(eventType, game, format, local, date) {
+      const dateBR = formatDateBR(date);
+      const gameLabel = getGameLabel(game);
+      if (eventType === "Armory") return `Resultado do Armory de ${gameLabel} realizado no local ${local || "LOCAL"} dia ${dateBR}.`;
+      if (eventType === "Liga") return `Resultado da Liga de ${gameLabel} realizada no local ${local || "LOCAL"} dia ${dateBR}.`;
+      return `Resultado do torneio ${format} de ${gameLabel} realizado no local ${local || "LOCAL"} dia ${dateBR}.`;
+    }
+
+    function getImageAlt(eventType, game, format, date) {
+      const gameLabel = getGameLabel(game);
+      const longDate = formatDateLongBR(date);
+      if (eventType === "Armory") return `Card de resultado do Armory de ${gameLabel} da comunidade Cianorte Card Masters em ${longDate}`;
+      if (eventType === "Liga") return `Card de resultado da Liga de ${gameLabel} da comunidade Cianorte Card Masters em ${longDate}`;
+      return `Card de resultado do torneio ${format} de ${gameLabel} da comunidade Cianorte Card Masters em ${longDate}`;
+    }
+
+    function getFolder(eventType) {
+      if (eventType === "Armory") return "_comunidade/Armory";
+      if (eventType === "Liga") return "_comunidade/Liga";
+      return "_comunidade/Torneio";
+    }
+
+    function getFilename(eventType, game, format, date) {
+      const iso = date || todayISO();
+      if (eventType === "Armory") return `armory-${iso}.md`;
+      if (eventType === "Liga") return `liga-${slugify(game)}-${iso}.md`;
+      return `torneio-${slugify(format)}-${iso}.md`;
     }
 
     function createPlayerRow(data = {}) {
-      const row = document.createElement('div');
-      row.className = 'player-row';
+      const row = document.createElement("div");
+      row.className = "player-row";
       row.innerHTML = `
         <div>
-          <label>Nome do jogador</label>
-          <input class="player-name" placeholder="Ex: Akira" value="${yamlQuote(data.player || '')}" />
+          <label>Jogador</label>
+          <input class="player-name" list="playerOptions" placeholder="Ex: Scopel" value="${escapeHtmlAttr(data.player || "")}" />
         </div>
         <div>
-          <label>Herói</label>
-          <input class="hero-name" placeholder="Ex: Ser Boltyn, Breaker of Dawn" value="${yamlQuote(data.hero || '')}" />
+          <label class="hero-label">Herói / deck</label>
+          <input class="hero-name" list="heroOptions" placeholder="Ex: Ira, Scarlet Revenger" value="${escapeHtmlAttr(data.hero || "")}" />
         </div>
         <div>
           <label>Vitórias</label>
           <input class="wins" type="number" min="0" value="${Number.isFinite(data.wins) ? data.wins : 0}" />
         </div>
+        <div>
+          <label>Record</label>
+          <input class="record-preview" readonly value="0-0" />
+        </div>
         <button type="button" class="danger remove-player">Remover</button>
       `;
 
-      row.querySelectorAll('input').forEach(input => input.addEventListener('input', generateMarkdown));
-
-      row.querySelector('.remove-player').addEventListener('click', () => {
+      row.querySelectorAll("input").forEach(input => input.addEventListener("input", generateMarkdown));
+      row.querySelector(".remove-player").addEventListener("click", () => {
         row.remove();
         generateMarkdown();
       });
@@ -424,47 +1039,124 @@
     }
 
     function readPlayers() {
-      return [...document.querySelectorAll('.player-row')]
+      return [...document.querySelectorAll(".player-row")]
         .map(row => {
-          const player = row.querySelector('.player-name').value.trim();
-          const hero = row.querySelector('.hero-name').value.trim();
-          const wins = Number(row.querySelector('.wins').value || 0);
-          return { player, hero, wins };
+          const player = row.querySelector(".player-name").value.trim();
+          const hero = row.querySelector(".hero-name").value.trim();
+          const wins = Number(row.querySelector(".wins").value || 0);
+          return { player, hero, wins, row };
         })
         .filter(item => item.player || item.hero);
     }
 
+    function updateRecordPreviews(players, rounds) {
+      players.forEach(item => {
+        const wins = Math.max(0, Math.min(rounds, Number(item.wins || 0)));
+        const losses = Math.max(0, rounds - wins);
+        const preview = item.row.querySelector(".record-preview");
+        if (preview) preview.value = `${wins}-${losses}`;
+      });
+    }
+
+    function updateComputedFields() {
+      const eventType = getValue("eventType");
+      const game = getValue("game");
+      const format = getValue("format");
+      const date = getValue("date");
+      const local = getValue("local");
+      document.querySelector("#generatedTitle").value = getTitle(eventType, game, format, date);
+      document.querySelector("#generatedSummary").value = getSummary(eventType, game, format, local, date);
+
+      const nextEventField = document.querySelector("#nextEventField");
+      nextEventField.classList.toggle("is-hidden", eventType === "Torneio");
+      const nextLabel = nextEventField.querySelector("label");
+      nextLabel.textContent = eventType === "Liga" ? "Próxima liga" : "Próximo Armory";
+
+      const fieldLabel = game === "Magic: The Gathering" ? "Comandante / deck" : game === "Pokemon" ? "Deck / Pokémon principal" : "Herói";
+      document.querySelectorAll(".hero-label").forEach(label => label.textContent = fieldLabel);
+    }
+
+    function applyEventDefaults(force = false) {
+      const eventType = getValue("eventType");
+      const defaults = DEFAULTS[eventType];
+      if (!defaults) return;
+
+      if (force) document.querySelector("#game").value = defaults.game;
+      renderFormatOptions(force ? defaults.format : "");
+
+      if (force || !getValue("rounds")) document.querySelector("#rounds").value = defaults.rounds;
+      if (force || !getValue("local")) document.querySelector("#local").value = defaults.local;
+      if (force || !getValue("nextEvent")) document.querySelector("#nextEvent").value = defaults.next;
+
+      renderHeroOptions();
+      renderImageOptions();
+      generateMarkdown();
+    }
+
     function generateMarkdown() {
-      const date = getValue('date');
-      const rounds = Math.max(1, Number(getValue('rounds') || 3));
-      const title = `Armory - ${formatDateBR(date)}`;
-      const imageAlt = `Card de resultado do Armory de Flesh and Blood da comunidade Cianorte Card Masters em ${formatDateLongBR(date)}`;
+      renderHeroOptions();
+      updateComputedFields();
+      const eventType = getValue("eventType");
+      const game = getValue("game");
+      const format = getValue("format");
+      const date = getValue("date");
+      const rounds = Math.max(1, Number(getValue("rounds") || 1));
+      const local = getValue("local");
+      const nextEvent = getValue("nextEvent");
+      const imagePath = getImagePath();
+      const title = getTitle(eventType, game, format, date);
+      const summary = getSummary(eventType, game, format, local, date);
+      const imageAlt = getImageAlt(eventType, game, format, date);
       const players = readPlayers();
+      updateRecordPreviews(players, rounds);
 
       const lines = [
-        '---',
-        `published: ${getValue('published')}`,
+        "---",
+        `published: ${getValue("published")}`,
         `title: "${yamlQuote(title)}"`,
-        `summary: "${yamlQuote(FIXED.summary)}"`,
-        `game: "${yamlQuote(FIXED.game)}"`,
-        `format: "${yamlQuote(FIXED.format)}"`,
-        `rounds: ${rounds}`,
-        `next_armory: "${yamlQuote(FIXED.nextArmory)}"`,
-        `date: ${date || 'AAAA-MM-DD'}`,
-        `local: "${yamlQuote(FIXED.local)}"`,
-        `image: "${yamlQuote(FIXED.image)}"`,
-        `image_alt: "${yamlQuote(imageAlt)}"`,
-        'results:'
+        `summary: "${yamlQuote(summary)}"`,
+        `game: "${yamlQuote(game)}"`,
+        `format: "${yamlQuote(format)}"`,
+        `rounds: ${rounds}`
       ];
+
+      if (eventType === "Armory") {
+        lines.push(`next_armory: "${yamlQuote(nextEvent || "Quarta • 19:00")}"`);
+        lines.push(`date: ${date || "AAAA-MM-DD"}`);
+      } else if (eventType === "Liga") {
+        lines.push(`date: ${date || "AAAA-MM-DD"}`);
+        lines.push(`event_date: ${date || "AAAA-MM-DD"}`);
+        lines.push(`next_liga: "${yamlQuote(nextEvent || "Esperando Edital")}"`);
+      } else {
+        lines.push(`date: ${date || "AAAA-MM-DD"}`);
+        lines.push(`event_date: ${date || "AAAA-MM-DD"}`);
+        lines.push('author: "Cianorte Card Masters"');
+        lines.push('category_label: "Torneio"');
+        lines.push('content_style: "torneio"');
+        lines.push('comments: false');
+      }
+
+      lines.push(`local: "${yamlQuote(local)}"`);
+      lines.push(`image: "${yamlQuote(imagePath)}"`);
+      lines.push(`image_alt: "${yamlQuote(imageAlt)}"`);
+
+      if (eventType === "Torneio") {
+        lines.push("tags:");
+        lines.push(`  - "${yamlQuote(game)}"`);
+        lines.push(`  - "${yamlQuote(format)}"`);
+        lines.push('  - "Torneio"');
+      }
+
+      lines.push("results:");
 
       if (players.length === 0) {
         lines.push('  - player: "Nome do jogador"');
-        lines.push('    hero: "Nome do herói"');
+        lines.push('    hero: "Nome do herói ou deck"');
         lines.push(`    record: "0-${rounds}"`);
-        lines.push('    wins: 0');
+        lines.push("    wins: 0");
       } else {
         players
-          .sort((a, b) => b.wins - a.wins || a.player.localeCompare(b.player, 'pt-BR'))
+          .sort((a, b) => b.wins - a.wins || a.player.localeCompare(b.player, "pt-BR"))
           .forEach(item => {
             const wins = Math.max(0, Math.min(rounds, Number(item.wins || 0)));
             const losses = Math.max(0, rounds - wins);
@@ -472,59 +1164,96 @@
             lines.push(`    hero: "${yamlQuote(item.hero)}"`);
             lines.push(`    record: "${wins}-${losses}"`);
             lines.push(`    wins: ${wins}`);
+            lines.push("");
           });
+        if (lines[lines.length - 1] === "") lines.pop();
       }
 
-      lines.push('---');
+      lines.push("---");
+      lines.push("");
 
-      output.textContent = lines.join('\n');
+      if (eventType === "Armory") {
+        lines.push("Resultado cadastrado para alimentar automaticamente a área fixa de Armory na página Comunidade.");
+      } else if (eventType === "Liga") {
+        lines.push("Resultado padronizado da Liga da comunidade Cianorte Card Masters.");
+      } else {
+        const playerCount = players.length || 0;
+        lines.push("Resultado cadastrado para alimentar automaticamente a área de torneios da comunidade.");
+        lines.push("");
+        lines.push(`O torneio foi disputado no formato **${format}**, com **${playerCount} jogadores** e **${rounds} rodadas**.`);
+      }
+
+      output.textContent = lines.join("\n");
+      const filename = getFilename(eventType, game, format, date);
+      document.querySelector("#pathHint").innerHTML = `Destino sugerido: <code>${getFolder(eventType)}/${filename}</code>`;
       saveDraft();
     }
 
     function copyMarkdown() {
       navigator.clipboard.writeText(output.textContent)
-        .then(() => showToast('Markdown copiado!'))
-        .catch(() => showToast('Não consegui copiar. Selecione o texto manualmente.'));
+        .then(() => showToast("Markdown copiado!"))
+        .catch(() => showToast("Não consegui copiar. Selecione o texto manualmente."));
     }
 
     function downloadMarkdown() {
-      const date = getValue('date') || todayISO();
-      const filename = `${date}-armory-flesh-and-blood.md`;
-      const blob = new Blob([output.textContent], { type: 'text/markdown;charset=utf-8' });
+      if (!getValue("date")) {
+        showToast("Preencha a data antes de baixar.");
+        document.querySelector("#date").focus();
+        return;
+      }
+      const filename = getFilename(getValue("eventType"), getValue("game"), getValue("format"), getValue("date"));
+      const blob = new Blob([output.textContent], { type: "text/markdown;charset=utf-8" });
       const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
+      const link = document.createElement("a");
       link.href = url;
       link.download = filename;
       document.body.appendChild(link);
       link.click();
       link.remove();
       URL.revokeObjectURL(url);
-      showToast('Arquivo .md gerado!');
+      showToast("Arquivo .md gerado!");
     }
 
     function saveDraft() {
       const data = {
-        published: getValue('published'),
-        date: getValue('date'),
-        rounds: getValue('rounds'),
-        players: readPlayers()
+        published: getValue("published"),
+        eventType: getValue("eventType"),
+        game: getValue("game"),
+        format: getValue("format"),
+        date: getValue("date"),
+        rounds: getValue("rounds"),
+        local: getValue("local"),
+        nextEvent: getValue("nextEvent"),
+        imageChoice: getValue("imageChoice"),
+        customImage: getValue("customImage"),
+        players: readPlayers().map(({ player, hero, wins }) => ({ player, hero, wins }))
       };
-      localStorage.setItem('armoryMarkdownGeneratorFixed', JSON.stringify(data));
+      localStorage.setItem("ccmResultMarkdownGeneratorV2", JSON.stringify(data));
     }
 
     function loadDraft() {
-      const saved = localStorage.getItem('armoryMarkdownGeneratorFixed');
+      const saved = localStorage.getItem("ccmResultMarkdownGeneratorV2");
       if (!saved) return false;
 
       try {
         const data = JSON.parse(saved);
-        document.querySelector('#published').value = data.published || 'True';
-        document.querySelector('#date').value = data.date || todayISO();
-        document.querySelector('#rounds').value = data.rounds || '3';
-        playerList.innerHTML = '';
+        document.querySelector("#published").value = data.published || "true";
+        document.querySelector("#eventType").value = data.eventType || "Armory";
+        document.querySelector("#game").value = data.game || DEFAULTS.Armory.game;
+        renderFormatOptions(data.format || DEFAULTS.Armory.format);
+        document.querySelector("#date").value = data.date || todayISO();
+        document.querySelector("#rounds").value = data.rounds || DEFAULTS.Armory.rounds;
+        document.querySelector("#local").value = data.local || DEFAULTS.Armory.local;
+        document.querySelector("#nextEvent").value = data.nextEvent || DEFAULTS.Armory.next;
+        renderImageOptions(data.imageChoice || "");
+        document.querySelector("#customImage").value = data.customImage || "";
+        playerList.innerHTML = "";
         if (Array.isArray(data.players) && data.players.length) {
           data.players.forEach(player => createPlayerRow(player));
+        } else {
+          createPlayerRow({ wins: 0 });
         }
+        generateMarkdown();
         return true;
       } catch (error) {
         return false;
@@ -532,37 +1261,63 @@
     }
 
     function resetForm() {
-      localStorage.removeItem('armoryMarkdownGeneratorFixed');
-      document.querySelector('#published').value = 'True';
-      document.querySelector('#date').value = todayISO();
-      document.querySelector('#rounds').value = '3';
-      playerList.innerHTML = '';
-      createPlayerRow({ player: 'Akira', hero: 'Ser Boltyn, Breaker of Dawn', wins: 3 });
-      createPlayerRow({ player: 'Scopel', hero: 'Prism, Awakener of Sol', wins: 2 });
-      createPlayerRow({ player: 'Erick Jadiel', hero: 'Ira, Scarlet Revenger', wins: 2 });
-      createPlayerRow({ player: 'Hermes', hero: 'Pleiades, Superstar', wins: 1 });
-      createPlayerRow({ player: 'Marcelo Goularte', hero: 'Arakni, Marionette', wins: 1 });
-      createPlayerRow({ player: 'Neto', hero: 'Teklovossen, Esteemed Magnate', wins: 0 });
-      showToast('Formulário limpo!');
+      localStorage.removeItem("ccmResultMarkdownGeneratorV2");
+      document.querySelector("#published").value = "true";
+      document.querySelector("#eventType").value = "Armory";
+      document.querySelector("#game").value = DEFAULTS.Armory.game;
+      document.querySelector("#date").value = todayISO();
+      document.querySelector("#rounds").value = DEFAULTS.Armory.rounds;
+      document.querySelector("#local").value = DEFAULTS.Armory.local;
+      document.querySelector("#nextEvent").value = DEFAULTS.Armory.next;
+      renderFormatOptions(DEFAULTS.Armory.format);
+      renderImageOptions("/assets/img/banners/banner-armory-bazar-do-weezing-green.webp");
+      playerList.innerHTML = "";
+      createPlayerRow({ player: "Scopel", hero: "Prism, Awakener of Sol", wins: 2 });
+      createPlayerRow({ player: "Mizuno", hero: "Arakni, Huntsman", wins: 2 });
+      createPlayerRow({ player: "Hermes", hero: "Pleiades, Superstar", wins: 1 });
+      showToast("Formulário limpo!");
       generateMarkdown();
     }
 
-    document.querySelector('#addPlayer').addEventListener('click', () => createPlayerRow({ wins: 0 }));
-    document.querySelector('#copyMarkdown').addEventListener('click', copyMarkdown);
-    document.querySelector('#downloadMarkdown').addEventListener('click', downloadMarkdown);
-    document.querySelector('#resetForm').addEventListener('click', resetForm);
-
-    ['published', 'date', 'rounds'].forEach(id => {
-      document.querySelector(`#${id}`).addEventListener('input', generateMarkdown);
-      document.querySelector(`#${id}`).addEventListener('change', generateMarkdown);
-    });
-
-    document.querySelector('#date').value = todayISO();
-
-    if (!loadDraft()) {
-      resetForm();
+    function handleEventTypeChange() {
+      applyEventDefaults(true);
     }
 
+    function handleGameChange() {
+      renderFormatOptions(DEFAULTS[getValue("eventType")]?.format || "");
+      renderHeroOptions();
+      renderImageOptions();
+      generateMarkdown();
+    }
+
+    function handleFormatChange() {
+      renderHeroOptions();
+      renderImageOptions();
+      generateMarkdown();
+    }
+
+    fillDatalist("playerOptions", DATA.players);
+    fillDatalist("localOptions", DATA.locations);
+
+    document.querySelector("#addPlayer").addEventListener("click", () => createPlayerRow({ wins: 0 }));
+    document.querySelector("#copyMarkdown").addEventListener("click", copyMarkdown);
+    document.querySelector("#downloadMarkdown").addEventListener("click", downloadMarkdown);
+    document.querySelector("#resetForm").addEventListener("click", resetForm);
+    document.querySelector("#eventType").addEventListener("change", handleEventTypeChange);
+    document.querySelector("#game").addEventListener("change", handleGameChange);
+    document.querySelector("#format").addEventListener("change", handleFormatChange);
+    document.querySelector("#imageChoice").addEventListener("change", () => { updateCustomImageVisibility(); generateMarkdown(); });
+
+    ["published", "date", "rounds", "local", "nextEvent", "customImage"].forEach(id => {
+      document.querySelector(`#${id}`).addEventListener("input", generateMarkdown);
+      document.querySelector(`#${id}`).addEventListener("change", generateMarkdown);
+    });
+
+    document.querySelector("#date").value = todayISO();
+    renderFormatOptions(DEFAULTS.Armory.format);
+    renderImageOptions("/assets/img/banners/banner-armory-bazar-do-weezing-green.webp");
+
+    if (!loadDraft()) resetForm();
     generateMarkdown();
   </script>
 </body>
