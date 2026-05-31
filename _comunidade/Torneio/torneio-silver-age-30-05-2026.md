@@ -44,7 +44,7 @@ results:
     record: "2-2"
     wins: 2
 
-  - player: "Marcelo"
+  - player: "Marcelo Goulart"
     hero: "Florian"
     record: "2-2"
     wins: 2
