@@ -9,7 +9,7 @@ author: "Cianorte Card Masters"
 date: 2026-05-27
 last_modified_at: 2026-05-27
 schema_type: "BlogPosting"
-content_style: "cianorte-card-master"
+content_style: "Knoha"
 keywords:
   - Flicia 2026 Cianorte
   - card games em Cianorte
