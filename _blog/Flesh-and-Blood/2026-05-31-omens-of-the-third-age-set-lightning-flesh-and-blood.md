@@ -21,7 +21,7 @@ keywords:
   - card game em Cianorte
 image: "goagain:Voltaris"
 image_alt: "Voltaris, carta Fabled de Omens of the Third Age em Flesh and Blood"
-author: "Neto"
+author: "Knoha"
 date: 2026-05-31
 last_modified_at: 2026-05-31
 permalink: /blog/flesh-and-blood/omens-of-the-third-age-set-lightning-flesh-and-blood-cianorte/
