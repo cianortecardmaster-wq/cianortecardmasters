@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Meta pós-Omens no Classic Constructed: o que muda agora que mais heróis viraram Living Legend?"
+title: "Meta pós-Omens no Classic Constructed: Prism, Victor e Fai pressionam o formato"
 category_label: "Flesh and Blood"
 category: "flesh-and-blood"
 content_style: "flesh-and-blood"
 schema_type: "BlogPosting"
-summary: "Omens of the Third Age chega ao Classic Constructed em um cenário alterado por Living Legend: alguns heróis já saíram do formato, outros seguem próximos dos 1000 pontos, e Aurora, Oscilio e Zyggy podem mudar sideboards e escolhas locais."
-description: "Análise atualizada do meta pós-Omens of the Third Age no Classic Constructed de Flesh and Blood: Living Legend, heróis que já viraram lenda, Kayo, Prism, Verdance, Fai, Aurora, Oscilio, Zyggy, sideboard, Arcane Barrier e impacto em Cianorte."
+summary: "Omens of the Third Age chega ao Classic Constructed em um momento de pressão: Prism está perto de Living Legend, Victor, Fai, Kassai, Dash I/O e Cindra seguem fortes, e Aurora, Oscilio e Zyggy podem mexer no sideboard e no meta local."
+description: "Análise atualizada do meta pós-Omens of the Third Age no Classic Constructed de Flesh and Blood: Living Legend, Prism, Victor Goldmane, Fai, Kassai, Dash I/O, Cindra, Aurora, Oscilio, Zyggy, sideboard, Arcane Barrier e impacto em Cianorte."
 keywords:
   - meta pós Omens
   - Omens of the Third Age meta
@@ -44,30 +44,33 @@ cards:
   - "Aurora, Legacy of Tempest"
   - "Oscilio, Forked Continuum"
   - "Zyggy Starlight"
-  - "Kayo, Armed and Dangerous"
   - "Prism, Awakener of Sol"
-  - "Verdance, Thorn of the Rose"
+  - "Victor Goldmane, High and Mighty"
   - "Fai, Rising Rebellion"
-  - "Aurora, Shooting Star"
-  - "Florian, Rotwood Harbinger"
-  - "Kano, Dracai of Aether"
-  - "Nuu, Alluring Desire"
-  - "Zen, Tamer of Purpose"
+  - "Kassai of the Golden Sand"
+  - "Dash I/O"
+  - "Cindra, Dracai of Retribution"
+  - "Bravo, Showstopper"
+  - "Katsu, the Wanderer"
+  - "Dorinthea Ironsong"
+  - "Arakni, Marionette"
   - "Nullrune Hood"
   - "Nullrune Gloves"
   - "Oasis Respite"
   - "Sigil of Solace"
 ---
 
-# Meta pós-Omens no Classic Constructed: o que muda agora que mais heróis viraram Living Legend?
+# Meta pós-Omens no Classic Constructed: Prism, Victor e Fai pressionam o formato
 
 Toda coleção nova cria barulho. Jogador testa carta que parece absurda, herói novo ganha lista no Fabrary, preço de single sobe antes de alguém embaralhar direito e, por algumas semanas, todo Armory parece laboratório.
 
-Com **Omens of the Third Age**, esse barulho tem um motivo real. A coleção não traz apenas três heróis novos. Ela chega em um momento em que o **Classic Constructed** já foi alterado pelo **Living Legend**: alguns heróis que ainda apareciam em conversas recentes de meta já viraram lenda, outros seguem perigosamente perto dos 1000 pontos, e o ambiente abre espaço para novas apostas.
+Com **Omens of the Third Age**, esse barulho tem um motivo real. A coleção chega em um Classic Constructed pressionado por **Living Legend**, por decks defensivos fortes, por heróis agressivos que ainda castigam erro de bloqueio e por uma nova leva de Lightning com **Aurora, Oscilio e Zyggy**.
+
+A tabela atual que você trouxe da página de Living Legend muda a leitura do artigo: **Prism, Awakener of Sol** aparece na frente com **951 pontos**, seguida por **Victor Goldmane** com **899**, **Fai** com **856**, **Kassai** com **839**, **Dash I/O** com **830** e **Cindra** com **820**. Isso coloca o formato em estado de alerta. Não é só “Omens chegou”; é Omens chegando em um ambiente onde vários heróis importantes podem mudar de status com poucos resultados grandes.
 
 A pergunta central agora é:
 
-> **Meu deck está preparado para um formato com mais Lightning, mais instants, mais auras, mais dano arcano e menos segurança sobre quais heróis continuarão legais nos próximos meses?**
+> **Meu deck está preparado para um formato com Prism perto de Living Legend, Victor ainda forte, Fai e Cindra pressionando, Dash I/O no radar e três heróis novos de Lightning entrando no laboratório?**
 
 Este texto é uma leitura de meta. Não é uma previsão absoluta e não tenta vender hype. A ideia é ajudar quem joga **Flesh and Blood em Cianorte**, acompanha o **Cianorte Card Masters** ou está começando agora no Classic Constructed a entender o que muda depois de Omens.
 
@@ -82,13 +85,14 @@ Este texto é uma leitura de meta. Não é uma previsão absoluta e não tenta v
 
 | Ponto do meta | O que muda na prática |
 |---|---|
-| **Heróis que já viraram Living Legend** | Aurora antiga, Florian, Kano, Nuu, Zen e outros nomes já aparecem como LL na página oficial. Não dá para usar listas antigas sem conferir legalidade. |
-| **Heróis ainda no radar de LL** | Kayo, Prism Awakener, Verdance e Fai continuam altos no ranking do Classic Constructed. |
-| **Nova Aurora** | **Aurora, Legacy of Tempest** não é a mesma carta que **Aurora, Shooting Star**, que já está em Living Legend. Isso precisa ficar claro para evitar confusão. |
-| **Oscilio** | Continua obrigando o meta a respeitar dano arcano, pitch aberto, Arcane Barrier e prevenção. |
+| **Prism a 951 pontos** | É a maior pressão de Living Legend no momento. Qualquer avanço forte pode tirar Prism do Classic Constructed oficial. |
+| **Victor com 899** | Continua como um dos grandes medidores do formato: defesa, valor e troca eficiente de cartas. |
+| **Fai, Kassai, Dash I/O e Cindra acima de 800** | O formato não é só controle. Ainda há muita pressão agressiva, arma, Draconic e Mechanologist. |
+| **Oscilio com 586** | Já não é curiosidade. O herói está no meio da tabela e Omens pode reforçar o plano arcano. |
+| **Nova Aurora** | **Aurora, Legacy of Tempest** não é a mesma carta que **Aurora, Shooting Star**, que já está em Living Legend. |
 | **Zyggy** | Pode ganhar partidas por desconhecimento de aura, Fragment, holo counter e Aphrodias. |
 | **Sideboard** | Nullrune, Oasis Respite, Sigil of Solace e respostas contra instants voltam para a conversa. |
-| **Meta local** | Em Cianorte, a mudança depende de quem realmente montar os decks, não só do que aparece em tier list global. |
+| **Meta local** | Em Cianorte, a mudança depende de quem realmente montar Aurora, Oscilio, Zyggy, Dash I/O e os decks antigos que já existem na mesa. |
 
 Para quem está começando: **meta** é o conjunto de decks e estratégias que aparecem com mais frequência. Quando uma coleção nova sai, o meta não muda só porque existem cartas novas; ele muda quando os jogadores começam a usar essas cartas e os outros precisam se adaptar.
 
@@ -120,36 +124,64 @@ Para o jogador veterano, a consequência é outra: toda análise de meta precisa
   {% include tcg-card.html game="fab" name="Zen, Tamer of Purpose" %}
 </div>
 
-## Quem ainda está perto dos 1000 pontos?
+## Quem está mais perto dos 1000 pontos agora?
 
-Mesmo com vários heróis já fora, o topo do ranking atual ainda importa. Na consulta à página oficial, **Kayo, Armed and Dangerous** aparece no topo dos heróis ainda legais no Classic Constructed, com **Prism, Awakener of Sol**, **Verdance, Thorn of the Rose** e **Fai, Rising Rebellion** também entre os nomes mais avançados.
+Com a tabela atual que você trouxe, o topo do Classic Constructed fica assim:
 
-Isso muda o planejamento de qualquer jogador competitivo.
+| Posição | Herói | Pontos LL |
+|---:|---|---:|
+| 1 | **Prism, Awakener of Sol** | **951** |
+| 2 | **Victor Goldmane, High and Mighty** | **899** |
+| 3 | **Fai, Rising Rebellion** | **856** |
+| 4 | **Kassai of the Golden Sand** | **839** |
+| 5 | **Dash I/O** | **830** |
+| 6 | **Cindra, Dracai of Retribution** | **820** |
+| 7 | **Bravo, Showstopper** | **776** |
+| 8 | **Katsu, the Wanderer** | **746** |
+| 9 | **Dorinthea Ironsong** | **743** |
+| 10 | **Arakni, Marionette** | **644** |
+| 11 | **Oscilio, Constella Intelligence** | **586** |
 
-Um herói perto de LL pode continuar forte, mas passa a carregar uma pergunta desconfortável:
+Isso muda bastante o texto. O formato não está mais girando em torno de Kayo como principal ameaça de Living Legend. Agora, o alerta mais claro é **Prism a 951 pontos**. Victor também está muito perto, e o bloco Fai/Kassai/Dash I/O/Cindra mostra que o meta ainda tem muitos decks capazes de pressionar por caminhos diferentes.
 
-> **Vale investir em um deck que pode sair do formato em breve?**
+Para quem está montando deck do zero, a pergunta passa a ser:
 
-A resposta depende do objetivo. Para quem já tem as cartas, faz sentido jogar enquanto o herói for legal. Para quem está montando do zero, Omens pode ser uma boa desculpa para olhar alternativas mais novas, como Aurora, Oscilio ou Zyggy.
+> **Vale investir pesado em um herói que está acima de 800 ou 900 pontos, ou é melhor olhar para opções que devem ficar legais por mais tempo?**
 
-<div class="tcg-card-grid" aria-label="Heróis ainda próximos do topo de Living Legend no Classic Constructed">
-  {% include tcg-card.html game="fab" name="Kayo, Armed and Dangerous" %}
+A resposta depende do objetivo. Para quem já tem as cartas, faz sentido jogar enquanto o herói for legal. Para quem está começando ou comprando staples agora, Omens pode ser uma boa desculpa para olhar alternativas mais novas, como Aurora, Oscilio e Zyggy.
+
+<div class="tcg-card-grid" aria-label="Heróis no topo atual de Living Legend no Classic Constructed">
   {% include tcg-card.html game="fab" name="Prism, Awakener of Sol" %}
-  {% include tcg-card.html game="fab" name="Verdance, Thorn of the Rose" %}
+  {% include tcg-card.html game="fab" name="Victor Goldmane, High and Mighty" %}
   {% include tcg-card.html game="fab" name="Fai, Rising Rebellion" %}
+  {% include tcg-card.html game="fab" name="Dash I/O" %}
 </div>
 
-## Kayo ainda é o teste de realidade
+## Prism, Victor e Dash I/O viram os novos medidores
 
-Enquanto **Kayo, Armed and Dangerous** estiver legal, todo deck novo precisa responder uma pergunta básica:
+O teste de realidade do pós-Omens mudou.
 
-> **Eu sobrevivo a dano bruto e turno explosivo?**
+Antes, a conversa girava muito em torno de Kayo. Agora, com a tabela atual, o formato precisa olhar primeiro para três tipos de pressão:
 
-Aurora, Oscilio e Zyggy podem ser interessantes, mas nenhum deles pode ignorar Kayo. O herói pune lista lenta, mão fraca e jogador que gasta cartas demais montando mesa.
+**Prism** testa se o seu deck consegue lidar com permanentes, defesa, valor e jogos que não acabam do jeito “normal”.
 
-Para **Aurora**, o desafio é correr junto sem ficar sem gás. Para **Oscilio**, é sobreviver até a janela de dano arcano. Para **Zyggy**, é provar que aura, Ward e valor de mesa seguram pressão suficiente antes de o jogo acabar.
+**Victor** testa se você consegue atravessar defesa eficiente, ataques de arma, troca de recurso e plano midrange sólido.
 
-Se Kayo sair por Living Legend, o formato respira diferente. Decks mais técnicos podem ganhar espaço. Mas enquanto ele estiver presente, ele continua sendo o medidor mais simples: se o deck novo não aguenta Kayo, talvez ainda não esteja pronto para CC.
+**Dash I/O** testa se você consegue sobreviver a velocidade, boost, pressão de dano físico e turnos em que o Mechanologist parece jogar mais cartas do que deveria.
+
+Aurora, Oscilio e Zyggy precisam passar por esses três medidores. Se o deck novo não consegue ameaçar Prism, não consegue atravessar Victor e não consegue sobreviver a Dash I/O, provavelmente ainda é só hype de spoiler.
+
+## Fai, Kassai e Cindra mantêm a pressão agressiva
+
+Outra correção importante: o formato não está lento.
+
+**Fai** com 856 pontos, **Kassai** com 839 e **Cindra** com 820 mostram que o Classic Constructed ainda tem muita pressão de combate, arma, go-wide e Draconic. Isso é importante para avaliar Omens porque os heróis novos podem parecer poderosos quando jogam sem pressão, mas o CC real não dá tanto tempo assim.
+
+Para **Aurora**, o desafio é correr junto sem ficar sem gás.
+
+Para **Oscilio**, é sobreviver até a janela de dano arcano.
+
+Para **Zyggy**, é provar que aura, Ward e valor de mesa seguram pressão suficiente antes de o jogo acabar.
 
 ## Aurora: atenção para não confundir as versões
 
@@ -251,7 +283,7 @@ Ninja raramente precisa de uma carta “absurda” para melhorar. Às vezes, uma
 
 Alguns decks podem sentir mais o pós-Omens.
 
-Decks sem plano contra dano arcano sofrem contra Oscilio. Decks que demoram para montar mesa podem sofrer contra Aurora. Decks que não entendem aura podem perder para Zyggy. Decks que gastam sideboard demais contra Lightning podem abrir buraco contra Dash, Kayo, Ninja ou Guardian.
+Decks sem plano contra dano arcano sofrem contra Oscilio. Decks que demoram para montar mesa podem sofrer contra Aurora. Decks que não entendem aura podem perder para Zyggy. Decks que gastam sideboard demais contra Lightning podem abrir buraco contra Dash I/O, Fai, Cindra, Ninja ou Guardian.
 
 A pergunta central do inventário passa a ser:
 
@@ -327,7 +359,7 @@ E para o jogador local de Cianorte, a pergunta final é ainda melhor:
 
 ## Fontes consultadas
 
-- Página oficial de Living Legend: https://fabtcg.com/living-legend/
+- Página oficial de Living Legend: https://fabtcg.com/living-legend/ — usada para regra de 1000 pontos, checagem semanal e atualização do ranking com os pontos informados nesta revisão.
 - Galeria de Omens of the Third Age da Star City Games: https://articles.starcitygames.com/flesh-and-blood/every-card-revealed-so-far-from-flesh-and-blood-omens-of-the-third-age/
 - Página oficial de Classic Constructed: https://fabtcg.com/gameplay-formats/classic-constructed/
 - Histórico local do grupo Tcg Flesh and Blood, usado como termômetro de Cianorte.
