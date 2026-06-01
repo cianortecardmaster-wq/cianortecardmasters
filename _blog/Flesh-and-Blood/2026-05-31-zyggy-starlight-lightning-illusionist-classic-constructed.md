@@ -17,7 +17,7 @@ keywords:
   - Armory Deck Zyggy
   - Cianorte Card Masters
   - card game em Cianorte
-image: "goagain:Zyggy Starlight"
+image: "/assets/img/banners/banner-card-hero-zyggy-stardust.webp"
 image_alt: "Zyggy Starlight, herói Lightning Illusionist de Flesh and Blood, em análise para Classic Constructed"
 author: "Knoha"
 date: 2026-05-31
