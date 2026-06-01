@@ -5,7 +5,7 @@ summary: "Magic: The Gathering segue forte no jogo físico com novos produtos de
 description: "Novidades de Magic: The Gathering físico para Commander casual, produtos especiais, Marvel Super Heroes e ideias para mesas presenciais da comunidade."
 image: "scryfall:Krenko, Mob Boss"
 image_alt: "Carta Krenko, Mob Boss usada como capa para notícia de Magic Commander físico"
-author: "Neto"
+author: "Knoha"
 date: 2026-05-19
 last_modified_at: 2026-05-23
 tags:
