@@ -7,7 +7,7 @@ summary: "Análise da nova Aurora em Flesh and Blood: Lightning Runeblade, Light
 description: "Análise da nova Aurora em Flesh and Blood: como Runeblade funciona, diferenças da Aurora antiga, cartas de Omens, plano para Silver Age e Classic Constructed, cartas baratas, upgrades competitivos e fraquezas."
 image: "goagain:Aurora, Legacy of Tempest"
 image_alt: "Aurora, Legacy of Tempest, heroína Lightning Runeblade de Flesh and Blood em Omens of the Third Age."
-author: "Neto"
+author: "Knoha"
 date: 2026-05-31
 last_modified_at: 2026-05-31
 permalink: /blog/flesh-and-blood/aurora-lightning-runeblade-omens/
