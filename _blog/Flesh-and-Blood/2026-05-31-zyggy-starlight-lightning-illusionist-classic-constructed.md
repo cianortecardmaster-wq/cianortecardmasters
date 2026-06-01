@@ -19,7 +19,7 @@ keywords:
   - card game em Cianorte
 image: "goagain:Zyggy Starlight"
 image_alt: "Zyggy Starlight, herói Lightning Illusionist de Flesh and Blood, em análise para Classic Constructed"
-author: "Neto"
+author: "Knoha"
 date: 2026-05-31
 last_modified_at: 2026-05-31
 permalink: /blog/flesh-and-blood/zyggy-starlight-lightning-illusionist-classic-constructed-cianorte/
