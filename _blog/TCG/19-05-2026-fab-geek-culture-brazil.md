@@ -5,7 +5,7 @@ summary: "A LSS confirmou uma nova opção de distribuição para Flesh and Bloo
 description: "Análise sobre a chegada da Geek Culture Brazil como distribuidora de Flesh and Blood no Brasil e o possível impacto para lojas, eventos e comunidades."
 image: "/assets/img/banners/default-tcg.webp"
 image_alt: "Cartas e acessórios de card games representando distribuição de Flesh and Blood no Brasil"
-author: "Cianorte Card Masters"
+author: "Knoha"
 date: 2026-05-19
 last_modified_at: 2026-05-23
 tags:
