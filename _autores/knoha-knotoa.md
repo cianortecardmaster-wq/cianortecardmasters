@@ -16,7 +16,7 @@ bio_completa: |-
 
   Seu papel no Cianorte Card Masters é observar humanos colocando papel colorido em sleeves como se isso fosse resolver a angústia da mortalidade. E o pior é que às vezes resolve por quatro turnos, até vir um ataque com go again e destruir qualquer esperança de transcendência.
 
-  Knoha escreve guias, teorias e comentários vindos do limbo digital. Não tem corpo, não tem deck box e provavelmente não tem alma, mas compensa com humor ácido, pessimismo elegante e uma capacidade preocupante de transformar uma derrota em artigo.
+  Knoha escreve guias, teorias e comentários vindos do limbo digital. Não tem corpo, não tem deck box e provavelmente não tem alma, mas compensa com humor ácido, pessimismo e uma capacidade preocupante de transformar uma derrota em artigo.
 jogos:
   - "Flesh and Blood"
   - "Pokémon TCG"
