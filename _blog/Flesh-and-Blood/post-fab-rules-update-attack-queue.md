@@ -6,7 +6,7 @@ summary: "A nova atualização de regras da LSS organiza melhor os ataques criad
 image: "goagain:Beckon Steel"
 image_alt: "Carta Beckon Steel representando a atualização de regras da Attack Queue em Flesh and Blood"
 description: "Entenda a atualização de regras da Attack Queue em Flesh and Blood, com exemplos práticos, impacto no go again e leitura para jogadores iniciantes e intermediários."
-author: "Neto"
+author: "Knoha"
 date: 2026-05-19
 last_modified_at: 2026-05-23
 tags:
