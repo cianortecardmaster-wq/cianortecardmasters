@@ -6,7 +6,7 @@ summary: "Análise profunda de Oscilio Lightning Wizard em Flesh and Blood: como
 description: "Guia de Oscilio Lightning Wizard em Flesh and Blood: entenda Starfall, Ponder, instants, dano arcano explosivo, jogo de valor, cartas novas de Omens e cartas antigas para testar."
 image: "goagain:Oscilio, Forked Continuum"
 image_alt: "Carta Oscilio, Forked Continuum de Flesh and Blood, herói Lightning Wizard de Omens of the Third Age"
-author: "Neto"
+author: "Knoha"
 date: 2026-05-31
 last_modified_at: 2026-05-31
 schema_type: "BlogPosting"
