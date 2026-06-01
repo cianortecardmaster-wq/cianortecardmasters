@@ -5,7 +5,7 @@ summary: "Mesas de RPG aos sábados na Biblioteca Municipal, com os Mestres Aril
 image: "/assets/img/banners/default-rpg.webp"
 image_alt: "Cena de fantasia representando mesas de RPG presenciais da comunidade Cianorte Card Masters"
 description: "Convite para jogar RPG de mesa com a comunidade Cianorte Card Masters, com encontros presenciais, mestres locais e aventuras para novos jogadores."
-author: "Cianorte Card Masters"
+author: "Knoha"
 date: 2026-05-19
 last_modified_at: 2026-05-23
 tags:
