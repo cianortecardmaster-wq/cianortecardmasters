@@ -384,7 +384,7 @@ published: true
 <main class="page">
     <header>
       <h1>Caça-palavras difícil</h1>
-      <p class="subtitle">Tema: Omens of the Third Age • Grade 15x15 • Estilo revista Coquetel</p>
+      <p class="subtitle">Tema: Omens of the Third Age • Grade 15x15 • Estilo revista</p>
     </header>
 
     <section class="intro">
