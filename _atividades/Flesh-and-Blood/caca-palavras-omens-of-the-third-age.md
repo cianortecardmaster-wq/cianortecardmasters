@@ -47,6 +47,67 @@ published: true
     box-sizing: border-box;
   }
 
+  /* Correção local: impede que o padrão visual do site deixe textos claros sobre fundo branco */
+  .omens-wordsearch,
+  .omens-wordsearch .page,
+  .omens-wordsearch .box,
+  .omens-wordsearch .seo-local,
+  .omens-wordsearch .grid-card,
+  .omens-wordsearch .status,
+  .omens-wordsearch .clues,
+  .omens-wordsearch .clue-list,
+  .omens-wordsearch .clue-list li,
+  .omens-wordsearch .answer-content,
+  .omens-wordsearch .locked-box,
+  .omens-wordsearch .answer-table {
+    color: #111 !important;
+  }
+
+  .omens-wordsearch h1,
+  .omens-wordsearch h2,
+  .omens-wordsearch h3,
+  .omens-wordsearch p,
+  .omens-wordsearch li,
+  .omens-wordsearch span,
+  .omens-wordsearch strong,
+  .omens-wordsearch em,
+  .omens-wordsearch small,
+  .omens-wordsearch td,
+  .omens-wordsearch th {
+    color: #111 !important;
+  }
+
+  .omens-wordsearch .subtitle,
+  .omens-wordsearch .note {
+    color: #555 !important;
+  }
+
+  .omens-wordsearch .answer-header,
+  .omens-wordsearch .answer-header span,
+  .omens-wordsearch .answer-header strong {
+    color: #fff !important;
+  }
+
+  .omens-wordsearch .cell {
+    color: #111 !important;
+  }
+
+  .omens-wordsearch.solution-revealed .cell.solution,
+  .omens-wordsearch.solution-revealed .cell.solution.found {
+    color: #fff !important;
+  }
+
+  .omens-wordsearch .clue-list li::before,
+  .omens-wordsearch button.action,
+  .omens-wordsearch .controls button {
+    color: #fff !important;
+  }
+
+  .omens-wordsearch button.action.secondary,
+  .omens-wordsearch .controls button.secondary {
+    color: #000 !important;
+  }
+
   .omens-wordsearch .page {
     max-width: 1040px;
     margin: 28px auto;
@@ -88,6 +149,7 @@ published: true
     margin: 0;
     font-size: 30px;
     line-height: 1.1;
+    color: #111 !important;
   }
 
   .omens-wordsearch .subtitle {
@@ -116,6 +178,7 @@ published: true
     margin: 0 0 8px;
     font-size: 18px;
     text-transform: uppercase;
+    color: #111 !important;
   }
 
   .omens-wordsearch .box p {
@@ -142,6 +205,7 @@ published: true
 
   .omens-wordsearch .seo-local strong {
     font-weight: 900;
+    color: #111 !important;
   }
 
   .omens-wordsearch .game-layout {
@@ -292,6 +356,7 @@ published: true
     border-bottom: 3px solid #000;
     padding-bottom: 6px;
     text-transform: uppercase;
+    color: #111 !important;
   }
 
   .omens-wordsearch .clue-list {
@@ -310,6 +375,7 @@ published: true
     position: relative;
     font-size: 14px;
     background: #fff;
+    color: #111 !important;
   }
 
   .omens-wordsearch .clue-list li::before {
