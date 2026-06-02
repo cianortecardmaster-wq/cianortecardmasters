@@ -1,0 +1,36 @@
+{% assign tipo_label = include.activity.activity_type | default: include.activity.tipo | default: include.activity.category_label | default: "Atividade" %}
+{% assign tipo_slug = tipo_label | slugify %}
+{% assign jogo_label = include.activity.game | default: include.activity.jogo | default: "Card Games" %}
+{% assign jogo_slug = jogo_label | slugify %}
+{% assign style_slug = include.activity.content_style | default: jogo_slug | slugify %}
+{% if style_slug == "pokemon-tcg" %}{% assign style_slug = "pokemon" %}{% endif %}
+{% if style_slug == "one-piece-tcg" %}{% assign style_slug = "tcg" %}{% endif %}
+{% if style_slug == "cianorte-card-masters" %}{% assign style_slug = "cianorte-card-master" %}{% endif %}
+{% assign activity_summary = include.activity.summary | default: include.activity.description | default: include.activity.excerpt | strip_html | strip_newlines | truncate: 170 %}
+
+<article class="activity-card post-style-{{ style_slug }}" data-activity-card data-activity-type="{{ tipo_slug }}" data-activity-type-label="{{ tipo_label | escape }}" data-activity-game="{{ jogo_slug }}" data-activity-game-label="{{ jogo_label | escape }}">
+  <div class="activity-card-topline">
+    <span>{{ tipo_label }}</span>
+    <small>{{ jogo_label }}</small>
+  </div>
+
+  <h3>{{ include.activity.title }}</h3>
+  <p>{{ activity_summary }}</p>
+
+  <div class="activity-card-meta" aria-label="Informações da atividade">
+    {% if include.activity.difficulty %}<span>Dificuldade: {{ include.activity.difficulty }}</span>{% endif %}
+    {% if include.activity.format %}<span>Formato: {{ include.activity.format }}</span>{% endif %}
+    {% if include.activity.date %}<span>Publicado em {{ include.activity.date | date: "%d/%m/%Y" }}</span>{% endif %}
+  </div>
+
+  {% if include.activity.tags %}
+    <div class="activity-card-tags" aria-label="Tags">
+      {% for tag in include.activity.tags limit: 5 %}<span>{{ tag }}</span>{% endfor %}
+    </div>
+  {% endif %}
+
+  <div class="btn-row activity-card-actions">
+    <a class="btn btn-primary" href="{{ include.activity.url | relative_url }}">Abrir atividade</a>
+    {% if include.activity.download_url and include.activity.download_url != "" %}<a class="btn btn-secondary" href="{{ include.activity.download_url | relative_url }}">Baixar arquivo</a>{% endif %}
+  </div>
+</article>

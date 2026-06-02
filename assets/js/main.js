@@ -185,7 +185,7 @@ if (menuButton && mainNav) {
       if (emptyState) {
         emptyState.hidden = matches.length > 0;
         if (!cards.length) {
-          emptyState.innerHTML = 'Nenhuma atividade publicada ainda. Cadastre uma atividade em <code>_data/atividades.yml</code>, marque <code>published: true</code> e ela aparecerá aqui com filtros automáticos.';
+          emptyState.innerHTML = 'Nenhuma atividade publicada ainda. Crie um arquivo <code>.md</code> dentro de <code>_atividades/</code>, marque <code>published: true</code> e ela aparecerá aqui com filtros automáticos.';
         } else if (!matches.length) {
           emptyState.textContent = 'Nenhuma atividade encontrada com esses filtros. Tente mudar o tipo de atividade ou o jogo.';
         }

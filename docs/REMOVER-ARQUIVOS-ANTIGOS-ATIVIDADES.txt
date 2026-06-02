@@ -1,0 +1,6 @@
+Se você aplicar apenas o ZIP de arquivos alterados sobre uma versão anterior, remova estes arquivos/pastas antigos para evitar duplicidade:
+
+- _data/atividades.yml
+- _comunidade/atividades/
+
+No ZIP completo, esses itens já foram removidos.

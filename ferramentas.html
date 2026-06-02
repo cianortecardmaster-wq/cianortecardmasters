@@ -116,7 +116,7 @@ permalink: /ferramentas/
       <article class="hub-card tool-hub-card post-style-activities">
         <span>Atividades</span>
         <strong>Caça-palavras, cruzadas, quiz e picross</strong>
-        <small>Área nova para publicar atividades jogáveis ou imprimíveis do Cianorte Card Masters, com filtros automáticos por tipo de atividade e por jogo.</small>
+        <small>Área para publicar atividades jogáveis ou imprimíveis do Cianorte Card Masters criando apenas arquivos .md, com filtros automáticos por tipo e jogo.</small>
         <div class="btn-row">
           <a class="btn btn-primary" href="{{ '/atividades/' | relative_url }}">Abrir atividades</a>
           <a class="btn btn-secondary" href="{{ '/guias/' | relative_url }}">Ver guias</a>
@@ -126,7 +126,7 @@ permalink: /ferramentas/
   </div>
 </section>
 
-{% assign atividades_ferramentas = site.data.atividades | where_exp: "item", "item.published != false" | sort: "date" | reverse %}
+{% assign atividades_ferramentas = site.atividades | where_exp: "item", "item.published != false" | sort: "date" | reverse %}
 
 <section class="section section-alt activity-library-section tools-activity-section" aria-labelledby="tools-activity-title">
   <div class="container">
@@ -134,7 +134,7 @@ permalink: /ferramentas/
       <div>
         <p class="eyebrow">Atividades do site</p>
         <h2 id="tools-activity-title">Caça-palavras, palavras cruzadas, quiz e picross</h2>
-        <p class="activity-count-line"><span data-activity-count>{{ atividades_ferramentas.size }}</span> atividade(s) publicada(s). Os filtros crescem automaticamente conforme novos tipos de atividade e jogos forem cadastrados.</p>
+        <p class="activity-count-line"><span data-activity-count>{{ atividades_ferramentas.size }}</span> atividade(s) publicada(s). Os filtros crescem automaticamente conforme novos tipos de atividade e jogos forem publicados em <code>_atividades/</code>.</p>
       </div>
 
       <div class="activity-filter-groups" aria-label="Filtros de atividades da página Ferramentas">
@@ -149,40 +149,13 @@ permalink: /ferramentas/
     </div>
 
     <div class="activity-library-grid" data-activity-library id="todas-as-atividades">
-      {% for item in atividades_ferramentas %}
-        {% assign tipo_label = item.tipo | default: item.type | default: "Atividade" %}
-        {% assign tipo_slug = tipo_label | slugify %}
-        {% assign jogo_label = item.jogo | default: item.game | default: "Card Games" %}
-        {% assign jogo_slug = jogo_label | slugify %}
-        {% assign style_slug = jogo_slug %}
-        {% if jogo_slug == "pokemon-tcg" %}{% assign style_slug = "pokemon" %}{% endif %}
-        {% if jogo_slug == "one-piece-tcg" %}{% assign style_slug = "tcg" %}{% endif %}
-        {% if jogo_slug == "cianorte-card-masters" %}{% assign style_slug = "cianorte-card-master" %}{% endif %}
-
-        <article class="activity-card post-style-{{ style_slug }}" data-activity-card data-activity-type="{{ tipo_slug }}" data-activity-type-label="{{ tipo_label | escape }}" data-activity-game="{{ jogo_slug }}" data-activity-game-label="{{ jogo_label | escape }}">
-          <div class="activity-card-topline">
-            <span>{{ tipo_label }}</span>
-            <small>{{ jogo_label }}</small>
-          </div>
-          <h3>{{ item.title }}</h3>
-          <p>{{ item.description }}</p>
-
-          <div class="activity-card-meta" aria-label="Informações da atividade">
-            {% if item.difficulty %}<span>Dificuldade: {{ item.difficulty }}</span>{% endif %}
-            {% if item.format %}<span>Formato: {{ item.format }}</span>{% endif %}
-            {% if item.date %}<span>Publicado em {{ item.date | date: "%d/%m/%Y" }}</span>{% endif %}
-          </div>
-
-          <div class="btn-row activity-card-actions">
-            {% if item.url and item.url != "" %}<a class="btn btn-primary" href="{{ item.url | relative_url }}">Abrir atividade</a>{% endif %}
-            {% if item.download_url and item.download_url != "" %}<a class="btn btn-secondary" href="{{ item.download_url | relative_url }}">Baixar arquivo</a>{% endif %}
-          </div>
-        </article>
+      {% for atividade in atividades_ferramentas %}
+        {% include activity-card.html activity=atividade %}
       {% endfor %}
     </div>
 
     <p class="empty-section activity-empty" data-activity-empty {% if atividades_ferramentas.size > 0 %}hidden{% endif %}>
-      Nenhuma atividade publicada ainda. Cadastre uma atividade em <code>_data/atividades.yml</code>, marque <code>published: true</code> e ela aparecerá aqui com filtro automático por atividade e jogo.
+      Nenhuma atividade publicada ainda. Crie um arquivo <code>.md</code> dentro de <code>_atividades/</code>, marque <code>published: true</code> e ela aparecerá aqui com filtro automático por atividade e jogo.
     </p>
 
     <div class="btn-row tools-activity-actions">

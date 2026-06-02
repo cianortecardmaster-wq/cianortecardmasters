@@ -16,7 +16,7 @@ image_alt: "Área de atividades do Cianorte Card Masters com desafios de card ga
 permalink: /atividades/
 ---
 
-{% assign atividades_publicadas = site.data.atividades | where_exp: "item", "item.published != false" | sort: "date" | reverse %}
+{% assign atividades_publicadas = site.atividades | where_exp: "item", "item.published != false" | sort: "date" | reverse %}
 
 <section class="page-hero atividades-page-hero" style="--page-hero-image: url('{{ '/assets/img/banners/banner-ferramentas.webp' | relative_url }}'); --page-hero-image-mobile: url('{{ '/assets/img/banners/banner-ferramentas-mobile.webp' | relative_url }}'); --page-hero-position: center; --page-hero-position-mobile: center;" aria-label="{{ page.image_alt | escape }}">
   <div class="container">
@@ -32,20 +32,20 @@ permalink: /atividades/
   <div class="container activity-page-intro-grid">
     <div>
       <p class="eyebrow">Passatempo com tema de mesa</p>
-      <h2 id="activity-intro-title">Uma seção própria para publicar desafios</h2>
+      <h2 id="activity-intro-title">Agora funciona igual Blog, Decks e Comunidade</h2>
       <p>
-        Aqui entram <strong>caça-palavras</strong>, <strong>palavras cruzadas</strong>, <strong>quiz</strong>, <strong>picross</strong>, atividades em HTML, PDFs para baixar e materiais para usar nos encontros da comunidade.
+        Para publicar uma atividade nova, basta criar um arquivo <code>.md</code> dentro de <code>_atividades/</code>. O card aparece automaticamente aqui e também na vitrine de atividades da página Ferramentas.
       </p>
       <p>
-        Os filtros abaixo são automáticos: quando uma nova atividade publicada tiver um novo tipo ou um novo jogo no arquivo <code>_data/atividades.yml</code>, o botão de filtro aparece sozinho na página.
+        Os filtros são automáticos: quando uma atividade publicada tiver um novo <code>activity_type</code> ou um novo <code>game</code>, o botão de filtro aparece sozinho na página.
       </p>
     </div>
 
     <aside class="activity-method-card post-style-activities" aria-label="Como publicar novas atividades">
-      <span>Fluxo simples</span>
-      <strong>Crie, publique e filtre</strong>
+      <span>Fluxo certo</span>
+      <strong>Criar arquivo .md</strong>
       <p>
-        Cadastre a atividade no YAML, coloque o link da página ou do PDF e marque <code>published: true</code>. O card aparece aqui sem precisar mexer no HTML da página.
+        Use <code>_atividades/Flesh-and-Blood/</code>, <code>_atividades/Pokemon/</code>, <code>_atividades/Magic/</code> ou crie outra subpasta. Não precisa mais cadastrar item em YAML manual.
       </p>
     </aside>
   </div>
@@ -72,46 +72,13 @@ permalink: /atividades/
     </div>
 
     <div class="activity-library-grid" data-activity-library id="todas-as-atividades">
-      {% for item in atividades_publicadas %}
-        {% assign tipo_label = item.tipo | default: item.type | default: "Atividade" %}
-        {% assign tipo_slug = tipo_label | slugify %}
-        {% assign jogo_label = item.jogo | default: item.game | default: "Card Games" %}
-        {% assign jogo_slug = jogo_label | slugify %}
-        {% assign style_slug = jogo_slug %}
-        {% if jogo_slug == "pokemon-tcg" %}{% assign style_slug = "pokemon" %}{% endif %}
-        {% if jogo_slug == "one-piece-tcg" %}{% assign style_slug = "tcg" %}{% endif %}
-        {% if jogo_slug == "cianorte-card-masters" %}{% assign style_slug = "cianorte-card-master" %}{% endif %}
-
-        <article class="activity-card post-style-{{ style_slug }}" data-activity-card data-activity-type="{{ tipo_slug }}" data-activity-type-label="{{ tipo_label | escape }}" data-activity-game="{{ jogo_slug }}" data-activity-game-label="{{ jogo_label | escape }}">
-          <div class="activity-card-topline">
-            <span>{{ tipo_label }}</span>
-            <small>{{ jogo_label }}</small>
-          </div>
-          <h3>{{ item.title }}</h3>
-          <p>{{ item.description }}</p>
-
-          <div class="activity-card-meta" aria-label="Informações da atividade">
-            {% if item.difficulty %}<span>Dificuldade: {{ item.difficulty }}</span>{% endif %}
-            {% if item.format %}<span>Formato: {{ item.format }}</span>{% endif %}
-            {% if item.date %}<span>Publicado em {{ item.date | date: "%d/%m/%Y" }}</span>{% endif %}
-          </div>
-
-          {% if item.tags %}
-            <div class="activity-card-tags" aria-label="Tags">
-              {% for tag in item.tags limit: 5 %}<span>{{ tag }}</span>{% endfor %}
-            </div>
-          {% endif %}
-
-          <div class="btn-row activity-card-actions">
-            {% if item.url and item.url != "" %}<a class="btn btn-primary" href="{{ item.url | relative_url }}">Abrir atividade</a>{% endif %}
-            {% if item.download_url and item.download_url != "" %}<a class="btn btn-secondary" href="{{ item.download_url | relative_url }}">Baixar arquivo</a>{% endif %}
-          </div>
-        </article>
+      {% for atividade in atividades_publicadas %}
+        {% include activity-card.html activity=atividade %}
       {% endfor %}
     </div>
 
     <p class="empty-section activity-empty" data-activity-empty {% if atividades_publicadas.size > 0 %}hidden{% endif %}>
-      Nenhuma atividade publicada ainda. Cadastre uma atividade em <code>_data/atividades.yml</code>, marque <code>published: true</code> e ela aparecerá aqui com filtros automáticos.
+      Nenhuma atividade publicada ainda. Crie um arquivo <code>.md</code> dentro de <code>_atividades/</code>, marque <code>published: true</code> e ela aparecerá aqui com filtros automáticos.
     </p>
   </div>
 </section>

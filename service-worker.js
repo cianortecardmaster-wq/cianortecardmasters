@@ -1,4 +1,4 @@
-const CCM_CACHE = 'ccm-pwa-v2026-06-02-atividades-01';
+const CCM_CACHE = 'ccm-pwa-v2026-06-02-atividades-md-02';
 
 const CORE_ASSETS = [
   '/',

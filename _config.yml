@@ -28,6 +28,9 @@ collections:
   autores:
     output: true
     permalink: /autores/:name/
+  atividades:
+    output: true
+    permalink: /atividades/:name/
 
 defaults:
   - scope:
@@ -122,6 +125,16 @@ defaults:
       author: "Cianorte Card Masters"
       category_label: "Comunidade"
       comments: true
+  - scope:
+      path: ""
+      type: "atividades"
+    values:
+      layout: post
+      author: "Cianorte Card Masters"
+      category_label: "Atividade"
+      content_style: "activities"
+      comments: false
+      schema_type: "CreativeWork"
   - scope:
       path: ""
       type: "autores"
@@ -253,6 +266,44 @@ defaults:
       category_label: "Armory"
       content_style: "armory"
       comments: false
+
+  # Atividades: subpastas com jogo/conteúdo automático
+  - scope:
+      path: "_atividades/Flesh-and-Blood"
+      type: "atividades"
+    values:
+      game: "Flesh and Blood"
+      content_style: "flesh-and-blood"
+  - scope:
+      path: "_atividades/Pokemon"
+      type: "atividades"
+    values:
+      game: "Pokémon TCG"
+      content_style: "pokemon"
+  - scope:
+      path: "_atividades/Magic"
+      type: "atividades"
+    values:
+      game: "Magic"
+      content_style: "magic"
+  - scope:
+      path: "_atividades/One-Piece"
+      type: "atividades"
+    values:
+      game: "One Piece TCG"
+      content_style: "tcg"
+  - scope:
+      path: "_atividades/RPG"
+      type: "atividades"
+    values:
+      game: "RPG"
+      content_style: "rpg"
+  - scope:
+      path: "_atividades/Cianorte-Card-Masters"
+      type: "atividades"
+    values:
+      game: "Cianorte Card Masters"
+      content_style: "cianorte-card-master"
 # Arquivos internos que não precisam ir para o site publicado.
 exclude:
   - docs/
