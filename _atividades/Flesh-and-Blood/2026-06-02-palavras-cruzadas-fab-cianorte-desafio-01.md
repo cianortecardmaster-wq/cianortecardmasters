@@ -2,15 +2,15 @@
 layout: post
 title: "Palavras Cruzadas FAB em Cianorte: desafio estilo Coquetel"
 category_label: "Flesh and Blood"
+format: "HTML / imprimível"
 schema_type: "BlogPosting"
 summary: "Desafio de palavras cruzadas de Flesh and Blood em estilo Coquetel para jogadores de Cianorte e região, com pistas sobre cartas, keywords, heróis, lore e siglas do TCG."
 description: "Resolva uma palavra cruzada temática de Flesh and Blood criada pelo Cianorte Card Masters, comunidade de TCG em Cianorte-PR, com pistas sobre Teklovossen, Heart of Ice, Aether Dart, Adaptive Plating, heróis, keywords e lore."
 image: "/assets/img/banners/banner-palavras-cruzadas-fab.webp"
 image_alt: "Palavras cruzadas de Flesh and Blood em estilo Coquetel para jogadores de TCG em Cianorte."
-author: "Knoha"
+author: "Neto"
 date: 2026-06-02
 last_modified_at: 2026-06-02
-permalink: /blog/flesh-and-blood/palavras-cruzadas-fab-cianorte-desafio-01/
 tags:
   - Flesh and Blood
   - palavras cruzadas
