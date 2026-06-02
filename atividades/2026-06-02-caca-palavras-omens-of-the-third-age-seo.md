@@ -1,4 +1,5 @@
 ---
+published: true
 layout: post
 title: "Caça-palavras Omens of the Third Age: desafio difícil de Flesh and Blood"
 category_label: "Flesh and Blood"
