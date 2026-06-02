@@ -10,7 +10,7 @@ image_alt: "Caça-palavras difícil de Flesh and Blood com tema Omens of the Thi
 author: "Neto"
 date: 2026-06-02
 last_modified_at: 2026-06-02
-permalink: /_comunidade/atividades/caca-palavras-omens-of-the-third-age/
+permalink: /atividades/caca-palavras-omens-of-the-third-age/
 tags:
   - Flesh and Blood
   - Caça-palavras
