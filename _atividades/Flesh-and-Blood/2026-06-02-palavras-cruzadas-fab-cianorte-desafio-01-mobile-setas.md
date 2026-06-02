@@ -26,7 +26,6 @@ tags:
   - comunidade TCG
 ---
 
-
 <style>
 .fab-crossword-post{
   --cols: 11;
@@ -283,7 +282,11 @@ tags:
 }
 
 .fab-mobile-direction-pad{
-  display: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .55rem;
+  margin: .75rem 0 1rem;
 }
 
 .fab-dir-choice{
@@ -295,6 +298,7 @@ tags:
   border-radius: 999px;
   min-width: 96px;
   box-shadow: 0 4px 14px rgba(0,0,0,.18);
+  cursor: pointer;
 }
 
 .fab-dir-choice.active{
@@ -367,8 +371,7 @@ tags:
     bottom: max(12px, env(safe-area-inset-bottom));
     transform: translateX(-50%);
     z-index: 9999;
-    display: flex;
-    gap: .55rem;
+    margin: 0;
     background: rgba(255,255,255,.95);
     border: 2px solid #111;
     border-radius: 999px;
@@ -461,7 +464,7 @@ A cruzada mistura pistas de cartas conhecidas, lore de Rathe, equipamentos, her�
 
 <div class="fab-crossword-post" id="fab-crossword-post">
   <div class="fab-crossword-intro">
-    <strong>Como jogar:</strong> clique em um quadrado branco e digite uma letra. A seta para a direita indica resposta horizontal; a seta para baixo indica resposta vertical. Escolha a direção do preenchimento pelas setas flutuantes no celular. O progresso fica salvo neste navegador.
+    <strong>Como jogar:</strong> clique em um quadrado branco e digite uma letra. A seta para a direita indica resposta horizontal; a seta para baixo indica resposta vertical. Escolha a direção do preenchimento pelos botões → Lado ou ↓ Baixo. No celular, esses botões ficam flutuantes. O progresso fica salvo neste navegador.
   </div>
 
   <div class="fab-crossword-local">
@@ -1061,3 +1064,4 @@ window.addEventListener('afterprint', function(){
   setInterval(updateGate, 60000);
 })();
 </script>
+
