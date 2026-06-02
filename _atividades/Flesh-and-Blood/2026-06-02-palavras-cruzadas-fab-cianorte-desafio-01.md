@@ -26,7 +26,6 @@ tags:
   - comunidade TCG
 ---
 
-
 <style>
 .fab-crossword-post{
   --cols: 11;
@@ -269,12 +268,129 @@ tags:
   margin: 8mm;
 }
 
+
+.fab-direction-label{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #111;
+  background: #fff;
+  color: #111;
+  padding: .55rem .8rem;
+  font-weight: 800;
+  border-radius: 4px;
+}
+
+.fab-mobile-direction-pad{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .55rem;
+  margin: .75rem 0 1rem;
+}
+
+.fab-dir-choice{
+  border: 2px solid #111;
+  background: #fff;
+  color: #111;
+  padding: .6rem .85rem;
+  font-weight: 900;
+  border-radius: 999px;
+  min-width: 96px;
+  box-shadow: 0 4px 14px rgba(0,0,0,.18);
+  cursor: pointer;
+}
+
+.fab-dir-choice.active{
+  background: #111;
+  color: #fff;
+}
+
+@media (max-width: 760px){
+  .fab-crossword-post{
+    --cell: clamp(30px, 8.15vw, 42px);
+    margin: 1rem -0.75rem;
+  }
+
+  .fab-crossword-intro,
+  .fab-crossword-local,
+  .fab-crossword-gate,
+  .fab-crossword-status{
+    padding: .75rem .85rem;
+    font-size: .92rem;
+  }
+
+  .fab-crossword-actions{
+    gap: .45rem;
+  }
+
+  .fab-crossword-actions button,
+  .fab-direction-label{
+    width: 100%;
+    justify-content: center;
+    font-size: .9rem;
+    padding: .6rem .7rem;
+  }
+
+  .fab-crossword-wrap{
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 5.8rem;
+  }
+
+  .fab-crossword-grid{
+    margin: 0 auto;
+  }
+
+  .fab-cell{
+    border-right-width: 1.6px;
+    border-bottom-width: 1.6px;
+  }
+
+  .fab-cell.clue .text{
+    inset: 2px;
+    line-height: .92;
+  }
+
+  .fab-input{
+    font-size: 18px;
+    min-height: 30px;
+  }
+
+  .fab-start-arrow.right,
+  .fab-start-arrow.down{
+    width: 10px;
+    height: 10px;
+    font-size: 10px;
+  }
+
+  .fab-mobile-direction-pad{
+    position: fixed;
+    left: 50%;
+    bottom: max(12px, env(safe-area-inset-bottom));
+    transform: translateX(-50%);
+    z-index: 9999;
+    margin: 0;
+    background: rgba(255,255,255,.95);
+    border: 2px solid #111;
+    border-radius: 999px;
+    padding: .45rem;
+    box-shadow: 0 8px 28px rgba(0,0,0,.25);
+  }
+
+  .fab-answer-box ol{
+    columns: 1;
+  }
+}
+
 @media print{
   .fab-crossword-post{
     --cell: 46px;
   }
 
   .fab-crossword-actions,
+  .fab-mobile-direction-pad,
   .fab-crossword-gate,
   .fab-crossword-local,
   .fab-crossword-status,
@@ -348,7 +464,7 @@ A cruzada mistura pistas de cartas conhecidas, lore de Rathe, equipamentos, her�
 
 <div class="fab-crossword-post" id="fab-crossword-post">
   <div class="fab-crossword-intro">
-    <strong>Como jogar:</strong> clique em um quadrado branco e digite uma letra. A seta para a direita indica resposta horizontal; a seta para baixo indica resposta vertical. O progresso fica salvo neste navegador.
+    <strong>Como jogar:</strong> clique em um quadrado branco e digite uma letra. A seta para a direita indica resposta horizontal; a seta para baixo indica resposta vertical. Escolha a direção do preenchimento pelos botões → Lado ou ↓ Baixo. No celular, esses botões ficam flutuantes. O progresso fica salvo neste navegador.
   </div>
 
   <div class="fab-crossword-local">
@@ -357,7 +473,7 @@ A cruzada mistura pistas de cartas conhecidas, lore de Rathe, equipamentos, her�
 
   <div class="fab-crossword-actions">
     <button type="button" onclick="fabPrintCrosswordOnly()">Imprimir apenas a cruzada</button>
-    <button type="button" id="fab-direction-button">Direção: horizontal</button>
+    <span class="fab-direction-label" id="fab-direction-label">Preenchimento: → lado</span>
     <button type="button" id="fab-clear-button">Limpar respostas</button>
     <button type="button" id="fab-check-button" disabled>Conferir depois de domingo às 18h</button>
     <button type="button" id="fab-answer-button" disabled>Gabarito liberado domingo depois das 18h</button>
@@ -369,6 +485,11 @@ A cruzada mistura pistas de cartas conhecidas, lore de Rathe, equipamentos, her�
 
   <div class="fab-crossword-status fab-print-hide" id="fab-status">
     Progresso salvo automaticamente neste navegador.
+  </div>
+
+  <div class="fab-mobile-direction-pad" aria-label="Escolha a direção do preenchimento">
+    <button type="button" class="fab-dir-choice active" data-dir="H" aria-label="Preencher para o lado">→ Lado</button>
+    <button type="button" class="fab-dir-choice" data-dir="V" aria-label="Preencher para baixo">↓ Baixo</button>
   </div>
 
   <div class="fab-crossword-wrap">
@@ -724,11 +845,17 @@ window.addEventListener('afterprint', function(){
   }
 
   function updateDirection(direction){
-    currentDirection = direction;
-    const button = document.getElementById('fab-direction-button');
-    if(button) {
-      button.textContent = currentDirection === 'H' ? 'Direção: horizontal' : 'Direção: vertical';
+    currentDirection = direction === 'V' ? 'V' : 'H';
+
+    const label = document.getElementById('fab-direction-label');
+    if(label) {
+      label.textContent = currentDirection === 'H' ? 'Preenchimento: → lado' : 'Preenchimento: ↓ baixo';
     }
+
+    document.querySelectorAll('.fab-dir-choice').forEach(button => {
+      button.classList.toggle('active', button.dataset.dir === currentDirection);
+      button.setAttribute('aria-pressed', button.dataset.dir === currentDirection ? 'true' : 'false');
+    });
   }
 
   function saveProgress(){
@@ -849,12 +976,6 @@ window.addEventListener('afterprint', function(){
 
   function setupInputs(){
     document.querySelectorAll('.fab-input').forEach(input => {
-      input.addEventListener('focus', function(){
-        const markers = arrowMap[`${this.dataset.r},${this.dataset.c}`] || [];
-        if(markers.includes('right')) updateDirection('H');
-        else if(markers.includes('down')) updateDirection('V');
-      });
-
       input.addEventListener('click', function(){
         this.select();
       });
@@ -924,8 +1045,14 @@ window.addEventListener('afterprint', function(){
     }
   }
 
-  document.getElementById('fab-direction-button')?.addEventListener('click', function(){
-    updateDirection(currentDirection === 'H' ? 'V' : 'H');
+  document.querySelectorAll('.fab-dir-choice').forEach(button => {
+    button.addEventListener('click', function(){
+      updateDirection(this.dataset.dir);
+      const active = document.activeElement;
+      if(active && active.classList && active.classList.contains('fab-input')) {
+        active.focus();
+      }
+    });
   });
 
   document.getElementById('fab-clear-button')?.addEventListener('click', clearProgress);
