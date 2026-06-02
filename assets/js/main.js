@@ -85,3 +85,142 @@ if (menuButton && mainNav) {
   });
 })();
 
+// Atividades: filtros automáticos por tipo e jogo.
+(function () {
+  function normalizeSlug(value) {
+    return String(value || '')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  }
+
+  function titleSort(a, b) {
+    return a.label.localeCompare(b.label, 'pt-BR', { sensitivity: 'base' });
+  }
+
+  function setActive(filters, activeValue) {
+    filters.forEach((filter) => {
+      const isActive = (filter.dataset.activityFilter || 'all') === activeValue;
+      filter.classList.toggle('is-active', isActive);
+      if (isActive) {
+        filter.setAttribute('aria-current', 'true');
+      } else {
+        filter.removeAttribute('aria-current');
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const cards = Array.from(document.querySelectorAll('[data-activity-card]'));
+    const typeGroup = document.querySelector('[data-activity-filter-group="type"]');
+    const gameGroup = document.querySelector('[data-activity-filter-group="game"]');
+    const emptyState = document.querySelector('[data-activity-empty]');
+    const countTarget = document.querySelector('[data-activity-count]');
+
+    if (!typeGroup || !gameGroup) return;
+
+    let activeType = 'all';
+    let activeGame = 'all';
+
+    function collect(kind) {
+      const values = new Map();
+      const valueKey = kind === 'type' ? 'activityType' : 'activityGame';
+      const labelKey = kind === 'type' ? 'activityTypeLabel' : 'activityGameLabel';
+
+      cards.forEach((card) => {
+        const value = normalizeSlug(card.dataset[valueKey]);
+        const label = card.dataset[labelKey] || card.dataset[valueKey] || value;
+        if (value) values.set(value, label);
+      });
+
+      return Array.from(values, ([value, label]) => ({ value, label })).sort(titleSort);
+    }
+
+    function chipClass(kind, value) {
+      if (kind === 'type') return 'post-style-activities';
+      if (value === 'pokemon-tcg') return 'post-style-pokemon';
+      if (value === 'cianorte-card-masters') return 'post-style-cianorte-card-master';
+      if (value === 'one-piece-tcg') return 'post-style-tcg';
+      return 'post-style-' + value;
+    }
+
+    function buildFilters(group, kind) {
+      const allChip = group.querySelector('[data-activity-filter="all"]');
+      group.querySelectorAll('[data-activity-filter]:not([data-activity-filter="all"])').forEach((chip) => chip.remove());
+
+      collect(kind).forEach((item) => {
+        const chip = document.createElement('a');
+        chip.className = 'section-chip ' + chipClass(kind, item.value);
+        chip.href = '#' + item.value;
+        chip.dataset.activityFilter = item.value;
+        chip.textContent = item.label;
+        group.appendChild(chip);
+      });
+
+      if (allChip) allChip.classList.add('is-active');
+    }
+
+    function filteredCards() {
+      return cards.filter((card) => {
+        const type = normalizeSlug(card.dataset.activityType);
+        const game = normalizeSlug(card.dataset.activityGame);
+        const typeOk = activeType === 'all' || type === activeType;
+        const gameOk = activeGame === 'all' || game === activeGame;
+        return typeOk && gameOk;
+      });
+    }
+
+    function render() {
+      const matches = filteredCards();
+      cards.forEach((card) => { card.hidden = !matches.includes(card); });
+
+      setActive(Array.from(typeGroup.querySelectorAll('[data-activity-filter]')), activeType);
+      setActive(Array.from(gameGroup.querySelectorAll('[data-activity-filter]')), activeGame);
+
+      if (countTarget) countTarget.textContent = String(matches.length);
+
+      if (emptyState) {
+        emptyState.hidden = matches.length > 0;
+        if (!cards.length) {
+          emptyState.innerHTML = 'Nenhuma atividade publicada ainda. Cadastre uma atividade em <code>_data/atividades.yml</code>, marque <code>published: true</code> e ela aparecerá aqui com filtros automáticos.';
+        } else if (!matches.length) {
+          emptyState.textContent = 'Nenhuma atividade encontrada com esses filtros. Tente mudar o tipo de atividade ou o jogo.';
+        }
+      }
+    }
+
+    function applyHash() {
+      const hash = normalizeSlug(window.location.hash.replace('#', ''));
+      if (!hash) return;
+
+      const typeValues = collect('type').map((item) => item.value);
+      const gameValues = collect('game').map((item) => item.value);
+
+      if (typeValues.includes(hash)) activeType = hash;
+      if (gameValues.includes(hash)) activeGame = hash;
+    }
+
+    buildFilters(typeGroup, 'type');
+    buildFilters(gameGroup, 'game');
+    applyHash();
+    render();
+
+    [typeGroup, gameGroup].forEach((group) => {
+      group.addEventListener('click', (event) => {
+        const filter = event.target.closest('[data-activity-filter]');
+        if (!filter) return;
+        event.preventDefault();
+
+        const value = filter.dataset.activityFilter || 'all';
+        if (group === typeGroup) activeType = value;
+        if (group === gameGroup) activeGame = value;
+
+        render();
+      });
+    });
+  });
+})();
+

@@ -1,0 +1,60 @@
+# Biblioteca de atividades do Cianorte Card Masters.
+#
+# Para publicar uma nova atividade:
+# 1. Copie um bloco abaixo.
+# 2. Troque published: false para published: true.
+# 3. Preencha title, description, tipo, jogo, difficulty, format e url/download_url.
+# 4. O filtro da página /atividades/ é gerado automaticamente pelos campos tipo e jogo.
+#
+# Campos recomendados:
+# - title: nome da atividade exibido no card
+# - description: resumo curto para SEO e leitura rápida
+# - tipo: Caça-palavras | Palavras Cruzadas | Quiz | Picross | Color Picross | etc.
+# - jogo: Flesh and Blood | Pokémon TCG | Magic | One Piece TCG | RPG | Cianorte Card Masters | etc.
+# - url: página HTML jogável ou página de detalhes
+# - download_url: PDF, imagem ou arquivo para baixar
+# - published: false mantém a atividade escondida até estar pronta
+
+- title: "Caça-palavras — Omens of the Third Age"
+  description: "Atividade de caça-palavras com termos, personagens, cartas e lore de Flesh and Blood."
+  tipo: "Caça-palavras"
+  jogo: "Flesh and Blood"
+  difficulty: "Difícil"
+  format: "HTML / PDF"
+  date: 2026-06-02
+  url: "/atividades/caca-palavras-omens-third-age/"
+  download_url: ""
+  published: false
+
+- title: "Palavras Cruzadas — Flesh and Blood"
+  description: "Cruzadinha estilo revista, com dicas sobre cartas, heróis, keywords e lore de Flesh and Blood."
+  tipo: "Palavras Cruzadas"
+  jogo: "Flesh and Blood"
+  difficulty: "Médio / Difícil"
+  format: "HTML / PDF"
+  date: 2026-06-02
+  url: "/atividades/palavras-cruzadas-flesh-and-blood/"
+  download_url: ""
+  published: false
+
+- title: "Quiz — Card Games em Cianorte"
+  description: "Quiz rápido para testar conhecimento de TCG, comunidade e jogos da mesa presencial."
+  tipo: "Quiz"
+  jogo: "Cianorte Card Masters"
+  difficulty: "Variado"
+  format: "HTML"
+  date: 2026-06-02
+  url: "/atividades/quiz-card-games-cianorte/"
+  download_url: ""
+  published: false
+
+- title: "Picross — Dash I/O"
+  description: "Picross temático de Mechanologist, pensado para jogar no celular com visual leve para o site."
+  tipo: "Picross"
+  jogo: "Flesh and Blood"
+  difficulty: "Médio"
+  format: "HTML / JS"
+  date: 2026-06-02
+  url: "/atividades/picross-dash-io/"
+  download_url: ""
+  published: false

@@ -4,7 +4,7 @@ Este diretório guarda documentação interna e relatórios antigos para não po
 
 ## Onde procurar cada coisa
 
-- `../_data/`: dados reutilizáveis, como agenda, imagens e redes sociais.
+- `../_data/`: dados reutilizáveis, como agenda, imagens, redes sociais e atividades (`atividades.yml`).
 - `../_includes/`: blocos HTML reaproveitáveis.
 - `../_layouts/`: estruturas principais de páginas e posts.
 - `../_guias/`: guias publicados.
@@ -12,6 +12,7 @@ Este diretório guarda documentação interna e relatórios antigos para não po
 - `../_blog/`: posts de blog por categoria.
 - `../_comunidade/`: resultados, fotos, vídeos e conteúdos da comunidade.
 - `../_jogos/`: páginas individuais dos jogos.
+- `../atividades/`: página pública e possíveis subpastas de atividades jogáveis/imprimíveis.
 - `../assets/css/styles.css`: CSS fonte para edição.
 - `../assets/css/styles.min.css`: CSS minificado usado no site.
 - `../assets/js/`: scripts fonte e `site.min.js` de produção.

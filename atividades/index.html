@@ -1,0 +1,148 @@
+---
+layout: default
+title: "Atividades de Card Games para Imprimir e Jogar"
+description: "Atividades gratuitas do Cianorte Card Masters: caça-palavras, palavras cruzadas, quiz, picross e jogos leves de card games, com filtros por tipo de atividade e por jogo."
+keywords:
+  - atividades card games
+  - caça-palavras Flesh and Blood
+  - palavras cruzadas Pokémon TCG
+  - quiz card games
+  - picross TCG
+  - atividades TCG para imprimir
+  - atividades Cianorte Card Masters
+  - ferramentas card games Cianorte
+image: /assets/img/banners/banner-ferramentas.webp
+image_alt: "Área de atividades do Cianorte Card Masters com desafios de card games"
+permalink: /atividades/
+---
+
+{% assign atividades_publicadas = site.data.atividades | where_exp: "item", "item.published != false" | sort: "date" | reverse %}
+
+<section class="page-hero atividades-page-hero" style="--page-hero-image: url('{{ '/assets/img/banners/banner-ferramentas.webp' | relative_url }}'); --page-hero-image-mobile: url('{{ '/assets/img/banners/banner-ferramentas-mobile.webp' | relative_url }}'); --page-hero-position: center; --page-hero-position-mobile: center;" aria-label="{{ page.image_alt | escape }}">
+  <div class="container">
+    <p class="eyebrow">Caça-palavras, cruzadas, quiz e picross</p>
+    <h1>Atividades</h1>
+    <p>
+      Uma biblioteca para publicar passatempos do Cianorte Card Masters: atividades de Flesh and Blood, Pokémon TCG, Magic, One Piece, RPG e outros jogos da comunidade. A ideia é ter material leve para jogar no site, imprimir, baixar em PDF ou usar em eventos presenciais.
+    </p>
+  </div>
+</section>
+
+<section class="activity-page-intro" aria-labelledby="activity-intro-title">
+  <div class="container activity-page-intro-grid">
+    <div>
+      <p class="eyebrow">Passatempo com tema de mesa</p>
+      <h2 id="activity-intro-title">Uma seção própria para publicar desafios</h2>
+      <p>
+        Aqui entram <strong>caça-palavras</strong>, <strong>palavras cruzadas</strong>, <strong>quiz</strong>, <strong>picross</strong>, atividades em HTML, PDFs para baixar e materiais para usar nos encontros da comunidade.
+      </p>
+      <p>
+        Os filtros abaixo são automáticos: quando uma nova atividade publicada tiver um novo tipo ou um novo jogo no arquivo <code>_data/atividades.yml</code>, o botão de filtro aparece sozinho na página.
+      </p>
+    </div>
+
+    <aside class="activity-method-card post-style-activities" aria-label="Como publicar novas atividades">
+      <span>Fluxo simples</span>
+      <strong>Crie, publique e filtre</strong>
+      <p>
+        Cadastre a atividade no YAML, coloque o link da página ou do PDF e marque <code>published: true</code>. O card aparece aqui sem precisar mexer no HTML da página.
+      </p>
+    </aside>
+  </div>
+</section>
+
+<section class="section section-alt activity-library-section" aria-labelledby="activity-library-title">
+  <div class="container">
+    <div class="feed-toolbar activity-feed-toolbar">
+      <div>
+        <p class="eyebrow">Biblioteca jogável</p>
+        <h2 id="activity-library-title">Escolha uma atividade</h2>
+        <p class="activity-count-line"><span data-activity-count>{{ atividades_publicadas.size }}</span> atividade(s) publicada(s).</p>
+      </div>
+
+      <div class="activity-filter-groups" aria-label="Filtros de atividades">
+        <nav class="section-index activity-filter-index" aria-label="Filtrar por tipo de atividade" data-activity-filter-group="type">
+          <a class="section-chip is-active" href="#todas-as-atividades" data-activity-filter="all" aria-current="true">Todas as atividades</a>
+        </nav>
+
+        <nav class="section-index activity-filter-index" aria-label="Filtrar por jogo" data-activity-filter-group="game">
+          <a class="section-chip is-active" href="#todos-os-jogos" data-activity-filter="all" aria-current="true">Todos os jogos</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="activity-library-grid" data-activity-library id="todas-as-atividades">
+      {% for item in atividades_publicadas %}
+        {% assign tipo_label = item.tipo | default: item.type | default: "Atividade" %}
+        {% assign tipo_slug = tipo_label | slugify %}
+        {% assign jogo_label = item.jogo | default: item.game | default: "Card Games" %}
+        {% assign jogo_slug = jogo_label | slugify %}
+        {% assign style_slug = jogo_slug %}
+        {% if jogo_slug == "pokemon-tcg" %}{% assign style_slug = "pokemon" %}{% endif %}
+        {% if jogo_slug == "one-piece-tcg" %}{% assign style_slug = "tcg" %}{% endif %}
+        {% if jogo_slug == "cianorte-card-masters" %}{% assign style_slug = "cianorte-card-master" %}{% endif %}
+
+        <article class="activity-card post-style-{{ style_slug }}" data-activity-card data-activity-type="{{ tipo_slug }}" data-activity-type-label="{{ tipo_label | escape }}" data-activity-game="{{ jogo_slug }}" data-activity-game-label="{{ jogo_label | escape }}">
+          <div class="activity-card-topline">
+            <span>{{ tipo_label }}</span>
+            <small>{{ jogo_label }}</small>
+          </div>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.description }}</p>
+
+          <div class="activity-card-meta" aria-label="Informações da atividade">
+            {% if item.difficulty %}<span>Dificuldade: {{ item.difficulty }}</span>{% endif %}
+            {% if item.format %}<span>Formato: {{ item.format }}</span>{% endif %}
+            {% if item.date %}<span>Publicado em {{ item.date | date: "%d/%m/%Y" }}</span>{% endif %}
+          </div>
+
+          {% if item.tags %}
+            <div class="activity-card-tags" aria-label="Tags">
+              {% for tag in item.tags limit: 5 %}<span>{{ tag }}</span>{% endfor %}
+            </div>
+          {% endif %}
+
+          <div class="btn-row activity-card-actions">
+            {% if item.url and item.url != "" %}<a class="btn btn-primary" href="{{ item.url | relative_url }}">Abrir atividade</a>{% endif %}
+            {% if item.download_url and item.download_url != "" %}<a class="btn btn-secondary" href="{{ item.download_url | relative_url }}">Baixar arquivo</a>{% endif %}
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+
+    <p class="empty-section activity-empty" data-activity-empty {% if atividades_publicadas.size > 0 %}hidden{% endif %}>
+      Nenhuma atividade publicada ainda. Cadastre uma atividade em <code>_data/atividades.yml</code>, marque <code>published: true</code> e ela aparecerá aqui com filtros automáticos.
+    </p>
+  </div>
+</section>
+
+<section class="ccm-internal-links-card activity-page-links" aria-labelledby="activity-links-title">
+  <header class="ccm-internal-links-header">
+    <p class="ccm-internal-links-kicker">Continue navegando</p>
+    <h2 id="activity-links-title">Atividades combinam com guia, evento e mesa presencial</h2>
+    <p>Use os passatempos como entrada para ensinar jogos, criar posts, animar eventos e levar novatos para a comunidade.</p>
+  </header>
+
+  <div class="ccm-internal-links-grid">
+    <a class="ccm-internal-link-item featured" href="{{ '/ferramentas/' | relative_url }}">
+      <span class="ccm-internal-link-tag">Ferramentas</span>
+      <strong>Voltar para o hub</strong>
+      <small>Veja ferramentas de deck, estatística, preço, organização e testes digitais.</small>
+    </a>
+    <a class="ccm-internal-link-item" href="{{ '/guias/' | relative_url }}">
+      <span class="ccm-internal-link-tag">Guias</span>
+      <strong>Transforme atividade em aprendizado</strong>
+      <small>Use os guias para explicar cartas, regras, keywords e formatos.</small>
+    </a>
+    <a class="ccm-internal-link-item" href="{{ '/jogos/' | relative_url }}">
+      <span class="ccm-internal-link-tag">Jogos</span>
+      <strong>Filtre por universo</strong>
+      <small>Flesh and Blood, Pokémon, Magic, One Piece, RPG e outros jogos da comunidade.</small>
+    </a>
+    <a class="ccm-internal-link-item" href="{{ '/agenda/' | relative_url }}">
+      <span class="ccm-internal-link-tag">Agenda</span>
+      <strong>Leve para o encontro</strong>
+      <small>Atividades impressas funcionam bem para recepção, oficina e evento casual.</small>
+    </a>
+  </div>
+</section>

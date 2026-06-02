@@ -112,6 +112,81 @@ permalink: /ferramentas/
           <a class="btn btn-secondary" href="{{ '/ferramentas/ferramentas-de-testes-digitais/' | relative_url }}">Testar decks</a>
         </div>
       </article>
+
+      <article class="hub-card tool-hub-card post-style-activities">
+        <span>Atividades</span>
+        <strong>Caça-palavras, cruzadas, quiz e picross</strong>
+        <small>Área nova para publicar atividades jogáveis ou imprimíveis do Cianorte Card Masters, com filtros automáticos por tipo de atividade e por jogo.</small>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="{{ '/atividades/' | relative_url }}">Abrir atividades</a>
+          <a class="btn btn-secondary" href="{{ '/guias/' | relative_url }}">Ver guias</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+{% assign atividades_ferramentas = site.data.atividades | where_exp: "item", "item.published != false" | sort: "date" | reverse %}
+
+<section class="section section-alt activity-library-section tools-activity-section" aria-labelledby="tools-activity-title">
+  <div class="container">
+    <div class="feed-toolbar activity-feed-toolbar">
+      <div>
+        <p class="eyebrow">Atividades do site</p>
+        <h2 id="tools-activity-title">Caça-palavras, palavras cruzadas, quiz e picross</h2>
+        <p class="activity-count-line"><span data-activity-count>{{ atividades_ferramentas.size }}</span> atividade(s) publicada(s). Os filtros crescem automaticamente conforme novos tipos de atividade e jogos forem cadastrados.</p>
+      </div>
+
+      <div class="activity-filter-groups" aria-label="Filtros de atividades da página Ferramentas">
+        <nav class="section-index activity-filter-index" aria-label="Filtrar por tipo de atividade" data-activity-filter-group="type">
+          <a class="section-chip is-active" href="#todas-as-atividades" data-activity-filter="all" aria-current="true">Todas as atividades</a>
+        </nav>
+
+        <nav class="section-index activity-filter-index" aria-label="Filtrar por jogo" data-activity-filter-group="game">
+          <a class="section-chip is-active" href="#todos-os-jogos" data-activity-filter="all" aria-current="true">Todos os jogos</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="activity-library-grid" data-activity-library id="todas-as-atividades">
+      {% for item in atividades_ferramentas %}
+        {% assign tipo_label = item.tipo | default: item.type | default: "Atividade" %}
+        {% assign tipo_slug = tipo_label | slugify %}
+        {% assign jogo_label = item.jogo | default: item.game | default: "Card Games" %}
+        {% assign jogo_slug = jogo_label | slugify %}
+        {% assign style_slug = jogo_slug %}
+        {% if jogo_slug == "pokemon-tcg" %}{% assign style_slug = "pokemon" %}{% endif %}
+        {% if jogo_slug == "one-piece-tcg" %}{% assign style_slug = "tcg" %}{% endif %}
+        {% if jogo_slug == "cianorte-card-masters" %}{% assign style_slug = "cianorte-card-master" %}{% endif %}
+
+        <article class="activity-card post-style-{{ style_slug }}" data-activity-card data-activity-type="{{ tipo_slug }}" data-activity-type-label="{{ tipo_label | escape }}" data-activity-game="{{ jogo_slug }}" data-activity-game-label="{{ jogo_label | escape }}">
+          <div class="activity-card-topline">
+            <span>{{ tipo_label }}</span>
+            <small>{{ jogo_label }}</small>
+          </div>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.description }}</p>
+
+          <div class="activity-card-meta" aria-label="Informações da atividade">
+            {% if item.difficulty %}<span>Dificuldade: {{ item.difficulty }}</span>{% endif %}
+            {% if item.format %}<span>Formato: {{ item.format }}</span>{% endif %}
+            {% if item.date %}<span>Publicado em {{ item.date | date: "%d/%m/%Y" }}</span>{% endif %}
+          </div>
+
+          <div class="btn-row activity-card-actions">
+            {% if item.url and item.url != "" %}<a class="btn btn-primary" href="{{ item.url | relative_url }}">Abrir atividade</a>{% endif %}
+            {% if item.download_url and item.download_url != "" %}<a class="btn btn-secondary" href="{{ item.download_url | relative_url }}">Baixar arquivo</a>{% endif %}
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+
+    <p class="empty-section activity-empty" data-activity-empty {% if atividades_ferramentas.size > 0 %}hidden{% endif %}>
+      Nenhuma atividade publicada ainda. Cadastre uma atividade em <code>_data/atividades.yml</code>, marque <code>published: true</code> e ela aparecerá aqui com filtro automático por atividade e jogo.
+    </p>
+
+    <div class="btn-row tools-activity-actions">
+      <a class="btn btn-primary" href="{{ '/atividades/' | relative_url }}">Abrir página completa de atividades</a>
     </div>
   </div>
 </section>
@@ -149,6 +224,11 @@ permalink: /ferramentas/
           <span class="ccm-internal-link-tag">Blog</span>
           <strong>Leia notícias e opiniões</strong>
           <small>Novidades, lançamentos e conteúdos da comunidade.</small>
+        </a>
+        <a class="ccm-internal-link-item" href="{{ '/atividades/' | relative_url }}">
+          <span class="ccm-internal-link-tag">Atividades</span>
+          <strong>Jogue ou imprima passatempos</strong>
+          <small>Caça-palavras, palavras cruzadas, quiz e picross temáticos de card games.</small>
         </a>
       </div>
     </aside>
