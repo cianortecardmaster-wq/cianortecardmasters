@@ -1,0 +1,28 @@
+Correção aplicada em 02/06/2026
+
+Problema encontrado:
+- O site carrega apenas assets/js/site.min.js no layout padrão.
+- O arquivo assets/js/site.min.js estava com apenas o script básico do site.
+- Por isso, não entravam no navegador:
+  1. card-apis-global.js, responsável por GoAgain, Pokémon TCG API, TCGdex, Scryfall e Yu-Gi-Oh.
+  2. spikes.js, responsável pela página /spikes/ e pelo arquivo assets/data/spikes.json gerado pela JustTCG.
+  3. community.js, responsável por renderizar resultados de Armory, Liga e Torneios na página /resultados/.
+
+Arquivos alterados:
+- assets/js/site.min.js
+- service-worker.js
+
+O que foi feito:
+- Recriado assets/js/site.min.js como bundle combinado com:
+  main.js + card-apis-global.js + spikes.js + community.js
+- Atualizado o nome do cache no service-worker.js para forçar o navegador/celular a baixar o JS novo.
+
+Como aplicar:
+1. Substitua os arquivos no repositório mantendo exatamente os mesmos caminhos.
+2. Faça commit e envie para o GitHub.
+3. Aguarde o GitHub Pages republicar o site.
+4. No celular, se ainda aparecer antigo, abra o site e atualize duas vezes ou limpe os dados do site/PWA, pois o service worker antigo pode ter cache.
+
+Observação:
+- A página /spikes/ depende do arquivo assets/data/spikes.json já existir ou ser atualizado pelo GitHub Actions com o segredo JUSTTCG_API_KEY.
+- A chave da JustTCG não deve ficar no navegador; ela deve ficar nos Secrets do GitHub.
