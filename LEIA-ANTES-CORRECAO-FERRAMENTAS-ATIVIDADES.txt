@@ -1,0 +1,14 @@
+Correção aplicada:
+
+1. Criada a página índice atividades.html com permalink /atividades/.
+2. A página /ferramentas/ continua puxando as atividades da coleção _atividades/.
+3. O fluxo correto agora é criar arquivos .md dentro de _atividades/, igual Blog, Decks e Comunidade.
+4. O arquivo _data/atividades.yml NÃO deve mais ser usado.
+
+Se você aplicar este ZIP de arquivos alterados por cima do site antigo, apague manualmente estes itens se existirem:
+
+- _data/atividades.yml
+- _comunidade/atividades/
+- cianortecardmaster-main/
+
+No ZIP completo corrigido esses itens já foram removidos.

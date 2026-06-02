@@ -1,6 +1,8 @@
 # Guia rápido — seção Atividades
 
-A página pública fica em `/atividades/` e agora é alimentada pela coleção `_atividades/`, igual ao fluxo de Blog, Decks e Comunidade. Também existe uma vitrine na página `/ferramentas/`, usando os mesmos arquivos `.md` e os mesmos filtros automáticos.
+A página pública fica em `/atividades/` e é alimentada pela coleção `_atividades/`, igual ao fluxo de Blog, Decks e Comunidade. Também existe uma vitrine na página `/ferramentas/`, usando os mesmos arquivos `.md` e os mesmos filtros automáticos.
+
+> Não use mais `_data/atividades.yml`. O cadastro manual em YAML foi removido. Para publicar, crie apenas arquivos `.md` dentro de `_atividades/`.
 
 ## Como publicar uma atividade
 

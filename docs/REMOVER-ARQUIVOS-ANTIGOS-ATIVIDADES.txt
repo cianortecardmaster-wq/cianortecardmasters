@@ -2,5 +2,6 @@ Se você aplicar apenas o ZIP de arquivos alterados sobre uma versão anterior, 
 
 - _data/atividades.yml
 - _comunidade/atividades/
+- cianortecardmaster-main/
 
 No ZIP completo, esses itens já foram removidos.

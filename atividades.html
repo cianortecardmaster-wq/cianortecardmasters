@@ -1,0 +1,148 @@
+---
+layout: default
+title: "Atividades de Card Games: caça-palavras, palavras cruzadas, quiz e picross"
+description: "Biblioteca de atividades do Cianorte Card Masters para publicar caça-palavras, palavras cruzadas, quiz e picross em arquivos Markdown, com filtros automáticos por tipo de atividade e jogo."
+keywords:
+  - atividades card games
+  - caça-palavras Flesh and Blood
+  - palavras cruzadas TCG
+  - quiz Pokémon TCG
+  - picross card games
+  - Cianorte Card Masters atividades
+  - passatempos TCG
+  - jogos educativos card games
+image: /assets/img/banners/banner-ferramentas.webp
+image_alt: "Mesa de card games com atividades, enigmas e ferramentas do Cianorte Card Masters"
+permalink: /atividades/
+---
+
+{% assign atividades_publicadas = site.atividades | where_exp: "atividade", "atividade.published != false" | sort: "date" | reverse %}
+{% assign atividades_destaque = atividades_publicadas | slice: 0, 12 %}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": {{ page.title | jsonify }},
+  "description": {{ page.description | jsonify }},
+  "url": "{{ page.url | absolute_url }}",
+  "inLanguage": "pt-BR",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": {{ site.title | jsonify }},
+    "url": "{{ '/' | absolute_url }}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ site.title | jsonify }},
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ site.data.images.logo_menu | absolute_url }}"
+    }
+  },
+  "about": [
+    { "@type": "Thing", "name": "Caça-palavras" },
+    { "@type": "Thing", "name": "Palavras cruzadas" },
+    { "@type": "Thing", "name": "Quiz" },
+    { "@type": "Thing", "name": "Picross" },
+    { "@type": "Thing", "name": "Card games em Cianorte" }
+  ],
+  "mainEntity": {
+    "@type": "ItemList",
+    "name": "Atividades publicadas pelo Cianorte Card Masters",
+    "itemListElement": [
+      {% for atividade in atividades_destaque %}
+        {
+          "@type": "ListItem",
+          "position": {{ forloop.index }},
+          "url": "{{ atividade.url | absolute_url }}",
+          "name": {{ atividade.title | jsonify }},
+          "item": {
+            "@type": "CreativeWork",
+            "headline": {{ atividade.title | jsonify }},
+            "description": {{ atividade.description | default: atividade.summary | default: atividade.excerpt | strip_html | strip_newlines | truncate: 180 | jsonify }},
+            "url": "{{ atividade.url | absolute_url }}",
+            "datePublished": "{{ atividade.date | date_to_xmlschema }}",
+            "dateModified": "{{ atividade.last_modified_at | default: atividade.date | date_to_xmlschema }}",
+            "author": {
+              "@type": "Organization",
+              "name": {{ atividade.author | default: site.title | jsonify }}
+            }
+          }
+        }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  }
+}
+</script>
+
+<section class="page-hero ferramentas-page-hero" style="--page-hero-image: url('{{ '/assets/img/banners/banner-ferramentas.webp' | relative_url }}'); --page-hero-image-mobile: url('{{ '/assets/img/banners/banner-ferramentas-mobile.webp' | relative_url }}'); --page-hero-position: center; --page-hero-position-mobile: center;" aria-label="{{ page.image_alt | escape }}">
+  <div class="container">
+    <p class="eyebrow">Passatempos, desafios e jogos leves</p>
+    <h1>Atividades</h1>
+    <p>
+      Área para reunir caça-palavras, palavras cruzadas, quiz, picross e outras atividades do Cianorte Card Masters. O fluxo é igual ao Blog, Decks e Comunidade: criou um arquivo <code>.md</code> dentro de <code>_atividades/</code>, publicou no front matter e ele entra na listagem automaticamente.
+    </p>
+  </div>
+</section>
+
+<section class="activity-page-intro" aria-labelledby="activity-page-intro-title">
+  <div class="container activity-page-intro-grid">
+    <div>
+      <p class="eyebrow">Sem mexer em planilha YAML</p>
+      <h2 id="activity-page-intro-title">Publique criando apenas arquivos .md</h2>
+      <p>
+        Para adicionar uma nova atividade, crie um arquivo em uma subpasta de <code>_atividades/</code>, preencha os campos do front matter e cole abaixo o conteúdo da atividade. Pode ser Markdown, HTML, CSS e JavaScript puro.
+      </p>
+      <p>
+        Os filtros são montados pelo JavaScript lendo os próprios cards publicados. Quando você usar um novo valor em <code>activity_type</code> ou <code>game</code>, a página passa a mostrar esse novo filtro automaticamente.
+      </p>
+    </div>
+
+    <aside class="activity-method-card" aria-label="Como organizar os arquivos de atividades">
+      <span>Exemplo de pasta</span>
+      <strong>_atividades/Flesh-and-Blood/</strong>
+      <p>
+        Use nomes claros, como <code>caca-palavras-omens.md</code>, <code>picross-dash-io.md</code> ou <code>quiz-pokemon-cianorte.md</code>. Se quiser esconder um rascunho, use <code>published: false</code>.
+      </p>
+    </aside>
+  </div>
+</section>
+
+<section class="section section-alt activity-library-section" aria-labelledby="activity-library-title">
+  <div class="container">
+    <div class="feed-toolbar activity-feed-toolbar">
+      <div>
+        <p class="eyebrow">Biblioteca jogável e imprimível</p>
+        <h2 id="activity-library-title">Atividades publicadas</h2>
+        <p class="activity-count-line"><span data-activity-count>{{ atividades_publicadas.size }}</span> atividade(s) publicada(s).</p>
+      </div>
+
+      <div class="activity-filter-groups" aria-label="Filtros de atividades">
+        <nav class="section-index activity-filter-index" aria-label="Filtrar por tipo de atividade" data-activity-filter-group="type">
+          <a class="section-chip is-active" href="#todas-as-atividades" data-activity-filter="all" aria-current="true">Todas as atividades</a>
+        </nav>
+
+        <nav class="section-index activity-filter-index" aria-label="Filtrar por jogo" data-activity-filter-group="game">
+          <a class="section-chip is-active" href="#todos-os-jogos" data-activity-filter="all" aria-current="true">Todos os jogos</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="activity-library-grid" data-activity-library id="todas-as-atividades">
+      {% for atividade in atividades_publicadas %}
+        {% include activity-card.html activity=atividade %}
+      {% endfor %}
+    </div>
+
+    <p class="empty-section activity-empty" data-activity-empty {% if atividades_publicadas.size > 0 %}hidden{% endif %}>
+      Nenhuma atividade publicada ainda. Crie um arquivo <code>.md</code> dentro de <code>_atividades/</code>, marque <code>published: true</code> ou remova <code>published: false</code>, e ela aparecerá aqui.
+    </p>
+
+    <div class="btn-row activity-page-links">
+      <a class="btn btn-primary" href="{{ '/ferramentas/' | relative_url }}">Voltar para Ferramentas</a>
+      <a class="btn btn-secondary" href="{{ '/guias/' | relative_url }}">Ver Guias</a>
+      <a class="btn btn-secondary" href="{{ '/blog/' | relative_url }}">Ver Blog</a>
+    </div>
+  </div>
+</section>

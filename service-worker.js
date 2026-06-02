@@ -1,4 +1,4 @@
-const CCM_CACHE = 'ccm-pwa-v2026-06-02-atividades-md-02';
+const CCM_CACHE = 'ccm-pwa-v2026-06-02-atividades-md-03';
 
 const CORE_ASSETS = [
   '/',
@@ -8,6 +8,7 @@ const CORE_ASSETS = [
   '/manifest-editor-autores.webmanifest',
   '/admin/gerador-armory.html',
   '/admin/editor-autores.html',
+  '/ferramentas/',
   '/atividades/',
   '/assets/css/styles.min.css',
   '/assets/js/site.min.js',
