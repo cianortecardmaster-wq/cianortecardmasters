@@ -1,20 +1,16 @@
 ---
 layout: post
-title: "Palavras Cruzadas FAB em Cianorte: desafio estilo Coquetel"
-category_label: "Palavras Cruzadas"
-activity_type: "Palavras Cruzadas"
-game: "Flesh and Blood"
-difficulty: "Difícil"
-format: "HTML / imprimível"
-content_style: "flesh-and-blood"
-schema_type: "CreativeWork"
-summary: "Desafio de palavras cruzadas de Flesh and Blood em estilo Coquetel para jogadores de Cianorte e região, com pistas sobre cartas, keywords, heróis, lore e siglas do TCG."
-description: "Resolva uma palavra cruzada temática de Flesh and Blood criada pelo Cianorte Card Masters, comunidade de TCG em Cianorte-PR, com pistas sobre Teklovossen, Heart of Ice, Aether Dart, Adaptive Plating, heróis, keywords e lore."
+title: "Palavras Cruzadas FAB em Cianorte: desafio interativo estilo Coquetel"
+category_label: "Flesh and Blood"
+schema_type: "BlogPosting"
+summary: "Desafio interativo de palavras cruzadas de Flesh and Blood em estilo Coquetel para jogadores de Cianorte e região, com pistas sobre cartas, keywords, heróis, lore e siglas do TCG."
+description: "Resolva online uma palavra cruzada temática de Flesh and Blood criada pelo Cianorte Card Masters, comunidade de TCG em Cianorte-PR, com pistas sobre Teklovossen, Heart of Ice, Aether Dart, Adaptive Plating, heróis, keywords e lore."
 image: "/assets/img/banners/banner-palavras-cruzadas-fab.webp"
-image_alt: "Palavras cruzadas de Flesh and Blood em estilo Coquetel para jogadores de TCG em Cianorte."
-author: "Neto"
+image_alt: "Palavras cruzadas interativa de Flesh and Blood em estilo Coquetel para jogadores de TCG em Cianorte."
+author: "Knoha"
 date: 2026-06-02
 last_modified_at: 2026-06-02
+permalink: /blog/flesh-and-blood/palavras-cruzadas-fab-cianorte-desafio-01/
 tags:
   - Flesh and Blood
   - palavras cruzadas
@@ -42,20 +38,24 @@ tags:
 
 .fab-crossword-post *{
   box-sizing: border-box;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
 }
 
-.fab-crossword-intro{
-  border: 1px solid #111;
-  padding: 1rem;
-  margin: 1rem 0 1.25rem;
-  background: #fafafa;
-}
-
-.fab-crossword-local{
+.fab-crossword-intro,
+.fab-crossword-local,
+.fab-crossword-gate,
+.fab-crossword-status{
   border-left: 4px solid #111;
   padding: .85rem 1rem;
   margin: 1rem 0 1.25rem;
   background: #f7f7f7;
+}
+
+.fab-crossword-intro{
+  border: 1px solid #111;
+  border-left: 1px solid #111;
+  background: #fafafa;
 }
 
 .fab-crossword-actions{
@@ -83,14 +83,6 @@ tags:
 .fab-crossword-actions button:disabled{
   opacity: .55;
   cursor: not-allowed;
-}
-
-.fab-crossword-gate{
-  border-left: 4px solid #111;
-  padding: .75rem 1rem;
-  margin: 1rem 0;
-  background: #f7f7f7;
-  font-size: .95rem;
 }
 
 .fab-crossword-wrap{
@@ -123,7 +115,10 @@ tags:
 }
 
 .fab-cell.block{
-  background: var(--block-bg);
+  background: var(--block-bg) !important;
+  background-color: #111 !important;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
 }
 
 .fab-cell.clue{
@@ -145,7 +140,43 @@ tags:
   z-index: 1;
 }
 
-.fab-letter{
+.fab-input{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #111;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: clamp(18px, 3vw, 24px);
+  letter-spacing: .5px;
+  font-family: Arial, Helvetica, sans-serif;
+  outline: none;
+  padding: 0;
+  z-index: 2;
+}
+
+.fab-input:focus{
+  box-shadow: inset 0 0 0 3px #111;
+}
+
+.fab-cell.correta{
+  background: #e9ffe9;
+}
+
+.fab-cell.errada{
+  background: #ffecec;
+}
+
+.fab-crossword-post.gabarito-visivel .fab-input{
+  display: none;
+}
+
+.fab-solution-letter{
   display: none;
   position: absolute;
   inset: 0;
@@ -154,9 +185,10 @@ tags:
   font-weight: 900;
   font-size: clamp(18px, 3vw, 24px);
   letter-spacing: .5px;
+  z-index: 2;
 }
 
-.fab-crossword-post.gabarito-liberado .fab-letter{
+.fab-crossword-post.gabarito-visivel .fab-solution-letter{
   display: flex;
 }
 
@@ -193,7 +225,7 @@ tags:
   font-size: 13px;
 }
 
-.fab-crossword-post.gabarito-liberado .fab-start-arrow{
+.fab-crossword-post.gabarito-visivel .fab-start-arrow{
   opacity: .7;
 }
 
@@ -205,7 +237,7 @@ tags:
   background: #fff;
 }
 
-.fab-crossword-post.gabarito-liberado .fab-answer-box{
+.fab-crossword-post.gabarito-visivel .fab-answer-box{
   display: block;
 }
 
@@ -225,9 +257,12 @@ tags:
   color: #555;
 }
 
-.fab-seo-note{
+.fab-crossword-status{
   font-size: .95rem;
-  line-height: 1.55;
+}
+
+@page{
+  margin: 8mm;
 }
 
 @media print{
@@ -238,12 +273,31 @@ tags:
   .fab-crossword-actions,
   .fab-crossword-gate,
   .fab-crossword-local,
-  .fab-seo-note{
+  .fab-crossword-status,
+  .fab-print-hide{
     display: none;
   }
 
   .fab-crossword-grid{
     break-inside: avoid;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .fab-cell.block{
+    background: #111 !important;
+    background-color: #111 !important;
+    color: #111 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    box-shadow: inset 0 0 0 999px #111 !important;
+  }
+
+  .fab-cell.clue{
+    background: #f4f4f4 !important;
+    background-color: #f4f4f4 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
   .fab-cell.clue .text{
@@ -256,10 +310,33 @@ tags:
     height: 10px;
     font-size: 10px;
   }
+
+  .fab-input{
+    font-size: 18px;
+  }
+
+  /* Quando o usuário clica no botão, imprime somente a grade da cruzada.
+     Isso esconde cabeçalho, menu, texto do post, tabela, rodapé e elementos do tema. */
+  body.fab-print-crossword-only *{
+    visibility: hidden !important;
+  }
+
+  body.fab-print-crossword-only #fab-crossword-grid,
+  body.fab-print-crossword-only #fab-crossword-grid *{
+    visibility: visible !important;
+  }
+
+  body.fab-print-crossword-only #fab-crossword-grid{
+    position: fixed !important;
+    left: 50% !important;
+    top: 10mm !important;
+    transform: translateX(-50%) !important;
+    margin: 0 !important;
+  }
 }
 </style>
 
-# Palavras Cruzadas FAB em Cianorte: desafio estilo Coquetel
+# Palavras Cruzadas FAB em Cianorte: desafio interativo estilo Coquetel
 
 Quem joga **Flesh and Blood em Cianorte** já sabe: decorar cartas, keywords, heróis e pequenas siglas da comunidade ajuda muito na mesa. Para deixar esse treino mais divertido, o **Cianorte Card Masters** preparou uma palavra cruzada temática em estilo Coquetel, feita para jogadores de TCG, colecionadores e curiosos que acompanham os encontros de card games em Cianorte e região.
 
@@ -267,7 +344,7 @@ A cruzada mistura pistas de cartas conhecidas, lore de Rathe, equipamentos, her�
 
 <div class="fab-crossword-post" id="fab-crossword-post">
   <div class="fab-crossword-intro">
-    <strong>Como jogar:</strong> leia cada pista dentro do quadrado e siga a seta. A seta para a direita indica resposta horizontal; a seta para baixo indica resposta vertical. O quadrado da pista não recebe letra.
+    <strong>Como jogar:</strong> clique em um quadrado branco e digite uma letra. A seta para a direita indica resposta horizontal; a seta para baixo indica resposta vertical. O progresso fica salvo neste navegador.
   </div>
 
   <div class="fab-crossword-local">
@@ -275,12 +352,19 @@ A cruzada mistura pistas de cartas conhecidas, lore de Rathe, equipamentos, her�
   </div>
 
   <div class="fab-crossword-actions">
-    <button type="button" onclick="window.print()">Imprimir / salvar em PDF</button>
+    <button type="button" onclick="fabPrintCrosswordOnly()">Imprimir apenas a cruzada</button>
+    <button type="button" id="fab-direction-button">Direção: horizontal</button>
+    <button type="button" id="fab-clear-button">Limpar respostas</button>
+    <button type="button" id="fab-check-button" disabled>Conferir depois de domingo às 18h</button>
     <button type="button" id="fab-answer-button" disabled>Gabarito liberado domingo depois das 18h</button>
   </div>
 
   <div class="fab-crossword-gate" id="fab-gate-message">
-    O gabarito será liberado automaticamente no domingo, 07/06/2026, depois das 18h.
+    O gabarito e a conferência serão liberados automaticamente no domingo, 07/06/2026, depois das 18h.
+  </div>
+
+  <div class="fab-crossword-status fab-print-hide" id="fab-status">
+    Progresso salvo automaticamente neste navegador.
   </div>
 
   <div class="fab-crossword-wrap">
@@ -325,8 +409,18 @@ Se você procura **Flesh and Blood em Cianorte**, quer conhecer jogadores de TCG
 Este desafio também pode ser impresso para encontros presenciais, aulas introdutórias de TCG, eventos de comunidade ou atividades rápidas antes de torneios de Flesh and Blood.
 
 <script>
+function fabPrintCrosswordOnly(){
+  document.body.classList.add('fab-print-crossword-only');
+  window.print();
+}
+
+window.addEventListener('afterprint', function(){
+  document.body.classList.remove('fab-print-crossword-only');
+});
+
 (function(){
   const RELEASE_AT = new Date('2026-06-07T18:00:00-03:00');
+  const STORAGE_KEY = 'ccm_fab_crossword_desafio_01_respostas_v2';
 
   const rows = [
   [
@@ -566,6 +660,12 @@ Este desafio também pode ser impresso para encontros presenciais, aulas introdu
   "Q25H": "Três primeiras letras do herói andarilho"
 };
 
+  let currentDirection = 'H';
+
+  function isAnswerCell(value){
+    return /^[A-Z0-9]$/.test(value);
+  }
+
   function clueKeyToPosition(key){
     for(let r = 0; r < rows.length; r++){
       for(let c = 0; c < rows[r].length; c++){
@@ -591,6 +691,111 @@ Este desafio também pode ser impresso para encontros presenciais, aulas introdu
   }
 
   const arrowMap = buildArrowMap();
+
+  function positionKey(r, c){
+    return `${r}-${c}`;
+  }
+
+  function getInput(r, c){
+    return document.querySelector(`.fab-input[data-r="${r}"][data-c="${c}"]`);
+  }
+
+  function moveFrom(input, direction, backwards){
+    let r = parseInt(input.dataset.r, 10);
+    let c = parseInt(input.dataset.c, 10);
+    const dr = direction === 'V' ? (backwards ? -1 : 1) : 0;
+    const dc = direction === 'H' ? (backwards ? -1 : 1) : 0;
+
+    r += dr;
+    c += dc;
+
+    if(r < 0 || r >= rows.length || c < 0 || c >= rows[0].length) return;
+    if(!isAnswerCell(rows[r][c])) return;
+
+    const next = getInput(r, c);
+    if(next) {
+      next.focus();
+      next.select();
+    }
+  }
+
+  function updateDirection(direction){
+    currentDirection = direction;
+    const button = document.getElementById('fab-direction-button');
+    if(button) {
+      button.textContent = currentDirection === 'H' ? 'Direção: horizontal' : 'Direção: vertical';
+    }
+  }
+
+  function saveProgress(){
+    const data = {};
+    document.querySelectorAll('.fab-input').forEach(input => {
+      data[positionKey(input.dataset.r, input.dataset.c)] = input.value || '';
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function loadProgress(){
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(!raw) return;
+      const data = JSON.parse(raw);
+      document.querySelectorAll('.fab-input').forEach(input => {
+        const value = data[positionKey(input.dataset.r, input.dataset.c)] || '';
+        input.value = value.slice(0, 1).toUpperCase();
+      });
+    } catch(e) {
+      localStorage.removeItem(STORAGE_KEY);
+    }
+  }
+
+  function clearProgress(){
+    if(!confirm('Limpar todas as respostas desta cruzada?')) return;
+    document.querySelectorAll('.fab-input').forEach(input => {
+      input.value = '';
+      input.closest('.fab-cell').classList.remove('correta', 'errada');
+    });
+    localStorage.removeItem(STORAGE_KEY);
+    updateStatus('Respostas limpas.');
+  }
+
+  function updateStatus(text){
+    const status = document.getElementById('fab-status');
+    if(status) status.textContent = text;
+  }
+
+  function checkAnswers(){
+    let total = 0;
+    let filled = 0;
+    let correct = 0;
+
+    document.querySelectorAll('.fab-input').forEach(input => {
+      const cell = input.closest('.fab-cell');
+      const expected = input.dataset.answer;
+      const value = (input.value || '').toUpperCase();
+
+      total++;
+      cell.classList.remove('correta', 'errada');
+
+      if(value) {
+        filled++;
+        if(value === expected) {
+          correct++;
+          cell.classList.add('correta');
+        } else {
+          cell.classList.add('errada');
+        }
+      }
+    });
+
+    updateStatus(`Conferência: ${correct} letra(s) correta(s) de ${total}. Preenchidas: ${filled}.`);
+  }
+
+  function toggleAnswer(){
+    const post = document.getElementById('fab-crossword-post');
+    if(!post) return;
+    post.classList.toggle('gabarito-visivel');
+  }
 
   function fitClueText(el){
     let size = 8.4;
@@ -626,7 +831,7 @@ Este desafio também pode ser impresso para encontros presenciais, aulas introdu
           const markerHtml = markers.map(dir =>
             `<div class="fab-start-arrow ${dir}">${dir === 'right' ? '→' : '↓'}</div>`
           ).join('');
-          div.innerHTML = `${markerHtml}<div class="fab-letter">${value}</div>`;
+          div.innerHTML = `${markerHtml}<input class="fab-input" type="text" inputmode="text" maxlength="1" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Linha ${r + 1}, coluna ${c + 1}" data-r="${r}" data-c="${c}" data-answer="${value}"><div class="fab-solution-letter">${value}</div>`;
         }
 
         grid.appendChild(div);
@@ -634,35 +839,95 @@ Este desafio também pode ser impresso para encontros presenciais, aulas introdu
     });
 
     document.querySelectorAll('#fab-crossword-post .clue .text').forEach(fitClueText);
+    setupInputs();
+    loadProgress();
+  }
+
+  function setupInputs(){
+    document.querySelectorAll('.fab-input').forEach(input => {
+      input.addEventListener('focus', function(){
+        const markers = arrowMap[`${this.dataset.r},${this.dataset.c}`] || [];
+        if(markers.includes('right')) updateDirection('H');
+        else if(markers.includes('down')) updateDirection('V');
+      });
+
+      input.addEventListener('click', function(){
+        this.select();
+      });
+
+      input.addEventListener('input', function(){
+        this.value = (this.value || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 1);
+        this.closest('.fab-cell').classList.remove('correta', 'errada');
+        saveProgress();
+        if(this.value) moveFrom(this, currentDirection, false);
+      });
+
+      input.addEventListener('keydown', function(event){
+        if(event.key === 'ArrowRight') {
+          event.preventDefault();
+          updateDirection('H');
+          moveFrom(this, 'H', false);
+        } else if(event.key === 'ArrowLeft') {
+          event.preventDefault();
+          updateDirection('H');
+          moveFrom(this, 'H', true);
+        } else if(event.key === 'ArrowDown') {
+          event.preventDefault();
+          updateDirection('V');
+          moveFrom(this, 'V', false);
+        } else if(event.key === 'ArrowUp') {
+          event.preventDefault();
+          updateDirection('V');
+          moveFrom(this, 'V', true);
+        } else if(event.key === 'Backspace' && !this.value) {
+          event.preventDefault();
+          moveFrom(this, currentDirection, true);
+        } else if(event.key === ' ' || event.key === 'Tab') {
+          if(event.key === ' ') {
+            event.preventDefault();
+            updateDirection(currentDirection === 'H' ? 'V' : 'H');
+          }
+        }
+      });
+    });
   }
 
   function updateGate(){
-    const post = document.getElementById('fab-crossword-post');
     const button = document.getElementById('fab-answer-button');
+    const checkButton = document.getElementById('fab-check-button');
     const message = document.getElementById('fab-gate-message');
-    if(!post || !button || !message) return;
+    if(!button || !checkButton || !message) return;
 
     const now = new Date();
     const unlocked = now >= RELEASE_AT;
 
     if(unlocked){
       button.disabled = false;
+      checkButton.disabled = false;
       button.textContent = 'Mostrar / ocultar gabarito';
-      message.innerHTML = 'Gabarito liberado. Clique no botão para mostrar ou ocultar as respostas.';
-      button.onclick = function(){
-        post.classList.toggle('gabarito-liberado');
-      };
+      checkButton.textContent = 'Conferir respostas';
+      message.innerHTML = 'Gabarito e conferência liberados. Você pode conferir suas respostas ou mostrar/ocultar o gabarito.';
+      button.onclick = toggleAnswer;
+      checkButton.onclick = checkAnswers;
     } else {
       button.disabled = true;
+      checkButton.disabled = true;
       const remainingMs = RELEASE_AT - now;
       const totalHours = Math.max(0, Math.ceil(remainingMs / 3600000));
       const days = Math.floor(totalHours / 24);
       const hours = totalHours % 24;
-      message.innerHTML = `O gabarito será liberado no domingo, 07/06/2026, depois das 18h. Falta aproximadamente ${days} dia(s) e ${hours} hora(s).`;
+      message.innerHTML = `O gabarito e a conferência serão liberados no domingo, 07/06/2026, depois das 18h. Falta aproximadamente ${days} dia(s) e ${hours} hora(s).`;
     }
   }
 
+  document.getElementById('fab-direction-button')?.addEventListener('click', function(){
+    updateDirection(currentDirection === 'H' ? 'V' : 'H');
+  });
+
+  document.getElementById('fab-clear-button')?.addEventListener('click', clearProgress);
+
   renderGrid();
+  updateDirection('H');
   updateGate();
   window.addEventListener('resize', () => document.querySelectorAll('#fab-crossword-post .clue .text').forEach(fitClueText));
   setInterval(updateGate, 60000);
