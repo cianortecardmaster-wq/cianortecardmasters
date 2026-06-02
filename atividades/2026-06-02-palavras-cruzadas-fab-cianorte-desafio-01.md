@@ -10,7 +10,7 @@ image_alt: "Palavras cruzadas de Flesh and Blood em estilo Coquetel para jogador
 author: "Knoha"
 date: 2026-06-02
 last_modified_at: 2026-06-02
-permalink: /blog/flesh-and-blood/palavras-cruzadas-fab-cianorte-desafio-01/
+permalink: /atividades/palavras-cruzadas-fab-cianorte-desafio-01/
 tags:
   - Flesh and Blood
   - palavras cruzadas
