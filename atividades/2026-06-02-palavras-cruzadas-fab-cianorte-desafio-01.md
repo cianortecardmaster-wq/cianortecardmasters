@@ -1,4 +1,5 @@
 ---
+published: true
 layout: post
 title: "Palavras Cruzadas FAB em Cianorte: desafio estilo Coquetel"
 category_label: "Flesh and Blood"
