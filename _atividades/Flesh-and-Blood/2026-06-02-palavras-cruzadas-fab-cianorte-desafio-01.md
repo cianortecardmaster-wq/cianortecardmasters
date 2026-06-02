@@ -15,7 +15,6 @@ image_alt: "Palavras cruzadas interativa de Flesh and Blood em estilo Coquetel p
 author: "Neto"
 date: 2026-06-02
 last_modified_at: 2026-06-02
-permalink: /atividades/flesh-and-blood/palavras-cruzadas-fab-cianorte-desafio-01/
 tags:
   - Flesh and Blood
   - palavras cruzadas
