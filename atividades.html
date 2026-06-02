@@ -1,9 +1,9 @@
 ---
 layout: default
-title: "Atividades de Card Games: caça-palavras, palavras cruzadas, quiz e picross"
-description: "Biblioteca de atividades do Cianorte Card Masters para publicar caça-palavras, palavras cruzadas, quiz e picross em arquivos Markdown, com filtros automáticos por tipo de atividade e jogo."
+title: "Atividades de Card Games em Cianorte: caça-palavras, palavras cruzadas, quiz e picross"
+description: "Jogue e imprima atividades gratuitas do Cianorte Card Masters: caça-palavras, palavras cruzadas, quiz e picross de Flesh and Blood, Pokémon TCG, Magic e outros card games em Cianorte."
 keywords:
-  - atividades card games
+  - atividades card games Cianorte
   - caça-palavras Flesh and Blood
   - palavras cruzadas TCG
   - quiz Pokémon TCG
@@ -11,6 +11,8 @@ keywords:
   - Cianorte Card Masters atividades
   - passatempos TCG
   - jogos educativos card games
+  - atividades Pokémon Cianorte
+  - Flesh and Blood Cianorte
 image: /assets/img/banners/banner-ferramentas.webp
 image_alt: "Mesa de card games com atividades, enigmas e ferramentas do Cianorte Card Masters"
 permalink: /atividades/
@@ -45,11 +47,14 @@ permalink: /atividades/
     { "@type": "Thing", "name": "Palavras cruzadas" },
     { "@type": "Thing", "name": "Quiz" },
     { "@type": "Thing", "name": "Picross" },
+    { "@type": "Thing", "name": "Flesh and Blood" },
+    { "@type": "Thing", "name": "Pokémon TCG" },
+    { "@type": "Thing", "name": "Magic: The Gathering" },
     { "@type": "Thing", "name": "Card games em Cianorte" }
   ],
   "mainEntity": {
     "@type": "ItemList",
-    "name": "Atividades publicadas pelo Cianorte Card Masters",
+    "name": "Atividades gratuitas do Cianorte Card Masters",
     "itemListElement": [
       {% for atividade in atividades_destaque %}
         {
@@ -79,31 +84,35 @@ permalink: /atividades/
 <section class="page-hero ferramentas-page-hero" style="--page-hero-image: url('{{ '/assets/img/banners/banner-ferramentas.webp' | relative_url }}'); --page-hero-image-mobile: url('{{ '/assets/img/banners/banner-ferramentas-mobile.webp' | relative_url }}'); --page-hero-position: center; --page-hero-position-mobile: center;" aria-label="{{ page.image_alt | escape }}">
   <div class="container">
     <p class="eyebrow">Passatempos, desafios e jogos leves</p>
-    <h1>Atividades</h1>
+    <h1>Atividades de Card Games</h1>
     <p>
-      Área para reunir caça-palavras, palavras cruzadas, quiz, picross e outras atividades do Cianorte Card Masters. O fluxo é igual ao Blog, Decks e Comunidade: criou um arquivo <code>.md</code> dentro de <code>_atividades/</code>, publicou no front matter e ele entra na listagem automaticamente.
+      Caça-palavras, palavras cruzadas, quiz, picross e desafios especiais para quem curte Flesh and Blood, Pokémon TCG, Magic: The Gathering, One Piece e o universo dos card games. Escolha uma atividade, jogue direto no navegador ou imprima para resolver no papel.
     </p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="#todas-as-atividades">Ver atividades</a>
+      <a class="btn btn-secondary" href="{{ '/ferramentas/' | relative_url }}">Ver ferramentas</a>
+    </div>
   </div>
 </section>
 
 <section class="activity-page-intro" aria-labelledby="activity-page-intro-title">
   <div class="container activity-page-intro-grid">
     <div>
-      <p class="eyebrow">Sem mexer em planilha YAML</p>
-      <h2 id="activity-page-intro-title">Publique criando apenas arquivos .md</h2>
+      <p class="eyebrow">Biblioteca gratuita do CC Master</p>
+      <h2 id="activity-page-intro-title">Desafios para jogar, imprimir e compartilhar</h2>
       <p>
-        Para adicionar uma nova atividade, crie um arquivo em uma subpasta de <code>_atividades/</code>, preencha os campos do front matter e cole abaixo o conteúdo da atividade. Pode ser Markdown, HTML, CSS e JavaScript puro.
+        Esta página reúne atividades criadas pelo Cianorte Card Masters para jogadores iniciantes, veteranos, colecionadores e curiosos. A ideia é misturar diversão, raciocínio e cultura TCG em desafios rápidos, leves e fáceis de acessar pelo celular ou computador.
       </p>
       <p>
-        Os filtros são montados pelo JavaScript lendo os próprios cards publicados. Quando você usar um novo valor em <code>activity_type</code> ou <code>game</code>, a página passa a mostrar esse novo filtro automaticamente.
+        Use os filtros por tipo de atividade e por jogo para encontrar temas de Flesh and Blood, Pokémon TCG, Magic, One Piece e outros passatempos inspirados em cartas, heróis, coleções, keywords, lore e mecânicas dos jogos.
       </p>
     </div>
 
-    <aside class="activity-method-card" aria-label="Como organizar os arquivos de atividades">
-      <span>Exemplo de pasta</span>
-      <strong>_atividades/Flesh-and-Blood/</strong>
+    <aside class="activity-method-card" aria-label="Como usar as atividades do Cianorte Card Masters">
+      <span>Como funciona</span>
+      <strong>Escolha, jogue ou imprima</strong>
       <p>
-        Use nomes claros, como <code>caca-palavras-omens.md</code>, <code>picross-dash-io.md</code> ou <code>quiz-pokemon-cianorte.md</code>. Se quiser esconder um rascunho, use <code>published: false</code>.
+        Algumas atividades são interativas e podem ser resolvidas na própria página. Outras foram pensadas para impressão, encontros presenciais, eventos, oficinas e momentos casuais entre amigos.
       </p>
     </aside>
   </div>
@@ -114,8 +123,8 @@ permalink: /atividades/
     <div class="feed-toolbar activity-feed-toolbar">
       <div>
         <p class="eyebrow">Biblioteca jogável e imprimível</p>
-        <h2 id="activity-library-title">Atividades publicadas</h2>
-        <p class="activity-count-line"><span data-activity-count>{{ atividades_publicadas.size }}</span> atividade(s) publicada(s).</p>
+        <h2 id="activity-library-title">Atividades disponíveis</h2>
+        <p class="activity-count-line"><span data-activity-count>{{ atividades_publicadas.size }}</span> atividade(s) encontrada(s).</p>
       </div>
 
       <div class="activity-filter-groups" aria-label="Filtros de atividades">
@@ -136,13 +145,36 @@ permalink: /atividades/
     </div>
 
     <p class="empty-section activity-empty" data-activity-empty {% if atividades_publicadas.size > 0 %}hidden{% endif %}>
-      Nenhuma atividade publicada ainda. Crie um arquivo <code>.md</code> dentro de <code>_atividades/</code>, marque <code>published: true</code> ou remova <code>published: false</code>, e ela aparecerá aqui.
+      Ainda não há atividades disponíveis nesta categoria. Volte em breve para conferir novos caça-palavras, palavras cruzadas, quizzes e picross do Cianorte Card Masters.
     </p>
 
     <div class="btn-row activity-page-links">
-      <a class="btn btn-primary" href="{{ '/ferramentas/' | relative_url }}">Voltar para Ferramentas</a>
-      <a class="btn btn-secondary" href="{{ '/guias/' | relative_url }}">Ver Guias</a>
-      <a class="btn btn-secondary" href="{{ '/blog/' | relative_url }}">Ver Blog</a>
+      <a class="btn btn-primary" href="{{ '/ferramentas/' | relative_url }}">Ver outras ferramentas</a>
+      <a class="btn btn-secondary" href="{{ '/guias/' | relative_url }}">Ler guias</a>
+      <a class="btn btn-secondary" href="{{ '/blog/' | relative_url }}">Acompanhar o blog</a>
     </div>
+  </div>
+</section>
+
+<section class="section activity-visitor-cta" aria-labelledby="activity-visitor-cta-title">
+  <div class="container activity-page-intro-grid">
+    <div>
+      <p class="eyebrow">Card games em Cianorte</p>
+      <h2 id="activity-visitor-cta-title">Gostou dos desafios?</h2>
+      <p>
+        O Cianorte Card Masters é uma comunidade para quem joga, coleciona ou quer aprender card games. Aqui você encontra conteúdos, ferramentas, atividades e materiais para entrar no hobby sem complicação.
+      </p>
+      <p>
+        Chame os amigos, teste uma atividade e acompanhe as novidades do site. Novos desafios podem aparecer com temas de coleções recentes, heróis, cartas marcantes, lore e eventos da comunidade.
+      </p>
+    </div>
+
+    <aside class="activity-method-card" aria-label="Dica para novos visitantes">
+      <span>Primeira vez por aqui?</span>
+      <strong>Comece por um desafio simples</strong>
+      <p>
+        Caça-palavras e quizzes são ótimos para conhecer nomes de cartas, personagens e keywords. Palavras cruzadas e picross são ideais para quem gosta de resolver desafios com calma.
+      </p>
+    </aside>
   </div>
 </section>
