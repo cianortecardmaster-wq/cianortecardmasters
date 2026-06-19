@@ -1,4 +1,4 @@
-const CCM_CACHE = 'ccm-pwa-v2026-06-02-js-bundle-04';
+const CCM_CACHE = 'ccm-pwa-v2026-06-19-photo-carousel-01';
 
 const CORE_ASSETS = [
   '/',
