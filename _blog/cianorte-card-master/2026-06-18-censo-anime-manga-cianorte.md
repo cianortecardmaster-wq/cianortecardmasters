@@ -13,7 +13,7 @@ keywords:
   - mangá em Cianorte
   - comunidade geek Cianorte
   - Cianorte Card Masters
-image: "/assets/img/banners/default-cianorte-card-master.webp"
+image: "https://storage.tally.so/fa92809c-c4d2-456b-881c-d21c66a953dc/ChatGPT-Image-18-de-jun.-de-2026-14_18_20.png"
 image_alt: "Censo Anime & Mangá da comunidade Cianorte Card Masters"
 permalink: /blog/censo-anime-manga/
 tally_url: "https://tally.so/r/rjgD7X?transparentBackground=1"
