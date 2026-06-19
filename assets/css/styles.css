@@ -11566,25 +11566,12 @@ tr.is-champion .fab-result-rank::before {
 
 /* ==========================================
    Posts de Fotos da Comunidade
-   Fotos maiores + carrossel arrastável
+   Carrossel responsivo apenas para imagens internas
+   Não altera a imagem principal/banner do post
 ========================================== */
 
-.post-style-fotos .post-hero-grid {
-  grid-template-columns: minmax(0, 1fr);
-  gap: 1.35rem;
-}
-
-.post-style-fotos .post-main-image {
-  width: 100%;
-  max-height: min(76vh, 760px);
-  object-fit: contain;
-  background:
-    radial-gradient(circle at top, rgba(144, 224, 239, .10), transparent 42%),
-    linear-gradient(180deg, rgba(16,27,19,.96), rgba(5,8,6,.98));
-}
-
 .post-style-fotos .post-content {
-  max-width: var(--container);
+  max-width: 1120px;
 }
 
 .post-style-fotos .community-photo-post {
@@ -11592,141 +11579,278 @@ tr.is-champion .fab-result-rank::before {
   gap: 1.25rem;
 }
 
-.post-style-fotos .gallery-grid {
-  display: flex;
-  grid-template-columns: none;
-  gap: 1rem;
-  margin: 1.35rem 0;
-  padding: .35rem .15rem 1rem;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  scroll-padding-inline: .15rem;
-  overscroll-behavior-x: contain;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(144, 224, 239, .75) rgba(255,255,255,.08);
-  cursor: grab;
-}
-
-.post-style-fotos .gallery-grid:active,
-.post-style-fotos .gallery-grid.is-dragging {
-  cursor: grabbing;
-}
-
-.post-style-fotos .gallery-item {
-  flex: 0 0 100%;
-  width: 100%;
-  min-width: 100%;
-  height: clamp(360px, 70vh, 720px);
-  aspect-ratio: auto;
-  scroll-snap-align: center;
-  scroll-snap-stop: always;
-  border-radius: 26px;
-  background:
-    radial-gradient(circle at top, rgba(144, 224, 239, .11), transparent 44%),
-    linear-gradient(180deg, rgba(8,13,9,.96), rgba(0,0,0,.98));
-  box-shadow: var(--shadow);
-}
-
-.post-style-fotos .gallery-item img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  padding: .45rem;
-}
-
-.post-style-fotos .gallery-item:hover img {
-  transform: none;
+.post-style-fotos .community-photo-post > p,
+.post-style-fotos .community-photo-post > h2,
+.post-style-fotos .community-photo-post > h3,
+.post-style-fotos .community-photo-post > ul,
+.post-style-fotos .community-photo-post > ol,
+.post-style-fotos .community-photo-post > blockquote {
+  max-width: 880px;
 }
 
 .photo-carousel-wrap {
   position: relative;
-  margin: 1.35rem 0 1.6rem;
+  margin: clamp(1.35rem, 3vw, 2.15rem) 0;
+  padding: clamp(.7rem, 2vw, 1rem);
+  border: 1px solid rgba(144, 224, 239, .28);
+  border-radius: clamp(22px, 4vw, 32px);
+  background:
+    radial-gradient(circle at 12% 0%, rgba(144, 224, 239, .18), transparent 18rem),
+    radial-gradient(circle at 88% 12%, rgba(212, 175, 55, .12), transparent 16rem),
+    linear-gradient(180deg, rgba(16, 27, 19, .96), rgba(5, 8, 6, .98));
+  box-shadow: var(--shadow), inset 0 0 0 1px rgba(255, 255, 255, .035);
+  overflow: hidden;
 }
 
-.photo-carousel-wrap .gallery-grid {
-  margin-block: 0;
+.photo-carousel-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(255, 255, 255, .045);
+  border-radius: inherit;
+  pointer-events: none;
 }
 
-.photo-carousel-nav {
+.photo-carousel-head {
+  position: relative;
+  z-index: 2;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  gap: .85rem;
-  margin-top: .8rem;
-  color: rgba(246,241,223,.78);
+  align-items: end;
+  gap: 1rem;
+  margin: 0 0 .75rem;
+  padding: .15rem .15rem 0;
+}
+
+.photo-carousel-title {
+  margin: 0;
+  color: #e8fbff;
+  font-family: "Fugaz One", system-ui, sans-serif;
+  font-size: clamp(1rem, 2.8vw, 1.22rem);
+  letter-spacing: .03em;
+  text-transform: uppercase;
+}
+
+.photo-carousel-hint {
+  margin: .15rem 0 0;
+  color: rgba(246, 241, 223, .66);
   font-size: .95rem;
 }
 
-.photo-carousel-actions {
+.photo-carousel-counter {
   display: inline-flex;
-  gap: .55rem;
-}
-
-.photo-carousel-btn {
-  width: 44px;
-  height: 44px;
-  display: inline-grid;
-  place-items: center;
+  align-items: center;
+  justify-content: center;
+  min-width: 62px;
+  min-height: 34px;
+  padding: .2rem .75rem;
   border: 1px solid rgba(144, 224, 239, .34);
   border-radius: 999px;
   color: #e8fbff;
-  background: rgba(255,255,255,.05);
-  font-size: 1.35rem;
+  background: rgba(255, 255, 255, .055);
+  font-family: "Fugaz One", system-ui, sans-serif;
+  font-size: .92rem;
+  white-space: nowrap;
+}
+
+.photo-carousel-viewport {
+  position: relative;
+  z-index: 1;
+}
+
+.post-style-fotos .post-content .photo-carousel-track,
+.post-style-fotos .post-content .gallery-grid.photo-carousel-track {
+  display: flex;
+  grid-template-columns: none;
+  gap: clamp(.7rem, 2vw, 1rem);
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x pan-y;
+  scrollbar-width: none;
+  cursor: grab;
+}
+
+.post-style-fotos .post-content .photo-carousel-track::-webkit-scrollbar,
+.post-style-fotos .post-content .gallery-grid.photo-carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.post-style-fotos .post-content .photo-carousel-track.is-dragging {
+  cursor: grabbing;
+  scroll-behavior: auto;
+  user-select: none;
+}
+
+.post-style-fotos .post-content .photo-carousel-track .gallery-item {
+  position: relative;
+  flex: 0 0 100%;
+  width: 100%;
+  min-width: 100%;
+  height: clamp(360px, 70vh, 760px);
+  aspect-ratio: auto;
+  margin: 0;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  border-radius: clamp(18px, 3vw, 26px);
+  border: 1px solid rgba(144, 224, 239, .22);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, .035), rgba(255, 255, 255, 0)),
+    linear-gradient(180deg, rgba(8, 13, 9, .98), rgba(0, 0, 0, .98));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03);
+  overflow: hidden;
+}
+
+.post-style-fotos .post-content .photo-carousel-track .gallery-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: clamp(.25rem, 1.4vw, .55rem);
+  border-radius: inherit;
+  object-fit: contain;
+  background:
+    radial-gradient(circle at center, rgba(144, 224, 239, .045), transparent 42%),
+    rgba(0, 0, 0, .12);
+  transition: none;
+}
+
+.post-style-fotos .post-content .photo-carousel-track .gallery-item:hover img {
+  transform: none;
+}
+
+.photo-carousel-btn {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  width: clamp(42px, 6vw, 54px);
+  height: clamp(42px, 6vw, 54px);
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid rgba(144, 224, 239, .38);
+  border-radius: 999px;
+  color: #e8fbff;
+  background: rgba(5, 8, 6, .74);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, .34), inset 0 0 0 1px rgba(255, 255, 255, .05);
+  transform: translateY(-50%);
+  font-size: clamp(1.45rem, 5vw, 2rem);
   line-height: 1;
   cursor: pointer;
+  backdrop-filter: blur(10px);
+}
+
+.photo-carousel-btn--prev {
+  left: clamp(.55rem, 2vw, 1rem);
+}
+
+.photo-carousel-btn--next {
+  right: clamp(.55rem, 2vw, 1rem);
 }
 
 .photo-carousel-btn:hover,
 .photo-carousel-btn:focus-visible {
-  background: rgba(144, 224, 239, .14);
-  border-color: rgba(144, 224, 239, .72);
+  border-color: rgba(144, 224, 239, .78);
+  background: rgba(18, 35, 27, .86);
+  box-shadow: 0 0 24px rgba(144, 224, 239, .18), 0 12px 24px rgba(0, 0, 0, .34);
 }
 
-.photo-carousel-counter {
-  font-family: "Fugaz One", system-ui, sans-serif;
-  color: #e8fbff;
+.photo-carousel-dots {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .48rem;
+  margin-top: .8rem;
 }
 
-.photo-carousel-hint {
-  margin: 0;
-  color: rgba(246,241,223,.72);
+.photo-carousel-dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 1px solid rgba(144, 224, 239, .46);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .12);
+  cursor: pointer;
+}
+
+.photo-carousel-dot.is-active,
+.photo-carousel-dot:hover,
+.photo-carousel-dot:focus-visible {
+  background: #90e0ef;
+  box-shadow: 0 0 16px rgba(144, 224, 239, .42);
 }
 
 @media (max-width: 760px) {
-  .post-style-fotos .post-main-image {
-    max-height: 64vh;
-    border-radius: 20px;
+  .post-style-fotos .post-content {
+    padding-top: 1.65rem;
   }
 
-  .post-style-fotos .gallery-grid {
-    gap: .75rem;
-    padding-bottom: .85rem;
+  .photo-carousel-wrap {
+    margin-inline: calc(var(--container-padding, 0px) * -1);
+    padding: .65rem;
+    border-radius: 22px;
   }
 
-  .post-style-fotos .gallery-item {
-    height: min(66vh, 540px);
-    border-radius: 20px;
+  .photo-carousel-head {
+    align-items: start;
   }
 
-  .post-style-fotos .gallery-item img {
-    padding: .25rem;
+  .photo-carousel-hint {
+    font-size: .86rem;
   }
 
-  .photo-carousel-nav {
-    align-items: flex-start;
-    flex-direction: column;
+  .photo-carousel-counter {
+    min-width: 54px;
+    min-height: 32px;
+    padding-inline: .55rem;
+    font-size: .84rem;
   }
 
-  .photo-carousel-actions {
-    width: 100%;
-    justify-content: space-between;
+  .post-style-fotos .post-content .photo-carousel-track .gallery-item {
+    height: min(68vh, 560px);
+    border-radius: 18px;
   }
 
   .photo-carousel-btn {
-    width: 48px;
-    height: 48px;
+    top: auto;
+    bottom: .75rem;
+    transform: none;
+    width: 46px;
+    height: 46px;
+    font-size: 1.55rem;
+  }
+
+  .photo-carousel-dots {
+    max-width: calc(100% - 112px);
+    min-height: 46px;
+    margin-inline: auto;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .photo-carousel-wrap {
+    margin-inline: -6px;
+  }
+
+  .photo-carousel-head {
+    gap: .65rem;
+  }
+
+  .photo-carousel-title {
+    font-size: .96rem;
+  }
+
+  .photo-carousel-hint {
+    max-width: 210px;
+  }
+
+  .post-style-fotos .post-content .photo-carousel-track .gallery-item {
+    height: min(64vh, 500px);
   }
 }

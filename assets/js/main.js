@@ -225,13 +225,15 @@ if (menuButton && mainNav) {
 })();
 
 
-// Posts de fotos da comunidade: transforma a galeria em carrossel grande, com arraste e botões.
+// Posts de Fotos da Comunidade: carrossel responsivo apenas para galerias dentro do conteúdo do post.
 (function () {
   function initCommunityPhotoCarousels() {
-    document.querySelectorAll('.post-style-fotos .gallery-grid').forEach((track, index) => {
+    const galleries = document.querySelectorAll('.post-style-fotos .post-content .community-photo-post .gallery-grid');
+
+    galleries.forEach((track) => {
       if (track.dataset.photoCarouselReady === 'true') return;
 
-      const items = Array.from(track.children).filter((item) => item.matches('.gallery-item'));
+      const items = Array.from(track.children).filter((item) => item.classList && item.classList.contains('gallery-item'));
       if (!items.length) return;
 
       track.dataset.photoCarouselReady = 'true';
@@ -239,118 +241,170 @@ if (menuButton && mainNav) {
       track.setAttribute('tabindex', '0');
       track.setAttribute('aria-label', track.getAttribute('aria-label') || 'Galeria de fotos da comunidade');
 
-      if (items.length < 2) return;
-
-      const wrapper = document.createElement('div');
+      const wrapper = document.createElement('section');
       wrapper.className = 'photo-carousel-wrap';
-      track.parentNode.insertBefore(wrapper, track);
-      wrapper.appendChild(track);
+      wrapper.setAttribute('aria-label', 'Carrossel de fotos da comunidade');
 
-      const nav = document.createElement('div');
-      nav.className = 'photo-carousel-nav';
+      const head = document.createElement('div');
+      head.className = 'photo-carousel-head';
+
+      const titleWrap = document.createElement('div');
+      const title = document.createElement('p');
+      title.className = 'photo-carousel-title';
+      title.textContent = 'Fotos do evento';
 
       const hint = document.createElement('p');
       hint.className = 'photo-carousel-hint';
-      hint.textContent = 'Arraste a foto para o lado ou use as setas para ver mais.';
+      hint.textContent = items.length > 1 ? 'Arraste para o lado ou use as setas.' : 'Foto em destaque do post.';
 
-      const actions = document.createElement('div');
-      actions.className = 'photo-carousel-actions';
-
-      const prev = document.createElement('button');
-      prev.className = 'photo-carousel-btn';
-      prev.type = 'button';
-      prev.innerHTML = '‹';
-      prev.setAttribute('aria-label', 'Foto anterior');
+      titleWrap.append(title, hint);
 
       const counter = document.createElement('span');
       counter.className = 'photo-carousel-counter';
       counter.setAttribute('aria-live', 'polite');
 
-      const next = document.createElement('button');
-      next.className = 'photo-carousel-btn';
-      next.type = 'button';
-      next.innerHTML = '›';
-      next.setAttribute('aria-label', 'Próxima foto');
+      head.append(titleWrap, counter);
 
-      actions.append(prev, counter, next);
-      nav.append(hint, actions);
-      wrapper.appendChild(nav);
+      const viewport = document.createElement('div');
+      viewport.className = 'photo-carousel-viewport';
+
+      track.parentNode.insertBefore(wrapper, track);
+      wrapper.append(head, viewport);
+      viewport.appendChild(track);
+
+      let dots = [];
+      let prev = null;
+      let next = null;
+
+      function itemLeft(item) {
+        return item.offsetLeft;
+      }
 
       function currentIndex() {
-        const positions = items.map((item) => Math.abs(item.offsetLeft - track.scrollLeft));
-        return positions.indexOf(Math.min(...positions));
-      }
+        let closestIndex = 0;
+        let closestDistance = Number.POSITIVE_INFINITY;
 
-      function updateCounter() {
-        counter.textContent = `${currentIndex() + 1}/${items.length}`;
-      }
-
-      function goTo(delta) {
-        const targetIndex = Math.max(0, Math.min(items.length - 1, currentIndex() + delta));
-        track.scrollTo({ left: items[targetIndex].offsetLeft, behavior: 'smooth' });
-      }
-
-      prev.addEventListener('click', () => goTo(-1));
-      next.addEventListener('click', () => goTo(1));
-
-      track.addEventListener('keydown', (event) => {
-        if (event.key === 'ArrowLeft') {
-          event.preventDefault();
-          goTo(-1);
-        }
-        if (event.key === 'ArrowRight') {
-          event.preventDefault();
-          goTo(1);
-        }
-      });
-
-      let scrollTicking = false;
-      track.addEventListener('scroll', () => {
-        if (scrollTicking) return;
-        scrollTicking = true;
-        window.requestAnimationFrame(() => {
-          updateCounter();
-          scrollTicking = false;
+        items.forEach((item, index) => {
+          const distance = Math.abs(itemLeft(item) - track.scrollLeft);
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            closestIndex = index;
+          }
         });
-      }, { passive: true });
 
-      let dragging = false;
-      let startX = 0;
-      let startLeft = 0;
-      let pointerId = null;
-
-      track.addEventListener('pointerdown', (event) => {
-        if (event.button !== undefined && event.button !== 0) return;
-        dragging = true;
-        pointerId = event.pointerId;
-        startX = event.clientX;
-        startLeft = track.scrollLeft;
-        track.classList.add('is-dragging');
-        track.setPointerCapture(pointerId);
-      });
-
-      track.addEventListener('pointermove', (event) => {
-        if (!dragging) return;
-        event.preventDefault();
-        track.scrollLeft = startLeft - (event.clientX - startX);
-      });
-
-      function stopDragging() {
-        if (!dragging) return;
-        dragging = false;
-        track.classList.remove('is-dragging');
-        if (pointerId !== null && track.hasPointerCapture(pointerId)) {
-          track.releasePointerCapture(pointerId);
-        }
-        pointerId = null;
+        return closestIndex;
       }
 
-      track.addEventListener('pointerup', stopDragging);
-      track.addEventListener('pointercancel', stopDragging);
-      track.addEventListener('pointerleave', stopDragging);
+      function updateState() {
+        const index = currentIndex();
+        counter.textContent = items.length > 1 ? `${index + 1}/${items.length}` : '1 foto';
 
-      updateCounter();
-      window.addEventListener('resize', updateCounter);
+        dots.forEach((dot, dotIndex) => {
+          const active = dotIndex === index;
+          dot.classList.toggle('is-active', active);
+          dot.setAttribute('aria-current', active ? 'true' : 'false');
+        });
+      }
+
+      function goTo(index) {
+        const safeIndex = ((index % items.length) + items.length) % items.length;
+        track.scrollTo({ left: itemLeft(items[safeIndex]), behavior: 'smooth' });
+      }
+
+      if (items.length > 1) {
+        prev = document.createElement('button');
+        prev.className = 'photo-carousel-btn photo-carousel-btn--prev';
+        prev.type = 'button';
+        prev.innerHTML = '‹';
+        prev.setAttribute('aria-label', 'Foto anterior');
+
+        next = document.createElement('button');
+        next.className = 'photo-carousel-btn photo-carousel-btn--next';
+        next.type = 'button';
+        next.innerHTML = '›';
+        next.setAttribute('aria-label', 'Próxima foto');
+
+        viewport.append(prev, next);
+
+        const dotsWrap = document.createElement('div');
+        dotsWrap.className = 'photo-carousel-dots';
+        dotsWrap.setAttribute('aria-label', 'Escolher foto');
+
+        dots = items.map((_, index) => {
+          const dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = 'photo-carousel-dot';
+          dot.setAttribute('aria-label', `Ir para foto ${index + 1}`);
+          dot.addEventListener('click', () => goTo(index));
+          dotsWrap.appendChild(dot);
+          return dot;
+        });
+
+        wrapper.appendChild(dotsWrap);
+
+        prev.addEventListener('click', () => goTo(currentIndex() - 1));
+        next.addEventListener('click', () => goTo(currentIndex() + 1));
+
+        track.addEventListener('keydown', (event) => {
+          if (event.key === 'ArrowLeft') {
+            event.preventDefault();
+            goTo(currentIndex() - 1);
+          } else if (event.key === 'ArrowRight') {
+            event.preventDefault();
+            goTo(currentIndex() + 1);
+          }
+        });
+
+        let scrollTicking = false;
+        track.addEventListener('scroll', () => {
+          if (scrollTicking) return;
+          scrollTicking = true;
+          window.requestAnimationFrame(() => {
+            updateState();
+            scrollTicking = false;
+          });
+        }, { passive: true });
+
+        let dragging = false;
+        let startX = 0;
+        let startLeft = 0;
+        let pointerId = null;
+
+        track.addEventListener('pointerdown', (event) => {
+          if (event.pointerType && event.pointerType !== 'mouse') return;
+          if (event.button !== undefined && event.button !== 0) return;
+
+          dragging = true;
+          pointerId = event.pointerId;
+          startX = event.clientX;
+          startLeft = track.scrollLeft;
+          track.classList.add('is-dragging');
+          track.setPointerCapture(pointerId);
+        });
+
+        track.addEventListener('pointermove', (event) => {
+          if (!dragging) return;
+          event.preventDefault();
+          track.scrollLeft = startLeft - (event.clientX - startX);
+        });
+
+        function stopDragging() {
+          if (!dragging) return;
+          dragging = false;
+          track.classList.remove('is-dragging');
+          if (pointerId !== null && track.hasPointerCapture(pointerId)) {
+            track.releasePointerCapture(pointerId);
+          }
+          pointerId = null;
+        }
+
+        track.addEventListener('pointerup', stopDragging);
+        track.addEventListener('pointercancel', stopDragging);
+        track.addEventListener('pointerleave', stopDragging);
+      }
+
+      updateState();
+      window.addEventListener('resize', updateState, { passive: true });
     });
   }
 
