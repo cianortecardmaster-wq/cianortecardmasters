@@ -66,6 +66,84 @@ tags:
   </div>
 </section>
 
+<section class="section community-welcome-section" aria-labelledby="community-welcome-title">
+  <div class="container">
+    <div class="section-title">
+      <div>
+        <p class="eyebrow">Como funciona</p>
+        <h2 id="community-welcome-title">Comunidade, mesas e aprendizado</h2>
+        <p>As informações que antes ocupavam vários blocos da Home agora ficam reunidas aqui, no lugar certo.</p>
+      </div>
+    </div>
+
+    <div class="community-facts-grid">
+      <article>
+        <strong>Não somos uma loja</strong>
+        <p>Somos uma comunidade de jogadores. Indicamos locais, eventos e parceiros, mas quem faz o grupo é a galera da mesa.</p>
+      </article>
+      <article>
+        <strong>Tem projeto na cidade</strong>
+        <p>Os encontros ajudam novos jogadores a aprender card games, participar de torneios e conhecer pessoas em Cianorte.</p>
+      </article>
+      <article>
+        <strong>Tem loja parceira</strong>
+        <p>O Bazar do Weezing apoia eventos semanais, torneios e venda de produtos para quem quer montar ou melhorar decks.</p>
+      </article>
+      <article>
+        <strong>Iniciante é bem-vindo</strong>
+        <p>Você não precisa de deck pronto. Apareça, pergunte, jogue partidas de teste e conheça os formatos aos poucos.</p>
+      </article>
+    </div>
+
+    <div class="community-project-card">
+      <div>
+        <p class="eyebrow">Projeto, parceiros e comunidade</p>
+        <h3>Encontros, torneios e mesas presenciais em Cianorte</h3>
+        <p>Aos domingos, os encontros da comunidade ajudam novos jogadores a aprender, jogar casualmente, testar decks e participar de torneios. Durante a semana, a loja parceira recebe eventos e produtos para quem quer acompanhar a cena de card games físicos.</p>
+        <p>O site organiza agenda, resultados de Armory e ligas, fotos, vídeos, guias, deck techs e notícias para quem quer participar sem depender de boato de grupo fechado.</p>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="{{ '/agenda/' | relative_url }}">Onde jogar</a>
+        <a class="btn btn-secondary" href="{{ '/sobre/' | relative_url }}">Entender o grupo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt community-channels-section" aria-labelledby="community-channels-title">
+  <div class="container">
+    <div class="section-title">
+      <div>
+        <p class="eyebrow">Canais da comunidade</p>
+        <h2 id="community-channels-title">A conversa continua depois do evento</h2>
+        <p>Entre no WhatsApp para combinar mesas e acompanhe as redes para fotos, vídeos, resultados e chamadas de eventos.</p>
+      </div>
+    </div>
+
+    <div class="community-channel-grid">
+      {% assign community_social_order = "WhatsApp|Instagram|Facebook|TikTok|YouTube" | split: "|" %}
+      {% for social_name in community_social_order %}
+        {% assign social = site.data.social_links | where: "name", social_name | first %}
+        {% if social %}
+          {% assign social_slug = social.name | downcase %}
+          <a class="community-channel-card community-channel-card--{{ social_slug }}" href="{{ social.url }}" target="_blank" rel="me noopener noreferrer">
+            <img src="{{ '/assets/img/social/icon-' | append: social_slug | append: '.png' | relative_url }}" alt="" aria-hidden="true" loading="lazy" decoding="async" width="42" height="42">
+            <span>
+              <strong>{{ social.name }}</strong>
+              {% if social.name == 'WhatsApp' %}<small>Combine mesas e tire dúvidas.</small>
+              {% elsif social.name == 'Instagram' %}<small>Fotos, reels e bastidores.</small>
+              {% elsif social.name == 'Facebook' %}<small>Postagens e registros públicos.</small>
+              {% elsif social.name == 'TikTok' %}<small>Cortes, humor e momentos da mesa.</small>
+              {% elsif social.name == 'YouTube' %}<small>Gameplays e cobertura de eventos.</small>
+              {% endif %}
+            </span>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",

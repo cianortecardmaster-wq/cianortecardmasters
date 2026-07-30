@@ -11854,3 +11854,405 @@ tr.is-champion .fab-result-rank::before {
     height: min(64vh, 500px);
   }
 }
+
+/* ==========================================
+   Home leve e navegação simplificada — 30/07/2026
+========================================== */
+.home-hero-light {
+  min-height: clamp(420px, 58vh, 600px);
+  max-height: 600px;
+  background: #050806;
+}
+
+.home-hero-light .hero-bg {
+  inset: 0 auto 0 50%;
+  width: min(100%, 2048px);
+  height: 100%;
+  transform: translateX(-50%);
+  background-position: center 44%;
+}
+
+.home-hero-light .hero-inner {
+  grid-template-columns: minmax(0, 760px);
+  padding: clamp(4rem, 8vw, 6rem) 0;
+}
+
+.home-hero-copy .lead {
+  max-width: 680px;
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+}
+
+.home-section-title-light {
+  align-items: center;
+}
+
+.home-next-events-section,
+.home-whatsapp-section,
+.home-photos-section,
+.home-latest-result-section {
+  padding-block: clamp(3rem, 5vw, 4.25rem);
+}
+
+.home-event-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.home-event-card {
+  position: relative;
+  display: grid;
+  gap: .35rem;
+  min-height: 180px;
+  padding: 1.25rem;
+  border: 1px solid rgba(212, 175, 55, .2);
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.018));
+  color: var(--white);
+  text-decoration: none;
+  transition: transform .2s ease, border-color .2s ease, background .2s ease;
+}
+
+.home-event-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(212,175,55,.55);
+  background: linear-gradient(180deg, rgba(212,175,55,.09), rgba(255,255,255,.02));
+}
+
+.home-event-card.is-next {
+  border-color: rgba(31,184,92,.5);
+  box-shadow: inset 0 0 0 1px rgba(31,184,92,.12);
+}
+
+.home-event-card[hidden] {
+  display: none !important;
+}
+
+.home-event-day {
+  width: fit-content;
+  padding: .28rem .58rem;
+  border-radius: 999px;
+  background: rgba(31,184,92,.14);
+  color: #93f2b8;
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.home-event-card strong {
+  margin-top: .4rem;
+  color: #fff2b8;
+  font-family: "Fugaz One", system-ui, sans-serif;
+  font-size: 1.15rem;
+}
+
+.home-event-card > span:not(.home-event-day) {
+  color: var(--muted);
+}
+
+.home-event-card small {
+  margin-top: auto;
+  color: rgba(246,241,223,.72);
+}
+
+.home-latest-armory {
+  margin-top: .25rem;
+}
+
+.home-latest-armory .armory-board-layout {
+  grid-template-columns: minmax(0, 1fr) minmax(230px, 290px) !important;
+}
+
+.home-latest-armory .armory-heroes-panel {
+  display: none;
+}
+
+.home-latest-armory .armory-board-actions {
+  justify-content: flex-start;
+}
+
+.home-latest-armory .armory-btn-primary,
+.home-latest-armory .armory-btn-secondary {
+  min-width: 0;
+}
+
+.home-whatsapp-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 2rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border: 1px solid rgba(31,184,92,.32);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 92% 10%, rgba(31,184,92,.16), transparent 18rem),
+    linear-gradient(135deg, rgba(31,184,92,.07), rgba(255,255,255,.025));
+}
+
+.home-whatsapp-card h2 {
+  margin-bottom: .55rem;
+}
+
+.home-whatsapp-card p:last-child {
+  max-width: 720px;
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.home-whatsapp-button {
+  white-space: nowrap;
+}
+
+.home-whatsapp-button img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.home-photo-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.home-photo-grid .gallery-item {
+  aspect-ratio: 4 / 3;
+}
+
+.publications-page-hero {
+  min-height: clamp(300px, 42vw, 440px);
+  background:
+    linear-gradient(90deg, rgba(5,8,6,.82), rgba(5,8,6,.44)),
+    url('/assets/img/banners/banner-blog.webp') center / cover;
+}
+
+.publications-shortcuts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.publications-shortcuts a {
+  display: grid;
+  gap: .45rem;
+  min-height: 150px;
+  padding: 1.2rem;
+  border: 1px solid rgba(212,175,55,.2);
+  border-radius: 18px;
+  background: rgba(255,255,255,.025);
+  color: var(--white);
+  text-decoration: none;
+  transition: transform .2s ease, border-color .2s ease;
+}
+
+.publications-shortcuts a:hover {
+  transform: translateY(-3px);
+  border-color: rgba(212,175,55,.55);
+}
+
+.publications-shortcuts strong {
+  color: #fff2b8;
+  font-family: "Fugaz One", system-ui, sans-serif;
+  font-size: 1.1rem;
+}
+
+.publications-shortcuts span {
+  color: var(--muted);
+}
+
+.publications-listing {
+  padding-top: 1rem;
+}
+
+.community-facts-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.community-facts-grid article {
+  padding: 1.2rem;
+  border: 1px solid rgba(212,175,55,.18);
+  border-radius: 18px;
+  background: rgba(255,255,255,.025);
+}
+
+.community-facts-grid strong {
+  display: block;
+  margin-bottom: .45rem;
+  color: #fff2b8;
+  font-family: "Fugaz One", system-ui, sans-serif;
+}
+
+.community-facts-grid p {
+  margin: 0;
+  color: var(--muted);
+  font-size: .94rem;
+}
+
+.community-project-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 2rem;
+  margin-top: 1rem;
+  padding: clamp(1.4rem, 3vw, 2rem);
+  border: 1px solid rgba(31,184,92,.25);
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(31,184,92,.07), rgba(255,255,255,.02));
+}
+
+.community-project-card h3 {
+  color: #fff2b8;
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+}
+
+.community-project-card p:not(.eyebrow) {
+  color: var(--muted);
+}
+
+.community-channel-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: .8rem;
+}
+
+.community-channel-card {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  min-height: 100px;
+  padding: .95rem;
+  border: 1px solid rgba(212,175,55,.18);
+  border-radius: 16px;
+  background: rgba(255,255,255,.025);
+  color: var(--white);
+  text-decoration: none;
+  transition: transform .2s ease, border-color .2s ease;
+}
+
+.community-channel-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(212,175,55,.5);
+}
+
+.community-channel-card img {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  object-fit: contain;
+}
+
+.community-channel-card strong,
+.community-channel-card small {
+  display: block;
+}
+
+.community-channel-card strong {
+  color: #fff2b8;
+}
+
+.community-channel-card small {
+  margin-top: .2rem;
+  color: var(--muted);
+  line-height: 1.25;
+}
+
+.site-footer-light {
+  padding-top: 2.8rem;
+}
+
+.footer-grid-light {
+  grid-template-columns: minmax(240px, 1.25fr) minmax(140px, .65fr) minmax(180px, .8fr) minmax(230px, .95fr);
+}
+
+.site-footer-light .footer-brand-block h2 {
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+}
+
+.footer-legal-nav {
+  margin-top: 1rem;
+}
+
+@media (max-width: 1080px) {
+  .community-facts-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .community-channel-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .home-event-grid,
+  .publications-shortcuts {
+    grid-template-columns: 1fr;
+  }
+
+  .home-event-card {
+    min-height: 0;
+  }
+
+  .home-latest-armory .armory-board-layout {
+    grid-template-columns: 1fr !important;
+  }
+
+  .home-whatsapp-card,
+  .community-project-card {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .home-photo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .home-hero-light {
+    min-height: 410px;
+    max-height: none;
+  }
+
+  .home-hero-light .hero-bg {
+    width: 100%;
+    background-position: center;
+  }
+
+  .home-hero-light .hero-inner {
+    padding: 4rem 0 3.5rem;
+  }
+
+  .home-latest-armory .armory-board-sidebar {
+    display: none;
+  }
+
+  .home-latest-armory .armory-board-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .home-latest-armory .armory-board-actions .btn {
+    width: 100%;
+  }
+
+  .community-channel-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .home-photo-grid,
+  .community-facts-grid,
+  .community-channel-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-photo-grid .gallery-item {
+    aspect-ratio: 16 / 10;
+  }
+
+  .home-whatsapp-button {
+    width: 100%;
+  }
+}

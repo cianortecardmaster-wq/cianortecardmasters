@@ -410,3 +410,34 @@ if (menuButton && mainNav) {
 
   document.addEventListener('DOMContentLoaded', initCommunityPhotoCarousels);
 })();
+
+// Home: ordena os encontros pelo próximo dia da semana e mantém somente os três mais próximos.
+(function () {
+  function initHomeAgenda() {
+    const board = document.querySelector('[data-home-agenda-board]');
+    if (!board) return;
+
+    const today = new Date().getDay();
+    const items = Array.from(board.querySelectorAll('[data-home-agenda-item]'));
+
+    items
+      .sort((a, b) => {
+        const aDay = Number(a.dataset.weekday);
+        const bDay = Number(b.dataset.weekday);
+        const aDistance = (aDay - today + 7) % 7;
+        const bDistance = (bDay - today + 7) % 7;
+        return aDistance - bDistance;
+      })
+      .forEach((item, index) => {
+        board.appendChild(item);
+        item.hidden = index >= 3;
+        item.classList.toggle('is-next', index === 0);
+      });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHomeAgenda);
+  } else {
+    initHomeAgenda();
+  }
+})();

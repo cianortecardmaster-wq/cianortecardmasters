@@ -4,6 +4,11 @@
 */
 
 (() => {
+  const hasSpikeInterface = document.querySelector(
+    "#hero-spike-card, #spikes-sections, #spikes-game-filters"
+  );
+  if (!hasSpikeInterface) return;
+
   const baseurl = window.CCM_BASEURL || "";
   const dataUrl = `${baseurl}/assets/data/spikes.json`;
 

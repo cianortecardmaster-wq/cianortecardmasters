@@ -1,4 +1,4 @@
-const CCM_CACHE = 'ccm-pwa-v2026-06-19-photo-carousel-02';
+const CCM_CACHE = 'ccm-pwa-v2026-07-30-home-light-01';
 
 const CORE_ASSETS = [
   '/',

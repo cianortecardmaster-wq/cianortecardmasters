@@ -1,48 +1,43 @@
 # Agenda resumida exibida na Home.
-# Cada item aparece em uma linha clicável e pode ser editado individualmente.
-# A página completa da agenda continua em /agenda/.
+# O campo weekday usa a numeração do JavaScript: domingo 0, segunda 1 ... sábado 6.
+# A Home ordena automaticamente os encontros a partir do dia atual e mostra os três próximos.
 
-- day: "Domingo"
+- weekday: 0
+  day: "Domingo"
   title: "Encontro semanal da comunidade"
   game: "Card games, RPG e comunidade"
-  time: "13:30"
+  time: "13:30 - 18:00"
+  location: "Centro Cultural"
   url: "/agenda/"
-  image: "/assets/img/agenda/fachada-centro-cultural.webp"
-  image_alt: "Fachada do Centro Cultural de Cianorte"
-  image_kind: "photo"
 
-- day: "Quarta"
-  title: "Armory — Flesh and Blood"
+- weekday: 3
+  day: "Quarta"
+  title: "Armory"
   game: "Flesh and Blood"
   time: "19:00 - 22:30"
+  location: "Bazar do Weezing"
   url: "/agenda/"
-  image: "/assets/img/agenda/bazar-do-weezing-transparente.png"
-  image_alt: "Logo do Bazar do Weezing"
-  image_kind: "logo"
 
-- day: "Quinta"
-  title: "Pokémon — Pokémon TCG"
+- weekday: 4
+  day: "Quinta"
+  title: "Pokémon"
   game: "Pokémon TCG"
   time: "19:00 - 22:30"
+  location: "Bazar do Weezing"
   url: "/agenda/"
-  image: "/assets/img/agenda/bazar-do-weezing-transparente.png"
-  image_alt: "Logo do Bazar do Weezing"
-  image_kind: "logo"
 
-- day: "Sexta"
+- weekday: 5
+  day: "Sexta"
   title: "Friday Night Magic"
   game: "Magic: The Gathering"
   time: "19:00 - 22:30"
+  location: "Bazar do Weezing"
   url: "/agenda/"
-  image: "/assets/img/agenda/bazar-do-weezing-transparente.png"
-  image_alt: "Logo do Bazar do Weezing"
-  image_kind: "logo"
 
-- day: "Sábado"
-  title: "Eventos — Card games variados"
+- weekday: 6
+  day: "Sábado"
+  title: "Eventos"
   game: "Card games variados"
   time: "14:00 - 18:00"
+  location: "Bazar do Weezing"
   url: "/agenda/"
-  image: "/assets/img/agenda/bazar-do-weezing-transparente.png"
-  image_alt: "Logo do Bazar do Weezing"
-  image_kind: "logo"

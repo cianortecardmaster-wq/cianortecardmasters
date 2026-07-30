@@ -815,8 +815,12 @@
   }
 
   function renderLatestArmory(items) {
-    const target = document.querySelector("#latest-armory-card");
-    if (!target) return;
+    const targets = Array.from(new Set([
+      ...document.querySelectorAll("[data-latest-armory-card]"),
+      ...document.querySelectorAll("#latest-armory-card")
+    ]));
+    if (!targets.length) return;
+
     const latest = items[0];
     if (!latest) return;
 
@@ -828,33 +832,6 @@
     const nextArmory = latest.next_armory || latest.nextArmory || "Quarta • 19:00";
     const useYoungHeroBadges = isYoungHeroFormat(latest.format || latest.formato || latest.event_format || "");
     const heroes = uniqueHeroes(results);
-
-    const rows = results.slice(0, 12).map((result, index) => {
-      const player = getPlayer(result) || "Jogador";
-      const hero = fullHeroName(getHero(result));
-      const heroName = hero;
-      const record = result.record || result.campanha || result.score || "";
-      const heroIcon = result.hero_icon || result.heroIcon || result.icon || "";
-      const placement = index + 1;
-      const placementIcon = index === 0 ? armoryIcons.depth.champion : armoryIcons.depth.placement;
-      return `
-        <li class="armory-result-row${index === 0 ? " is-champion" : ""}">
-          <span class="armory-rank-badge armory-rank-${placement}" aria-label="${placement}º colocado">
-            ${iconImage(placementIcon, "armory-rank-icon", "")}
-            <strong>${placement}º</strong>
-          </span>
-          <div class="armory-player-cell">
-            ${heroBadge(hero, heroIcon, index === 0 ? "featured" : "normal", { young: useYoungHeroBadges })}
-            <div>
-              <strong>${escapeHtml(player)}</strong>
-              <small>${escapeHtml(heroName)}</small>
-            </div>
-          </div>
-          <span class="armory-hero-name" title="${escapeHtml(heroName)}">${escapeHtml(heroName)}</span>
-          <span class="armory-record">${iconImage(armoryIcons.depth.trophy, "armory-record-icon", "")}${escapeHtml(record || "-")}</span>
-        </li>
-      `;
-    }).join("");
 
     const statItems = [
       { icon: armoryIcons.flat.people, label: "Jogadores", value: playerCount || "-" },
@@ -876,38 +853,71 @@
       </li>
     `).join("");
 
-    target.innerHTML = `
-      <div class="armory-board-glow" aria-hidden="true"></div>
-      <div class="armory-board-heading">
-        <div class="armory-event-badge">${iconImage(armoryIcons.depth.badge, "armory-event-badge-img", "")}</div>
-        <div>
-          <p class="eyebrow">Último Armory</p>
-          <h3>${escapeHtml(latest.title || "Resultado Armory")}</h3>
-          <p>${dateLabel(displayDate)}${latest.summary ? " • " + escapeHtml(latest.summary) : ""}</p>
-        </div>
-      </div>
+    targets.forEach(target => {
+      const parsedLimit = Number.parseInt(target.dataset.resultLimit || "12", 10);
+      const resultLimit = Number.isFinite(parsedLimit) && parsedLimit > 0 ? parsedLimit : 12;
+      const historyUrl = target.dataset.historyUrl || "#armory-historico";
 
-      <div class="armory-board-layout">
-        <div class="armory-results-panel">
-          ${rows ? `<ol class="latest-armory-podium armory-results-list">${rows}</ol>` : `<p class="empty-section">Resultado sem lista de jogadores.</p>`}
-        </div>
+      const rows = results.slice(0, resultLimit).map((result, index) => {
+        const player = getPlayer(result) || "Jogador";
+        const hero = fullHeroName(getHero(result));
+        const heroName = hero;
+        const record = result.record || result.campanha || result.score || "";
+        const heroIcon = result.hero_icon || result.heroIcon || result.icon || "";
+        const placement = index + 1;
+        const placementIcon = index === 0 ? armoryIcons.depth.champion : armoryIcons.depth.placement;
+        return `
+          <li class="armory-result-row${index === 0 ? " is-champion" : ""}">
+            <span class="armory-rank-badge armory-rank-${placement}" aria-label="${placement}º colocado">
+              ${iconImage(placementIcon, "armory-rank-icon", "")}
+              <strong>${placement}º</strong>
+            </span>
+            <div class="armory-player-cell">
+              ${heroBadge(hero, heroIcon, index === 0 ? "featured" : "normal", { young: useYoungHeroBadges })}
+              <div>
+                <strong>${escapeHtml(player)}</strong>
+                <small>${escapeHtml(heroName)}</small>
+              </div>
+            </div>
+            <span class="armory-hero-name" title="${escapeHtml(heroName)}">${escapeHtml(heroName)}</span>
+            <span class="armory-record">${iconImage(armoryIcons.depth.trophy, "armory-record-icon", "")}${escapeHtml(record || "-")}</span>
+          </li>
+        `;
+      }).join("");
 
-        <aside class="armory-board-sidebar" aria-label="Resumo do Armory">
-          <div class="armory-stat-panel">${statItems}</div>
-          <div class="armory-heroes-panel">
-            <div class="armory-panel-title"><span></span><strong>Heróis do evento</strong><span></span></div>
-            ${heroList ? `<ul>${heroList}</ul>` : `<p class="empty-section">Nenhum herói informado.</p>`}
+      target.innerHTML = `
+        <div class="armory-board-glow" aria-hidden="true"></div>
+        <div class="armory-board-heading">
+          <div class="armory-event-badge">${iconImage(armoryIcons.depth.badge, "armory-event-badge-img", "")}</div>
+          <div>
+            <p class="eyebrow">Último Armory</p>
+            <h3>${escapeHtml(latest.title || "Resultado Armory")}</h3>
+            <p>${dateLabel(displayDate)}${latest.summary ? " • " + escapeHtml(latest.summary) : ""}</p>
           </div>
-        </aside>
-      </div>
+        </div>
 
-      <div class="armory-board-actions">
-        ${latest.url ? `<a class="btn armory-btn-primary" href="${latest.url}">${iconImage(armoryIcons.depth.trophy, "armory-btn-icon", "")}Ver resultado completo</a>` : ""}
-        <a class="btn armory-btn-secondary" href="#armory-historico">Ver histórico</a>
-      </div>
-    `;
+        <div class="armory-board-layout">
+          <div class="armory-results-panel">
+            ${rows ? `<ol class="latest-armory-podium armory-results-list">${rows}</ol>` : `<p class="empty-section">Resultado sem lista de jogadores.</p>`}
+          </div>
 
-    initArmoryHeroBadges(target);
+          <aside class="armory-board-sidebar" aria-label="Resumo do Armory">
+            <div class="armory-stat-panel">${statItems}</div>
+            <div class="armory-heroes-panel">
+              <div class="armory-panel-title"><span></span><strong>Heróis do evento</strong><span></span></div>
+              ${heroList ? `<ul>${heroList}</ul>` : `<p class="empty-section">Nenhum herói informado.</p>`}
+            </div>
+          </aside>
+        </div>
+
+        <div class="armory-board-actions">
+          ${latest.url ? `<a class="btn armory-btn-primary" href="${latest.url}">${iconImage(armoryIcons.depth.trophy, "armory-btn-icon", "")}Ver resultado completo</a>` : ""}
+          <a class="btn armory-btn-secondary" href="${escapeHtml(historyUrl)}">Ver histórico</a>
+        </div>
+      `;
+
+      initArmoryHeroBadges(target);
+    });
   }
 
   function renderLeagueCard(selector, latest, options = {}) {

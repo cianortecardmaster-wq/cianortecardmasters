@@ -1,25 +1,62 @@
 ---
 layout: default
-title: "Todas as postagens"
+title: "Publicações"
+description: "Artigos, guias, deck techs, notícias e outros conteúdos publicados pelo Cianorte Card Masters."
 permalink: /posts/
 ---
 
-<section class="page-hero">
+{% assign posts_list = site.guias | concat: site.decks | concat: site.blog | sort: "date" | reverse %}
+
+<section class="page-hero publications-page-hero" aria-labelledby="publications-title">
   <div class="container">
-    <p class="eyebrow">Arquivo</p>
-    <h1>Todas as postagens</h1>
-    <p>Todos os conteúdos do site em ordem de publicação.</p>
+    <p class="eyebrow">Conteúdo da comunidade</p>
+    <h1 id="publications-title">Publicações</h1>
+    <p>Artigos, guias, deck techs e novidades publicados quando existe algo útil, interessante ou estranho o bastante para registrar.</p>
   </div>
 </section>
 
-<section class="listing">
+<section class="section publications-index-section" aria-labelledby="publications-index-title">
   <div class="container">
+    <div class="section-title">
+      <div>
+        <p class="eyebrow">Escolha um caminho</p>
+        <h2 id="publications-index-title">Conteúdo sem aparência de portal</h2>
+        <p>Você pode ver tudo em ordem de publicação ou entrar diretamente em uma categoria.</p>
+      </div>
+    </div>
+
+    <nav class="publications-shortcuts" aria-label="Categorias de publicações">
+      <a href="{{ '/blog/' | relative_url }}">
+        <strong>Artigos e notícias</strong>
+        <span>Opinião, novidades, lançamentos e textos da comunidade.</span>
+      </a>
+      <a href="{{ '/guias/' | relative_url }}">
+        <strong>Guias</strong>
+        <span>Regras, conceitos e conteúdos para aprender ou tirar dúvidas.</span>
+      </a>
+      <a href="{{ '/guias/decks/' | relative_url }}">
+        <strong>Decks</strong>
+        <span>Deck techs, listas e ideias para diferentes jogos e formatos.</span>
+      </a>
+    </nav>
+  </div>
+</section>
+
+<section class="listing publications-listing" aria-labelledby="all-publications-title">
+  <div class="container">
+    <div class="section-title">
+      <div>
+        <p class="eyebrow">Arquivo</p>
+        <h2 id="all-publications-title">Todas as publicações</h2>
+        <p>Conteúdos em ordem do mais recente para o mais antigo.</p>
+      </div>
+    </div>
+
     <div class="card-grid grid-3">
-      {% assign posts_list = site.guias | concat: site.decks | concat: site.blog | concat: site.comunidade | sort: "date" | reverse %}
       {% for post in posts_list %}
         {% include post-card.html post=post %}
       {% else %}
-        <p>Nenhuma postagem publicada ainda.</p>
+        <p>Nenhuma publicação disponível ainda.</p>
       {% endfor %}
     </div>
   </div>

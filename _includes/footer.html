@@ -1,47 +1,34 @@
-<footer class="site-footer">
-  <div class="container footer-grid">
+<footer class="site-footer site-footer-light">
+  <div class="container footer-grid footer-grid-light">
     <div class="footer-brand-block">
       <h2>Cianorte Card Masters</h2>
       <p>Comunidade de card games, RPG e jogos de tabuleiro em Cianorte.</p>
-      <p class="footer-note">Flesh and Blood, Magic Commander, Pokémon TCG, RPG e mesa presencial para quem quer aprender, jogar e conhecer a galera.</p>
+      <p class="footer-note">Encontre horários, resultados, publicações e os caminhos para participar das mesas presenciais.</p>
     </div>
 
-    <nav class="footer-nav" aria-label="Seções do site">
-      <h3>Seções</h3>
-      <a href="{{ '/' | relative_url }}">Home</a>
-      <a href="{{ '/comunidade/' | relative_url }}">Comunidade</a>
-      <a href="{{ '/jogos/' | relative_url }}">Jogos</a>
-      <a href="{{ '/resultados/' | relative_url }}">Resultados</a>
+    <nav class="footer-nav" aria-label="Navegação principal">
+      <h3>Principal</h3>
       <a href="{{ '/agenda/' | relative_url }}">Agenda</a>
+      <a href="{{ '/resultados/' | relative_url }}">Resultados</a>
+      <a href="{{ '/posts/' | relative_url }}">Publicações</a>
+      <a href="{{ '/comunidade/' | relative_url }}">Comunidade</a>
+    </nav>
+
+    <nav class="footer-nav" aria-label="Conteúdos e recursos do site">
+      <h3>Explorar</h3>
+      <a href="{{ '/jogos/' | relative_url }}">Jogos</a>
       <a href="{{ '/guias/' | relative_url }}">Guias</a>
-      <a href="{{ '/blog/' | relative_url }}">Blog</a>
+      <a href="{{ '/guias/decks/' | relative_url }}">Decks</a>
       <a href="{{ '/ferramentas/' | relative_url }}">Ferramentas</a>
+      <a href="{{ '/atividades/' | relative_url }}">Atividades</a>
+      <a href="{{ '/spikes/' | relative_url }}">Spikes</a>
+      <a href="{{ '/autores/' | relative_url }}">Autores</a>
       <a href="{{ '/sobre/' | relative_url }}">Sobre</a>
     </nav>
 
-    <nav class="footer-nav footer-nav--community" aria-label="Conteúdos da comunidade">
-      <h3>Comunidade</h3>
-      <div class="footer-feature-links">
-        <a class="footer-pill footer-pill--hero" href="{{ '/autores/' | relative_url }}">Heróis da comunidade</a>
-        <a class="footer-pill footer-pill--cta" href="{{ '/agenda/' | relative_url }}">Quero participar</a>
-      </div>
-      <a href="{{ '/agenda/' | relative_url }}">Encontros da semana</a>
-      <a href="{{ '/comunidade/' | relative_url }}">Fotos e vídeos</a>
-      <a href="{{ '/resultados/' | relative_url }}">Resultados de Armory</a>
-      <a href="{{ '/resultados/' | relative_url }}">Resultados da Liga</a>
-    </nav>
-
     <div class="footer-side-stack">
-      <nav class="footer-nav" aria-label="Informações importantes">
-        <h3>Informações</h3>
-        <a href="{{ '/privacidade/' | relative_url }}">Política de Privacidade</a>
-        <a href="{{ '/termos-comunidade/' | relative_url }}">Termos da Comunidade</a>
-        <a href="{{ '/uso-de-imagem/' | relative_url }}">Uso de Imagem e Repostagem</a>
-        <a href="{{ '/uso-de-imagem/#solicitar-remocao-de-conteudo' | relative_url }}">Solicitar remoção de conteúdo</a>
-      </nav>
-
       <section class="footer-social-compact" aria-labelledby="footer-social-title">
-        <p class="footer-social-title" id="footer-social-title">Nos chame nas redes sociais</p>
+        <p class="footer-social-title" id="footer-social-title">Participar e acompanhar</p>
         <nav class="footer-social-icons" aria-label="Links das redes sociais">
           {% assign footer_social_order = "WhatsApp|Instagram|Facebook|TikTok|YouTube" | split: "|" %}
           {% for social_name in footer_social_order %}
@@ -55,13 +42,14 @@
           {% endfor %}
         </nav>
       </section>
-    </div>
-  </div>
 
-  <div class="container footer-consent">
-    <p>
-      Ao marcar o Cianorte Card Masters em fotos, vídeos ou postagens públicas, você indica que está de acordo com o compartilhamento desse conteúdo nos canais da comunidade, sempre com finalidade comunitária e crédito quando possível. Caso queira remover algum conteúdo, fale com a organização.
-    </p>
+      <nav class="footer-nav footer-legal-nav" aria-label="Informações legais">
+        <h3>Informações</h3>
+        <a href="{{ '/privacidade/' | relative_url }}">Privacidade</a>
+        <a href="{{ '/termos-comunidade/' | relative_url }}">Termos da comunidade</a>
+        <a href="{{ '/uso-de-imagem/' | relative_url }}">Uso de imagem</a>
+      </nav>
+    </div>
   </div>
 
   <div class="container footer-bottom">
