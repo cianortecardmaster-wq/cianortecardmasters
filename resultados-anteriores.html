@@ -1,0 +1,84 @@
+---
+layout: default
+title: "Histórico de resultados"
+description: "Arquivo completo dos resultados de Armory, Liga Pokémon, ligas, torneios, selados e pré-releases do Cianorte Card Masters."
+image: /assets/img/resultados/pokemon/stadium-stands.webp
+image_alt: "Arquibancadas de uma arena competitiva iluminada"
+permalink: /resultados/anteriores/
+---
+
+{% assign comunidade_posts = site.comunidade | sort: "date" | reverse %}
+
+<section class="page-hero result-archive-hero" style="--page-hero-image: url('{{ '/assets/img/resultados/pokemon/stadium-stands.webp' | relative_url }}'); --page-hero-image-mobile: url('{{ '/assets/img/resultados/pokemon/stadium-stands-mobile.webp' | relative_url }}'); --page-hero-position: center; --page-hero-position-mobile: center;" aria-label="{{ page.image_alt | escape }}">
+  <div class="container">
+    <p class="eyebrow">Arquivo competitivo</p>
+    <h1>Resultados anteriores</h1>
+    <p>Abra qualquer evento pela data ou pelo nome. A tabela reúne todos os resultados publicados pela comunidade.</p>
+  </div>
+</section>
+
+<section class="section result-archive-section" aria-labelledby="result-archive-title">
+  <div class="container">
+    <div class="section-title result-archive-heading">
+      <div>
+        <p class="eyebrow">Histórico completo</p>
+        <h2 id="result-archive-title">Todos os eventos</h2>
+        <p>Armory, Liga Pokémon, ligas, torneios e demais formatos competitivos em ordem do mais recente para o mais antigo.</p>
+      </div>
+      <a class="btn btn-secondary" href="{{ '/resultados/' | relative_url }}">Voltar aos destaques</a>
+    </div>
+
+    <div class="result-archive-table-scroll">
+      <table class="result-archive-table">
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Evento</th>
+            <th>Jogo</th>
+            <th>Tipo</th>
+            <th>Campeão</th>
+            <th>Local</th>
+            <th><span class="sr-only">Abrir</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% assign result_count = 0 %}
+          {% for post in comunidade_posts %}
+            {% assign post_path = post.path | downcase %}
+            {% assign style_slug = post.content_style | default: post.category_label | default: "" | slugify %}
+            {% assign is_result_event = false %}
+            {% if post.results %}
+              {% if post_path contains "_comunidade/armory/" or post_path contains "_comunidade/liga/" or post_path contains "_comunidade/torneio/" or post_path contains "_comunidade/pokemon/" %}
+                {% assign is_result_event = true %}
+              {% elsif style_slug == "armory" or style_slug == "liga" or style_slug == "torneio" or style_slug == "pokemon-result" %}
+                {% assign is_result_event = true %}
+              {% endif %}
+            {% endif %}
+            {% if is_result_event %}
+              {% assign result_count = result_count | plus: 1 %}
+              {% assign result_game = post.game | default: "Card game" %}
+              {% assign result_type = post.event_type | default: post.tipo_evento | default: post.category_label %}
+              {% if post_path contains "_comunidade/armory/" %}{% assign result_type = "Armory" %}{% endif %}
+              {% if post_path contains "_comunidade/pokemon/" and result_type == nil %}{% assign result_type = "Liga Pokémon" %}{% endif %}
+              {% assign result_champion = post.results | first %}
+              {% assign result_champion_name = result_champion.player | default: result_champion.jogador | default: result_champion.nome | default: "-" %}
+              {% assign result_date = post.event_date | default: post.date %}
+              {% assign result_location = post.local | default: post.location | default: post.venue | default: "-" %}
+              <tr>
+                <td data-label="Data"><a href="{{ post.url | relative_url }}">{{ result_date | date: "%d/%m/%Y" }}</a></td>
+                <td data-label="Evento"><a class="result-archive-event-link" href="{{ post.url | relative_url }}">{{ post.title }}</a></td>
+                <td data-label="Jogo">{{ result_game }}</td>
+                <td data-label="Tipo"><span class="result-archive-type">{{ result_type | default: "Resultado" }}</span></td>
+                <td data-label="Campeão">{{ result_champion_name }}</td>
+                <td data-label="Local">{{ result_location }}</td>
+                <td class="result-archive-open"><a href="{{ post.url | relative_url }}" aria-label="Abrir {{ post.title | escape }}">Abrir</a></td>
+              </tr>
+            {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    {% if result_count == 0 %}<p class="empty-section">Nenhum resultado publicado ainda.</p>{% endif %}
+  </div>
+</section>

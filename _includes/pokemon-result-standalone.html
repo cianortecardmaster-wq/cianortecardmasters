@@ -1,0 +1,168 @@
+{% assign event_name = page.event_name | default: "Liga Pokémon" %}
+{% assign event_type = page.event_type | default: page.tipo_evento | default: page.tipo | default: "Liga" %}
+{% assign event_format = page.format | default: page.formato | default: "Standard" %}
+{% assign event_time = page.time | default: page.horario | default: page.event_time | default: "Horário não informado" %}
+{% assign event_location = page.local | default: page.location | default: page.venue | default: page.local_evento | default: "Cianorte" %}
+{% assign event_date = page.event_date | default: page.date %}
+{% assign total_players = page.players | default: page.numero_jogadores | default: page.player_count | default: page.results.size %}
+{% assign event_rounds = page.rounds | default: page.rodadas | default: "-" %}
+{% assign scoring_mode = page.scoring | default: page.pontuacao | default: "record" | downcase %}
+{% assign is_points_scoring = false %}
+{% if scoring_mode == "points" or scoring_mode == "pontos" %}{% assign is_points_scoring = true %}{% endif %}
+
+{% assign champion = nil %}
+{% assign runner_up = nil %}
+{% assign third_place = nil %}
+{% for result in page.results %}
+  {% if forloop.index == 1 %}{% assign champion = result %}{% endif %}
+  {% if forloop.index == 2 %}{% assign runner_up = result %}{% endif %}
+  {% if forloop.index == 3 %}{% assign third_place = result %}{% endif %}
+{% endfor %}
+
+{% assign champion_player = champion.player | default: champion.jogador | default: champion.nome | default: "Campeão" %}
+{% assign champion_pokemon_raw = champion.pokemon | default: champion.main_pokemon | default: champion.pokemon_principal | default: champion.hero | default: champion.deck | default: "Pokémon" %}
+{% assign champion_pokemon_parts = champion_pokemon_raw | split: "/" %}
+{% assign champion_pokemon = champion_pokemon_parts | first | strip %}
+{% assign champion_record = champion.record | default: champion.campanha | default: champion.score | default: "-" %}
+{% assign champion_points = champion.points | default: champion.pontos | default: champion.score | default: champion.record | default: "-" %}
+
+<article class="pokemon-result-page{% if is_points_scoring %} is-points-scoring{% endif %}">
+  <section class="pokemon-result-top" aria-labelledby="pokemon-result-title">
+    <div class="pokemon-result-overlay" aria-hidden="true"></div>
+    <div class="container pokemon-result-shell">
+      <div class="pokemon-result-heading">
+        <p class="pokemon-result-kicker">{{ event_name }} · Cianorte</p>
+        <h1 id="pokemon-result-title">Resultado da Liga Pokémon</h1>
+        <p class="pokemon-result-subtitle">Pokémon TCG em Cianorte</p>
+
+        <div class="pokemon-result-tag-list" aria-label="Informações principais">
+          <span class="pokemon-result-tag is-primary">{{ event_name }}</span>
+          <span class="pokemon-result-tag">{{ event_type }}</span>
+          <span class="pokemon-result-tag">{{ event_format }}</span>
+        </div>
+      </div>
+
+      <div class="pokemon-result-meta-bar" aria-label="Informações do evento">
+        <span><i class="pokemon-result-meta-icon is-players" aria-hidden="true"></i><strong>{{ total_players }}</strong> jogadores</span>
+        <span><i class="pokemon-result-meta-icon is-type" aria-hidden="true"></i>{{ event_type }}</span>
+        <span><i class="pokemon-result-meta-icon is-calendar" aria-hidden="true"></i>{{ event_date | date: "%d/%m/%Y" }} · {{ event_time }}</span>
+        <span><i class="pokemon-result-meta-icon is-location" aria-hidden="true"></i>{{ event_location }}</span>
+      </div>
+
+      <div class="pokemon-result-podium" aria-label="Três primeiros colocados">
+        {% if runner_up %}{% include pokemon-result-podium-card.html result=runner_up rank=2 tone="silver" %}{% endif %}
+        {% if champion %}{% include pokemon-result-podium-card.html result=champion rank=1 tone="gold" %}{% endif %}
+        {% if third_place %}{% include pokemon-result-podium-card.html result=third_place rank=3 tone="bronze" %}{% endif %}
+      </div>
+    </div>
+  </section>
+
+  <section class="pokemon-result-mid">
+    <div class="pokemon-result-overlay" aria-hidden="true"></div>
+    <div class="container pokemon-result-shell">
+      <div class="pokemon-result-summary-grid">
+        <div class="pokemon-result-story-card">
+          <span class="pokemon-result-pokeball" aria-hidden="true"></span>
+          <p>
+            {{ event_type }} finalizado com <strong>{{ champion_player }}</strong> no topo usando
+            <strong>{{ champion_pokemon }}</strong>{% if is_points_scoring %}, com <strong>{{ champion_points }} pontos</strong>{% else %}, campanha <strong>{{ champion_record }}</strong>{% endif %}.
+            A classificação completa abaixo registra todos os competidores.
+          </p>
+        </div>
+        <div class="pokemon-result-stat-card">
+          <span>Jogadores</span>
+          <strong>{{ total_players }}</strong>
+        </div>
+        <div class="pokemon-result-stat-card">
+          <span>Rodadas</span>
+          <strong>{{ event_rounds }}</strong>
+        </div>
+        <div class="pokemon-result-stat-card">
+          <span>{% if is_points_scoring %}Maior pontuação{% else %}Melhor campanha{% endif %}</span>
+          <strong>{% if is_points_scoring %}{{ champion_points }} pts{% else %}{{ champion_record }}{% endif %}</strong>
+          <small>{{ champion_player }}</small>
+        </div>
+        <div class="pokemon-result-stat-card">
+          <span>Pokémon campeão</span>
+          <strong>{{ champion_pokemon }}</strong>
+        </div>
+      </div>
+
+      <section class="pokemon-result-standings" aria-labelledby="pokemon-result-standings-title">
+        <div class="pokemon-result-section-heading">
+          <p class="eyebrow">Classificação completa</p>
+          <h2 id="pokemon-result-standings-title">Resultado final</h2>
+          <p>{% if is_points_scoring %}Miniaturas dos Pokémon principais e pontuação final em ordem de colocação.{% else %}Carta no pódio, miniatura na tabela e os dados do torneio em ordem de colocação.{% endif %}</p>
+        </div>
+
+        <div class="pokemon-result-table-scroll">
+          <table class="pokemon-result-table{% if is_points_scoring %} is-points{% endif %}">
+            <thead>
+              <tr>
+                <th>Posição</th>
+                <th>Jogador</th>
+                <th>Pokémon principal</th>
+                {% if is_points_scoring %}
+                  <th>Pontos</th>
+                {% else %}
+                  <th>Deck</th>
+                  <th>Campanha</th>
+                  <th>Vitórias</th>
+                {% endif %}
+              </tr>
+            </thead>
+            <tbody>
+              {% for result in page.results %}
+                {% assign result_player = result.player | default: result.jogador | default: result.nome | default: "Jogador" %}
+                {% assign result_pokemon_raw = result.pokemon | default: result.main_pokemon | default: result.pokemon_principal | default: result.hero | default: result.deck | default: "Pokémon" %}
+                {% assign result_pokemon_parts = result_pokemon_raw | split: "/" %}
+                {% assign result_pokemon = result_pokemon_parts | first | strip %}
+                {% assign result_sprite = result.pokemon_api | default: result.sprite | default: result_pokemon %}
+                {% assign result_deck = result.deck | default: result.deque | default: result.hero | default: result.card | default: result_pokemon %}
+                {% assign result_record = result.record | default: result.campanha | default: result.score | default: "-" %}
+                {% assign result_wins = result.wins | default: result.vitorias | default: result.vitórias | default: "-" %}
+                {% assign result_points = result.points | default: result.pontos | default: result.score | default: result.record | default: "-" %}
+                <tr class="{% if forloop.index == 1 %}is-champion{% elsif forloop.index == 2 %}is-runner-up{% elsif forloop.index == 3 %}is-third-place{% endif %}">
+                  <td data-label="Posição"><span class="pokemon-result-position is-rank-{{ forloop.index }}">{{ forloop.index }}º</span></td>
+                  <td data-label="Jogador"><strong>{{ result_player }}</strong></td>
+                  <td data-label="Pokémon principal">
+                    <div class="pokemon-result-pokemon-cell">
+                      <span class="pokemon-result-sprite" data-pokemon-result-sprite="{{ result_sprite | escape }}" data-pokemon-label="{{ result_pokemon | escape }}"><span>{{ result_pokemon | slice: 0, 1 }}</span></span>
+                      <strong>{{ result_pokemon }}</strong>
+                    </div>
+                  </td>
+                  {% if is_points_scoring %}
+                    <td data-label="Pontos"><span class="pokemon-result-record-pill">{{ result_points }} pts</span></td>
+                  {% else %}
+                    <td data-label="Deck">{{ result_deck }}</td>
+                    <td data-label="Campanha"><span class="pokemon-result-record-pill">{{ result_record }}</span></td>
+                    <td data-label="Vitórias"><span class="pokemon-result-wins">{{ result_wins }}</span></td>
+                  {% endif %}
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {% if content and content != "" %}
+        <div class="pokemon-result-notes">
+          {{ content }}
+        </div>
+      {% endif %}
+    </div>
+  </section>
+
+  <section class="pokemon-result-bottom" aria-label="Atalhos da comunidade">
+    <div class="pokemon-result-overlay" aria-hidden="true"></div>
+    <div class="container pokemon-result-shell">
+      <nav class="pokemon-result-action-grid" aria-label="Links úteis">
+        <a href="{{ '/resultados/' | relative_url }}"><span aria-hidden="true">▥</span><strong>Ver outros<br>resultados</strong></a>
+        <a href="{{ '/comunidade/' | relative_url }}"><span aria-hidden="true">●●●</span><strong>Conheça a<br>comunidade</strong></a>
+        <a href="{{ '/agenda/' | relative_url }}"><span aria-hidden="true">□</span><strong>Ver agenda<br>de eventos</strong></a>
+        <a href="{{ '/jogos/pokemon-tcg-em-cianorte/' | relative_url }}"><span class="pokemon-result-mini-ball" aria-hidden="true"></span><strong>Guia de<br>Pokémon</strong></a>
+      </nav>
+      <div class="pokemon-result-arena-mark" aria-hidden="true"><span></span></div>
+    </div>
+  </section>
+</article>

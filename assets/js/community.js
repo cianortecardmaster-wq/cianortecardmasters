@@ -181,7 +181,8 @@
       swords: assetUrl("/assets/img/armory-icons/flat/icon-espadas.png"),
       people: assetUrl("/assets/img/armory-icons/flat/icon-pessoas.png"),
       cards: assetUrl("/assets/img/armory-icons/flat/icon-cartas.png"),
-      calendar: assetUrl("/assets/img/armory-icons/flat/icon-calendario.png")
+      calendar: assetUrl("/assets/img/armory-icons/flat/icon-calendario.png"),
+      location: assetUrl("/assets/img/home/project/icon-onde-jogar.png")
     }
   };
 
@@ -609,6 +610,13 @@
     return names.length ? names.join(" / ") : (getHero(source) || String(source || "") || "Deck Pokémon");
   }
 
+  function pokemonPrimaryDisplayLabel(source) {
+    const names = pokemonDisplayNamesFromSource(source);
+    if (names.length) return names[0];
+    const fallback = getHero(source) || String(source || "") || "Pokémon";
+    return String(fallback).split(/\s*\/\s*|\s*,\s*|\s*\+\s*|\s*&\s*/)[0].trim() || "Pokémon";
+  }
+
   function pokemonLookupName(value) {
     let text = String(value || "")
       .normalize("NFD")
@@ -755,10 +763,22 @@
     `;
   }
 
+  function initPokemonResultSprites(scope = document) {
+    scope.querySelectorAll("[data-pokemon-result-sprite]").forEach(target => {
+      if (target.dataset.pokemonSpriteReady === "true") return;
+      target.dataset.pokemonSpriteReady = "true";
+
+      const lookupName = target.dataset.pokemonResultSprite || "";
+      const label = target.dataset.pokemonLabel || lookupName || "Pokémon";
+      const image = pokemonSpriteImg(lookupName, "pokemon-result-sprite-image", label);
+      if (image) target.innerHTML = image;
+    });
+  }
+
   function uniquePokemonDecks(results) {
     const map = new Map();
     results.forEach(result => {
-      const label = pokemonDisplayLabel(result);
+      const label = pokemonPrimaryDisplayLabel(result);
       if (!label) return;
       const key = label.toLowerCase();
       if (!map.has(key)) {
@@ -856,7 +876,7 @@
     targets.forEach(target => {
       const parsedLimit = Number.parseInt(target.dataset.resultLimit || "12", 10);
       const resultLimit = Number.isFinite(parsedLimit) && parsedLimit > 0 ? parsedLimit : 12;
-      const historyUrl = target.dataset.historyUrl || "#armory-historico";
+      const historyUrl = target.dataset.historyUrl || assetUrl("/resultados/anteriores/");
 
       const rows = results.slice(0, resultLimit).map((result, index) => {
         const player = getPlayer(result) || "Jogador";
@@ -926,26 +946,29 @@
 
     const results = Array.isArray(latest.results) ? latest.results : [];
     const displayDate = latest.event_date || latest.date;
-    const playerCount = new Set(results.map(getPlayer).filter(Boolean)).size || results.length;
+    const explicitPlayers = Number(latest.players || latest.numero_jogadores || latest.player_count);
+    const playerCount = (Number.isFinite(explicitPlayers) && explicitPlayers > 0)
+      ? explicitPlayers
+      : (new Set(results.map(getPlayer).filter(Boolean)).size || results.length);
     const rounds = roundsFromResults(results, latest.rounds);
     const game = latest.game || (options.variant === "pokemon" ? "Pokemon" : "Flesh and Blood");
     const nextLeague = latest.next_league || latest.next_liga || latest.nextLeague || "Domingo • 13:30";
     const isPokemon = options.variant === "pokemon" || isPokemonGame(game);
     const useYoungHeroBadges = !isPokemon && isYoungHeroFormat(latest.format || latest.formato || latest.event_format || "");
     const heroes = isPokemon ? uniquePokemonDecks(results) : uniqueHeroes(results);
-    const eyebrow = isPokemon ? "Última Liga de Pokémon" : "Última Liga de Flesh and Blood";
-    const sideTitle = isPokemon ? "Pokémon da liga" : "Heróis da liga";
+    const eyebrow = isPokemon ? "Última Liga Pokémon" : "Última Liga de Flesh and Blood";
+    const sideTitle = isPokemon ? "Pokémon principais" : "Heróis da liga";
 
     const rows = results.slice(0, 12).map((result, index) => {
       const player = getPlayer(result) || "Jogador";
       const hero = fullHeroName(getHero(result));
-      const pokemonLabel = isPokemon ? pokemonDisplayLabel(result) : "";
+      const pokemonLabel = isPokemon ? pokemonPrimaryDisplayLabel(result) : "";
       const heroName = isPokemon ? pokemonLabel : hero;
       const record = result.record || result.campanha || result.score || "";
       const heroIcon = result.hero_icon || result.heroIcon || result.icon || "";
       const placement = index + 1;
       const placementIcon = index === 0 ? armoryIcons.depth.champion : armoryIcons.depth.placement;
-      const badgeMarkup = isPokemon ? pokemonSpriteStack(result) : heroBadge(hero, heroIcon, index === 0 ? "featured" : "normal", { young: useYoungHeroBadges });
+      const badgeMarkup = isPokemon ? pokemonBadge(result, index === 0 ? "featured" : "normal") : heroBadge(hero, heroIcon, index === 0 ? "featured" : "normal", { young: useYoungHeroBadges });
       return `
         <li class="armory-result-row${index === 0 ? " is-champion" : ""}${isPokemon ? " is-pokemon-row" : ""}">
           <span class="armory-rank-badge armory-rank-${placement}" aria-label="${placement}º colocado">
@@ -967,12 +990,22 @@
       `;
     }).join("");
 
-    const statItems = [
-      { icon: armoryIcons.flat.people, label: "Jogadores", value: playerCount || "-" },
-      { icon: armoryIcons.flat.swords, label: "Rodadas", value: rounds || "-" },
-      { icon: armoryIcons.flat.cards, label: "Jogo", value: game },
-      { icon: armoryIcons.flat.calendar, label: "Próxima Liga", value: nextLeague }
-    ].map(item => `
+    const pokemonDateTime = [dateLabel(displayDate), latest.time || latest.horario || ""].filter(Boolean).join(" • ");
+    const statSource = isPokemon
+      ? [
+          { icon: armoryIcons.flat.people, label: "Jogadores", value: playerCount || "-" },
+          { icon: armoryIcons.flat.cards, label: "Tipo", value: latest.event_type || latest.tipo_evento || "Liga" },
+          { icon: armoryIcons.flat.calendar, label: "Data e horário", value: pokemonDateTime || "-" },
+          { icon: armoryIcons.flat.location, label: "Local", value: latest.local || latest.location || "Cianorte" }
+        ]
+      : [
+          { icon: armoryIcons.flat.people, label: "Jogadores", value: playerCount || "-" },
+          { icon: armoryIcons.flat.swords, label: "Rodadas", value: rounds || "-" },
+          { icon: armoryIcons.flat.cards, label: "Jogo", value: game },
+          { icon: armoryIcons.flat.calendar, label: "Próxima Liga", value: nextLeague }
+        ];
+
+    const statItems = statSource.map(item => `
       <div class="armory-stat-item">
         ${iconImage(item.icon, "armory-stat-icon", "")}
         <span>${escapeHtml(item.label)}</span>
@@ -1014,7 +1047,7 @@
 
       <div class="armory-board-actions">
         ${latest.url ? `<a class="btn armory-btn-primary" href="${latest.url}">${iconImage(armoryIcons.depth.trophy, "armory-btn-icon", "")}Ver resultado completo</a>` : ""}
-        <a class="btn armory-btn-secondary" href="#resultados-ligas">Ver resultados anteriores</a>
+        <a class="btn armory-btn-secondary" href="${assetUrl("/resultados/anteriores/")}">Ver resultados anteriores</a>
       </div>
     `;
 
@@ -1030,9 +1063,7 @@
     });
 
     const pokemonLeagues = allLeagues.filter(item => isPokemonGame(item.game));
-    const fabLeagues = allLeagues.filter(item => isFleshAndBloodGame(item.game) || !isPokemonGame(item.game));
 
-    renderLeagueCard("#latest-league-fab-card", fabLeagues[0], { variant: "fab" });
     renderLeagueCard("#latest-league-pokemon-card", pokemonLeagues[0], { variant: "pokemon" });
 
     if (!allArmories.length) return;
@@ -1494,6 +1525,7 @@
       initCommunityPagination();
       renderArmoryStats();
       initArmoryHeroBadges(document);
+      initPokemonResultSprites(document);
     });
   } else {
     initBlogFilter();
@@ -1502,5 +1534,6 @@
     initCommunityPagination();
     renderArmoryStats();
     initArmoryHeroBadges(document);
+    initPokemonResultSprites(document);
   }
 })();

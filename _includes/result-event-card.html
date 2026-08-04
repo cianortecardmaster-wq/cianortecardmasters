@@ -1,0 +1,52 @@
+{% assign result_post = include.post %}
+{% assign result_path = result_post.path | downcase %}
+{% assign result_game_label = result_post.game | default: "Competitivo" %}
+{% assign result_game = result_game_label | downcase %}
+{% assign result_is_pokemon = false %}
+{% if result_path contains "_comunidade/pokemon/" or result_game contains "pokemon" or result_game contains "pokémon" %}
+  {% assign result_is_pokemon = true %}
+{% endif %}
+
+{% assign result_kind = result_post.event_type | default: result_post.tipo_evento | default: result_post.tipo %}
+{% if result_kind == nil or result_kind == "" %}
+  {% if result_path contains "_comunidade/armory/" %}
+    {% assign result_kind = "Armory" %}
+  {% elsif result_path contains "_comunidade/torneio/" %}
+    {% assign result_kind = "Torneio" %}
+  {% elsif result_is_pokemon %}
+    {% assign result_kind = "Liga Pokémon" %}
+  {% else %}
+    {% assign result_kind = "Liga" %}
+  {% endif %}
+{% endif %}
+
+{% assign result_champion = result_post.results | first %}
+{% assign result_champion_player = result_champion.player | default: result_champion.jogador | default: result_champion.nome | default: "Resultado publicado" %}
+{% assign result_champion_subject_raw = result_champion.pokemon | default: result_champion.main_pokemon | default: result_champion.pokemon_principal | default: result_champion.card | default: result_champion.hero | default: result_champion.deck | default: "Campeão" %}
+{% assign result_champion_subject_parts = result_champion_subject_raw | split: "/" %}
+{% assign result_champion_subject = result_champion_subject_parts | first | strip %}
+{% assign result_champion_card = result_champion.card | default: result_champion.card_name | default: result_champion_subject %}
+{% assign result_date = result_post.event_date | default: result_post.date %}
+{% assign result_location = result_post.local | default: result_post.location | default: result_post.venue %}
+{% assign result_image = result_post.image | default: "/assets/img/banners/banner-armory-resultado-card.webp" %}
+
+<article class="result-event-card{% if result_is_pokemon %} is-pokemon{% endif %}">
+  <a class="result-event-card-media" href="{{ result_post.url | relative_url }}" aria-label="Abrir {{ result_post.title | escape }}">
+    {% if result_is_pokemon and result_champion_card %}
+      {% include tcg-card.html game="pokemon" name=result_champion_card cover=true alt=result_champion_card fallback="/assets/img/resultados/pokemon/stadium-stands.webp" fallback_alt=result_post.title %}
+    {% else %}
+      <img src="{{ result_image | relative_url }}" alt="{{ result_post.image_alt | default: result_post.title | escape }}" loading="lazy" decoding="async">
+    {% endif %}
+    <span class="result-event-card-shade" aria-hidden="true"></span>
+    <span class="result-event-card-kind">{{ result_kind }}</span>
+  </a>
+  <div class="result-event-card-body">
+    <p class="eyebrow">{{ result_game_label }}</p>
+    <h3><a href="{{ result_post.url | relative_url }}">{{ result_post.title }}</a></h3>
+    <p class="result-event-card-champion"><span>Campeão</span><strong>{{ result_champion_player }}</strong><small>{{ result_champion_subject }}</small></p>
+    <div class="result-event-card-meta">
+      <span>{{ result_date | date: "%d/%m/%Y" }}</span>
+      {% if result_location %}<span>{{ result_location }}</span>{% endif %}
+    </div>
+  </div>
+</article>

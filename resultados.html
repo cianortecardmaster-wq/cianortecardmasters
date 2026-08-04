@@ -1,27 +1,47 @@
 ---
 layout: default
-title: "Resultados de Armory, Ligas e Torneios"
-description: "Resultados da comunidade Cianorte Card Masters: último Armory, última liga, torneios, ligas, estatísticas e histórico de partidas presenciais em Cianorte."
+title: "Resultados de torneios e ligas"
+description: "Últimos resultados do Cianorte Card Masters: Armory de Flesh and Blood, Liga Pokémon e histórico competitivo dos eventos presenciais em Cianorte."
 keywords:
   - resultados Flesh and Blood Cianorte
   - Armory Cianorte
-  - Liga Cianorte Card Masters
+  - Liga Pokémon Cianorte
   - torneios de card games Cianorte
   - resultados TCG Cianorte
 image: /assets/img/banners/banner-armory.webp
-image_alt: "Guerreiro bloqueando fogo verde em banner de resultados da comunidade Cianorte Card Masters"
+image_alt: "Resultados competitivos da comunidade Cianorte Card Masters"
 permalink: /resultados/
 ---
 
 {% assign comunidade_posts = site.comunidade | sort: "date" | reverse %}
+{% assign latest_armory_post = nil %}
+{% assign latest_pokemon_post = nil %}
+{% for post in comunidade_posts %}
+  {% assign post_path = post.path | downcase %}
+  {% assign post_game = post.game | default: "" | downcase %}
+  {% assign style_slug = post.content_style | default: post.category_label | default: "" | slugify %}
+  {% unless latest_armory_post %}
+    {% if post.results %}
+      {% if post_path contains "_comunidade/armory/" or style_slug == "armory" %}
+        {% assign latest_armory_post = post %}
+      {% endif %}
+    {% endif %}
+  {% endunless %}
+  {% unless latest_pokemon_post %}
+    {% if post.results %}
+      {% if post_path contains "_comunidade/pokemon/" or post_game contains "pokemon" or post_game contains "pokémon" %}
+        {% assign latest_pokemon_post = post %}
+      {% endif %}
+    {% endif %}
+  {% endunless %}
+{% endfor %}
 
 <section class="page-hero resultados-page-hero" style="--page-hero-image: url('{{ '/assets/img/banners/banner-armory.webp' | relative_url }}'); --page-hero-image-mobile: url('{{ '/assets/img/banners/banner-armory-mobile.webp' | relative_url }}'); --page-hero-position: center; --page-hero-position-mobile: center;" aria-label="{{ page.image_alt | escape }}">
   <div class="container">
-    <p class="eyebrow">Rankings, campeões e histórico</p>
+    <p class="eyebrow">Campeões, campanhas e histórico</p>
     <h1>Resultados da comunidade</h1>
     <p>
-      Armory, ligas, torneios, histórico e estatísticas dos encontros presenciais do Cianorte Card Masters.
-      A Comunidade ficou para fotos e bastidores; aqui entra o placar da guerra de papelão.
+      O último Armory de Flesh and Blood, a Liga Pokémon mais recente e os demais resultados competitivos da comunidade em um único lugar.
     </p>
   </div>
 </section>
@@ -31,30 +51,25 @@ permalink: /resultados/
     <div class="section-title">
       <div>
         <p class="eyebrow">Consulta rápida</p>
-        <h2 id="result-nav-title">O que você encontra aqui</h2>
-        <p>Use os atalhos para ir direto ao último Armory, última liga, torneios, ligas antigas ou estatísticas acumuladas.</p>
+        <h2 id="result-nav-title">Escolha o placar</h2>
+        <p>Os dois eventos fixos ficam em destaque. O restante segue para o bloco competitivo e para o arquivo completo.</p>
       </div>
     </div>
-    <div class="hub-card-grid result-hub-grid">
+    <div class="hub-card-grid result-hub-grid result-hub-grid-compact">
       <a class="hub-card post-style-armory" href="#ultimo-armory">
         <span>01</span>
         <strong>Último Armory</strong>
-        <small>Resultado mais recente do torneio semanal de Flesh and Blood.</small>
+        <small>O resultado mais recente do torneio semanal de Flesh and Blood.</small>
       </a>
-      <a class="hub-card post-style-liga" href="#resultado-ultima-liga">
+      <a class="hub-card post-style-pokemon" href="#ultima-liga-pokemon">
         <span>02</span>
-        <strong>Última liga</strong>
-        <small>Resumo da liga mais recente cadastrada na comunidade.</small>
+        <strong>Última Liga Pokémon</strong>
+        <small>Classificação, Pokémon principal e campanha de cada competidor.</small>
       </a>
-      <a class="hub-card post-style-torneio" href="#resultados-ligas">
+      <a class="hub-card post-style-torneio" href="#competitivo">
         <span>03</span>
-        <strong>Torneios e ligas</strong>
-        <small>Arquivo de resultados maiores e campanhas anteriores.</small>
-      </a>
-      <a class="hub-card post-style-tcg" href="#armory-historico">
-        <span>04</span>
-        <strong>Estatísticas</strong>
-        <small>Resumo do mês, histórico de Armory e desempenho acumulado.</small>
+        <strong>Competitivo</strong>
+        <small>Os últimos resultados de Armory, ligas, torneios, selados e pré-releases.</small>
       </a>
     </div>
   </div>
@@ -73,13 +88,7 @@ permalink: /resultados/
     "@type": "WebSite",
     "name": {{ site.title | jsonify }},
     "url": "{{ '/' | absolute_url }}"
-  },
-  "about": [
-    { "@type": "Thing", "name": "Resultados de card games" },
-    { "@type": "Thing", "name": "Flesh and Blood Armory" },
-    { "@type": "Thing", "name": "Ligas de TCG" },
-    { "@type": "Thing", "name": "Torneios em Cianorte" }
-  ]
+  }
 }
 </script>
 
@@ -88,8 +97,8 @@ permalink: /resultados/
 {% assign first_armory = true %}
 {% for post in comunidade_posts %}
   {% assign post_path = post.path | downcase %}
-  {% assign style_slug = post.content_style | default: post.category_label | default: '' | slugify %}
-  {% if post_path contains '/armory/' or post_path contains '_comunidade/armory/' or style_slug == 'armory' %}
+  {% assign style_slug = post.content_style | default: post.category_label | default: "" | slugify %}
+  {% if post_path contains "_comunidade/armory/" or style_slug == "armory" %}
     {% unless first_armory %},{% endunless %}
     {
       "title": {{ post.title | jsonify }},
@@ -111,25 +120,34 @@ permalink: /resultados/
 
 <script type="application/json" id="league-data">
 [
-{% assign first_league = true %}
+{% assign first_pokemon = true %}
 {% for post in comunidade_posts %}
   {% assign post_path = post.path | downcase %}
-  {% assign style_slug = post.content_style | default: post.category_label | default: '' | slugify %}
-  {% if post_path contains '/liga/' or post_path contains '_comunidade/liga/' or style_slug == 'liga' %}
-    {% unless first_league %},{% endunless %}
+  {% assign post_game = post.game | default: "" | downcase %}
+  {% assign is_pokemon_event = false %}
+  {% if post_path contains "_comunidade/pokemon/" %}{% assign is_pokemon_event = true %}{% endif %}
+  {% if post_game contains "pokemon" %}{% assign is_pokemon_event = true %}{% endif %}
+  {% if post_game contains "pokémon" %}{% assign is_pokemon_event = true %}{% endif %}
+  {% if is_pokemon_event and post.results %}
+    {% unless first_pokemon %},{% endunless %}
     {
       "title": {{ post.title | jsonify }},
       "url": {{ post.url | relative_url | jsonify }},
       "date": {{ post.date | date_to_xmlschema | jsonify }},
       "event_date": {{ post.event_date | default: post.date | date_to_xmlschema | jsonify }},
       "summary": {{ post.summary | default: post.excerpt | strip_html | strip | jsonify }},
-      "game": {{ post.game | default: "Flesh and Blood" | jsonify }},
-      "format": {{ post.format | default: "" | jsonify }},
+      "game": {{ post.game | default: "Pokemon" | jsonify }},
+      "event_name": {{ post.event_name | default: "Liga Pokémon" | jsonify }},
+      "event_type": {{ post.event_type | default: post.tipo_evento | default: "Liga" | jsonify }},
+      "format": {{ post.format | default: "Standard" | jsonify }},
       "rounds": {{ post.rounds | default: "" | jsonify }},
-      "next_league": {{ post.next_liga | default: post.next_league | default: "Domingo • 13:30" | jsonify }},
-      "results": {% if post.results %}{{ post.results | jsonify }}{% else %}[]{% endif %}
+      "players": {{ post.players | default: post.numero_jogadores | default: post.results.size | jsonify }},
+      "time": {{ post.time | default: post.horario | default: "" | jsonify }},
+      "local": {{ post.local | default: post.location | default: "" | jsonify }},
+      "next_league": {{ post.next_event | default: post.next_liga | default: "Quinta • 19:00" | jsonify }},
+      "results": {{ post.results | jsonify }}
     }
-    {% assign first_league = false %}
+    {% assign first_pokemon = false %}
   {% endif %}
 {% endfor %}
 ]
@@ -141,12 +159,12 @@ permalink: /resultados/
       <div>
         <p class="eyebrow">Último Armory</p>
         <h2 id="ultimo-armory-title">Resultado mais recente</h2>
-        <p>Resultado mais recente do nosso Armory, o torneio semanal de Flesh and Blood da comunidade.</p>
+        <p>O placar mais recente do encontro semanal de Flesh and Blood.</p>
       </div>
     </div>
 
     <div class="community-dashboard-grid community-dashboard-single">
-      <article class="latest-armory-card latest-armory-card-wide armory-board" id="latest-armory-card" data-latest-armory-card data-result-limit="12" data-history-url="#armory-historico">
+      <article class="latest-armory-card latest-armory-card-wide armory-board" id="latest-armory-card" data-latest-armory-card data-result-limit="9" data-history-url="{{ '/resultados/anteriores/' | relative_url }}">
         <p class="eyebrow">Último Armory</p>
         <h3>Nenhum resultado cadastrado</h3>
         <p>Crie um Markdown em <code>_comunidade/Armory</code> usando o modelo de resultados para preencher esta área.</p>
@@ -155,145 +173,97 @@ permalink: /resultados/
   </div>
 </section>
 
-<section class="section community-dashboard-section armory-feature-section league-feature-section" id="resultado-ultima-liga" aria-labelledby="resultado-liga-title">
+<section class="section community-dashboard-section armory-feature-section pokemon-feature-section" id="ultima-liga-pokemon" aria-labelledby="resultado-pokemon-title">
   <div class="container">
-    <div class="section-title armory-feature-title league-feature-title">
+    <div class="section-title armory-feature-title pokemon-feature-title">
       <div>
-        <p class="eyebrow">Ligas</p>
-        <h2 id="resultado-liga-title">Resultados das últimas ligas</h2>
-        <p>Um bloco para Flesh and Blood e outro para Pokémon, para ninguém misturar espadada com Poké Bola.</p>
+        <p class="eyebrow">Liga Pokémon</p>
+        <h2 id="resultado-pokemon-title">Último resultado de Pokémon</h2>
+        <p>Um único Pokémon principal por jogador, com miniatura, campanha e acesso ao resultado completo.</p>
       </div>
     </div>
 
-    <div class="community-dashboard-grid league-dashboard-grid">
-      <article class="latest-armory-card latest-armory-card-wide armory-board league-board league-board-fab" id="latest-league-fab-card">
-        <p class="eyebrow">Última Liga de Flesh and Blood</p>
-        <h3>Nenhum resultado cadastrado</h3>
-        <p>Crie um Markdown em <code>_comunidade/Liga</code> com <strong>game: "Flesh and Blood"</strong> para preencher esta área.</p>
-      </article>
-
+    <div class="community-dashboard-grid community-dashboard-single">
       <article class="latest-armory-card latest-armory-card-wide armory-board league-board league-board-pokemon" id="latest-league-pokemon-card">
-        <p class="eyebrow">Última Liga de Pokémon</p>
+        <p class="eyebrow">Última Liga Pokémon</p>
         <h3>Nenhum resultado cadastrado</h3>
-        <p>Crie um Markdown em <code>_comunidade/Liga</code> com <strong>game: "Pokemon"</strong> para preencher esta área.</p>
+        <p>Crie um Markdown em <code>_comunidade/Pokemon</code> usando o modelo da Liga Pokémon.</p>
       </article>
     </div>
   </div>
 </section>
 
-<section class="section competitive-results-section" id="resultados-ligas" aria-labelledby="competitivo-title">
+<section class="section competitive-results-section" id="competitivo" aria-labelledby="competitivo-title">
   <div class="container">
-    <div class="section-title">
+    <div class="section-title competitive-results-heading">
       <div>
         <p class="eyebrow">Competitivo</p>
-        <h2 id="competitivo-title">Torneios e ligas</h2>
-        <p>Resultados e relatos maiores ficam separados dos posts sociais para facilitar a consulta.</p>
+        <h2 id="competitivo-title">Outros resultados recentes</h2>
+        <p>Os três resultados mais recentes além dos dois destaques acima, misturando todos os jogos e tipos de evento.</p>
       </div>
+      <a class="btn btn-secondary" href="{{ '/resultados/anteriores/' | relative_url }}">Ver resultados anteriores</a>
     </div>
 
-    <div class="results-columns">
-      <section class="content-section-block post-style-torneio" aria-labelledby="torneios-title">
-        <div class="content-section-head">
-          <div>
-            <p class="eyebrow">Torneios</p>
-            <h3 id="torneios-title">Resultados de torneios</h3>
-          </div>
-          <span class="section-folder"></span>
-        </div>
-        <div class="card-grid grid-3">
-          {% assign torneio_count = 0 %}
-          {% for post in comunidade_posts %}
-            {% assign post_path = post.path | downcase %}
-            {% assign style_slug = post.content_style | default: post.category_label | default: '' | slugify %}
-            {% if post_path contains '/torneio/' or post_path contains '_comunidade/torneio/' or style_slug == 'torneio' %}
-              {% if torneio_count < 6 %}{% include post-card.html post=post %}{% endif %}
-              {% assign torneio_count = torneio_count | plus: 1 %}
-            {% endif %}
-          {% endfor %}
-        </div>
-        {% if torneio_count == 0 %}<p class="empty-section">Nenhum torneio publicado ainda.</p>{% endif %}
-      </section>
+    <div class="result-event-grid">
+      {% assign competitive_count = 0 %}
+      {% for post in comunidade_posts %}
+        {% assign post_path = post.path | downcase %}
+        {% assign post_game = post.game | default: "" | downcase %}
+        {% assign style_slug = post.content_style | default: post.category_label | default: "" | slugify %}
+        {% assign is_result_event = false %}
+        {% if post.results %}
+          {% if post_path contains "_comunidade/armory/" or post_path contains "_comunidade/liga/" or post_path contains "_comunidade/torneio/" or post_path contains "_comunidade/pokemon/" %}
+            {% assign is_result_event = true %}
+          {% elsif style_slug == "armory" or style_slug == "liga" or style_slug == "torneio" or style_slug == "pokemon-result" %}
+            {% assign is_result_event = true %}
+          {% endif %}
+        {% endif %}
+        {% assign is_featured_result = false %}
+        {% if latest_armory_post and post.url == latest_armory_post.url %}{% assign is_featured_result = true %}{% endif %}
+        {% if latest_pokemon_post and post.url == latest_pokemon_post.url %}{% assign is_featured_result = true %}{% endif %}
+        {% if is_result_event and is_featured_result == false and competitive_count < 3 %}
+          {% include result-event-card.html post=post %}
+          {% assign competitive_count = competitive_count | plus: 1 %}
+        {% endif %}
+      {% endfor %}
+    </div>
 
-      <section class="content-section-block post-style-liga" aria-labelledby="ligas-title">
-        <div class="content-section-head">
-          <div>
-            <p class="eyebrow">Ligas</p>
-            <h3 id="ligas-title">Resultados anteriores de ligas</h3>
-          </div>
-          <span class="section-folder"></span>
-        </div>
-        <div class="card-grid grid-3">
-          {% assign liga_count = 0 %}
-          {% for post in comunidade_posts %}
-            {% assign post_path = post.path | downcase %}
-            {% assign style_slug = post.content_style | default: post.category_label | default: '' | slugify %}
-            {% if post_path contains '/liga/' or post_path contains '_comunidade/liga/' or style_slug == 'liga' %}
-              {% if liga_count < 6 %}{% include post-card.html post=post %}{% endif %}
-              {% assign liga_count = liga_count | plus: 1 %}
-            {% endif %}
-          {% endfor %}
-        </div>
-        {% if liga_count == 0 %}<p class="empty-section">Nenhuma liga publicada ainda.</p>{% endif %}
-      </section>
+    {% if competitive_count == 0 %}<p class="empty-section">Nenhum outro resultado publicado ainda.</p>{% endif %}
+
+    <div class="competitive-results-footer">
+      <a class="btn btn-primary" href="{{ '/resultados/anteriores/' | relative_url }}">Abrir histórico completo</a>
     </div>
   </div>
 </section>
-
-
-<section class="section section-alt armory-history-section" id="armory-historico" aria-labelledby="armory-historico-title">
-  <div class="container">
-    <div class="section-title">
-      <div>
-        <p class="eyebrow">Histórico Armory</p>
-        <h2 id="armory-historico-title">Estatísticas e resultados</h2>
-        <p>Lista dos Armory cadastrados e resumo acumulado do mês vigente.</p>
-      </div>
-    </div>
-
-    <div class="armory-history-grid">
-      <article class="info-panel">
-        <p class="eyebrow">Resumo do mês</p>
-        <div id="armory-month-summary" class="stat-list">Sem dados cadastrados.</div>
-      </article>
-
-      <article class="info-panel">
-        <p class="eyebrow">Últimos Armory</p>
-        <div id="armory-history-list" class="armory-history-list">Sem resultados cadastrados.</div>
-      </article>
-    </div>
-  </div>
-</section>
-
-
 
 <section class="section resultados-links-section" aria-labelledby="resultados-links-title">
   <div class="container">
     <aside class="ccm-internal-links-card" aria-labelledby="resultados-links-title">
       <div class="ccm-internal-links-header">
         <p class="ccm-internal-links-kicker">Depois do placar</p>
-        <h2 id="resultados-links-title">Veja também o resto da comunidade</h2>
-        <p>Resultados mostram quem venceu. Os links abaixo mostram onde jogar, como aprender e o que a galera anda publicando.</p>
+        <h2 id="resultados-links-title">Continue pela comunidade</h2>
+        <p>Veja quando jogar, acompanhe os registros dos encontros e encontre materiais para melhorar no próximo evento.</p>
       </div>
       <div class="ccm-internal-links-grid">
         <a class="ccm-internal-link-item featured" href="{{ '/agenda/' | relative_url }}">
           <span class="ccm-internal-link-tag">Agenda</span>
           <strong>Próximos encontros</strong>
-          <small>Veja quando rolam Armory, Commander, Pokémon, RPG e outras mesas em Cianorte.</small>
+          <small>Confira horários e locais das mesas presenciais em Cianorte.</small>
         </a>
         <a class="ccm-internal-link-item" href="{{ '/comunidade/' | relative_url }}">
           <span class="ccm-internal-link-tag">Comunidade</span>
           <strong>Fotos e bastidores</strong>
-          <small>Reels, fotos, vídeos, memes e registros da galera fora da tabela de resultados.</small>
+          <small>Registros da galera fora das tabelas de classificação.</small>
         </a>
-        <a class="ccm-internal-link-item" href="{{ '/guias/' | relative_url }}">
-          <span class="ccm-internal-link-tag">Guias</span>
-          <strong>Aprenda os jogos</strong>
-          <small>Regras, formatos, dúvidas e explicações para não apanhar da própria carta.</small>
+        <a class="ccm-internal-link-item" href="{{ '/jogos/pokemon-tcg-em-cianorte/' | relative_url }}">
+          <span class="ccm-internal-link-tag">Pokémon</span>
+          <strong>Conheça o jogo</strong>
+          <small>Informações para entrar nas mesas de Pokémon TCG em Cianorte.</small>
         </a>
         <a class="ccm-internal-link-item" href="{{ '/guias/decks/' | relative_url }}">
-          <span class="ccm-internal-link-tag">Deck Techs</span>
+          <span class="ccm-internal-link-tag">Decks</span>
           <strong>Estude listas</strong>
-          <small>Decks testados, planos de jogo e decisões para melhorar nas próximas rodadas.</small>
+          <small>Decks, planos de jogo e decisões para os próximos torneios.</small>
         </a>
       </div>
     </aside>

@@ -260,6 +260,15 @@ defaults:
       content_style: "liga"
       comments: false
   - scope:
+      path: "_comunidade/Pokemon"
+      type: "comunidade"
+    values:
+      category_label: "Liga Pokémon"
+      content_style: "pokemon-result"
+      game: "Pokemon"
+      event_name: "Liga Pokémon"
+      comments: false
+  - scope:
       path: "_comunidade/Armory"
       type: "comunidade"
     values:

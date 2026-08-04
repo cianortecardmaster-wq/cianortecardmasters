@@ -344,7 +344,10 @@
       paf: ["sv04.5", "sv4.5"],
       twm: ["sv06", "sv6"],
       sfa: ["sv06.5", "sv6.5"],
-      pre: ["sv08.5", "sv8.5"]
+      pre: ["sv08.5", "sv8.5"],
+      meg: ["me01"],
+      pfl: ["me02"],
+      dri: ["sv10"]
     };
 
     if (aliases[normalized]) return aliases[normalized];

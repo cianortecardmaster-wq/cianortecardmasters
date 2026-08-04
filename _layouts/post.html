@@ -19,6 +19,7 @@ layout: default
   {% elsif page_path contains "_comunidade/videos/" %}{% assign item_label = "Vídeos" %}{% assign inferred_style = "videos" %}
   {% elsif page_path contains "_comunidade/musica/" %}{% assign item_label = "Música" %}{% assign inferred_style = "musica" %}
   {% elsif page_path contains "_comunidade/meme/" %}{% assign item_label = "Meme" %}{% assign inferred_style = "meme" %}
+  {% elsif page_path contains "_comunidade/pokemon/" %}{% assign item_label = "Liga Pokémon" %}{% assign inferred_style = "pokemon-result" %}
   {% elsif page_path contains "_comunidade/torneio/" %}{% assign item_label = "Torneio" %}{% assign inferred_style = "torneio" %}
   {% elsif page_path contains "_comunidade/liga/" %}{% assign item_label = "Liga" %}{% assign inferred_style = "liga" %}
   {% elsif page_path contains "_comunidade/armory/" %}{% assign item_label = "Armory" %}{% assign inferred_style = "armory" %}
@@ -46,6 +47,7 @@ layout: default
   {% when "flesh-and-blood" %}{% assign fallback_image = site.data.images.post_defaults.flesh_and_blood %}
   {% when "magic" %}{% assign fallback_image = site.data.images.post_defaults.magic %}
   {% when "pokemon" %}{% assign fallback_image = site.data.images.post_defaults.pokemon %}
+  {% when "pokemon-result" %}{% assign fallback_image = "/assets/img/resultados/pokemon/stadium-top.webp" %}
   {% when "tcg" %}{% assign fallback_image = site.data.images.post_defaults.tcg %}
   {% when "rpg" %}{% assign fallback_image = site.data.images.post_defaults.rpg %}
   {% when "cianorte-card-master" %}{% assign fallback_image = site.data.images.post_defaults.cianorte_card_master %}
@@ -193,14 +195,19 @@ layout: default
 {% endif %}
 
 {% assign is_fab_result_detail = false %}
+{% assign is_pokemon_result_detail = false %}
 {% assign post_game_down = page.game | default: "" | downcase %}
 {% if page.collection == "comunidade" and page.results %}
-  {% if post_style == "armory" %}
+  {% if post_style == "pokemon-result" or page_path contains "_comunidade/pokemon/" %}
+    {% assign is_pokemon_result_detail = true %}
+  {% elsif post_game_down contains "pokemon" or post_game_down contains "pokémon" %}
+    {% if post_style == "liga" or post_style == "torneio" %}
+      {% assign is_pokemon_result_detail = true %}
+    {% endif %}
+  {% elsif post_style == "armory" %}
     {% assign is_fab_result_detail = true %}
   {% elsif post_style == "liga" %}
-    {% unless post_game_down contains "pokemon" %}
-      {% assign is_fab_result_detail = true %}
-    {% endunless %}
+    {% assign is_fab_result_detail = true %}
   {% elsif post_style == "torneio" %}
     {% if post_game_down contains "flesh" or post_game_down == "fab" %}
       {% assign is_fab_result_detail = true %}
@@ -208,7 +215,9 @@ layout: default
   {% endif %}
 {% endif %}
 
-{% if is_fab_result_detail %}
+{% if is_pokemon_result_detail %}
+  {% include pokemon-result-standalone.html %}
+{% elsif is_fab_result_detail %}
   {% include fab-result-standalone.html %}
 {% else %}
 <article class="post-page post-style-{{ post_style }}">

@@ -15,6 +15,7 @@
   {% elsif include_post_path contains "_comunidade/videos/" %}{% assign item_label = "Vídeos" %}{% assign inferred_style = "videos" %}
   {% elsif include_post_path contains "_comunidade/musica/" %}{% assign item_label = "Música" %}{% assign inferred_style = "musica" %}
   {% elsif include_post_path contains "_comunidade/meme/" %}{% assign item_label = "Meme" %}{% assign inferred_style = "meme" %}
+  {% elsif include_post_path contains "_comunidade/pokemon/" %}{% assign item_label = "Liga Pokémon" %}{% assign inferred_style = "pokemon-result" %}
   {% elsif include_post_path contains "_comunidade/torneio/" %}{% assign item_label = "Torneio" %}{% assign inferred_style = "torneio" %}
   {% elsif include_post_path contains "_comunidade/liga/" %}{% assign item_label = "Liga" %}{% assign inferred_style = "liga" %}
   {% elsif include_post_path contains "_comunidade/armory/" %}{% assign item_label = "Armory" %}{% assign inferred_style = "armory" %}
@@ -42,6 +43,7 @@
   {% when "flesh-and-blood" %}{% assign fallback_image = site.data.images.post_defaults.flesh_and_blood %}
   {% when "magic" %}{% assign fallback_image = site.data.images.post_defaults.magic %}
   {% when "pokemon" %}{% assign fallback_image = site.data.images.post_defaults.pokemon %}
+  {% when "pokemon-result" %}{% assign fallback_image = "/assets/img/resultados/pokemon/stadium-stands.webp" %}
   {% when "tcg" %}{% assign fallback_image = site.data.images.post_defaults.tcg %}
   {% when "rpg" %}{% assign fallback_image = site.data.images.post_defaults.rpg %}
   {% when "cianorte-card-master" %}{% assign fallback_image = site.data.images.post_defaults.cianorte_card_master %}

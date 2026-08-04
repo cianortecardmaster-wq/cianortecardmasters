@@ -1,0 +1,53 @@
+{% assign podium_result = include.result %}
+{% assign podium_rank = include.rank | default: 1 %}
+{% assign podium_tone = include.tone | default: "gold" %}
+{% assign podium_player = podium_result.player | default: podium_result.jogador | default: podium_result.nome | default: "Jogador" %}
+{% assign podium_pokemon_raw = podium_result.pokemon | default: podium_result.main_pokemon | default: podium_result.pokemon_principal | default: podium_result.hero | default: podium_result.deck | default: "Pokémon" %}
+{% assign podium_pokemon_parts = podium_pokemon_raw | split: "/" %}
+{% assign podium_pokemon = podium_pokemon_parts | first | strip %}
+{% assign podium_card = podium_result.card | default: podium_result.card_name | default: podium_result.carta %}
+{% assign podium_deck = podium_result.deck | default: podium_result.deque %}
+{% assign podium_record = podium_result.record | default: podium_result.campanha | default: podium_result.score | default: "-" %}
+{% assign podium_wins = podium_result.wins | default: podium_result.vitorias | default: podium_result.vitórias | default: "-" %}
+{% assign podium_points = podium_result.points | default: podium_result.pontos | default: podium_result.score | default: podium_result.record | default: "-" %}
+{% assign podium_set = podium_result.card_set | default: podium_result.set | default: podium_result.colecao %}
+{% assign podium_number = podium_result.card_number | default: podium_result.number | default: podium_result.numero %}
+{% assign podium_lang = podium_result.card_lang | default: podium_result.lang | default: "pt-br" %}
+{% assign scoring_mode = page.scoring | default: page.pontuacao | default: "record" | downcase %}
+{% assign is_points_scoring = false %}
+{% if scoring_mode == "points" or scoring_mode == "pontos" %}{% assign is_points_scoring = true %}{% endif %}
+
+<article class="pokemon-result-podium-card is-rank-{{ podium_rank }} is-{{ podium_tone }}{% unless podium_card %} has-card-placeholder{% endunless %}">
+  <div class="pokemon-result-rank-badge" aria-label="{{ podium_rank }}º colocado">
+    <span>{{ podium_rank }}º</span>
+  </div>
+  <div class="pokemon-result-card-shell">
+    <div class="pokemon-result-card-energy" aria-hidden="true"></div>
+    <div class="pokemon-result-card-image">
+      {% if podium_card and podium_card != "" %}
+        {% include tcg-card.html game="pokemon" name=podium_card set=podium_set number=podium_number lang=podium_lang cover=true alt=podium_card %}
+      {% else %}
+        <div class="pokemon-result-card-placeholder" aria-label="Espaço reservado para a carta de {{ podium_pokemon }}">
+          <span class="pokemon-result-card-placeholder-ball" aria-hidden="true"></span>
+          <strong>Carta a definir</strong>
+          <small>Adicione o campo <code>card:</code> no resultado</small>
+        </div>
+      {% endif %}
+    </div>
+    <div class="pokemon-result-card-shine" aria-hidden="true"></div>
+  </div>
+  <div class="pokemon-result-podium-caption">
+    <strong>{{ podium_player }}</strong>
+    <span>{{ podium_pokemon }}</span>
+    {% if podium_deck and podium_deck != podium_pokemon %}<small>{{ podium_deck }}</small>{% endif %}
+    <div>
+      {% if is_points_scoring %}
+        <em>{{ podium_points }} pts</em>
+        <b>{{ podium_rank }}º lugar</b>
+      {% else %}
+        <em>{{ podium_record }}</em>
+        <b>{{ podium_wins }} vitórias</b>
+      {% endif %}
+    </div>
+  </div>
+</article>
