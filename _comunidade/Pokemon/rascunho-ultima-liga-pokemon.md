@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Liga Pokémon - DATA A DEFINIR"
 summary: "Resultado da última Liga Pokémon realizada em Cianorte."
 game: "Pokemon"
