@@ -1,6 +1,6 @@
 ---
 published: true
-title: "Liga Pokémon - DATA A DEFINIR"
+title: "Liga Pokémon - 27/07/2026"
 summary: "Resultado da última Liga Pokémon realizada em Cianorte."
 game: "Pokemon"
 event_name: "Liga Pokémon"
@@ -8,10 +8,10 @@ event_type: "Liga"
 format: "Standard"
 rounds: "A definir"
 players: 6
-date: 2026-08-04
-event_date: 2026-08-04
-time: "A definir"
-local: "A definir"
+date: 2026-07-27
+event_date: 2026-07-27
+time: "17:00"
+local: "Bazar do Weezing"
 next_event: "A definir"
 scoring: "points"
 image_game: "pokemon"
