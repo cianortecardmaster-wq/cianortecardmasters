@@ -16,7 +16,7 @@ next_event: "A definir"
 scoring: "points"
 image_game: "pokemon"
 image_card: ""
-image_alt: "Resultado do Torneio Pokémon da comunidade Cianorte Card Masters em 15 de agosto de 2026"
+image_alt: "Resultado do Torneio Pokémon da comunidade Cianorte Card Masters em 15 de agosto de 2026" 
 results:
   - player: "Fernando"
     pokemon: "Cinccino"
