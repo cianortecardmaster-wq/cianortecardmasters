@@ -1,0 +1,60 @@
+---
+published: true
+title: "Torneio Pokémon - 15/08/2026"
+summary: "Resultado do Torneio Pokémon realizado em Cianorte no dia 15/08/2026."
+game: "Pokemon"
+event_name: "Torneio Pokémon"
+event_type: "Torneio"
+format: "Standard"
+rounds: 3
+players: 6
+date: 2026-08-15
+event_date: 2026-08-15
+time: "A definir"
+local: "Bazar do Weezing"
+next_event: "A definir"
+scoring: "points"
+image_game: "pokemon"
+image_card: ""
+image_alt: "Resultado do Torneio Pokémon da comunidade Cianorte Card Masters em 15 de agosto de 2026" 
+results:
+  - player: "Fernando"
+    pokemon: "Cinccino"
+    pokemon_api: "Cinccino EX 119/086"
+    deck: "Cinccino EX"
+    points: 2
+
+  - player: "João"
+    pokemon: "Decidueye"
+    pokemon_api: "decidueye EX 012/088"
+    deck: "Decidueye EX"
+    points: 2
+
+  - player: "Artur"
+    pokemon: "Ogerpon"
+    pokemon_api: "ogerpon EX"
+    deck: "Ogerpon EX 025/167"
+    points: 2
+
+  - player: "Ardergui"
+    pokemon: "Decidueye"
+    pokemon_api: "decidueye EX 012/088"
+    deck: "Decidueye EX"
+    points: 2
+
+  - player: "Matheus Orador"
+    pokemon: "Honchkrow"
+    pokemon_api: "Honchkrow da Equipe Rocket 127/217
+    deck: "Honchkrow"
+    points: 1
+
+  - player: "Caetano"
+    pokemon: "Lucario"
+    pokemon_api: "lucario ex 160/132"
+    deck: "Lucario ex"
+    points: 0
+---
+
+Resultado cadastrado para alimentar automaticamente a página de resultados e o histórico competitivo.
+
+A classificação do aplicativo registrou Fernando em 1º lugar; João, Artur e Felipe empatados nas posições 2–4; Matheus Ardenghi em 5º; e Caetano em 6º.
