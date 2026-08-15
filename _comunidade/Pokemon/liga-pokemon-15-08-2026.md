@@ -16,45 +16,57 @@ next_event: "A definir"
 scoring: "points"
 image_game: "pokemon"
 image_card: ""
-image_alt: "Resultado do Torneio Pokémon da comunidade Cianorte Card Masters em 15 de agosto de 2026" 
+image_alt: "Resultado do Torneio Pokémon da comunidade Cianorte Card Masters em 15 de agosto de 2026"
 results:
   - player: "Fernando"
     pokemon: "Cinccino"
-    pokemon_api: "Cinccino EX 119/086"
-    deck: "Cinccino EX"
+    pokemon_api: "cinccino"
+    card: "Cinccino EX"
+    card_number: "119/086"
+    card_lang: "pt-br"
     points: 2
 
   - player: "João"
     pokemon: "Decidueye"
-    pokemon_api: "decidueye EX 012/088"
-    deck: "Decidueye EX"
+    pokemon_api: "decidueye"
+    card: "Decidueye EX"
+    card_number: "012/088"
+    card_lang: "pt-br"
     points: 2
 
   - player: "Artur"
     pokemon: "Ogerpon"
-    pokemon_api: "ogerpon EX"
-    deck: "Ogerpon EX 025/167"
+    pokemon_api: "ogerpon"
+    card: "Ogerpon EX"
+    card_number: "025/167"
+    card_lang: "pt-br"
     points: 2
 
   - player: "Ardergui"
     pokemon: "Decidueye"
-    pokemon_api: "decidueye EX 012/088"
-    deck: "Decidueye EX"
+    pokemon_api: "decidueye"
+    card: "Decidueye EX"
+    card_number: "012/088"
+    card_lang: "pt-br"
     points: 2
 
   - player: "Matheus Orador"
     pokemon: "Honchkrow"
-    pokemon_api: "Honchkrow da Equipe Rocket 127/217
-    deck: "Honchkrow"
+    pokemon_api: "honchkrow"
+    card: "Honchkrow da Equipe Rocket"
+    card_number: "127/217"
+    card_lang: "pt-br"
     points: 1
 
   - player: "Caetano"
     pokemon: "Lucario"
-    pokemon_api: "lucario ex 160/132"
-    deck: "Lucario ex"
+    pokemon_api: "lucario"
+    card: "Lucario ex"
+    card_number: "160/132"
+    card_lang: "pt-br"
     points: 0
 ---
 
 Resultado cadastrado para alimentar automaticamente a página de resultados e o histórico competitivo.
 
-A classificação do aplicativo registrou Fernando em 1º lugar; João, Artur e Felipe empatados nas posições 2–4; Matheus Ardenghi em 5º; e Caetano em 6º.
+A classificação do aplicativo registrou Fernando em 1º lugar; João, Artur e Ardergui empatados nas posições 2–4; Matheus Orador em 5º; e Caetano em 6º.
