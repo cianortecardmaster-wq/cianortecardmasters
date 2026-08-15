@@ -20,37 +20,37 @@ image_alt: "Resultado do Torneio Pokémon da comunidade Cianorte Card Masters em
 results:
   - player: "Fernando"
     pokemon: "Cinccino"
-    pokemon_api: "metagross"
-    deck: "Metagross / Cinccino"
+    pokemon_api: "Cinccino EX 119/086"
+    deck: "Cinccino EX"
     points: 2
 
   - player: "João"
     pokemon: "Decidueye"
-    pokemon_api: "decidueye"
-    deck: "Decidueye"
+    pokemon_api: "decidueye EX 012/088"
+    deck: "Decidueye EX"
     points: 2
 
   - player: "Artur"
     pokemon: "Ogerpon"
-    pokemon_api: "ogerpon"
-    deck: "Ogerpon"
+    pokemon_api: "ogerpon EX"
+    deck: "Ogerpon EX 025/167"
     points: 2
 
-  - player: "Felipe"
+  - player: "Ardergui"
     pokemon: "Decidueye"
-    pokemon_api: "decidueye"
-    deck: "Decidueye"
+    pokemon_api: "decidueye EX 012/088"
+    deck: "Decidueye EX"
     points: 2
 
-  - player: "Matheus Ardenghi"
+  - player: "Matheus Orador"
     pokemon: "Honchkrow"
-    pokemon_api: "honchkrow"
+    pokemon_api: "Honchkrow da Equipe Rocket 127/217
     deck: "Honchkrow"
     points: 1
 
   - player: "Caetano"
     pokemon: "Lucario"
-    pokemon_api: "lucario"
+    pokemon_api: "lucario ex 160/132"
     deck: "Lucario ex"
     points: 0
 ---
