@@ -1,4 +1,4 @@
-const CCM_CACHE = 'ccm-pwa-v2026-08-04-pokemon-cards-02';
+const CCM_CACHE = 'ccm-pwa-v2026-08-27-home-moderna-01';
 
 const CORE_ASSETS = [
   '/',
