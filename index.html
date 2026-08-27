@@ -2,198 +2,94 @@
 layout: default
 permalink: /
 title: "Card games, RPG e comunidade em Cianorte"
-description: "Veja os próximos encontros, o último resultado de Armory, fotos e os canais da comunidade Cianorte Card Masters."
-keywords:
-  - card games em Cianorte
-  - Flesh and Blood Cianorte
-  - Pokémon TCG Cianorte
-  - Magic Commander Cianorte
-  - RPG em Cianorte
-  - comunidade geek Cianorte
-  - torneios de card game Cianorte
+description: "Agenda, resultados e publicações da comunidade Cianorte Card Masters."
 image: "/assets/img/banners/banner-home.webp"
-image_alt: "Dragão em arte fantástica representando a comunidade Cianorte Card Masters e os encontros presenciais de card games em Cianorte"
+image_alt: "Dragão verde representando a comunidade Cianorte Card Masters"
 ---
 
 {% assign comunidade_posts = site.comunidade | sort: "date" | reverse %}
-{% assign menu_whatsapp = site.data.social_links | where: "name", "WhatsApp" | first %}
-
-<section class="hero home-hero home-hero-light" aria-labelledby="home-title">
-  <div class="hero-bg" style="--hero-image: url('{{ site.data.images.hero_background | relative_url }}'); --hero-image-mobile: url('{{ site.data.images.hero_background_mobile | default: site.data.images.hero_background | relative_url }}');"></div>
-
-  <div class="container hero-inner">
-    <div class="home-hero-copy">
-      <p class="eyebrow">Card games, RPG e comunidade em Cianorte</p>
-      <h1 id="home-title">Cianorte Card Masters</h1>
-      <p class="lead">Encontre os próximos jogos, acompanhe os resultados e entre em contato com a comunidade local.</p>
-      <div class="btn-row">
-        <a class="btn btn-primary" href="#proximos-encontros">Próximos encontros</a>
-        <a class="btn btn-secondary" href="{{ menu_whatsapp.url | default: 'https://chat.whatsapp.com/HjmzPtLTCIALlwS2mIg55R' }}" target="_blank" rel="noopener noreferrer">Entrar no WhatsApp</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section home-next-events-section" id="proximos-encontros" aria-labelledby="home-next-events-title">
-  <div class="container">
-    <div class="section-title home-section-title-light">
-      <div>
-        <p class="eyebrow">Agenda</p>
-        <h2 id="home-next-events-title">Próximos encontros da semana</h2>
-        <p>Os três próximos horários fixos da comunidade. Mudanças especiais são confirmadas no WhatsApp.</p>
-      </div>
-      <a class="section-link" href="{{ '/agenda/' | relative_url }}">Ver agenda completa</a>
-    </div>
-
-    <div class="home-event-grid" data-home-agenda-board>
-      {% for item in site.data.home_agenda %}
-        <a class="home-event-card" href="{{ item.url | relative_url }}" data-home-agenda-item data-weekday="{{ item.weekday }}">
-          <span class="home-event-day">{{ item.day }}</span>
-          <strong>{{ item.title }}</strong>
-          <span>{{ item.game }}</span>
-          <small>{{ item.time }}{% if item.location %} · {{ item.location }}{% endif %}</small>
-        </a>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
-<script type="application/json" id="armory-data">
-[
-{% assign first_armory = true %}
-{% for post in comunidade_posts %}
-  {% assign post_path = post.path | downcase %}
-  {% assign style_slug = post.content_style | default: post.category_label | default: '' | slugify %}
-  {% if post_path contains '/armory/' or post_path contains '_comunidade/armory/' or style_slug == 'armory' %}
-    {% unless first_armory %},{% endunless %}
-    {
-      "title": {{ post.title | jsonify }},
-      "url": {{ post.url | relative_url | jsonify }},
-      "date": {{ post.date | date_to_xmlschema | jsonify }},
-      "event_date": {{ post.event_date | default: post.date | date_to_xmlschema | jsonify }},
-      "summary": {{ post.summary | default: post.excerpt | strip_html | strip | jsonify }},
-      "game": {{ post.game | default: "Flesh and Blood" | jsonify }},
-      "format": {{ post.format | default: "" | jsonify }},
-      "rounds": {{ post.rounds | default: "" | jsonify }},
-      "next_armory": {{ post.next_armory | default: "Quarta • 19:00" | jsonify }},
-      "results": {% if post.results %}{{ post.results | jsonify }}{% else %}[]{% endif %}
-    }
-    {% assign first_armory = false %}
-  {% endif %}
+{% assign latest_armory = nil %}
+{% assign latest_pokemon = nil %}
+{% for item in comunidade_posts %}
+  {% assign item_path = item.path | downcase %}
+  {% if latest_armory == nil and item_path contains '/armory/' %}{% assign latest_armory = item %}{% endif %}
+  {% if latest_pokemon == nil and item_path contains '/pokemon/' %}{% assign latest_pokemon = item %}{% endif %}
 {% endfor %}
-]
-</script>
+{% assign home_publications = site.blog | concat: site.guias | sort: "date" | reverse %}
+{% assign whatsapp = site.data.social_links | where: "name", "WhatsApp" | first %}
 
-<section class="section section-alt home-latest-result-section" aria-labelledby="home-latest-result-title">
-  <div class="container">
-    <div class="section-title home-section-title-light">
-      <div>
-        <p class="eyebrow">Último Armory</p>
-        <h2 id="home-latest-result-title">Resultado mais recente</h2>
-        <p>O mesmo placar usado na página de resultados, em uma versão compacta para a Home.</p>
+<section class="ccm-home-hero" id="inicio">
+  <div class="ccm-home-hero-bg"></div>
+  <div class="ccm-home-grid"></div>
+  <div class="container ccm-home-hero-inner">
+    <div class="ccm-home-copy">
+      <p class="ccm-kicker"><span>●</span> Comunidade TCG de Cianorte</p>
+      <h1>É na mesa<br>que a história<br><em>acontece.</em></h1>
+      <p>Card games, RPG e encontros presenciais. Encontre sua próxima mesa, acompanhe os resultados e conheça quem mantém o jogo vivo em Cianorte.</p>
+      <div class="ccm-home-actions">
+        <a class="ccm-btn ccm-btn-green" href="#agenda-home">Ver próxima rodada <span>→</span></a>
+        <a class="ccm-btn ccm-btn-ghost" href="{{ whatsapp.url }}" target="_blank" rel="noopener noreferrer">Conhecer a comunidade</a>
       </div>
-      <a class="section-link" href="{{ '/resultados/' | relative_url }}">Todos os resultados</a>
     </div>
-
-    <article class="latest-armory-card latest-armory-card-wide armory-board home-latest-armory" data-latest-armory-card data-result-limit="3" data-history-url="{{ '/resultados/anteriores/' | relative_url }}">
-      <p class="eyebrow">Último Armory</p>
-      <h3>Nenhum resultado cadastrado</h3>
-      <p>Quando um resultado for publicado, ele aparecerá automaticamente aqui.</p>
-    </article>
+    {% assign first_event = site.data.home_agenda | first %}
+    <a class="ccm-next-card" href="{{ '/agenda/' | relative_url }}">
+      <div class="ccm-next-label"><span>Próximo encontro</span><span>◷</span></div>
+      <div class="ccm-next-main">
+        <div class="ccm-next-day"><small>{{ first_event.day | slice: 0, 3 | upcase }}</small><strong>DOM</strong></div>
+        <div><p>{{ first_event.location }}</p><h2>{{ first_event.title }}</h2><span>{{ first_event.time }} · Cianorte</span></div>
+      </div>
+      <div class="ccm-next-foot"><span>{{ first_event.game }}</span><b>→</b></div>
+    </a>
   </div>
 </section>
 
-<section class="section home-whatsapp-section" aria-labelledby="home-whatsapp-title">
+<div class="ccm-game-strip"><div>FLESH AND BLOOD <i>◆</i> POKÉMON TCG <i>◆</i> MAGIC: THE GATHERING <i>◆</i> ONE PIECE <i>◆</i> RPG <i>◆</i> YU-GI-OH! <i>◆</i></div></div>
+
+<section class="ccm-home-section" id="agenda-home">
   <div class="container">
-    <div class="home-whatsapp-card">
-      <div>
-        <p class="eyebrow">Participe</p>
-        <h2 id="home-whatsapp-title">Quer encontrar jogadores em Cianorte?</h2>
-        <p>Entre no grupo para acompanhar horários, combinar partidas, tirar dúvidas e saber de mudanças nos encontros.</p>
-      </div>
-      <a class="btn btn-primary home-whatsapp-button" href="{{ menu_whatsapp.url | default: 'https://chat.whatsapp.com/HjmzPtLTCIALlwS2mIg55R' }}" target="_blank" rel="noopener noreferrer">
-        <img src="{{ '/assets/img/social/icon-whatsapp.png' | relative_url }}" alt="" aria-hidden="true" width="28" height="28">
-        Entrar no WhatsApp
+    <div class="ccm-section-heading"><div><p class="ccm-kicker"><span>●</span> A semana nas mesas</p><h2>Próximos<br><em>encontros</em></h2></div><div><p>Dos eventos competitivos às mesas casuais.<br>Escolha seu jogo e chegue junto.</p><a href="{{ '/agenda/' | relative_url }}">Agenda completa →</a></div></div>
+    <div class="ccm-event-list" data-home-agenda-board>
+      {% for event in site.data.home_agenda %}
+      <a class="ccm-event-row ccm-event-{{ forloop.index }}" href="{{ event.url | relative_url }}" data-home-agenda-item data-weekday="{{ event.weekday }}">
+        <div class="ccm-event-day"><small>{{ event.day | slice: 0, 3 | upcase }}</small><strong>{{ event.weekday }}</strong></div>
+        <div class="ccm-event-title"><small>{{ event.game }}</small><h3>{{ event.title }}</h3></div>
+        <div class="ccm-event-detail"><span>◷ {{ event.time }}</span><span>⌖ {{ event.location }}</span></div><b>›</b>
       </a>
-    </div>
-  </div>
-</section>
-
-<section class="section section-alt home-photos-section" aria-labelledby="home-photos-title">
-  <div class="container">
-    <div class="section-title home-section-title-light">
-      <div>
-        <p class="eyebrow">Comunidade</p>
-        <h2 id="home-photos-title">Fotos recentes</h2>
-        <p>Um pouco do que acontece nas mesas, encontros e eventos da comunidade.</p>
-      </div>
-      <a class="section-link" href="{{ '/comunidade/' | relative_url }}">Ver comunidade</a>
-    </div>
-
-    <div class="gallery-grid home-photo-grid">
-      {% assign gallery_count = 0 %}
-      {% for post in comunidade_posts %}
-        {% assign style_slug = post.content_style | default: post.category_label | default: '' | slugify %}
-        {% if style_slug == 'fotos' or style_slug == 'instagram' %}
-          {% if post.image and gallery_count < 6 %}
-            {% assign gallery_alt = post.image_alt | default: post.title | prepend: 'Foto da comunidade Cianorte Card Masters: ' %}
-            <a class="gallery-item" href="{{ post.url | relative_url }}" aria-label="Abrir registro da comunidade: {{ post.title | escape }}">
-              <img src="{{ post.image | relative_url }}" alt="{{ gallery_alt | escape }}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='{{ site.data.images.post_default | relative_url }}';">
-            </a>
-            {% assign gallery_count = gallery_count | plus: 1 %}
-          {% endif %}
-          {% if post.gallery %}
-            {% for foto in post.gallery %}
-              {% if gallery_count < 6 %}
-                {% assign foto_src = foto.src | default: foto.url | default: foto.path | default: foto %}
-                {% assign foto_alt = foto.alt | default: foto.title | default: post.image_alt | default: post.title | append: ' — foto ' | append: forloop.index %}
-                <a class="gallery-item" href="{{ post.url | relative_url }}" aria-label="Abrir galeria da comunidade: {{ post.title | escape }}">
-                  <img src="{{ foto_src | relative_url }}" alt="{{ foto_alt | escape }}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='{{ site.data.images.post_default | relative_url }}';">
-                </a>
-                {% assign gallery_count = gallery_count | plus: 1 %}
-              {% endif %}
-            {% endfor %}
-          {% endif %}
-        {% endif %}
       {% endfor %}
     </div>
-
-    {% if gallery_count == 0 %}
-      <p class="empty-section">Nenhuma foto publicada ainda.</p>
-    {% endif %}
   </div>
 </section>
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": {{ site.title | jsonify }},
-  "alternateName": "CC Master",
-  "description": {{ page.description | jsonify }},
-  "url": "{{ '/' | absolute_url }}",
-  "inLanguage": "{{ site.lang | default: 'pt-BR' }}",
-  "publisher": {
-    "@type": "Organization",
-    "name": "Cianorte Card Masters",
-    "url": "{{ '/' | absolute_url }}",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "{{ site.data.images.logo_menu | default: '/assets/img/logo/ccm-logo.png' | absolute_url }}"
-    },
-    "sameAs": [
-      "https://www.instagram.com/cianortecardmasters/",
-      "https://www.facebook.com/p/Cianorte-Card-Masters-61573789171734/",
-      "https://youtube.com/@cianortecardmaster",
-      "https://www.tiktok.com/@ccmasters7"
-    ]
-  },
-  "about": [
-    { "@type": "Thing", "name": "Card games em Cianorte" },
-    { "@type": "Thing", "name": "Flesh and Blood" },
-    { "@type": "Thing", "name": "Pokémon TCG" },
-    { "@type": "Thing", "name": "Magic: The Gathering Commander" },
-    { "@type": "Thing", "name": "RPG de mesa" }
-  ]
-}
-</script>
+<section class="ccm-results-home" id="resultados-home">
+  <div class="ccm-results-art"><img src="{{ '/assets/img/banners/banner-armory-resultado-card.png' | relative_url }}" alt="Resultado de Armory do Cianorte Card Masters"><span>RESULTADOS<br><b>CCM</b></span></div>
+  <div class="ccm-results-content">
+    <p class="ccm-kicker ccm-gold"><span>●</span> Competitivo local</p><h2>Últimos<br><em>resultados</em></h2>
+    {% if latest_armory %}
+    <article class="ccm-competition-card ccm-fab-result">
+      <header><div><small>Flesh and Blood · {{ latest_armory.event_date | default: latest_armory.date | date: '%d.%m.%y' }}</small><h3>{{ latest_armory.title }}</h3></div><span>{{ latest_armory.results.size }} jogadores</span></header>
+      <div>{% for result in latest_armory.results limit: 3 %}<a class="ccm-rank" href="{{ latest_armory.url | relative_url }}"><strong>0{{ forloop.index }}</strong><span><b>{{ result.player }}</b><small>{{ result.hero }}</small></span><em>{{ result.record }}</em></a>{% endfor %}</div>
+    </article>{% endif %}
+    {% if latest_pokemon %}
+    <article class="ccm-competition-card ccm-pokemon-result">
+      <header><div><small>Pokémon TCG · {{ latest_pokemon.event_date | default: latest_pokemon.date | date: '%d.%m.%y' }}</small><h3>{{ latest_pokemon.title }}</h3></div><span>{{ latest_pokemon.results.size }} jogadores</span></header>
+      <div>{% for result in latest_pokemon.results limit: 3 %}<a class="ccm-rank" href="{{ latest_pokemon.url | relative_url }}"><strong>0{{ forloop.index }}</strong><span><b>{{ result.player }}</b><small>{{ result.card | default: result.pokemon }}</small></span><em>{{ result.points }} pts</em></a>{% endfor %}</div>
+    </article>{% endif %}
+    <a class="ccm-text-link" href="{{ '/resultados/' | relative_url }}">Ver todos os resultados →</a>
+  </div>
+</section>
+
+<section class="ccm-home-section ccm-publications-home" id="publicacoes-home"><div class="container">
+  <div class="ccm-section-heading"><div><p class="ccm-kicker"><span>●</span> Conteúdo da comunidade</p><h2>Últimas<br><em>publicações</em></h2></div><div><p>Em ordem de publicação: a novidade<br>mais recente aparece sempre primeiro.</p><a href="{{ '/posts/' | relative_url }}">Todas as publicações →</a></div></div>
+  <div class="ccm-post-grid">
+    {% for post in home_publications limit: 3 %}
+    {% assign fallback = site.data.images.post_defaults[post.content_style] | default: site.data.images.post_default %}
+    <a class="ccm-post-card {% if forloop.first %}ccm-post-featured{% endif %}" href="{{ post.url | relative_url }}">
+      <div class="ccm-post-image"><img src="{{ post.image | default: fallback | relative_url }}" alt="{{ post.image_alt | default: post.title | escape }}" loading="lazy"><span>0{{ forloop.index }}</span></div>
+      <div class="ccm-post-copy"><div><small>{{ post.category_label | default: 'Publicação' }}</small><time>{{ post.date | date: '%d %b %Y' | upcase }}</time></div><h3>{{ post.title }}</h3><p>{{ post.summary | default: post.excerpt | strip_html | truncate: 145 }}</p><b>Ler publicação →</b></div>
+    </a>{% endfor %}
+  </div>
+</div></section>
+
+<section class="ccm-join-home"><div class="container"><div><p class="ccm-kicker ccm-gold"><span>●</span> Sua cadeira está livre</p><h2>Todo mestre<br>já foi <em>iniciante.</em></h2></div><div><p>Não tem deck? Nunca jogou? Sem problema. A comunidade tem decks para ensinar e gente disposta a explicar aquela regra que ninguém entende na primeira vez.</p><a class="ccm-btn ccm-btn-gold" href="{{ whatsapp.url }}" target="_blank" rel="noopener noreferrer">Entrar no WhatsApp →</a></div></div></section>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":{{ site.title | jsonify }},"url":"{{ '/' | absolute_url }}","inLanguage":"pt-BR"}</script>
